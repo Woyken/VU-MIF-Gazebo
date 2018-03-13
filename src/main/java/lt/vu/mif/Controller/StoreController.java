@@ -1,4 +1,4 @@
-package com.gazebo.controller;
+package lt.vu.mif.Controller;
 
 import java.util.HashMap;
 import java.util.Map;
