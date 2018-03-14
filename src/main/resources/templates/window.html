@@ -95,8 +95,16 @@
     <i class="fas fa-ambulace"></i>
     <a href="showCars">Show cars</a>
 
+    <div id="app">
+        <single-file-component></single-file-component>
+    </div>
+    <script th:src="@{/js/vue.js}"></script>
+    <script th:src="@{/js/axios.min.js}"></script>
+    <script type="module" th:src="@{/components/SingleFileComponent.js}"></script>
+    <script type="module" th:src="@{/js/app.js}"></script>
+
     <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/js/login-modal.js}"></script>
+    <!--<script th:src="@{/js/login-modal.js}"></script>-->
 </body>
 </html>
