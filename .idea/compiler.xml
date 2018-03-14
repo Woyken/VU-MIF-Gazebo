@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Gazebo" />
+        <module name="VU-MIF-Gazebo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Gazebo" target="1.8" />
+      <module name="VU-MIF-Gazebo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
