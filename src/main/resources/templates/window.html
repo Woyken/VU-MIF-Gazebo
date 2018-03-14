@@ -97,6 +97,11 @@
 
     <div id="app">
         <single-file-component></single-file-component>
+        <ul>
+            <li v-for="testd in testdata">
+                <p>{{testd}}</p>
+            </li>
+        </ul>
     </div>
     <script th:src="@{/js/vue.js}"></script>
     <script th:src="@{/js/axios.min.js}"></script>
