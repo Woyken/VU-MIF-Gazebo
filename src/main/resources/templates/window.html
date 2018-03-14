@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home page</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome-all.min.css}" />
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div id="window-navbar" class="d-flex flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+        <h4 class="my-0 mr-md-auto font-weight-normal">Gazebo</h4>
+        <a id="js-login-button" class="btn btn-outline-primary" data-toggle="modal" data-target="#login-modal" href="#">Prisijungti</a>
+    </div>
+
+    <!-- Login modal -->
+    <div id="login-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-inline-flex p-1">
+                                    <h4 class="modal-title">Sveiki atvykę!</h4>
+                                </div>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <form>
+                                    <div class="form-group">
+                                        <div class="input-wrapper">
+                                            <label for="input-email" class="font-weight-bold">El. paštas</label>
+                                            <input id="input-email" type="text" class="form-control form-control-lg input-with-icon">
+                                            <label class="input-icon fas fa-user"></label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form>
+                                    <div class="form-group">
+                                        <div class="input-wrapper">
+                                            <label for="input-password" class="font-weight-bold">Slaptažodis</label>
+                                            <input id="input-password" type="password" class="form-control form-control-lg input-with-icon">
+                                            <label class="input-icon fas fa-lock"></label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form>
+                                    <div class="form-group">
+                                        <!--<a class="btn btn-block btn-success"><b>Prisijungti</b></a>-->
+                                        <button type="button" class="btn btn-block btn-lg btn-success font-weight-bold">Prisijungti</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex p-2 justify-content-end">
+                                    <a class="registration-link" href="#">Pamiršote slaptažodį?</a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form group">
+                                    <button type="button" class="btn btn-block btn-lg btn-outline-secondary font-weight-bold">Sukurti paskyrą</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <i class="fas fa-ambulace"></i>
+    <a href="showCars">Show cars</a>
+
+    <div id="app">
+        <single-file-component></single-file-component>
+        <ul>
+            <li v-for="testd in testdata">
+                <p>{{testd}}</p>
+            </li>
+        </ul>
+    </div>
+    <script th:src="@{/js/vue.js}"></script>
+    <script th:src="@{/js/axios.min.js}"></script>
+    <script type="module" th:src="@{/src/components/SingleFileComponent.js}"></script>
+    <script type="module" th:src="@{/src/app.js}"></script>
+
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!--<script th:src="@{/js/login-modal.js}"></script>-->
+</body>
+</html>

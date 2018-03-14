@@ -1,0 +1,29 @@
+#window-navbar {
+    -webkit-box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+    -moz-box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+}
+
+.input-icon {
+    position: absolute;
+    left: 3%;
+    top: calc(73% - 0.5em); /* Keep icon in center of input, regardless of the input height */
+}
+input {
+    padding-left: 4%;
+}
+.input-with-icon {
+    padding-left: 9%;
+}
+.input-wrapper {
+    position: relative;
+}
+
+.registration-link {
+    text-decoration: underline;
+    color: #6c757d;
+}
+
+.input-icon.fas {
+    color: #6c757d;
+}
