@@ -1,0 +1,49 @@
+/* --- --- --- Our styles. */
+.gz-hyperlink {
+	text-decoration: underline;
+	color: #808090;
+	border-color: #808090;
+}
+
+.gz-hyperlink:hover {
+	color: #616161;
+	border-color: #616161;
+}
+
+.gz-input-label {
+	color: #616161;
+	font-weight: 700;
+} 
+
+.gz-no-top-margin {
+	margin-top: 0;
+}
+/* --- --- --- End of our styles. */
+
+
+/* --- --- --- Foundation overrides. */
+
+.button {
+	font-weight: 700;
+}
+
+.button.success {
+	color: white;
+	background-color: #4CAF50;
+}
+
+.button.success:hover {
+	color: white;
+	background-color: #388E3C;
+}
+
+.button.hollow.secondary {
+	color: #808090;
+	border-color: #808090;
+}
+
+.button.hollow.secondary:hover {
+	color: #616161;
+	border-color: #616161;
+} 
+/* --- --- --- End of Foundation overrides. */
