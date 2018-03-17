@@ -7,21 +7,25 @@ import org.mockito.Mockito;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-public class EmailProviderTests {
+class EmailProviderTests {
+
+    private static final String TEST_EMAIL_TO = "fake.email@something.com";
+    private static final String TEST_EMAIL_SUBJECT = "Some test subject";
+    private static final String TEST_EMAIL_BODY = "Testing this mail";
 
     @Test
-    public void testEmail() {
+    void sendSimpleMailTo_sendingMail_success() {
         JavaMailSender javaMailSenderMock = Mockito.mock(JavaMailSender.class);
 
         EmailProvider emailProvider = new EmailProvider(javaMailSenderMock);
-        emailProvider.sendMail("karolis.uzkuraitis@gmail.com", "Test subject", "Test mail");
+        emailProvider.sendSimpleMailTo(TEST_EMAIL_TO, TEST_EMAIL_SUBJECT, TEST_EMAIL_BODY);
 
         ArgumentCaptor<SimpleMailMessage> captor = ArgumentCaptor.forClass(SimpleMailMessage.class);
         Mockito.verify(javaMailSenderMock).send(captor.capture());
         SimpleMailMessage captured = captor.getValue();
         Assertions.assertEquals(1, captured.getTo().length);
-        Assertions.assertEquals("karolis.uzkuraitis@gmail.com", captured.getTo()[0]);
-        Assertions.assertEquals("Test subject", captured.getSubject());
-        Assertions.assertEquals("Test mail", captured.getText());
+        Assertions.assertEquals(TEST_EMAIL_TO, captured.getTo()[0]);
+        Assertions.assertEquals(TEST_EMAIL_SUBJECT, captured.getSubject());
+        Assertions.assertEquals(TEST_EMAIL_BODY, captured.getText());
     }
 }

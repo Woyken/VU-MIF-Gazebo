@@ -15,12 +15,11 @@ public class EmailProvider {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendMail(String toEmail, String subject, String message) {
+    public void sendSimpleMailTo(String toEmail, String subject, String message) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
-        //mailMessage.setFrom("admin@admin.com");
         javaMailSender.send(mailMessage);
     }
 }
