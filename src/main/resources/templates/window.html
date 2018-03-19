@@ -14,11 +14,11 @@
     <!-- Navigation bar. -->
     <div data-sticky-container>
         <div data-sticky data-options="marginTop: 0">
-            <div class="top-bar">
+            <div class="top-bar gz-nav-bar">
                 <div class="top-bar-left">
                     <ul class="menu">
                         <li>
-                            <a href="#" class="menu-text">Gazebo</a>
+                            <a href="#" class="menu-text gz-text-font">G A Z E B O</a>
                         </li>
                     </ul>
                 </div>
@@ -30,6 +30,69 @@
             </div>
         </div>
     </div> <!-- End of navigation bar. -->
+
+    <!-- Main page cover. -->
+    <div id="main-page-image"></div>
+    <!-- End of main page cover. -->
+
+    <!-- Page title. -->
+    <div class="row column text-center gz-section-title">
+        <h1>Pagrindinės prekės</h1>
+    </div> <!-- End of page title. -->
+
+    <!-- Product list. -->
+    <div class="row small-up-2 large-up-4 gz-product-list">
+        <div class="column">
+            <img class="thumbnail" src="../images/products/shoe-1.jpg">
+            <h5 class="gz-product-name">GZ Air Flow</h5>
+            <p class="gz-product-price">€ 59.99</p>
+            <a href="#" class="button expanded secondary">Pirkti</a>
+        </div>
+        <div class="column">
+            <img class="thumbnail" src="../images/products/shoe-2.jpg">
+            <h5 class="gz-product-name">GZ Titan</h5>
+            <p class="gz-product-price">€ 129.99</p>
+            <a href="#" class="button expanded secondary">Pirkti</a>
+        </div>
+        <div class="column">
+            <img class="thumbnail" src="../images/products/shoe-3.jpg">
+            <h5 class="gz-product-name">GZ Attack</h5>
+            <p class="gz-product-price">€ 49.99</p>
+            <a href="#" class="button expanded secondary">Pirkti</a>
+        </div>
+        <div class="column">
+            <img class="thumbnail" src="../images/products/shoe-4.jpg">
+            <h5 class="gz-product-name">GZ Time v2</h5>
+            <p class="gz-product-price">€ 79.99</p>
+            <a href="#" class="button expanded secondary">Pirkti</a>
+        </div>
+    </div>
+    <div class="row small-up-2 large-up-4 gz-product-list">
+        <div class="column">
+            <img class="thumbnail" src="../images/products/shoe-5.jpg">
+            <h5 class="gz-product-name">GZ Predator</h5>
+            <p class="gz-product-price">€ 59.99</p>
+            <a href="#" class="button expanded secondary">Pirkti</a>
+        </div>
+        <div class="column">
+            <img class="thumbnail" src="../images/products/shoe-6.jpg">
+            <h5 class="gz-product-name">GZ New Breed</h5>
+            <p class="gz-product-price">€ 129.99</p>
+            <a href="#" class="button expanded secondary">Pirkti</a>
+        </div>
+        <div class="column">
+            <img class="thumbnail" src="../images/products/shoe-7.jpg">
+            <h5 class="gz-product-name">GZ Leap</h5>
+            <p class="gz-product-price">€ 49.99</p>
+            <a href="#" class="button expanded secondary">Pirkti</a>
+        </div>
+        <div class="column">
+            <img class="thumbnail" src="../images/products/shoe-8.jpg">
+            <h5 class="gz-product-name">GZ Classic</h5>
+            <p class="gz-product-price">€ 79.99</p>
+            <a href="#" class="button expanded secondary">Pirkti</a>
+        </div>
+    </div> <!-- End of product list. -->
 
 
     <!-- Login form modal. -->
@@ -83,11 +146,10 @@
         </button>
     </div> <!-- End of login form modal. -->
 
-
     <!-- Registration form modal. -->
     <div id="register-modal" class="reveal"
-        data-reveal
-        data-animation-in="fade-in fast">
+         data-reveal
+         data-animation-in="fade-in fast">
         <div class="row">
             <div class="columns small-8 small-offset-2">
                 <h4><b>Sukurti naują paskyrą</b></h4>
@@ -109,10 +171,10 @@
                     </div>
                     <div class="columns shrink">
                         <span
-                            data-tooltip
-                            data-allow-html="true"
-                            class="has-tip right"
-                            title="- Bent 8 simbolių ilgio. <br>
+                                data-tooltip
+                                data-allow-html="true"
+                                class="has-tip right"
+                                title="- Bent 8 simbolių ilgio. <br>
                                    - Bent viena didžioji raidė. <br>
                                    - Bent viena mažoji raidė. <br>
                                    - Bent vienas simbolis, kuris nebūtų raidė.">
@@ -140,15 +202,23 @@
         </button>
     </div> <!-- End of registration form modal. -->
 
-
-    <div id="app">
-        <single-file-component></single-file-component>
-        <ul>
-            <li v-for="testd in testdata">
-                <p>{{testd}}</p>
-            </li>
-        </ul>
+    <!-- Footer. -->
+    <div id="footer" class="">
+        <div class="row">
+            <div id="footer-notice" class="columns">
+                <p>Be „Gazebo“ sutikimo draudžiama kopijuoti ir platinti svetainėje esančią informaciją. </p>
+                <p>Gazebo © 2018 All rights reserved</p>
+            </div>
+        </div>
     </div>
+    <!--<div id="app">-->
+        <!--<single-file-component></single-file-component>-->
+        <!--<ul>-->
+            <!--<li v-for="testd in testdata">-->
+                <!--<p>{{testd}}</p>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
 
 
     <script th:src="@{/js/vendor/vue.js}"></script>
