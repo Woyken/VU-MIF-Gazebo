@@ -1,3 +1,23 @@
+/* --- --- --- Our styles. */
+.gz-hyperlink {
+	text-decoration: underline;
+	color: #808090;
+	border-color: #808090;
+}
+.gz-hyperlink:hover {
+	color: #616161;
+	border-color: #616161;
+}
+.gz-input-label {
+	color: #616161;
+	font-weight: 700;
+}
+.gz-no-top-margin {
+	margin-top: 0;
+}
+/* --- --- --- End of our styles. */
+
+
 /* --- --- --- Foundation overrides. */
 .button {
 	font-weight: 700;
@@ -64,7 +84,8 @@
 	background: url(../images/main-page-cover-16-9.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
-	width: 90vw;
+	background-size:cover;
+	width: 94vw;
 	height: 60vh;
 }
 .gz-section-title {
@@ -93,6 +114,9 @@
 	font-family: "Georgia";
 	font-size: 18px;
 	color: #7d7d7d;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #7d7d7d;
 }
 .gz-product-price {
 	text-align: center;
@@ -116,3 +140,7 @@
 	height: 1000px;
 }
 /* End of our styles. */
+.tooltip {
+	max-width: 25rem;
+}
+/* --- --- --- End of Foundation overrides. */
