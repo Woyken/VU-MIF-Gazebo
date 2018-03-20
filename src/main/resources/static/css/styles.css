@@ -125,6 +125,13 @@
 .product-item {
 	margin-bottom: 5vh;
 }
+.product-details-row {
+	margin-top: 3%;
+	max-width: 60%;
+}
+.half-width {
+	width: 50%;
+}
 #footer {
 	margin-top: 4%;
 	background-color: #2e2e2e;
@@ -143,4 +150,18 @@
 .tooltip {
 	max-width: 25rem;
 }
+
+#to-cart-button {
+	color: white;
+	background-color: #474747;
+	border-color: white;
+}
+#to-cart-button:hover {
+	color: #474747;
+	background-color: white;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #474747;
+}
+
 /* --- --- --- End of Foundation overrides. */

@@ -19,6 +19,11 @@ public class StoreController {
         return new ModelAndView("window", params);
     }
 
+    @RequestMapping(value = "/product-details", method = RequestMethod.GET)
+    public ModelAndView productDetailsWindow() {
+        return new ModelAndView("product-details");
+    }
+
     @RequestMapping(value = "/testrequest", method = RequestMethod.GET)
     @ResponseBody
     public String[] testRequest() {
