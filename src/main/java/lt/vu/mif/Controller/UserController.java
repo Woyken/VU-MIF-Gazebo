@@ -1,22 +1,23 @@
 package lt.vu.mif.Controller;
 
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import lombok.Getter;
 import lt.vu.mif.View.UserView;
 
-/**
- * Created by monika on 18.3.20.
- */
 @Named
-@ViewScoped
+@Getter
 @Controller
 public class UserController {
     private UserView userView = new UserView(10251L, "test@gmail.com");
 
-    public UserView getUserView() {
-        return userView;
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public ModelAndView getUserWindow() {
+        return new ModelAndView("user.xhtml");
     }
 }
