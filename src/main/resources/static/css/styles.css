@@ -1,3 +1,13 @@
+/* --- --- --- CONSTANTS.
+-- COLORS
+	Main font color (gray): color: #666565;
+
+-- FONTS
+	Thin font: font-family: "Courier New";
+
+/* End of constants. */
+
+
 /* --- --- --- Foundation overrides. */
 .button {
 	font-weight: 700;
@@ -191,4 +201,42 @@ body::-webkit-scrollbar {
 	font-size: 16px;
 	font-weight: bold;
 }
+.border-bottom {
+	border-bottom-style: solid;
+	border-bottom-color: gray;
+	border-bottom-width: 1px;
+}
+.drop-down-button {
+	background-color: white;
+	color: #666565;
+	border-style: solid;
+	border-color: #666565;
+	border-width: 1px;
+	font-family: "Courier New";
+}
+.drop-down-list {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #666565;
+}
+.drop-down-item {
+	font-family: "Courier New";
+	color: #666565;
+	border-bottom-style: solid;
+	border-bottom-color: #666565;
+	border-bottom-width: 1px;
+}
+.drop-down-item:hover {
+	color: white;
+	background-color: #666565;
+}
+
+
+/* --- --- --- UTILITIES */
+.no-bor-bot {
+	border-bottom-style: none;
+}
+/* End of utilities.*/
+
+
 /* End of our styles. */
