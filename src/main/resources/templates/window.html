@@ -24,6 +24,7 @@
                 </div>
                 <div class="top-bar-right">
                     <ul class="menu">
+                        <li><a href="#" data-open="change-password-modal" class="button hollow">Keisti slaptažodį</a></li>
                         <li><a href="#" data-open="login-modal" class="button">Prisijungti</a></li>
                     </ul>
                 </div>
@@ -161,6 +162,65 @@
             <span>&times;</span>
         </button>
     </div> <!-- End of login form modal. -->
+
+    <!-- Change password modal. -->
+    <div id="change-password-modal" class="reveal"
+         data-reveal
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4><b>Slaptažodžio keitimas</b></h4>
+                <br>
+                <!-- Current password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            <span class="alert-star">*</span>
+                            Dabartinis slaptažodis
+                            <i class="fi-unlock"></i>
+                            <input type="password">
+                        </label>
+                    </div>
+                </div>
+                <!-- New password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            <span class="alert-star">*</span>
+                            Naujas slaptažodis
+                            <span><i class="fi-lock"></i></span>
+                            <input type="password">
+                        </label>
+                    </div>
+                </div>
+                <!-- Repeat new password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            <span class="alert-star">*</span>
+                            Pakartokite naująjį slaptažodį
+                            <span><i class="fi-lock"></i></span>
+                            <input class="no-margin" type="password">
+                        </label>
+                        <!-- Required fields. -->
+                        <div class="margin-bot-5">
+                            <span class="alert-star">*</span>
+                            <span class="alert-text"> privalomi laukai</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit. -->
+                <div class="row">
+                    <div class="columns">
+                        <button class="button success expanded">Keisti slaptažodį</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="close-button" data-close type="button">
+            <span>&times;</span>
+        </button>
+    </div> <!-- End of change password modal. -->
 
     <!-- Registration form modal. -->
     <div id="register-modal" class="reveal"

@@ -175,4 +175,20 @@ body::-webkit-scrollbar {
 	border-width: 1px;
 	border-color: #474747;
 }
+.no-margin {
+	margin: 0;
+}
+.margin-bot-5 {
+	margin-bottom: 5%;
+}
+.alert-text {
+	color: #c60f13;
+	font-size: 12px;
+	font-weight: bold;
+}
+.alert-star {
+	color: #c60f13;
+	font-size: 16px;
+	font-weight: bold;
+}
 /* End of our styles. */
