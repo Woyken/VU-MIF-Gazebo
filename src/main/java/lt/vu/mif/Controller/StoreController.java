@@ -24,6 +24,9 @@ public class StoreController {
         return new ModelAndView("product-details");
     }
 
+    @RequestMapping(value = "/logged-in", method = RequestMethod.GET)
+    public ModelAndView loggedIn() { return new ModelAndView("main-page-logged-in.html"); }
+
     @RequestMapping(value = "/testrequest", method = RequestMethod.GET)
     @ResponseBody
     public String[] testRequest() {

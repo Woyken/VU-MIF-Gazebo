@@ -11,7 +11,8 @@
 </head>
 <body>
 
-    <!-- Navigation bar. -->
+
+    <!-- NAVIGATION BAR. -->
     <div data-sticky-container>
         <div data-sticky data-options="marginTop: 0">
             <div class="top-bar gz-nav-bar">
@@ -29,18 +30,23 @@
                 </div>
             </div>
         </div>
-    </div> <!-- End of navigation bar. -->
+    </div> <!-- END OF NAVIGATION BAR. -->
 
-    <!-- Main page cover. -->
-    <div id="main-page-image"></div>
-    <!-- End of main page cover. -->
 
-    <!-- Page title. -->
+
+    <!-- MAIN PAGE COVER. -->
+    <div id="main-page-image"></div> <!-- END OF MAIN PAGE COVER. -->
+
+
+
+    <!-- PAGE TITLE. -->
     <div class="row column text-center gz-section-title">
         <h1>Pagrindinės prekės</h1>
-    </div> <!-- End of page title. -->
+    </div> <!-- END OF PAGE TITLE. -->
 
-    <!-- Product list. -->
+
+
+    <!-- PRODUCT LIST. -->
     <div class="row small-up-2 large-up-4 gz-product-list">
         <div class="column product-column">
             <a href="product-details">
@@ -75,6 +81,7 @@
             <a href="#" class="button expanded secondary">Pirkti</a>
         </div>
     </div>
+
     <div class="row small-up-2 large-up-4 gz-product-list">
         <div class="column product-column">
             <a href="product-details">
@@ -108,10 +115,11 @@
             <p class="gz-product-price">€ 79.99</p>
             <a href="#" class="button expanded secondary">Pirkti</a>
         </div>
-    </div> <!-- End of product list. -->
+    </div> <!-- END OF PRODUCT LIST. -->
 
 
-    <!-- Login form modal. -->
+
+    <!-- LOGIN FORM MODAL. -->
     <div id="login-modal" class="reveal"
          data-reveal
          data-animation-in="fade-in fast">
@@ -137,7 +145,7 @@
                 </div>
                 <div class="row">
                     <div class="columns">
-                        <button class="button success expanded">Prisijungti</button>
+                        <a href="logged-in" class="button success expanded">Prisijungti</a>
                     </div>
                 </div>
                 <div class="row">
@@ -160,9 +168,154 @@
         <button class="close-button" data-close type="button">
             <span>&times;</span>
         </button>
-    </div> <!-- End of login form modal. -->
+    </div> <!-- END OF LOGIN FORM MODAL. -->
 
-    <!-- Registration form modal. -->
+
+
+    <!-- CHANGE PASSWORD MODAL. -->
+    <div id="change-password-modal" class="reveal"
+         data-reveal
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4><b>Slaptažodžio keitimas</b></h4>
+                <br>
+
+                <!-- New password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            <span class="alert-star">*</span>
+                            Naujasis slaptažodis
+                            <span><i class="fi-lock"></i></span>
+                            <input type="password">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Repeat new password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            <span class="alert-star">*</span>
+                            Pakartokite naująjį slaptažodį
+                            <span><i class="fi-lock"></i></span>
+                            <input type="password">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Current password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            <span class="alert-star">*</span>
+                            Dabartinis slaptažodis
+                            <i class="fi-unlock"></i>
+                            <input class="no-margin" type="password">
+                        </label>
+                        <!-- Required fields. -->
+                        <div class="margin-bot-5">
+                            <span class="alert-star">*</span>
+                            <span class="alert-text"> privalomi laukai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit. -->
+                <div class="row">
+                    <div class="columns">
+                        <button class="button success expanded">Keisti slaptažodį</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="close-button" data-close type="button">
+            <span>&times;</span>
+        </button>
+    </div> <!-- END OF CHANGE PASSWORD MODAL. -->
+
+
+
+    <!-- CHANGE EMAIL MODAL. -->
+    <div id="change-email-modal" class="reveal"
+         data-reveal
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4><b>El. pašto adreso keitimas</b></h4>
+                <br>
+
+                <!-- Current email. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            Dabartinis adresas
+                            <i class="fi-torso"></i>
+                            <input type="text" placeholder="gazebo@gmail.com" value="gazebo@gmail.com" disabled>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- New email. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            <span class="alert-star">*</span>
+                            Naujasis adresas
+                            <span><i class="fi-mail"></i></span>
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Repeat new email. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            <span class="alert-star">*</span>
+                            Pakartokite naująjį adresą
+                            <span><i class="fi-mail"></i></span>
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="gz-input-label">
+                            <span class="alert-star">*</span>
+                            Dabartinis slaptažodis
+                            <span><i class="fi-lock"></i></span>
+                            <input class="no-margin" type="text">
+                        </label>
+                        <!-- Required fields. -->
+                        <div class="margin-bot-5">
+                            <span class="alert-star">*</span>
+                            <span class="alert-text"> privalomi laukai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit. -->
+                <div class="row">
+                    <div class="columns">
+                        <button class="button success expanded">Keisti el. pašto adresą</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="close-button" data-close type="button">
+            <span>&times;</span>
+        </button>
+    </div> <!-- END OF CHANGE EMAIL MODAL. -->
+
+
+
+    <!-- REGISTRATION FORM MODAL. -->
     <div id="register-modal" class="reveal"
          data-reveal
          data-animation-in="fade-in fast">
@@ -216,9 +369,11 @@
         <button class="close-button" data-close type="button">
             <span>&times;</span>
         </button>
-    </div> <!-- End of registration form modal. -->
+    </div> <!-- END OF REGISTRATION FORM MODAL. -->
 
-    <!-- Footer. -->
+
+
+    <!-- FOOTER. -->
     <div id="footer" class="">
         <div class="row">
             <div id="footer-notice" class="columns">
@@ -226,7 +381,7 @@
                 <p>Gazebo © 2018 All rights reserved</p>
             </div>
         </div>
-    </div>
+    </div> <!-- END OF FOOTER. -->
 
 
     <script th:src="@{/js/vendor/vue.js}"></script>
