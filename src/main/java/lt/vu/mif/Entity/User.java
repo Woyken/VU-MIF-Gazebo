@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.Entity.Roles.Role;
 
 @Getter
 @Setter
@@ -22,4 +23,8 @@ public class User implements Serializable {
 
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "ROLE", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
