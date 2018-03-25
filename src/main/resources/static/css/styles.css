@@ -8,6 +8,7 @@
 
 -- COLORS
 	Default (gray):		#616161
+	Default darker:		#2e2e2e
 
 -- FONTS
 	Store title:		'Oswald', sans-serif
@@ -139,6 +140,19 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 
 
 
+/* --- FOOTER --- */
+#footer {
+	margin-top: 3%;
+	padding-top: 2vh;
+	color: #616161;
+	font-size: 0.8em;
+	background-color: #2e2e2e;
+}
+/* --- End of footer */
+
+
+
+
 .gz-hyperlink {
 	text-decoration: underline;
 	color: #808090;
@@ -191,17 +205,6 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 }
 .half-width {
 	width: 50%;
-}
-#footer {
-	margin-top: 4%;
-	background-color: #2e2e2e;
-	color: #535353;
-	font-size: 0.8em;
-}
-#footer-notice {
-	margin-left: 10%;
-	margin-right: 5%;
-	padding-top: 1%;
 }
 .test {
 	height: 1000px;
