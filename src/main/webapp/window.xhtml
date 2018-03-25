@@ -5,6 +5,11 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:o="http://omnifaces.org/ui">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
+</f:metadata>
+
 <h:head>
     <title>Home page</title>
     <meta charset="UTF-8"/>
@@ -52,12 +57,13 @@
 
 
     <!-- PRODUCT LIST. -->
-    <ui:repeat value="#{storeController.products}" var="productItem" varStatus="loop">
+    <ui:repeat value="#{productController.products}" var="productItem" varStatus="loop">
         <h:outputText value="&lt;div class='row small-up-2 large-up-4 gz-product-list'&gt;" escape="false" rendered="#{loop.index % 4 == 0}" />
         <div class="column product-column">
             <a href="product-details">
-                <h:graphicImage class="thumbnail" value="resources/images/products/shoe-1.jpg" /><!-- TODO add proper images -->
-
+                <p:graphicImage class="thumbnail" value="#{imageStreamer.image}" >
+                    <f:param name="id" value="#{productItem.images.get(0).id}"/>
+                </p:graphicImage>
             </a>
             <h5 class="gz-product-name">#{productItem.title}</h5>
             <p class="gz-product-price">€ #{productItem.price}</p>
