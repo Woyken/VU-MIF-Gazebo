@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400i,600');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
 /* --- --- --- CONSTANTS.
 
@@ -11,6 +12,7 @@
 	Default darker:		#2e2e2e
 
 -- FONTS
+	Default:			'Roboto', sans-serif
 	Store title:		'Oswald', sans-serif
 	Buttons:			'Roboto', sans-serif
 	Section titles:		'Playfair Display', serif
@@ -24,36 +26,35 @@
 
 /* --- --- --- Foundation overrides. */
 .button {
+	font-weight: 700;
+	font-family: 'Roboto', sans-serif;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
 	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-	font-family: 'Roboto', sans-serif;
-}
-.button.primary {
-	background-color: white;
-	color: black;
 	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 	-moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
-.button.primary:hover {
+.button.primary {
+	background-color: white;
+	color: black;
+}
+.button.primary:hover,
+.button.primary:focus {
 	background: linear-gradient(141deg, #4f4f4f 0%, #3d3d3d 51%, #3b3b3b 75%);
 	color: white;
 }
-ul.menu {
-	background-color: white;
-}
-.button {
-	font-weight: 700;
-}
+
 .button.success {
 	color: white;
 	background-color: #4CAF50;
 }
 .button.success:hover {
 	color: white;
-	background-color: #388E3C;
+	background-color: #9fc832;
 }
+
+
 .button.hollow.secondary {
 	color: #808090;
 	border-color: #808090;
@@ -69,7 +70,10 @@ ul.menu {
 
 /* --- --- --- Our styles. */
 
-
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+}
 
 /* --- NAVIGATION --- */
 
@@ -86,6 +90,9 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 /* Store name. */
 .top-bar > .top-bar-left > ul.menu > li > a {
 	font: italic 24px 'Oswald', sans-serif;
+}
+ul.menu {
+	background-color: white;
 }
 /* --- End of navigation */
 
@@ -126,7 +133,7 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 	text-align: center;
 	font-family: 'IBM Plex Sans', sans-serif;
 	font-weight: 600;
-	font-size: 1.3rem;
+	font-size: 1.5rem;
 	margin-bottom: 0;
 }
 .product-box > p.product-price {
@@ -138,7 +145,18 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 }
 /* --- End of product list */
 
-
+/* --- FORMS --- */
+h4.form-title {
+	color: #616161;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	margin-top: 0.5rem;
+}
+label.input-label {
+	color: #616161;
+	font-weight: 700;
+}
+/* --- End of forms */
 
 /* --- FOOTER --- */
 #footer {
@@ -150,41 +168,18 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 }
 /* --- End of footer */
 
-
-
-
-.gz-hyperlink {
+.link {
 	text-decoration: underline;
-	color: #808090;
-	border-color: #808090;
-}
-.gz-hyperlink:hover {
 	color: #616161;
 	border-color: #616161;
 }
-.gz-input-label {
-	color: #616161;
-	font-weight: 700;
+.link:hover {
+	color: #2e2e2e;
+	border-color: #2e2e2e;
 }
-.gz-no-top-margin {
-	margin-top: 0;
-}
-.gz-hyperlink {
-	text-decoration: underline;
-	color: #808090;
-	border-color: #808090;
-}
-.gz-hyperlink:hover {
-	color: #616161;
-	border-color: #616161;
-}
-.gz-input-label {
-	color: #616161;
-	font-weight: 700;
-}
-.gz-no-top-margin {
-	margin-top: 0;
-}
+
+
+
 .gz-nav-bar .menu {
 	background-color: white;
 }
@@ -276,11 +271,15 @@ body::-webkit-scrollbar {
 
 
 /* --- --- --- UTILITIES */
-.bor-bot {
+.bor-bot { 		/* bottom border */
 	border-bottom: solid 1px black;
 }
-.no-bor-bot {
+.no-bor-bot { 	/* no bottom border */
+	border-width: 0;
 	border-bottom-style: none;
+}
+.no-top-mar { 	/* no top margin */
+	margin-top: 0;
 }
 /* End of utilities.*/
 
