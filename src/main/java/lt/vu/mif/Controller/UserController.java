@@ -1,23 +1,26 @@
 package lt.vu.mif.Controller;
 
-import javax.inject.Named;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
 import lombok.Getter;
+import lt.vu.mif.Repository.UserRepository;
 import lt.vu.mif.View.UserView;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Named
 @Getter
-@Controller
 public class UserController {
-    private UserView userView = new UserView(10251L, "test@gmail.com");
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ModelAndView getUserWindow() {
-        return new ModelAndView("user.xhtml");
+    @Autowired
+    private UserRepository userRepository;
+
+    private List<UserView> users = new ArrayList<>();
+
+    public void onPageLoad() {
+        users = userRepository.getAll().stream().map(UserView::new).collect(Collectors.toList());
     }
+
 }

@@ -8,11 +8,22 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 
 @Transactional
 @Repository
 public class UserRepository extends BaseRepository<User> {
+
+    public List<User> getAll() {
+        CriteriaBuilder builder = getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+
+        criteria.select(root);
+
+        return getEntityManager().createQuery(criteria).getResultList();
+    }
 
     public boolean checkIfUserExists(String email) {
         Objects.requireNonNull(email);
