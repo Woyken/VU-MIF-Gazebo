@@ -31,7 +31,7 @@ public class StoreController {
     }
 
     @RequestMapping(value = "/logged-in", method = RequestMethod.GET)
-    public ModelAndView loggedIn() { return new ModelAndView("main-page-logged-in.html"); }
+    public ModelAndView loggedIn() { return new ModelAndView("/main-page-logged-in.xhtml"); }
 
     @RequestMapping(value = "/testrequest", method = RequestMethod.GET)
     @ResponseBody
