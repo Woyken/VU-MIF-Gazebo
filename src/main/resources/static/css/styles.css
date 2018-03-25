@@ -8,17 +8,16 @@
 
 
 -- COLORS
-	Default (gray):		#616161
-	Default darker:		#2e2e2e
+	Default (gray):		#616161;
+	Default darker:		#2e2e2e;
 
 -- FONTS
-	Default:			'Roboto', sans-serif
-	Store title:		'Oswald', sans-serif
-	Buttons:			'Roboto', sans-serif
-	Section titles:		'Playfair Display', serif
-	Product name:		'IBM Plex Sans', sans-serif
+	Default:			'Roboto', sans-serif;
+	Store title:		'Oswald', sans-serif;
+	Buttons:			'Roboto', sans-serif;
+	Section titles:		'Playfair Display', serif;
+	Product name:		'IBM Plex Sans', sans-serif;
 
-	Thin font: font-family: "Courier New";
 
 
 /* End of constants. */
@@ -66,13 +65,72 @@
 .thumbnail {
 	margin-top: 1rem;
 }
-/* End of Foundation overrides. */
+
+
+/* Menu button */
+ul.dropdown.menu > li[role] > a {
+	color: #2e2e2e;
+	border: 1px solid white;
+	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	-moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+ul.dropdown.menu > li[role] > a:hover {
+	color: #2e2e2e;
+	border: 1px solid #2e2e2e;
+}
+
+/* Menu drop down list button */
+ul.dropdown.menu > li.is-dropdown-submenu-parent > a.primary {
+	color: #2e2e2e;
+}
+ul.dropdown.menu > li.is-dropdown-submenu-parent > a.primary:hover {
+	color: #2e2e2e;
+}
+
+/* Menu drop down list button arrow */
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after {
+	border-top-color: #616161;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+}
+
+/* Menu drop down list row */
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item {
+	padding-top: 5%;
+	padding-bottom: 5%;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item:hover {
+	background-color: #2e2e2e;
+	color: white;
+}
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item:last-child {
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+
+/* Menu drop down list item */
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item > a {
+	color: #2e2e2e;
+	display: inline;
+}
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item > a:hover {
+	color: white;
+}
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item > i {
+	padding-left: 5%;
+	margin-left: 5%;
+}
+
 
 /* --- --- --- Our styles. */
 
 body {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
+	color: #2e2e2e;
 }
 
 /* --- NAVIGATION --- */
@@ -80,12 +138,12 @@ body {
 /* Navigation bar. */
 div[data-sticky-container] > div[data-sticky] > div.top-bar {
 	background-color: white;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #2e2e2e;
 	padding-left: 10%;
 	padding-right: 10%;
-	-webkit-box-shadow: 0 0 5px -1px black;
-	-moz-box-shadow: 0 0 5px -1px black;
-	box-shadow: 0 0 5px -1px black;
+	-webkit-box-shadow: 0 0 5px -1px #2e2e2e;
+	-moz-box-shadow: 0 0 5px -1px #2e2e2e;
+	box-shadow: 0 0 5px -1px #2e2e2e;
 }
 /* Store name. */
 .top-bar > .top-bar-left > ul.menu > li > a {
@@ -188,9 +246,6 @@ label.input-label {
 	width: auto;
 	height: 40vh;
 }
-.gz-product-name {
-
-}
 .product-item {
 	margin-bottom: 5vh;
 }
@@ -239,40 +294,12 @@ body::-webkit-scrollbar {
 	font-size: 16px;
 	font-weight: bold;
 }
-.border-bottom {
-	border-bottom-style: solid;
-	border-bottom-color: gray;
-	border-bottom-width: 1px;
-}
-.drop-down-button {
-	background-color: white;
-	color: #666565;
-	border-style: solid;
-	border-color: #666565;
-	border-width: 1px;
-	font-family: "Courier New";
-}
-.drop-down-list {
-	border-style: solid;
-	border-width: 1px;
-	border-color: #666565;
-}
-.drop-down-item {
-	font-family: "Courier New";
-	color: #666565;
-	border-bottom-style: solid;
-	border-bottom-color: #666565;
-	border-bottom-width: 1px;
-}
-.drop-down-item:hover {
-	color: white;
-	background-color: #666565;
-}
 
 
 /* --- --- --- UTILITIES */
+
 .bor-bot { 		/* bottom border */
-	border-bottom: solid 1px black;
+	border-bottom: solid 1px #2e2e2e;
 }
 .no-bor-bot { 	/* no bottom border */
 	border-width: 0;
@@ -281,7 +308,3 @@ body::-webkit-scrollbar {
 .no-top-mar { 	/* no top margin */
 	margin-top: 0;
 }
-/* End of utilities.*/
-
-
-/* End of our styles. */
