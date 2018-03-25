@@ -10,6 +10,8 @@
 -- COLORS
 	Default (gray):		#616161;
 	Default darker:		#2e2e2e;
+	Success:			#4CAF50;
+	Success on hover:	#9fc832;
 
 -- FONTS
 	Default:			'Roboto', sans-serif;
@@ -17,7 +19,6 @@
 	Buttons:			'Roboto', sans-serif;
 	Section titles:		'Playfair Display', serif;
 	Product name:		'IBM Plex Sans', sans-serif;
-
 
 
 /* End of constants. */
@@ -44,6 +45,20 @@
 	color: white;
 }
 
+.button.primary-inverted {
+    color: white;
+    background-color: #2e2e2e;
+    border: 1px solid white;
+    -webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    -moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+.button.primary-inverted:hover {
+    color: #2e2e2e;
+	border: 1px solid #2e2e2e;
+}
+
+
 .button.success {
 	color: white;
 	background-color: #4CAF50;
@@ -62,9 +77,15 @@
 	color: #616161;
 	border-color: #616161;
 }
+
+.tooltip {
+	max-width: 25rem;
+}
+
 .thumbnail {
 	margin-top: 1rem;
 }
+
 
 
 /* Menu button */
@@ -132,8 +153,9 @@ body {
 	font-weight: 400;
 	color: #2e2e2e;
 }
-
-/* --- NAVIGATION --- */
+body::-webkit-scrollbar {
+	display: none;
+}
 
 /* Navigation bar. */
 div[data-sticky-container] > div[data-sticky] > div.top-bar {
@@ -152,11 +174,8 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 ul.menu {
 	background-color: white;
 }
-/* --- End of navigation */
 
 
-
-/* --- SECTION --- */
 .section {
 	margin-top: 3%;
 	margin-right: auto;
@@ -173,11 +192,9 @@ ul.menu {
 	font-family: 'Playfair Display', serif;
 	border-bottom: 1px solid #666565;
 }
-/* End of section. */
 
 
 
-/* --- PRODUCT LIST --- */
 .product-box {
 	border: 1px #ffffff solid;
 	border-radius: 3px;
@@ -201,9 +218,8 @@ ul.menu {
 	font-style: italic;
 	font-size: 1rem;
 }
-/* --- End of product list */
 
-/* --- FORMS --- */
+
 h4.form-title {
 	color: #616161;
 	font-family: 'Roboto', sans-serif;
@@ -214,9 +230,8 @@ label.input-label {
 	color: #616161;
 	font-weight: 700;
 }
-/* --- End of forms */
 
-/* --- FOOTER --- */
+
 #footer {
 	margin-top: 3%;
 	padding-top: 2vh;
@@ -224,7 +239,6 @@ label.input-label {
 	font-size: 0.8em;
 	background-color: #2e2e2e;
 }
-/* --- End of footer */
 
 .link {
 	text-decoration: underline;
@@ -236,54 +250,12 @@ label.input-label {
 	border-color: #2e2e2e;
 }
 
-
-
-.gz-nav-bar .menu {
-	background-color: white;
-}
-.gz-product-image {
-	background-position: center;
-	width: auto;
-	height: 40vh;
-}
-.product-item {
-	margin-bottom: 5vh;
-}
 .product-details-row {
 	margin-top: 3%;
 	max-width: 60%;
 }
-.half-width {
-	width: 50%;
-}
-.test {
-	height: 1000px;
-}
-body::-webkit-scrollbar {
-	display: none;
-}
-.tooltip {
-	max-width: 25rem;
-}
 
-#to-cart-button {
-	color: white;
-	background-color: #474747;
-	border-color: white;
-}
-#to-cart-button:hover {
-	color: #474747;
-	background-color: white;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #474747;
-}
-.no-margin {
-	margin: 0;
-}
-.margin-bot-5 {
-	margin-bottom: 5%;
-}
+
 .alert-text {
 	color: #c60f13;
 	font-size: 12px;
@@ -298,8 +270,8 @@ body::-webkit-scrollbar {
 
 /* --- --- --- UTILITIES */
 
-.bor-bot { 		/* bottom border */
-	border-bottom: solid 1px #2e2e2e;
+.no-margin {	/* no margin*/
+	margin: 0;
 }
 .no-bor-bot { 	/* no bottom border */
 	border-width: 0;
@@ -307,4 +279,13 @@ body::-webkit-scrollbar {
 }
 .no-top-mar { 	/* no top margin */
 	margin-top: 0;
+}
+.bor-bot { 		/* bottom border */
+	border-bottom: solid 1px #2e2e2e;
+}
+.margin-bot-5 {	/* margin bottom 5% */
+	margin-bottom: 5%;
+}
+.half-width {	/* half width */
+	width: 50%;
 }
