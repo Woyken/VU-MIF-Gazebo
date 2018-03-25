@@ -2,7 +2,6 @@ package lt.vu.mif.Controller;
 
 import javax.inject.Named;
 
-//import lt.vu.mif.Entity.Roles.Role;
 import lt.vu.mif.Entity.Roles.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
