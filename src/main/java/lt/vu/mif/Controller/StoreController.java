@@ -42,23 +42,4 @@ public class StoreController {
                 "456"
         };
     }
-
-    public ProductView[] getProducts(){
-        return new ProductView[] {
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-            new ProductView(1l, "sometitle1", new BigDecimal(1256), "This is a description", new ArrayList<ImageView>()),
-        };
-    }
 }
