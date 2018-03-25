@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400i,600');
 
 /* --- --- --- CONSTANTS.
 
 
 -- COLORS
-	Default (gray):		#666565
+	Default (gray):		#616161
 
 -- FONTS
 	Store title:		'Oswald', sans-serif
 	Buttons:			'Roboto', sans-serif
 	Section titles:		'Playfair Display', serif
+	Product name:		'IBM Plex Sans', sans-serif
 
 	Thin font: font-family: "Courier New";
 
@@ -36,11 +38,7 @@
 .button.primary:hover {
 	background: linear-gradient(141deg, #4f4f4f 0%, #3d3d3d 51%, #3b3b3b 75%);
 	color: white;
-	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-	-moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
-
 ul.menu {
 	background-color: white;
 }
@@ -71,26 +69,28 @@ ul.menu {
 /* --- --- --- Our styles. */
 
 
-/* NAVIGATION */
+
+/* --- NAVIGATION --- */
 
 /* Navigation bar. */
 div[data-sticky-container] > div[data-sticky] > div.top-bar {
 	background-color: white;
-	border-bottom: 1px solid #666565;
+	border-bottom: 1px solid black;
 	padding-left: 10%;
 	padding-right: 10%;
-	-webkit-box-shadow: 0 0 5px -1px #666565;
-	-moz-box-shadow: 0 0 5px -1px #666565;
-	box-shadow: 0 0 5px -1px #666565;
+	-webkit-box-shadow: 0 0 5px -1px black;
+	-moz-box-shadow: 0 0 5px -1px black;
+	box-shadow: 0 0 5px -1px black;
 }
 /* Store name. */
 .top-bar > .top-bar-left > ul.menu > li > a {
 	font: italic 24px 'Oswald', sans-serif;
 }
-/* End of navigation */
+/* --- End of navigation */
 
 
-/* SECTION. */
+
+/* --- SECTION --- */
 .section {
 	margin-top: 3%;
 	margin-right: auto;
@@ -107,8 +107,38 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 	font-family: 'Playfair Display', serif;
 	border-bottom: 1px solid #666565;
 }
-
 /* End of section. */
+
+
+
+/* --- PRODUCT LIST --- */
+.product-box {
+	border: 1px #ffffff solid;
+	border-radius: 3px;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+.product-box:hover {
+	border: 1px #000000 solid;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+.product-box > h5.product-name {
+	text-align: center;
+	font-family: 'IBM Plex Sans', sans-serif;
+	font-weight: 600;
+	font-size: 1.3rem;
+	margin-bottom: 0;
+}
+.product-box > p.product-price {
+	text-align: center;
+	font-family: 'IBM Plex Sans', sans-serif;
+	font-weight: 400;
+	font-style: italic;
+	font-size: 1rem;
+}
+/* --- End of product list */
+
+
+
 .gz-hyperlink {
 	text-decoration: underline;
 	color: #808090;
@@ -144,29 +174,13 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 .gz-nav-bar .menu {
 	background-color: white;
 }
-.gz-product-list {
-	margin-top: 4%;
-	font-style: italic;
-
-}
 .gz-product-image {
 	background-position: center;
 	width: auto;
 	height: 40vh;
 }
 .gz-product-name {
-	text-align: center;
-	font-weight: bold;
-	font-family: "Georgia";
-	font-size: 18px;
-	color: #7d7d7d;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	border-bottom-color: #7d7d7d;
-}
-.gz-product-price {
-	text-align: center;
-	font-style: italic;
+
 }
 .product-item {
 	margin-bottom: 5vh;
@@ -198,18 +212,7 @@ body::-webkit-scrollbar {
 .tooltip {
 	max-width: 25rem;
 }
-.product-column {
-	border-style: solid;
-	border-width: 1px;
-	border-color: white;
-	transition: border-color 0.5s, border-width 0.5s, border-style 0.5s; /* Safari */
-}
-.product-column:hover {
-	border-style: solid;
-	border-width: 1px;
-	border-color: black;
-	transition: border-color 0.5s, border-width 0.5s, border-style 0.5s;
-}
+
 #to-cart-button {
 	color: white;
 	background-color: #474747;
@@ -270,6 +273,9 @@ body::-webkit-scrollbar {
 
 
 /* --- --- --- UTILITIES */
+.bor-bot {
+	border-bottom: solid 1px black;
+}
 .no-bor-bot {
 	border-bottom-style: none;
 }
