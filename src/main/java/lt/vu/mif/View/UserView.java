@@ -1,25 +1,26 @@
 package lt.vu.mif.View;
 
-import javax.inject.Named;
-
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.mif.Entity.Roles.Role;
+import lt.vu.mif.Entity.User;
+
+import javax.inject.Named;
 
 @Named
 @Getter
 @Setter
 public class UserView {
+
     private Long id;
     private String email;
-    private Role role;
+    private String password;
 
     public UserView() {
     }
 
-    public UserView(Long id, String email, Role role) {
-        this.id = id;
-        this.email = email;
-        this.role = role;
+    public UserView(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
     }
 }
