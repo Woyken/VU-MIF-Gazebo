@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
+</f:metadata>
+
+<h:head>
     <title>Home page</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="stylesheet" th:href="@{/css/vendor/foundation.css}">
-    <link rel="stylesheet" th:href="@{/css/vendor/foundation-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-</head>
-<body>
+    <h:outputStylesheet name="/css/vendor/foundation.css"/>
+    <h:outputStylesheet name="/css/vendor/foundation-icons.css"/>
+    <h:outputStylesheet name="/css/styles.css"/>
+</h:head>
+<h:body>
 
     <!-- Navigation bar. -->
-    <div data-sticky-container>
-        <div data-sticky data-options="marginTop: 0">
+    <div data-sticky-container="">
+        <div data-sticky="" data-options="marginTop: 0">
             <div class="top-bar gz-nav-bar">
                 <div class="top-bar-left">
                     <ul class="menu">
@@ -33,29 +43,30 @@
 
     <!-- Page title. -->
     <div class="row column text-center gz-section-title">
-        <h1>GZ Spartan</h1>
+        <h1>#{productController.products.get(0).title}</h1>
     </div> <!-- End of page title. -->
 
     <!-- Product details. -->
     <div class="row align-middle align-center product-details-row">
         <div class="medium-6 columns">
             <!-- Main image. -->
-            <img class="thumbnail" src="../images/products/shoe-2.jpg">
+            <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
+                <f:param name="id" value="#{productController.products.get(0).images.get(0).id}"/>
+            </p:graphicImage>
 
             <!-- Smaller images. -->
             <div class="row small-up-4">
-                <div class="column">
-                    <img class="thumbnail" src="../images/products/shoe-3.jpg">
-                </div>
-                <div class="column">
-                    <img class="thumbnail" src="../images/products/shoe-4.jpg">
-                </div>
-                <div class="column">
-                    <img class="thumbnail" src="../images/products/shoe-5.jpg">
-                </div>
-                <div class="column">
-                    <img class="thumbnail" src="../images/products/shoe-6.jpg">
-                </div>
+                <ui:repeat value="#{productController.products.get(0).images}" var="image"
+                           varStatus="loop">
+                    <!--Image is cached by default. If you want to refresh, add cache="false"-->
+                    <h:outputText value="&lt;div class='column'&gt;" escape="false"
+                                  rendered="#{!loop.first}"/>
+                    <p:graphicImage class="thumbnail" value="#{imageStreamer.image}"
+                                    rendered="#{!loop.first}">
+                        <f:param name="id" value="#{image.id}"/>
+                    </p:graphicImage>
+                    <h:outputText value="&lt;/div&gt;" escape="false" rendered="#{!loop.first}"/>
+                </ui:repeat>
             </div>
         </div>
 
@@ -70,7 +81,8 @@
                 </div>
                 <div class="small-6 columns">
                     <!-- TODO: Max skaičius priklauso nuo prekių kiekio sandelyje! -->
-                    <input class="half-width" type="number" id="middle-label" value="1" min="1" max="99">
+                    <input class="half-width" type="number" id="middle-label" value="1" min="1"
+                           max="99"/>
                 </div>
             </div>
 
@@ -80,7 +92,7 @@
                 </div>
                 <div class="small-6 columns">
                     <!-- TODO: Galutinė kaina priklausys nuo prekių kiekio! -->
-                    <p>€ 149.99</p>
+                    <p>€ #{productController.products.get(0).price}</p>
                 </div>
             </div>
 
@@ -99,9 +111,9 @@
     </div>
 
 
-    <script th:src="@{/js/vendor/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{/js/vendor/what-input.js}"></script>
-    <script th:src="@{/js/vendor/foundation.js}"></script>
-    <script th:src="@{/js/foundation-app.js}"></script>
-</body>
+    <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
+    <h:outputScript name="js/vendor/foundation.js"/>
+    <h:outputScript name="js/foundation-app.js"/>
+    <h:outputScript name="js/vendor/what-input.js"/>
+</h:body>
 </html>

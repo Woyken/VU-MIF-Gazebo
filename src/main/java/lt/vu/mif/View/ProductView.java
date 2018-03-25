@@ -1,5 +1,6 @@
 package lt.vu.mif.View;
 
+import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Entity.Product;
@@ -28,5 +29,13 @@ public class ProductView {
         this.price = product.getPrice();
         this.description = product.getDescription();
         this.images = product.getImages().stream().map(image -> new ImageView(image)).collect(Collectors.toList());
+    }
+
+    public ProductView(Long id, String title, BigDecimal price, String description, List<ImageView> images) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.images = new ArrayList<>(images);
     }
 }
