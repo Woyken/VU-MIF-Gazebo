@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
 
 /* --- --- --- CONSTANTS.
 
@@ -8,8 +9,9 @@
 	Default (gray):		#666565
 
 -- FONTS
-	Store title:	'Oswald'
-	Buttons:		'Roboto'
+	Store title:		'Oswald', sans-serif
+	Buttons:			'Roboto', sans-serif
+	Section titles:		'Playfair Display', serif
 
 	Thin font: font-family: "Courier New";
 
@@ -69,6 +71,8 @@ ul.menu {
 /* --- --- --- Our styles. */
 
 
+/* NAVIGATION */
+
 /* Navigation bar. */
 div[data-sticky-container] > div[data-sticky] > div.top-bar {
 	background-color: white;
@@ -83,7 +87,28 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 .top-bar > .top-bar-left > ul.menu > li > a {
 	font: italic 24px 'Oswald', sans-serif;
 }
+/* End of navigation */
 
+
+/* SECTION. */
+.section {
+	margin-top: 3%;
+	margin-right: auto;
+	margin-left:auto;
+}
+.section.section-cover {
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+	background-size:cover !important;
+	width: 94vw;
+	height: 60vh;
+}
+.section > h1.section-title {
+	font-family: 'Playfair Display', serif;
+	border-bottom: 1px solid #666565;
+}
+
+/* End of section. */
 .gz-hyperlink {
 	text-decoration: underline;
 	color: #808090;
@@ -118,28 +143,6 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 }
 .gz-nav-bar .menu {
 	background-color: white;
-}
-
-#main-page-image {
-	margin-top: 3%;
-	margin-left: 3%;
-	margin-right: 3%;
-	background: url(../images/main-page-cover-16-9.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size:cover;
-	width: 94vw;
-	height: 60vh;
-}
-.gz-section-title {
-	margin-top: 3%;
-	color: #666565;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	border-bottom-color: #666565;
-}
-.gz-section-title > h1 {
-	font-family: "Palatino Linotype";
 }
 .gz-product-list {
 	margin-top: 4%;
