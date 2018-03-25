@@ -11,7 +11,6 @@ class ValidationUtilsTests {
 
     @Test
     void validatePassword_validatingPassword_success() {
-
         boolean invalidResult = ValidationUtils.ValidatePassword(TEST_INVALID_PASSWORD);
         boolean validResult = ValidationUtils.ValidatePassword(TEST_VALID_PASSWORD);
 
