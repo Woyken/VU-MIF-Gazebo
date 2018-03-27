@@ -46,18 +46,7 @@
 	color: white;
 }
 
-.button.primary-inverted {
-	color: white;
-	background-color: #2e2e2e;
-	border: 1px solid white;
-	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-	-moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-}
-.button.primary-inverted:hover {
-	color: #2e2e2e;
-	border: 1px solid #2e2e2e;
-}
+
 
 
 .button.success {
@@ -79,6 +68,20 @@
 	border-color: #616161;
 }
 
+
+.button.primary-inverted {
+	color: white;
+	background-color: #2e2e2e;
+	border: 1px solid white;
+	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	-moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+.button.primary-inverted:hover {
+	color: #2e2e2e;
+	border: 1px solid #2e2e2e;
+}
+
 .tooltip {
 	max-width: 25rem;
 }
@@ -87,11 +90,16 @@
 	margin-top: 1rem;
 }
 
-
+/* Navigation buttons */
+ul.dropdown.menu > li {
+	padding: 0 1% 0 1%;
+	border-radius: 3px;
+}
 
 /* Menu button */
 ul.dropdown.menu > li[role] > a {
 	color: #2e2e2e;
+	border-radius: 3px;
 	border: 1px solid white;
 	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 	-moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
@@ -100,6 +108,18 @@ ul.dropdown.menu > li[role] > a {
 ul.dropdown.menu > li[role] > a:hover {
 	color: #2e2e2e;
 	border: 1px solid #2e2e2e;
+}
+
+#cart-button {
+	border-color: #9fc832;
+	background: #9fc832;
+	color: white;
+	font-style: italic;
+}
+#cart-button:hover {
+	color:black;
+	border: 1px solid #4CAF50;
+	background: white;
 }
 
 /* Menu drop down list button */
