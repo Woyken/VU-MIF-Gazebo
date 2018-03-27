@@ -21,32 +21,54 @@
 </h:head>
 <h:body>
 
-    <!-- Navigation bar. -->
+    <!-- NAVIGATION BAR. -->
     <div data-sticky-container="">
         <div data-sticky="" data-options="marginTop: 0">
-            <div class="top-bar gz-nav-bar">
+            <div class="top-bar">
                 <div class="top-bar-left">
                     <ul class="menu">
                         <li>
-                            <a href="#" class="menu-text gz-text-font">G A Z E B O</a>
+                            <a href="main-page-logged-in.xhtml" class="menu-text">G A Z E B O</a>
                         </li>
                     </ul>
                 </div>
                 <div class="top-bar-right">
-                    <ul class="menu">
-                        <li><a href="#" data-open="login-modal" class="button">Prisijungti</a></li>
+                    <ul class="dropdown menu"
+                        data-dropdown-menu=""
+                        data-closing-time="200">
+                        <li class="is-dropdown-submenu-parent">
+                            <a id="account-settings" class="primary" href="#">Paskyra</a>
+                            <ul class="menu">
+                                <li>
+                                    <i class="fi-lock"></i>
+                                    <a href="#" data-open="change-password-modal">Keisti slaptažodį</a>
+                                </li>
+
+                                <li>
+                                    <i class="fi-mail"></i>
+                                    <a href="#" data-open="change-email-modal">Keisti el. paštą</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="menuitem">
+                            <a href="window.xhtml" class="no-bor-bot">Atsijungti</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div> <!-- End of navigation bar. -->
+    </div> <!-- END OF NAVIGATION BAR -->
 
-    <!-- Page title. -->
-    <div class="row column text-center gz-section-title">
-        <h1>#{productController.products.get(0).title}</h1>
-    </div> <!-- End of page title. -->
 
-    <!-- Product details. -->
+
+    <!-- PAGE TITLE -->
+    <div class="row column text-center section">
+        <h1 class="section-title">#{productController.products.get(0).title}</h1>
+    </div> <!-- END OF PAGE TITLE -->
+
+
+
+    <!-- PRODUCT DETAILS -->
     <div class="row align-middle align-center product-details-row">
         <div class="medium-6 columns">
             <!-- Main image. -->
@@ -72,8 +94,7 @@
 
         <!-- Side column. -->
         <div class="medium-6 large-5 columns">
-            <!--<h3>GZ Spartan</h3>-->
-            <p>The GZ Spartan is a lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec arcu gravida, tempus nunc quis, mollis odio. Cras lacinia vitae lorem sit amet commodo. Proin id elit convallis, pretium magna eu, dignissim nunc. Donec viverra dolor non est pretium, eu ultricies mi accumsan. Vivamus aliquet justo sapien, ac rutrum libero ullamcorper id. Phasellus vel imperdiet dolor, ac sollicitudin turpis. Proin faucibus sit amet dolor ac fringilla. Integer et laoreet sapien, ut tincidunt libero. Suspendisse commodo orci vel laoreet laoreet. Sed accumsan arcu vel neque placerat, sed commodo velit ullamcorper. Quisque ultricies, est ac malesuada aliquam, est sem euismod mauris, eu consectetur mi turpis sed odio. Maecenas fermentum aliquet dui. Integer auctor et nisl et blandit. Proin id vestibulum ante.</p>
+            <p class="text-justify">The GZ Spartan is a lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec arcu gravida, tempus nunc quis, mollis odio. Cras lacinia vitae lorem sit amet commodo. Proin id elit convallis, pretium magna eu, dignissim nunc. Donec viverra dolor non est pretium, eu ultricies mi accumsan. Vivamus aliquet justo sapien, ac rutrum libero ullamcorper id. Phasellus vel imperdiet dolor, ac sollicitudin turpis. Proin faucibus sit amet dolor ac fringilla. Integer et laoreet sapien, ut tincidunt libero. Suspendisse commodo orci vel laoreet laoreet. Sed accumsan arcu vel neque placerat, sed commodo velit ullamcorper. Quisque ultricies, est ac malesuada aliquam, est sem euismod mauris, eu consectetur mi turpis sed odio. Maecenas fermentum aliquet dui. Integer auctor et nisl et blandit. Proin id vestibulum ante.</p>
 
             <div class="row">
                 <div class="small-6 columns shrink">
@@ -96,19 +117,21 @@
                 </div>
             </div>
 
-            <a id="to-cart-button" href="#" class="button large hollow expanded">Dėti į krepšelį</a>
+            <a href="#" class="button large hollow expanded primary-inverted">DĖTI Į KREPŠELĮ</a>
         </div>
-    </div> <!-- End of product details. -->
+    </div> <!-- END OF PRODUCT DETAILS -->
 
-    <!-- Footer. -->
-    <div id="footer" class="">
+
+
+    <!-- FOOTER -->
+    <div id="footer">
         <div class="row">
-            <div id="footer-notice" class="columns">
-                <p>Be „Gazebo“ sutikimo draudžiama kopijuoti ir platinti svetainėje esančią informaciją. </p>
-                <p>Gazebo © 2018 All rights reserved</p>
+            <div class="columns">
+                <p class="text-center">Be "Gazebo" sutikimo draudžiama kopijuoti ir platinti svetainėje esančią informaciją.</p>
+                <p class="text-center">Gazebo © 2018 All rights reserved</p>
             </div>
         </div>
-    </div>
+    </div> <!-- END OF FOOTER -->
 
 
     <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
