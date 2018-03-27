@@ -1,13 +1,19 @@
 package lt.vu.mif.Controller;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.inject.Named;
+import lt.vu.mif.View.ImageView;
+import lt.vu.mif.View.ProductView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+@Named
 @Controller
 public class StoreController {
 
@@ -25,7 +31,7 @@ public class StoreController {
     }
 
     @RequestMapping(value = "/logged-in", method = RequestMethod.GET)
-    public ModelAndView loggedIn() { return new ModelAndView("main-page-logged-in.html"); }
+    public ModelAndView loggedIn() { return new ModelAndView("/main-page-logged-in.xhtml"); }
 
     @RequestMapping(value = "/testrequest", method = RequestMethod.GET)
     @ResponseBody

@@ -1,0 +1,263 @@
+<!DOCTYPE html [
+        <!ENTITY times "&#215;">
+        ]>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
+</f:metadata>
+
+<h:head>
+    <title>Home page</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <h:outputStylesheet name="/css/vendor/foundation.css"/>
+    <h:outputStylesheet name="/css/vendor/foundation-icons.css"/>
+    <h:outputStylesheet name="/css/styles.css"/>
+</h:head>
+<h:body>
+
+
+    <!-- NAVIGATION BAR. -->
+    <div data-sticky-container="">
+        <div data-sticky="" data-options="marginTop: 0">
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <ul class="menu">
+                        <li>
+                            <a href="main-page-logged-in.xhtml" class="menu-text">G A Z E B O</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="dropdown menu"
+                        data-dropdown-menu=""
+                        data-closing-time="200">
+                        <li class="is-dropdown-submenu-parent">
+                            <a id="account-settings" class="primary" href="#">Paskyra</a>
+                            <ul class="menu">
+                                <li>
+                                    <i class="fi-lock"></i>
+                                    <a href="#" data-open="change-password-modal">Keisti slaptažodį</a>
+                                </li>
+
+                                <li>
+                                    <i class="fi-mail"></i>
+                                    <a href="#" data-open="change-email-modal">Keisti el. paštą</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="menuitem">
+                            <a href="window.xhtml" class="no-bor-bot">Atsijungti</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END OF NAVIGATION BAR. -->
+
+
+    <!-- MAIN PAGE COVER. -->
+    <div class="section section-cover"
+         style="background: url(resources/images/main-page-cover-16-9-2.jpg);">
+    </div> <!-- END OF MAIN PAGE COVER. -->
+
+
+    <!-- PAGE TITLE. -->
+    <div class="row column text-center section">
+        <h1 class="section-title">PAGRINDINĖS PREKĖS</h1>
+    </div> <!-- END OF PAGE TITLE. -->
+
+
+    <!-- PRODUCT LIST. -->
+    <ui:repeat value="#{productController.products}" var="productItem" varStatus="loop">
+        <h:outputText value="&lt;div class='row small-up-2 large-up-4 section'&gt;"
+                      escape="false" rendered="#{loop.index % 4 == 0}"/>
+        <div class="column product-box">
+            <a href="product-details.xhtml">
+                <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
+                    <f:param name="id" value="#{productItem.images.get(0).id}"/>
+                </p:graphicImage>
+            </a>
+            <h5 class="product-name bor-bot">#{productItem.title}</h5>
+            <p class="product-price">€ #{productItem.price}</p>
+            <a href="#" class="button expanded primary">PRIDĖTI Į KREPŠELĮ</a>
+        </div>
+        <h:outputText value="&lt;/div&gt;" escape="false"
+                      rendered="#{loop.last or (loop.index + 1) % 4 == 0}"/>
+    </ui:repeat> <!-- END OF PRODUCT LIST. -->
+
+
+
+    <!-- CHANGE PASSWORD MODAL. -->
+    <div id="change-password-modal" class="reveal"
+         data-reveal=""
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    Slaptažodžio keitimas
+                </h4>
+                <br/>
+
+                <!-- New password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Naujasis slaptažodis
+                            <span><i class="fi-lock"></i></span>
+                            <input type="password"/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Repeat new password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Pakartokite naująjį slaptažodį
+                            <span><i class="fi-lock"></i></span>
+                            <input type="password"/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Current password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Dabartinis slaptažodis
+                            <i class="fi-unlock"></i>
+                            <input class="no-mar" type="password"/>
+                        </label>
+                        <!-- Required fields. -->
+                        <div class="mar-bot-5">
+                            <span class="alert-star">*</span>
+                            <span class="alert-text"> privalomi laukai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit. -->
+                <div class="row">
+                    <div class="columns">
+                        <button class="button success expanded">Keisti slaptažodį</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="close-button" data-close="" type="button">
+            <span>&times;</span>
+        </button>
+    </div> <!-- END OF CHANGE PASSWORD MODAL. -->
+
+
+
+    <!-- CHANGE EMAIL MODAL. -->
+    <div id="change-email-modal" class="reveal"
+         data-reveal=""
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    El. pašto adreso keitimas
+                </h4>
+                <br/>
+
+                <!-- Current email. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            Dabartinis adresas
+                            <i class="fi-torso"></i>
+                            <input type="text" placeholder="gazebo@gmail.com"
+                                   value="gazebo@gmail.com" disabled=""/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- New email. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Naujasis adresas
+                            <span><i class="fi-mail"></i></span>
+                            <input type="text"/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Repeat new email. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Pakartokite naująjį adresą
+                            <span><i class="fi-mail"></i></span>
+                            <input type="text"/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Dabartinis slaptažodis
+                            <span><i class="fi-lock"></i></span>
+                            <input class="no-mar" type="text"/>
+                        </label>
+                        <!-- Required fields. -->
+                        <div class="mar-bot-5">
+                            <span class="alert-star">*</span>
+                            <span class="alert-text"> privalomi laukai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit. -->
+                <div class="row">
+                    <div class="columns">
+                        <button class="button success expanded">Keisti el. pašto adresą</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="close-button" data-close="" type="button">
+            <span>&times;</span>
+        </button>
+    </div> <!-- END OF CHANGE EMAIL MODAL. -->
+
+
+
+    <!-- FOOTER. -->
+    <div id="footer">
+        <div class="row">
+            <div class="columns">
+                <p class="text-center">Be "Gazebo" sutikimo draudžiama kopijuoti ir platinti svetainėje esančią informaciją.</p>
+                <p class="text-center">Gazebo © 2018 All rights reserved</p>
+            </div>
+        </div>
+    </div> <!-- END OF FOOTER. -->
+
+
+    <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
+    <h:outputScript name="js/vendor/foundation.js"/>
+    <h:outputScript name="js/foundation-app.js"/>
+    <h:outputScript name="js/vendor/what-input.js"/>
+
+</h:body>
+</html>
