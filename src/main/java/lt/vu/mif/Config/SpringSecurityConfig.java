@@ -17,12 +17,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Resource(name = "userDetailsService")
+    @Resource(name = "CustomUserDetailsService")
     private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests()
+            .antMatchers("/main-page-logged-in.xhtml").authenticated()
+            .anyRequest().permitAll()
+            .and()
+            .formLogin().loginPage("/login").permitAll()
+            .and()
+            .logout().permitAll();
     }
 
     @Bean
