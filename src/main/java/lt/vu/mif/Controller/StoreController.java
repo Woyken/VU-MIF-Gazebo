@@ -6,3 +6,4 @@ import javax.inject.Named;
 public class StoreController {
 
 }
+
