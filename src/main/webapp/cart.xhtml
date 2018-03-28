@@ -1,0 +1,263 @@
+<!DOCTYPE html [
+        <!ENTITY times "&#215;">
+        ]>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
+</f:metadata>
+
+<h:head>
+    <title>Home page</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <h:outputStylesheet name="/css/vendor/foundation.css"/>
+    <h:outputStylesheet name="/css/vendor/foundation-icons.css"/>
+    <h:outputStylesheet name="/css/styles.css"/>
+</h:head>
+<h:body>
+
+    <!-- NAVIGATION BAR. -->
+    <div data-sticky-container="">
+        <div data-sticky="" data-options="marginTop: 0">
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <ul class="menu">
+                        <li>
+                            <a href="main-page-logged-in.xhtml" class="menu-text">G A Z E B O</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="dropdown menu"
+                        data-dropdown-menu=""
+                        data-closing-time="200">
+                        <li role="menuitem">
+                            <a id="cart-button" href="cart.xhtml">
+                                <i class="fi-shopping-cart"></i>
+                                Mano krepšelis
+                            </a>
+                        </li>
+                        <li class="is-dropdown-submenu-parent">
+                            <a id="account-settings" class="primary" href="#">Paskyra</a>
+                            <ul class="menu">
+                                <li>
+                                    <i class="fi-lock"></i>
+                                    <a href="#" data-open="change-password-modal">Keisti slaptažodį</a>
+                                </li>
+
+                                <li>
+                                    <i class="fi-mail"></i>
+                                    <a href="#" data-open="change-email-modal">Keisti el. paštą</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="menuitem">
+                            <a href="window.xhtml">Atsijungti</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END OF NAVIGATION BAR -->
+
+
+
+    <!-- PAGE TITLE -->
+    <div class="row column text-center section">
+        <h1 class="section-title">Krepšelis</h1>
+    </div> <!-- END OF PAGE TITLE -->
+
+
+
+    <!-- TOP BUTTONS -->
+    <div class="row collapse section">
+        <div class="columns small-3">
+            <a class="button primary expanded" href="main-page-logged-in.xhtml">
+                <i class="fi-arrow-left"></i>
+                Atgal į katalogą</a>
+        </div>
+        <div class="columns small-3 small-offset-6">
+            <a class="button orange expanded">Pirkti prekes</a>
+        </div>
+    </div> <!-- END OF TOP BUTTONS -->
+
+
+    <!-- SHOPPING CART ITEMS -->
+    <div id="shopping-list-header" class="row section">
+        <div class="small-6 columns"> <h5>Prekė</h5> </div>
+        <div class="small-3 columns"> <h5>Kiekis</h5> </div>
+        <div class="small-3 columns"> <h5>Kaina</h5> </div>
+    </div>
+
+    <div id="shopping-list-body" class="row align-middle">
+
+        <!-- PRODUCT ONE -->
+        <div class="small-6 columns">
+            <div class="row align-middle align-top">
+                <!-- Product image. -->
+                <div class="small-6 columns align-right">
+                    <a href="product-details.xhtml">
+                        <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
+                    </a>
+                </div>
+                <!-- Product name. -->
+                <div class="small-6 columns">
+                    <a href="product-details.xhtml">
+                        <h5>GZ Air Force v4</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Product quantity. -->
+        <div class="small-3 columns">
+            <input class="half-width" type="number" value="1" min="1" max="99"/>
+        </div>
+        <!-- Price of the product. -->
+        <div class="small-2 columns">
+            <h5 class="shopping-cart-price">123.99 €</h5>
+        </div>
+        <div class="small-1 columns">
+            <a class="button primary" href="#" data-open="remove-item-from-cart-modal">&times;</a>
+        </div>
+
+
+
+        <!-- PRODUCT TWO -->
+        <div class="small-6 columns">
+            <div class="row align-middle align-top">
+                <!-- Product image. -->
+                <div class="small-6 columns align-right">
+                    <a href="product-details.xhtml">
+                        <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
+                    </a>
+                </div>
+                <!-- Product name. -->
+                <div class="small-6 columns">
+                    <a href="product-details.xhtml">
+                        <h5>GZ Titan X</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Product quantity. -->
+        <div class="small-3 columns">
+            <input class="half-width" type="number" value="1" min="1" max="99"/>
+        </div>
+        <!-- Price of the product. -->
+        <div class="small-2 columns">
+            <h5 class="shopping-cart-price">64.99 €</h5>
+        </div>
+        <div class="small-1 columns">
+            <a class="button primary" href="#" data-open="remove-item-from-cart-modal">&times;</a>
+        </div>
+
+
+
+        <!-- PRODUCT THREE -->
+        <div class="small-6 columns">
+            <div class="row align-middle align-top">
+                <!-- Product image. -->
+                <div class="small-6 columns align-right">
+                    <a href="product-details.xhtml">
+                        <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
+                    </a>
+                </div>
+                <!-- Product name. -->
+                <div class="small-6 columns">
+                    <a href="product-details.xhtml">
+                        <h5>GZ Velocity</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Product quantity. -->
+        <div class="small-3 columns">
+            <input class="half-width" type="number" value="1" min="1" max="99"/>
+        </div>
+        <!-- Price of the product. -->
+        <div class="small-2 columns">
+            <h5 class="shopping-cart-price">89.99 €</h5>
+        </div>
+        <div class="small-1 columns">
+            <a class="button primary" href="#" data-open="remove-item-from-cart-modal">&times;</a>
+        </div>
+    </div>
+
+
+    <div id="shopping-list-total" class="row align-right">
+        <div class="columns">
+            <h4 class="text-right">Galutinė suma: <span>278.97 €</span></h4>
+        </div>
+    </div>
+    <!-- END OF SHOPPING CART ITEMS -->
+
+
+
+    <!-- BOTTOM BUTTONS -->
+    <div class="row collapse section">
+        <div class="columns small-3">
+            <a class="button primary expanded" href="main-page-logged-in.xhtml">
+                <i class="fi-arrow-left"></i>
+                Atgal į katalogą</a>
+        </div>
+        <div class="columns small-3 small-offset-6">
+            <a class="button orange expanded">Pirkti prekes</a>
+        </div>
+    </div>  <!-- END OF BOTTOM BUTTONS -->
+
+
+
+    <!-- REMOVE ITEM FROM CART MODAL -->
+    <div id="remove-item-from-cart-modal"
+         class="reveal"
+         data-reveal=""
+         data-overlay="false"
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    Pašalinti prekę iš krepšelio?
+                </h4>
+                <br />
+                <div class="row">
+                    <div class="columns small-6">
+                        <a class="button primary expanded" data-close="">Taip</a>
+                    </div>
+                    <div class="columns small-6">
+                        <a class="button orange expanded" data-close="">Ne</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="close-button" data-close="" type="button">
+            <span>&times;</span>
+        </button>
+    </div> <!-- END OF REMOVE ITEM FROM CART MODAL -->
+
+
+
+    <!-- FOOTER -->
+    <div id="footer">
+        <div class="row">
+            <div class="columns">
+                <p class="text-center">Be "Gazebo" sutikimo draudžiama kopijuoti ir platinti svetainėje esančią informaciją.</p>
+                <p class="text-center">Gazebo © 2018 All rights reserved</p>
+            </div>
+        </div>
+    </div> <!-- END OF FOOTER. -->
+
+
+    <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
+    <h:outputScript name="js/vendor/foundation.js"/>
+    <h:outputScript name="js/foundation-app.js"/>
+    <h:outputScript name="js/vendor/what-input.js"/>
+
+</h:body>
+</html>
