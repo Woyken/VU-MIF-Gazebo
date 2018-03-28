@@ -31,10 +31,10 @@ public class DataGenerator {
             user.setPassword("password");
             if (i % 2 == 0) {
                 user.setEmail("admin" + i + "@gmail.com");
-                user.setRole(Role.ROLE_ADMIN);
+                user.setRole(Role.ADMIN);
             } else {
                 user.setEmail("user" + i + "@gmail.com");
-                user.setRole(Roles.Role.ROLE_USER);
+                user.setRole(Role.USER);
             }
             users.add(user);
         }

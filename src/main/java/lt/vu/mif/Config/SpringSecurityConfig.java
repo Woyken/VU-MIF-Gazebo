@@ -23,18 +23,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/main-page-logged-in.xhtml").authenticated()
-            .anyRequest().permitAll()
-            .and()
-            .formLogin().loginPage("/login.xhtml").failureUrl("/login.xhtml?error=true").permitAll()
-            .and()
-            .logout().permitAll();
+                .antMatchers("/main-page-logged-in.xhtml").access("hasAnyRole('USER', 'ADMIN')")
+                .and()
+                .formLogin().loginPage("/login.xhtml").defaultSuccessUrl("/main-page-logged-in.xhtml", true).failureUrl("/login.xhtml?error=true").permitAll()
+                .and()
+                .logout().permitAll().and().csrf().disable();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder;
+        return new BCryptPasswordEncoder();
     }
 
     @Autowired
@@ -43,7 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/*.css");
         web.ignoring().antMatchers("/*.js");
     }

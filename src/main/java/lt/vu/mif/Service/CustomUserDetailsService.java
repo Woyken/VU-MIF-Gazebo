@@ -1,6 +1,5 @@
 package lt.vu.mif.Service;
 
-import lt.vu.mif.Repository.UserRepository;
 import lt.vu.mif.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

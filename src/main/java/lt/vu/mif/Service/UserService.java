@@ -19,7 +19,7 @@ public class UserService {
         //Should it be hashed here?
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         //Should the role be set here?
-        user.setRole(Role.ROLE_USER);
+        user.setRole(Role.USER);
         userRepository.save(user);
     }
 
