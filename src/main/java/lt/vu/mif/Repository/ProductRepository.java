@@ -1,6 +1,7 @@
 package lt.vu.mif.Repository;
 
 import lt.vu.mif.Entity.Product;
+import lt.vu.mif.Entity.Product_;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,6 +20,16 @@ public class ProductRepository extends BaseRepository<Product> {
         Root<Product> root = criteria.from(Product.class);
 
         criteria.select(root);
+
+        return getEntityManager().createQuery(criteria).getResultList();
+    }
+
+    public List<Long> getIds() {
+        CriteriaBuilder builder = getCriteriaBuilder();
+        CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+        Root<Product> root = criteria.from(Product.class);
+
+        criteria.select(root.get(Product_.id));
 
         return getEntityManager().createQuery(criteria).getResultList();
     }
