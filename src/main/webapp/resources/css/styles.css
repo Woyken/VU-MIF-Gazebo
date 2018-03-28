@@ -47,7 +47,13 @@
 }
 
 
-
+.button.orange {
+	color: white;
+	background-color: #FF9800;
+}
+.button.orange:hover {
+	background-color: #F57C00;;
+}
 
 .button.success {
 	color: white;
@@ -110,6 +116,10 @@ ul.dropdown.menu > li[role] > a:hover {
 	border: 1px solid #2e2e2e;
 }
 
+.button > i {
+	margin-right: 4%;
+}
+
 #cart-button {
 	border-color: #9fc832;
 	background: #9fc832;
@@ -168,6 +178,52 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 
 
 /* --- --- --- Our styles. */
+
+
+/* Shopping cart */
+#shopping-list-header {
+	margin-bottom: 2%;
+	border-bottom: 1px solid black;
+	text-transform: uppercase;
+}
+#shopping-list-header h5 {
+	font-weight: bold;
+}
+
+#shopping-list-body .thumbnail {
+	max-width: 10vw;
+	max-height: 15vh;
+}
+
+/* Remove item from cart button */
+.remove-item {
+	border: 1px solid #2e2e2e;
+	background-color: #2e2e2e;
+	color: white;
+}
+
+/* Price of an individual product */
+.shopping-cart-price {
+	font-weight: bold;
+	color: #9fc832;
+}
+
+#shopping-list-total {
+	margin-top: 1.5%;
+	text-transform: uppercase;
+	border-top: 1px solid black;
+}
+/* Total price text */
+#shopping-list-total h4 {
+	font-weight: bold;
+	margin-top: 0.5rem;
+	font-style: italic;
+
+}
+/* Total price number itself */
+#shopping-list-total span {
+	color: #9fc832;
+}
 
 body {
 	font-family: 'Roboto', sans-serif;
@@ -310,4 +366,7 @@ label.input-label {
 }
 .half-width {	/* half width */
 	width: 50%;
+}
+.quarter-width {	/* quarter width*/
+	width: 25%;
 }
