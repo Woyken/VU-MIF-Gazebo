@@ -25,6 +25,16 @@ public class ProductRepository extends BaseRepository<Product> {
         return getEntityManager().createQuery(criteria).getResultList();
     }
 
+    public List<Long> getIds() {
+        CriteriaBuilder builder = getCriteriaBuilder();
+        CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+        Root<Product> root = criteria.from(Product.class);
+
+        criteria.select(root.get(Product_.id));
+      
+        return getEntityManager().createQuery(criteria).getResultList();
+    }
+
     public List<Product> getByTitle(String title) {
         Objects.requireNonNull(title);
 
