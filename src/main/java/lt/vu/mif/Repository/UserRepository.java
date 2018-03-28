@@ -1,5 +1,6 @@
 package lt.vu.mif.Repository;
 
+import java.util.Optional;
 import lt.vu.mif.Entity.User;
 import lt.vu.mif.Entity.User_;
 import org.springframework.stereotype.Repository;
@@ -36,5 +37,18 @@ public class UserRepository extends BaseRepository<User> {
         criteria.select(builder.count(root));
 
         return getEntityManager().createQuery(criteria).getSingleResult() > 0;
+    }
+
+    public User getUserByEmail(String email) {
+        Objects.requireNonNull(email);
+
+        CriteriaBuilder builder = getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+
+        criteria.select(root);
+        criteria.where(builder.equal(root.get(User_.email), email));
+
+        return getEntityManager().createQuery(criteria).getSingleResult();
     }
 }

@@ -1,4 +1,4 @@
-package lt.vu.mif.Controišresolvintiller;
+package lt.vu.mif.Controller;
 
 import javax.inject.Named;
 
@@ -6,3 +6,4 @@ import javax.inject.Named;
 public class StoreController {
 
 }
+
