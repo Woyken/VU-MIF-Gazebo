@@ -3,6 +3,6 @@ package lt.vu.mif.Entity;
 public class Roles {
 
     public enum Role{
-        USER, ADMIN
+        ROLE_USER, ROLE_ADMIN
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource(name = "CustomUserDetailsService")
@@ -26,7 +26,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/main-page-logged-in.xhtml").authenticated()
             .anyRequest().permitAll()
             .and()
-            .formLogin().loginPage("/login").permitAll()
+            .formLogin().loginPage("/login.xhtml").failureUrl("/login.xhtml?error=true").permitAll()
             .and()
             .logout().permitAll();
     }

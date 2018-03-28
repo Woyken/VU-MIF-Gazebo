@@ -16,8 +16,10 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public void save(User user) {
+        //Should it be hashed here?
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.USER);
+        //Should the role be set here?
+        user.setRole(Role.ROLE_USER);
         userRepository.save(user);
     }
 
