@@ -1,6 +1,7 @@
 package lt.vu.mif.Test;
 
 import lt.vu.mif.Entity.*;
+import lt.vu.mif.Entity.Roles.Role;
 import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,10 @@ public class DataGenerator {
             user.setPassword("password");
             if (i % 2 == 0) {
                 user.setEmail("admin" + i + "@gmail.com");
-                user.setRole(Roles.Role.ADMIN);
+                user.setRole(Role.ADMIN);
             } else {
                 user.setEmail("user" + i + "@gmail.com");
-                user.setRole(Roles.Role.USER);
+                user.setRole(Role.USER);
             }
             users.add(user);
         }
