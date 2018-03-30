@@ -1,12 +1,17 @@
 package lt.vu.mif.Service;
 
+import javax.inject.Named;
 import lt.vu.mif.Entity.Roles.Role;
 import lt.vu.mif.Entity.User;
 import lt.vu.mif.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Named("UserService")
 @Service
 public class UserService {
 
@@ -21,6 +26,12 @@ public class UserService {
         //Should the role be set here?
         user.setRole(Role.USER);
         userRepository.save(user);
+    }
+
+    public boolean isLoggedIn () {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return !(authentication instanceof AnonymousAuthenticationToken);
     }
 
     public User findByUsername(String username) {
