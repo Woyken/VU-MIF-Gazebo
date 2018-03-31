@@ -2,6 +2,7 @@ package lt.vu.mif.View;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.Entity.Roles.Role;
 import lt.vu.mif.Entity.User;
 
 import javax.inject.Named;
@@ -14,6 +15,7 @@ public class UserView {
     private Long id;
     private String email;
     private String password;
+    private Role role;
 
     public UserView() {
     }
@@ -22,5 +24,6 @@ public class UserView {
         this.id = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();
+        this.role = user.getRole();
     }
 }
