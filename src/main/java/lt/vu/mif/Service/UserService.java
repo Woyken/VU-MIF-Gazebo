@@ -34,6 +34,13 @@ public class UserService {
         return !(authentication instanceof AnonymousAuthenticationToken);
     }
 
+    public User getLoggedUser() {
+        if (isLoggedIn()) {
+            return userRepository.getUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        }
+        return null;
+    }
+
     public User findByUsername(String username) {
         return userRepository.getUserByEmail(username);
     }
