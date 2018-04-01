@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+    <!-- NAVIGATION BAR. -->
+    <div data-sticky-container="">
+        <div data-sticky="" data-options="marginTop: 0">
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <ul class="menu">
+                        <li>
+                            <a href="../../main.xhtml" class="menu-text">G A Z E B O</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="dropdown menu"
+                        data-dropdown-menu=""
+                        data-closing-time="200">
+                        <li role="menuitem">
+                            <a id="cart-button" href="../../cart.xhtml">
+                                <i class="fi-shopping-cart" />
+                                Mano krepšelis
+                            </a>
+                        </li>
+                        <li class="is-dropdown-submenu-parent">
+                            <a id="account-settings" class="primary" href="#">Paskyra</a>
+                            <ul class="menu">
+                                <li>
+                                    <i class="fi-lock" />
+                                    <a href="#" data-open="change-password-modal">Keisti slaptažodį</a>
+                                </li>
+
+                                <li>
+                                    <i class="fi-mail" />
+                                    <a href="#" data-open="change-email-modal">Keisti el. paštą</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="menuitem">
+                            <a href="../../main.xhtml">Atsijungti</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END OF NAVIGATION BAR. -->
+
+
+
+    <!-- CHANGE PASSWORD MODAL. -->
+    <div id="change-password-modal" class="reveal"
+         data-reveal=""
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    Slaptažodžio keitimas
+                </h4>
+                <br/>
+
+                <!-- New password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Naujasis slaptažodis
+                            <span><i class="fi-lock" /></span>
+                            <input type="password"/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Repeat new password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Pakartokite naująjį slaptažodį
+                            <span><i class="fi-lock" /></span>
+                            <input type="password"/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Current password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Dabartinis slaptažodis
+                            <i class="fi-unlock" />
+                            <input class="no-mar" type="password"/>
+                        </label>
+                        <!-- Required fields. -->
+                        <div class="mar-bot-5">
+                            <span class="alert-star">*</span>
+                            <span class="alert-text"> privalomi laukai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit. -->
+                <div class="row">
+                    <div class="columns">
+                        <button class="button success expanded">Keisti slaptažodį</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="close-button" data-close="" type="button">
+            <span>&times;</span>
+        </button>
+    </div> <!-- END OF CHANGE PASSWORD MODAL. -->
+
+
+
+    <!-- CHANGE EMAIL MODAL. -->
+    <div id="change-email-modal" class="reveal"
+         data-reveal=""
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    El. pašto adreso keitimas
+                </h4>
+                <br/>
+
+                <!-- Current email. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            Dabartinis adresas
+                            <i class="fi-torso" />
+                            <input type="text" placeholder="gazebo@gmail.com"
+                                   value="gazebo@gmail.com" disabled=""/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- New email. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Naujasis adresas
+                            <span><i class="fi-mail" /></span>
+                            <input type="text"/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Repeat new email. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Pakartokite naująjį adresą
+                            <span><i class="fi-mail" /></span>
+                            <input type="text"/>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Password. -->
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">
+                            <span class="alert-star">*</span>
+                            Dabartinis slaptažodis
+                            <span><i class="fi-lock" /></span>
+                            <input class="no-mar" type="text"/>
+                        </label>
+                        <!-- Required fields. -->
+                        <div class="mar-bot-5">
+                            <span class="alert-star">*</span>
+                            <span class="alert-text"> privalomi laukai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit. -->
+                <div class="row">
+                    <div class="columns">
+                        <button class="button success expanded">Keisti el. pašto adresą</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="close-button" data-close="" type="button">
+            <span>&times;</span>
+        </button>
+    </div> <!-- END OF CHANGE EMAIL MODAL. -->
+
+</ui:composition>
+</html>

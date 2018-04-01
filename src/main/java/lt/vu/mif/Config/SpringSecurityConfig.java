@@ -25,7 +25,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/main-page-logged-in.xhtml").access("hasAnyRole('USER', 'ADMIN')")
                 .and()
-                .formLogin().loginPage("/login.xhtml").defaultSuccessUrl("/main-page-logged-in.xhtml", true).failureUrl("/login.xhtml?error=true").permitAll()
+                .formLogin().loginPage("/login.xhtml").defaultSuccessUrl("/main.xhtml", true).failureUrl("/login.xhtml?error=true").permitAll()
                 .and()
                 .logout().permitAll().and().csrf().disable();
     }
