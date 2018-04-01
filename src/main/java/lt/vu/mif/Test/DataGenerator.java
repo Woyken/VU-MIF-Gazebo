@@ -6,6 +6,7 @@ import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -22,13 +23,15 @@ public class DataGenerator {
     private UserRepository userRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public void insertUsers() {
         List<User> users = new ArrayList<>();
 
         for (int i = 1; i <= 20; i++) {
             User user = new User();
-            user.setPassword("password");
+            user.setPassword(passwordEncoder.encode("password"));
             if (i % 2 == 0) {
                 user.setEmail("admin" + i + "@gmail.com");
                 user.setRole(Role.ADMIN);
