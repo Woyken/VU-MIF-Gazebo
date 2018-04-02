@@ -2,6 +2,7 @@ package lt.vu.mif.Entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,4 +28,10 @@ public class User implements Serializable {
     @Column(name = "ROLE", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(name = "PASSWORD_TOKEN")
+    private String passwordToken;
+
+    @Column(name = "TOKEN_CREATION_DATE")
+    private LocalDateTime tokenCreationDate;
 }

@@ -37,7 +37,7 @@
                 </div>
                 <div class="top-bar-right">
                     <ul class="menu">
-                        <li><a href="#" data-open="login-modal" class="button primary">Prisijungti</a></li>
+                        <p:commandButton value="Prisijungti" type="button" onclick="PF('login-modal').show();"/>
                     </ul>
                 </div>
             </div>
@@ -76,12 +76,7 @@
         <h:outputText value="&lt;/div&gt;" escape="false" rendered="#{loop.last or (loop.index + 1) % 4 == 0}" />
     </ui:repeat> <!-- END OF PRODUCT LIST. -->
 
-
-
-    <!-- LOGIN FORM MODAL. -->
-    <div id="login-modal" class="reveal"
-         data-reveal=""
-         data-animation-in="fade-in fast">
+    <p:dialog widgetVar="login-modal" modal="true" width="500">
         <div class="row">
             <div class="columns small-8 small-offset-2">
                 <h4 class="form-title text-center">
@@ -113,7 +108,7 @@
                 <div class="row">
                     <div class="columns small-6 small-offset-6 small-collapse">
                         <p class="text-right">
-                            <a class="link" href="#">Pamiršote slaptažodį?</a>
+                            <h:commandLink onclick="PF('password-reminder').show();" value="Pamiršote slaptažodį?"/>
                         </p>
                     </div>
                 </div>
@@ -130,9 +125,18 @@
         <button class="close-button" data-close="" type="button">
             <span>&times;</span>
         </button>
-    </div> <!-- END OF LOGIN FORM MODAL. -->
+    </p:dialog> <!-- END OF LOGIN FORM MODAL. -->
 
-
+    <p:dialog header="Slaptažodžio priminimas" widgetVar="password-reminder" modal="true" width="500">
+        <h:form>
+            <span>Jūsų nurodytu el. pašto adresu bus išsiųstas laiškas su nuoroda, kurią paspaudus gausite naują slaptažodį.</span>
+            <h:inputText value="#{storeController.email}">
+                <f:validateLength minimum="1" />
+            </h:inputText>
+            <p:commandButton action="#{storeController.remindPassword}" value="Siųsti" update="messageLabel"/>
+            <p:outputLabel value="#{storeController.message}" id="messageLabel"/>
+        </h:form>
+    </p:dialog>
 
     <!-- REGISTRATION FORM MODAL. -->
     <div id="register-modal" class="reveal"
@@ -204,11 +208,6 @@
             </div>
         </div>
     </div> <!-- END OF FOOTER. -->
-
-    <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
-    <h:outputScript name="js/vendor/foundation.js"/>
-    <h:outputScript name="js/foundation-app.js"/>
-    <h:outputScript name="js/vendor/what-input.js"/>
 
 </h:body>
 </html>
