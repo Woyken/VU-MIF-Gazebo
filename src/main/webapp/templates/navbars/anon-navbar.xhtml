@@ -1,37 +1,19 @@
-<!DOCTYPE html [
-        <!ENTITY times "&#215;">
-        ]>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:o="http://omnifaces.org/ui">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
 
-<f:metadata>
-    <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
-</f:metadata>
-
-<h:head>
-    <title>Home page</title>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <h:outputStylesheet name="/css/vendor/foundation.css" />
-    <h:outputStylesheet name="/css/vendor/foundation-icons.css" />
-    <h:outputStylesheet name="/css/styles.css" />
-</h:head>
-<h:body>
-
-
-    <!-- NAVIGATION BAR. -->
+    <!-- NAVIGATION BAR -->
     <div data-sticky-container="">
         <div data-sticky="" data-options="marginTop: 0">
             <div class="top-bar">
                 <div class="top-bar-left">
                     <ul class="menu">
                         <li>
-                            <a href="window.xhtml" class="menu-text">G A Z E B O</a>
+                            <a href="../../main.xhtml" class="menu-text">G A Z E B O</a>
                         </li>
                     </ul>
                 </div>
@@ -43,38 +25,6 @@
             </div>
         </div>
     </div> <!-- END OF NAVIGATION BAR. -->
-
-
-
-    <!-- MAIN PAGE COVER. -->
-    <div class="section section-cover"
-         style="background: url(resources/images/main-page-cover-16-9-1.jpg);">
-    </div> <!-- END OF MAIN PAGE COVER. -->
-
-
-
-    <!-- PAGE TITLE. -->
-    <div class="row column text-center section">
-        <h1 class="section-title">PAGRINDINĖS PREKĖS</h1>
-    </div> <!-- END OF PAGE TITLE. -->
-
-
-
-    <!-- PRODUCT LIST. -->
-    <ui:repeat value="#{productController.products}" var="productItem" varStatus="loop">
-        <h:outputText value="&lt;div class='row small-up-2 large-up-4 section'&gt;" escape="false" rendered="#{loop.index % 4 == 0}" />
-        <div class="column product-box">
-            <a href="product-details.xhtml">
-                <p:graphicImage class="thumbnail" value="#{imageStreamer.image}" >
-                    <f:param name="id" value="#{productItem.images.get(0).id}"/>
-                </p:graphicImage>
-            </a>
-            <h5 class="product-name bor-bot">#{productItem.title}</h5>
-            <p class="product-price">€ #{productItem.price}</p>
-            <a href="#" class="button expanded primary">Pridėti į krepšelį</a>
-        </div>
-        <h:outputText value="&lt;/div&gt;" escape="false" rendered="#{loop.last or (loop.index + 1) % 4 == 0}" />
-    </ui:repeat> <!-- END OF PRODUCT LIST. -->
 
 
 
@@ -92,7 +42,7 @@
                 <div class="row">
                     <div class="columns">
                         <label class="input-label">El. paštas
-                            <i class="fi-torso"></i>
+                            <i class="fi-torso" />
                             <input type="text"/>
                         </label>
                     </div>
@@ -100,14 +50,14 @@
                 <div class="row">
                     <div class="columns">
                         <label class="input-label">Slaptažodis
-                            <span><i class="fi-lock"></i></span>
+                            <span><i class="fi-lock" /></span>
                             <input type="text"/>
                         </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="columns">
-                        <a href="main-page-logged-in.xhtml" class="button success expanded">PRISIJUNGTI</a>
+                        <a href="../../main.xhtml" class="button success expanded">PRISIJUNGTI</a>
                     </div>
                 </div>
                 <div class="row">
@@ -148,7 +98,7 @@
                 <div class="row">
                     <div class="columns">
                         <label class="input-label">El. paštas
-                            <i class="fi-torso"></i>
+                            <i class="fi-torso" />
                             <input type="text"/>
                         </label>
                     </div>
@@ -156,7 +106,7 @@
                 <div class="row align-middle">
                     <div class="columns">
                         <label class="input-label">Slaptažodis
-                            <span><i class="fi-lock"></i></span>
+                            <span><i class="fi-lock" /></span>
                             <input type="text"/>
                         </label>
                     </div>
@@ -169,14 +119,14 @@
                                    - Bent viena didžioji raidė. &lt;/br/&gt;
                                    - Bent viena mažoji raidė. &lt;/br/&gt;
                                    - Bent vienas simbolis, kuris nebūtų raidė.">
-                                <i class="fi-info"></i>
+                                <i class="fi-info" />
                         </span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="columns">
                         <label class="input-label">Pakartokite slaptažodį
-                            <span><i class="fi-lock"></i></span>
+                            <span><i class="fi-lock" /></span>
                             <input type="text"/>
                         </label>
                     </div>
@@ -193,22 +143,6 @@
         </button>
     </div> <!-- END OF REGISTRATION FORM MODAL. -->
 
+</ui:composition>
 
-
-    <!-- FOOTER. -->
-    <div id="footer">
-        <div class="row">
-            <div class="columns">
-                <p class="text-center">Be "Gazebo" sutikimo draudžiama kopijuoti ir platinti svetainėje esančią informaciją.</p>
-                <p class="text-center">Gazebo © 2018 All rights reserved</p>
-            </div>
-        </div>
-    </div> <!-- END OF FOOTER. -->
-
-    <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
-    <h:outputScript name="js/vendor/foundation.js"/>
-    <h:outputScript name="js/foundation-app.js"/>
-    <h:outputScript name="js/vendor/what-input.js"/>
-
-</h:body>
 </html>
