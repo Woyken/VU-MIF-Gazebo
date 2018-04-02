@@ -1,14 +1,27 @@
 package lt.vu.mif.Controller;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import lt.vu.mif.Entity.Product;
 import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.View.ProductView;
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
+@Rollback
+@Transactional
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class ProductControllerTests {
 
     @Autowired
@@ -18,13 +31,19 @@ public class ProductControllerTests {
 
     @Before
     public void init() {
-        Assertions.assertEquals(true, productRepository.getAll().isEmpty());
+        Assertions.assertTrue(productRepository.getAll().isEmpty());
 
         Product product = new Product();
         product.setTitle("Very long title");
+        product.setDescription("Description 1");
+        product.setPrice(new BigDecimal(10L));
         productRepository.save(product);
+
         product = new Product();
         product.setTitle("long title");
+        product.setDescription("Description 2");
+        product.setPrice(new BigDecimal(20L));
+
         productRepository.save(product);
     }
 
