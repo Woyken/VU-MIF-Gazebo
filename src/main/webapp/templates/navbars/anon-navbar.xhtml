@@ -8,8 +8,7 @@
       xmlns:o="http://omnifaces.org/ui">
 <ui:composition
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <!-- NAVIGATION BAR -->
     <div data-sticky-container="">
@@ -66,57 +65,47 @@
 
 
     <p:dialog widgetVar="login-modal" modal="true" width="500">
-    <div id="login-modal" class="reveal"
-         data-reveal=""
-         data-animation-in="fade-in fast">
         <div class="row">
-                <div class="columns small-8 small-offset-2">
-                    <h4 class="form-title text-center">
-                        Prisijungimas
-                    </h4>
-                    <br />
-
-                    <div class="row">
-                        <div class="columns">
-                            <label class="input-label">El. paštas
-                                <i class="fi-torso" />
-                                <input type="text"/>
-                            </label>
-                        </div>
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    Prisijungimas
+                </h4>
+                <br />
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">El. paštas
+                            <i class="fi-torso" />
+                            <input type="text"/>
+                        </label>
                     </div>
-                    <div class="row">
-                        <div class="columns">
-                            <label class="input-label">Slaptažodis
-                                <span><i class="fi-lock" /></span>
-                                <input type="text"/>
-                            </label>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">Slaptažodis
+                            <span><i class="fi-lock" /></span>
+                            <input type="text"/>
+                        </label>
                     </div>
-                    <div class="row">
-                        <div class="columns">
-                            <a href="../../main.xhtml" class="button success expanded">PRISIJUNGTI</a>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="columns">
+                        <a href="../../main.xhtml" class="button success expanded">PRISIJUNGTI</a>
                     </div>
-                    <div class="row">
-                        <div class="columns small-6 small-offset-6 small-collapse">
-                            <p class="text-right">
-                                <h:commandLink onclick="PF('password-reminder').show();" value="Pamiršote slaptažodį?"/>
-                            </p>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="columns small-6 small-offset-6 small-collapse">
+                        <p class="text-right">
+                            <h:commandLink onclick="PF('password-reminder').show();" value="Pamiršote slaptažodį?"/>
+                        </p>
                     </div>
-
-                    <hr class="no-top-mar"/>
-
-                    <div class="row">
-                        <div class="columns">
-                            <button id="login-form-register" class="button primary expanded">REGISTRUOTIS</button>
-                        </div>
+                </div>
+                <hr class="no-top-mar"/>
+                <div class="row">
+                    <div class="columns">
+                        <button id="login-form-register" class="button primary expanded">REGISTRUOTIS</button>
                     </div>
                 </div>
             </div>
-            <button class="close-button" data-close="" type="button">
-                <span>&times;</span>
-            </button>
         </div>
     </p:dialog> <!-- END OF LOGIN FORM MODAL. -->
 
@@ -126,7 +115,7 @@
             <h:inputText value="#{storeController.email}">
                 <f:validateLength minimum="1" />
             </h:inputText>
-            <p:commandButton action="#{storeController.remindPassword}" value="Siųsti" update="messageLabel"/>
+            <p:commandButton styleClass="button primary" action="#{storeController.remindPassword}" value="Siųsti" update="messageLabel"/>
             <p:outputLabel value="#{storeController.message}" id="messageLabel"/>
         </h:form>
     </p:dialog>
