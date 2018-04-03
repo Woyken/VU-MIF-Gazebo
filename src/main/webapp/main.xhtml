@@ -12,10 +12,6 @@
     <title>Home</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <h:outputStylesheet name="/css/vendor/foundation.css" />
-    <h:outputStylesheet name="/css/vendor/foundation-icons.css" />
-    <h:outputStylesheet name="/css/styles.css" />
 </h:head>
 <h:body>
 
@@ -27,6 +23,18 @@
 
     <!-- FOOTER -->
     <ui:include src="./templates/footers/footer.xhtml" />
+
+
+
+    <!-- The stupid reason why the CSS files are here and not in the <head> tag
+            is because PrimeFaces is kind enough to always insert his CSS files
+            dynamically AS THE FUCKING LAST style file to be loaded
+            thus nullifying my attempts at taming the fucker. -->
+    <h:outputStylesheet name="/css/primefaces-overrides.css" />
+    <h:outputStylesheet name="/css/vendor/foundation.css" />
+    <h:outputStylesheet name="/css/vendor/foundation-icons.css" />
+    <h:outputStylesheet name="/css/styles.css" />
+
 
     <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
     <h:outputScript name="js/vendor/foundation.js"/>

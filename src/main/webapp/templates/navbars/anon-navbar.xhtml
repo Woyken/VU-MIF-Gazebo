@@ -24,7 +24,7 @@
                 </div>
                 <div class="top-bar-right">
                     <ul class="menu">
-                        <p:commandButton value="Prisijungti" type="button" onclick="PF('login-modal').show();"/>
+                        <p:commandButton class="button primary" value="Prisijungti" type="button" onclick="PF('login-modal').show();"/>
                     </ul>
                 </div>
             </div>
@@ -70,53 +70,54 @@
          data-reveal=""
          data-animation-in="fade-in fast">
         <div class="row">
-            <div class="columns small-8 small-offset-2">
-                <h4 class="form-title text-center">
-                    Prisijungimas
-                </h4>
-                <br />
+                <div class="columns small-8 small-offset-2">
+                    <h4 class="form-title text-center">
+                        Prisijungimas
+                    </h4>
+                    <br />
 
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">El. paštas
-                            <i class="fi-torso" />
-                            <input type="text"/>
-                        </label>
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">El. paštas
+                                <i class="fi-torso" />
+                                <input type="text"/>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">Slaptažodis
-                            <span><i class="fi-lock" /></span>
-                            <input type="text"/>
-                        </label>
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">Slaptažodis
+                                <span><i class="fi-lock" /></span>
+                                <input type="text"/>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="columns">
-                        <a href="../../main.xhtml" class="button success expanded">PRISIJUNGTI</a>
+                    <div class="row">
+                        <div class="columns">
+                            <a href="../../main.xhtml" class="button success expanded">PRISIJUNGTI</a>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="columns small-6 small-offset-6 small-collapse">
-                        <p class="text-right">
-                            <h:commandLink onclick="PF('password-reminder').show();" value="Pamiršote slaptažodį?"/>
-                        </p>
+                    <div class="row">
+                        <div class="columns small-6 small-offset-6 small-collapse">
+                            <p class="text-right">
+                                <h:commandLink onclick="PF('password-reminder').show();" value="Pamiršote slaptažodį?"/>
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <hr class="no-top-mar"/>
+                    <hr class="no-top-mar"/>
 
-                <div class="row">
-                    <div class="columns">
-                        <button id="login-form-register" class="button primary expanded">REGISTRUOTIS</button>
+                    <div class="row">
+                        <div class="columns">
+                            <button id="login-form-register" class="button primary expanded">REGISTRUOTIS</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            <button class="close-button" data-close="" type="button">
+                <span>&times;</span>
+            </button>
         </div>
-        <button class="close-button" data-close="" type="button">
-            <span>&times;</span>
-        </button>
     </p:dialog> <!-- END OF LOGIN FORM MODAL. -->
 
     <p:dialog header="Slaptažodžio priminimas" widgetVar="password-reminder" modal="true" width="500">
