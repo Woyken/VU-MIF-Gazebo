@@ -4,8 +4,10 @@ import lt.vu.mif.Entity.*;
 import lt.vu.mif.Entity.Roles.Role;
 import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.Repository.UserRepository;
+import lt.vu.mif.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -17,11 +19,11 @@ import java.util.List;
 
 @Component
 public class DataGenerator {
-
-    @Autowired
-    private UserRepository userRepository;
+    
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserService userService;
 
     public void insertUsers() {
         List<User> users = new ArrayList<>();
@@ -39,7 +41,9 @@ public class DataGenerator {
             users.add(user);
         }
 
-        userRepository.save(users);
+        for (User u: users) {
+            userService.save(u);
+        }
     }
 
     public void insertProducts() {
