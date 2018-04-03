@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource(name = "CustomUserDetailsService")
@@ -22,6 +22,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable(); //temporary disabled to allow h2-console
+
         http.authorizeRequests()
                 .antMatchers("/main-page-logged-in.xhtml").access("hasAnyRole('USER', 'ADMIN')")
                 .and()
