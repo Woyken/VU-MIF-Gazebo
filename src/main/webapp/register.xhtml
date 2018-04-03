@@ -19,13 +19,13 @@
 </h:head>
 <h:body>
 
-    <!-- LOGIN FORM -->
-    <div id="login-window">
+    <!-- REGISTRATION FORM -->
+    <div id="registration-window">
 
         <div class="row section">
             <div class="columns small-10 small-offset-1 medium-6 medium-offset-3 large-4 large-offset-4">
                 <h4 class="form-title text-center">
-                    Prisijungimas
+                    Naujos paskyros kūrimas
                 </h4>
                 <br />
 
@@ -37,9 +37,29 @@
                         </label>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row align-middle">
                     <div class="columns">
                         <label class="input-label">Slaptažodis
+                            <span><i class="fi-lock" /></span>
+                            <input type="text"/>
+                        </label>
+                    </div>
+                    <div class="columns shrink">
+                        <span
+                                data-tooltip=""
+                                data-allow-html="true"
+                                class="has-tip right"
+                                title="- Bent 8 simbolių ilgio. &lt;/br/&gt;
+                                   - Bent viena didžioji raidė. &lt;/br/&gt;
+                                   - Bent viena mažoji raidė. &lt;/br/&gt;
+                                   - Bent vienas simbolis, kuris nebūtų raidė.">
+                                <i class="fi-info" />
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="columns">
+                        <label class="input-label">Pakartokite slaptažodį
                             <span><i class="fi-lock" /></span>
                             <input type="text"/>
                         </label>
@@ -47,32 +67,17 @@
                 </div>
                 <div class="row">
                     <div class="columns">
-                        <a href="../../main.xhtml" class="button success expanded">PRISIJUNGTI</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="columns small-10 small-offset-1 small-collapse">
-                        <p class="text-right">
-                            <a class="link" href="#">Pamiršote slaptažodį?</a>
-                        </p>
-                    </div>
-                </div>
-
-                <hr class="no-top-mar"/>
-
-                <div class="row">
-                    <div class="columns">
-                        <a href="register.xhtml" id="login-form-register" class="button primary expanded">REGISTRUOTIS</a>
+                        <button class="button success expanded">REGISTRUOTIS</button>
                     </div>
                 </div>
             </div>
         </div>
 
-    </div> <!-- END OF LOGIN FORM -->
+    </div> <!-- END OF REGISTRATION FORM -->
 
     <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
     <h:outputScript name="js/vendor/foundation.js"/>
-    <!--<h:outputScript name="js/foundation-app.js"/>-->
+    <h:outputScript name="js/foundation-app.js"/>
     <h:outputScript name="js/vendor/what-input.js"/>
 
 </h:body>
