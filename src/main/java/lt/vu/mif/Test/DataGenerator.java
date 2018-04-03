@@ -4,6 +4,7 @@ import lt.vu.mif.Entity.*;
 import lt.vu.mif.Entity.Roles.Role;
 import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.Repository.UserRepository;
+import lt.vu.mif.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,20 +19,18 @@ import java.util.List;
 
 @Component
 public class DataGenerator {
-
-    @Autowired
-    private UserRepository userRepository;
+    
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserService userService;
 
     public void insertUsers() {
         List<User> users = new ArrayList<>();
 
         for (int i = 1; i <= 20; i++) {
             User user = new User();
-            user.setPassword(passwordEncoder.encode("password"));
+            user.setPassword("password");
             if (i % 2 == 0) {
                 user.setEmail("admin" + i + "@gmail.com");
                 user.setRole(Role.ADMIN);
@@ -42,7 +41,9 @@ public class DataGenerator {
             users.add(user);
         }
 
-        userRepository.save(users);
+        for (User u: users) {
+            userService.save(u);
+        }
     }
 
     public void insertProducts() {
