@@ -1,0 +1,78 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+    <div id="payment-window" hidden="">
+
+        <!-- PAGE TITLE -->
+        <div class="row column text-center section">
+            <h1 class="section-title">Prekių apmokėjimas</h1>
+        </div> <!-- END OF PAGE TITLE -->
+
+
+        <!-- PAYMENT INFORMATION -->
+        <div class="section">
+            <div class="row">
+                <div class="columns">
+                    <a href="#"
+                       class="button expanded primary js-back-to-cart">Grįžti į prekių krepšelį</a>
+                </div>
+            </div>
+
+            <div class="row align-middle">
+                <div class="columns small-3">
+                    <h5 class="font-bold">Pristatymo adresas</h5>
+                </div>
+                <div class="columns small-9">
+                    <input type="text" placeholder="Didlaukio g. 59 1212B" />
+                </div>
+            </div>
+
+            <div class="row align-middle">
+                <div class="columns small-3">
+                    <h5 class="font-bold">Kortelės numeris</h5>
+                </div>
+                <div class="columns small-9">
+                    <input type="number" placeholder="6654 4456 9987 2213 4123" />
+                </div>
+            </div>
+
+            <div class="row align-middle">
+                <div class="columns small-3">
+                    <h5 class="font-bold">MM / YY</h5>
+                </div>
+                <div class="columns small-9">
+                    <input type="text" placeholder="08 / 12" />
+                </div>
+            </div>
+
+            <div class="row align-middle">
+                <div class="columns small-3">
+                    <h5 class="font-bold">Apsaugos kodas</h5>
+                </div>
+                <div class="columns small-9">
+                    <input type="number" placeholder="679" />
+                </div>
+            </div>
+
+            <div class="row margin-bottom-1">
+                <div class="columns small-12">
+                    <h3 class="text-right">
+                        <strong>Galutinė kaina: </strong>
+                        249.97 €
+                    </h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="columns">
+                    <a href="../../main.xhtml" class="button expanded orange">Apmokėti</a>
+                </div>
+            </div>
+        </div>
+        <!-- END OF PAYMENT INFORMATION -->
+
+    </div>
+
+</ui:composition>

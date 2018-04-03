@@ -1,0 +1,69 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+>
+
+    <!-- PAGE TITLE. -->
+    <div class="row column text-center section">
+        <h1 class="section-title">Gazebo Air Flow v2</h1>
+    </div> <!-- END OF PAGE TITLE. -->
+
+
+    <!-- PRODUCT DETAILS -->
+    <div class="row align-middle align-center product-details-row">
+        <div class="medium-6 columns">
+            <!-- Main image. -->
+            <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
+                <f:param name="id" value="#{productController.products.get(0).images.get(0).id}"/>
+            </p:graphicImage>
+
+            <!-- Smaller images. -->
+            <div class="row small-up-4">
+                <ui:repeat value="#{productController.products.get(0).images}" var="image"
+                           varStatus="loop">
+                    <!--Image is cached by default. If you want to refresh, add cache="false"-->
+                    <h:outputText value="&lt;div class='column'&gt;" escape="false"
+                                  rendered="#{!loop.first}"/>
+                    <p:graphicImage class="thumbnail" value="#{imageStreamer.image}"
+                                    rendered="#{!loop.first}">
+                        <f:param name="id" value="#{image.id}"/>
+                    </p:graphicImage>
+                    <h:outputText value="&lt;/div&gt;" escape="false" rendered="#{!loop.first}"/>
+                </ui:repeat>
+            </div>
+        </div>
+
+        <!-- Side column. -->
+        <div class="medium-6 large-5 columns">
+            <p class="text-justify">The GZ Spartan is a lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec arcu gravida, tempus nunc quis, mollis odio. Cras lacinia vitae lorem sit amet commodo. Proin id elit convallis, pretium magna eu, dignissim nunc. Donec viverra dolor non est pretium, eu ultricies mi accumsan. Vivamus aliquet justo sapien, ac rutrum libero ullamcorper id. Phasellus vel imperdiet dolor, ac sollicitudin turpis. Proin faucibus sit amet dolor ac fringilla. Integer et laoreet sapien, ut tincidunt libero. Suspendisse commodo orci vel laoreet laoreet. Sed accumsan arcu vel neque placerat, sed commodo velit ullamcorper. Quisque ultricies, est ac malesuada aliquam, est sem euismod mauris, eu consectetur mi turpis sed odio. Maecenas fermentum aliquet dui. Integer auctor et nisl et blandit. Proin id vestibulum ante.</p>
+
+            <div class="row">
+                <div class="small-6 columns shrink">
+                    <label for="middle-label" class="middle">Kiekis</label>
+                </div>
+                <div class="small-6 columns">
+                    <!-- TODO: Max skaičius priklauso nuo prekių kiekio sandelyje! -->
+                    <input class="half-width" type="number" id="middle-label" value="1" min="1"
+                           max="99"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="small-6 columns shrink">
+                    <p>Kaina:</p>
+                </div>
+                <div class="small-6 columns">
+                    <!-- TODO: Galutinė kaina priklausys nuo prekių kiekio! -->
+                    <p>€ #{productController.products.get(0).price}</p>
+                </div>
+            </div>
+
+            <a href="#" class="button large hollow expanded primary-inverted">DĖTI Į KREPŠELĮ</a>
+        </div>
+    </div> <!-- END OF PRODUCT DETAILS -->
+
+
+</ui:composition>
