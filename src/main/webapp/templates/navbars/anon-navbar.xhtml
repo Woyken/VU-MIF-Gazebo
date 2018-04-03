@@ -18,8 +18,23 @@
                     </ul>
                 </div>
                 <div class="top-bar-right">
-                    <ul class="menu">
-                        <li><a href="#" data-open="login-modal" class="button primary">Prisijungti</a></li>
+                    <ul class="dropdown menu"
+                        data-dropdown-menu=""
+                        data-closing-time="200">
+                        <li class="is-dropdown-submenu-parent">
+                            <a id="account-settings" class="primary" href="#"> Paskyra </a>
+                            <ul class="menu">
+                                <li>
+                                    <i class="fi-home" />
+                                    <a href="../../login.xhtml">Prisijungti</a>
+                                </li>
+
+                                <li>
+                                    <i class="fi-plus" />
+                                    <a href="../../register.xhtml">Registruotis</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -28,120 +43,120 @@
 
 
 
-    <!-- LOGIN FORM MODAL. -->
-    <div id="login-modal" class="reveal"
-         data-reveal=""
-         data-animation-in="fade-in fast">
-        <div class="row">
-            <div class="columns small-8 small-offset-2">
-                <h4 class="form-title text-center">
-                    Prisijungimas
-                </h4>
-                <br />
+    <!--&lt;!&ndash; LOGIN FORM MODAL. &ndash;&gt;-->
+    <!--<div id="login-modal" class="reveal"-->
+         <!--data-reveal=""-->
+         <!--data-animation-in="fade-in fast">-->
+        <!--<div class="row">-->
+            <!--<div class="columns small-8 small-offset-2">-->
+                <!--<h4 class="form-title text-center">-->
+                    <!--Prisijungimas-->
+                <!--</h4>-->
+                <!--<br />-->
 
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">El. paštas
-                            <i class="fi-torso" />
-                            <input type="text"/>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">Slaptažodis
-                            <span><i class="fi-lock" /></span>
-                            <input type="text"/>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="columns">
-                        <a href="../../main.xhtml" class="button success expanded">PRISIJUNGTI</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="columns small-6 small-offset-6 small-collapse">
-                        <p class="text-right">
-                            <a class="link" href="#">Pamiršote slaptažodį?</a>
-                        </p>
-                    </div>
-                </div>
+                <!--<div class="row">-->
+                    <!--<div class="columns">-->
+                        <!--<label class="input-label">El. paštas-->
+                            <!--<i class="fi-torso" />-->
+                            <!--<input type="text"/>-->
+                        <!--</label>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="columns">-->
+                        <!--<label class="input-label">Slaptažodis-->
+                            <!--<span><i class="fi-lock" /></span>-->
+                            <!--<input type="text"/>-->
+                        <!--</label>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="columns">-->
+                        <!--<a href="../../main.xhtml" class="button success expanded">PRISIJUNGTI</a>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="columns small-6 small-offset-6 small-collapse">-->
+                        <!--<p class="text-right">-->
+                            <!--<a class="link" href="#">Pamiršote slaptažodį?</a>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-                <hr class="no-top-mar"/>
+                <!--<hr class="no-top-mar"/>-->
 
-                <div class="row">
-                    <div class="columns">
-                        <button id="login-form-register" class="button primary expanded">REGISTRUOTIS</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="close-button" data-close="" type="button">
-            <span>&times;</span>
-        </button>
-    </div> <!-- END OF LOGIN FORM MODAL. -->
+                <!--<div class="row">-->
+                    <!--<div class="columns">-->
+                        <!--<button id="login-form-register" class="button primary expanded">REGISTRUOTIS</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<button class="close-button" data-close="" type="button">-->
+            <!--<span>&times;</span>-->
+        <!--</button>-->
+    <!--</div> &lt;!&ndash; END OF LOGIN FORM MODAL. &ndash;&gt;-->
 
 
 
-    <!-- REGISTRATION FORM MODAL. -->
-    <div id="register-modal" class="reveal"
-         data-reveal=""
-         data-animation-in="fade-in fast">
-        <div class="row">
-            <div class="columns small-8 small-offset-2">
-                <h4 class="form-title text-center">
-                    Naujos paskyros kūrimas
-                </h4>
-                <br />
+    <!--&lt;!&ndash; REGISTRATION FORM MODAL. &ndash;&gt;-->
+    <!--<div id="register-modal" class="reveal"-->
+         <!--data-reveal=""-->
+         <!--data-animation-in="fade-in fast">-->
+        <!--<div class="row">-->
+            <!--<div class="columns small-8 small-offset-2">-->
+                <!--<h4 class="form-title text-center">-->
+                    <!--Naujos paskyros kūrimas-->
+                <!--</h4>-->
+                <!--<br />-->
 
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">El. paštas
-                            <i class="fi-torso" />
-                            <input type="text"/>
-                        </label>
-                    </div>
-                </div>
-                <div class="row align-middle">
-                    <div class="columns">
-                        <label class="input-label">Slaptažodis
-                            <span><i class="fi-lock" /></span>
-                            <input type="text"/>
-                        </label>
-                    </div>
-                    <div class="columns shrink">
-                        <span
-                                data-tooltip=""
-                                data-allow-html="true"
-                                class="has-tip right"
-                                title="- Bent 8 simbolių ilgio. &lt;/br/&gt;
-                                   - Bent viena didžioji raidė. &lt;/br/&gt;
-                                   - Bent viena mažoji raidė. &lt;/br/&gt;
-                                   - Bent vienas simbolis, kuris nebūtų raidė.">
-                                <i class="fi-info" />
-                        </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">Pakartokite slaptažodį
-                            <span><i class="fi-lock" /></span>
-                            <input type="text"/>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="columns">
-                        <button class="button success expanded">REGISTRUOTIS</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="close-button" data-close="" type="button">
-            <span>&times;</span>
-        </button>
-    </div> <!-- END OF REGISTRATION FORM MODAL. -->
+                <!--<div class="row">-->
+                    <!--<div class="columns">-->
+                        <!--<label class="input-label">El. paštas-->
+                            <!--<i class="fi-torso" />-->
+                            <!--<input type="text"/>-->
+                        <!--</label>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row align-middle">-->
+                    <!--<div class="columns">-->
+                        <!--<label class="input-label">Slaptažodis-->
+                            <!--<span><i class="fi-lock" /></span>-->
+                            <!--<input type="text"/>-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <!--<div class="columns shrink">-->
+                        <!--<span-->
+                                <!--data-tooltip=""-->
+                                <!--data-allow-html="true"-->
+                                <!--class="has-tip right"-->
+                                <!--title="- Bent 8 simbolių ilgio. &lt;/br/&gt;-->
+                                   <!-- - Bent viena didžioji raidė. &lt;/br/&gt;-->
+                                   <!-- - Bent viena mažoji raidė. &lt;/br/&gt;-->
+                                   <!-- - Bent vienas simbolis, kuris nebūtų raidė.">-->
+                                <!--<i class="fi-info" />-->
+                        <!--</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="columns">-->
+                        <!--<label class="input-label">Pakartokite slaptažodį-->
+                            <!--<span><i class="fi-lock" /></span>-->
+                            <!--<input type="text"/>-->
+                        <!--</label>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="columns">-->
+                        <!--<button class="button success expanded">REGISTRUOTIS</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<button class="close-button" data-close="" type="button">-->
+            <!--<span>&times;</span>-->
+        <!--</button>-->
+    <!--</div> &lt;!&ndash; END OF REGISTRATION FORM MODAL. &ndash;&gt;-->
 
 </ui:composition>
 
