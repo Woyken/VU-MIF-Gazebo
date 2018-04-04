@@ -29,7 +29,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/login.xhtml").defaultSuccessUrl("/main.xhtml", true).failureUrl("/login.xhtml?error=true").permitAll()
                 .and()
-                .logout().permitAll().and().csrf().disable();
+                .logout().logoutSuccessUrl("/main.xhtml").invalidateHttpSession(true).deleteCookies("remove").permitAll().and().csrf().disable();
     }
 
     @Bean
