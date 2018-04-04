@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +39,14 @@ public class UserService {
         return null;
     }
 
-    public User findByUsername(String username) {
-        return userRepository.getUserByEmail(username);
+    public User findByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.getUserByEmail(username);
+
+        if(null == user) {
+            throw new UsernameNotFoundException("User with provided email does not exist");
+        }
+
+        return user;
     }
 
 }
