@@ -2,9 +2,11 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html">
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
 
     <!-- NAVIGATION BAR. -->
     <div data-sticky-container="">
@@ -23,7 +25,7 @@
                         data-closing-time="200">
                         <li role="menuitem">
                             <a id="cart-button" href="../../cart.xhtml">
-                                <i class="fi-shopping-cart" />
+                                <i class="fi-shopping-cart"/>
                                 Mano krepšelis
                             </a>
                         </li>
@@ -31,25 +33,26 @@
                             <a id="account-settings" class="primary" href="#">Paskyra</a>
                             <ul class="menu">
                                 <li>
-                                    <i class="fi-lock" />
-                                    <a href="#" data-open="change-password-modal">Keisti slaptažodį</a>
+                                    <i class="fi-lock"/>
+                                    <a href="#"
+                                       data-open="change-password-modal">Keisti slaptažodį</a>
                                 </li>
 
                                 <li>
-                                    <i class="fi-mail" />
+                                    <i class="fi-mail"/>
                                     <a href="#" data-open="change-email-modal">Keisti el. paštą</a>
                                 </li>
                             </ul>
                         </li>
                         <li role="menuitem">
-                            <h:outputLink value="${pageContext.request.contextPath}/logout">Atsijungti</h:outputLink>
+                            <h:outputLink
+                                    value="${pageContext.request.contextPath}/logout">Atsijungti</h:outputLink>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div> <!-- END OF NAVIGATION BAR. -->
-
 
 
     <!-- CHANGE PASSWORD MODAL. -->
@@ -69,7 +72,7 @@
                         <label class="input-label">
                             <span class="alert-star">*</span>
                             Naujasis slaptažodis
-                            <span><i class="fi-lock" /></span>
+                            <span><i class="fi-lock"/></span>
                             <input type="password"/>
                         </label>
                     </div>
@@ -81,7 +84,7 @@
                         <label class="input-label">
                             <span class="alert-star">*</span>
                             Pakartokite naująjį slaptažodį
-                            <span><i class="fi-lock" /></span>
+                            <span><i class="fi-lock"/></span>
                             <input type="password"/>
                         </label>
                     </div>
@@ -93,7 +96,7 @@
                         <label class="input-label">
                             <span class="alert-star">*</span>
                             Dabartinis slaptažodis
-                            <i class="fi-unlock" />
+                            <i class="fi-unlock"/>
                             <input class="no-mar" type="password"/>
                         </label>
                         <!-- Required fields. -->
@@ -119,7 +122,6 @@
     </div> <!-- END OF CHANGE PASSWORD MODAL. -->
 
 
-
     <!-- CHANGE EMAIL MODAL. -->
     <div id="change-email-modal" class="reveal"
          data-reveal=""
@@ -131,65 +133,87 @@
                 </h4>
                 <br/>
 
-                <!-- Current email. -->
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">
-                            Dabartinis adresas
-                            <i class="fi-torso" />
-                            <input type="text" placeholder="gazebo@gmail.com"
-                                   value="gazebo@gmail.com" disabled=""/>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- New email. -->
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">
-                            <span class="alert-star">*</span>
-                            Naujasis adresas
-                            <span><i class="fi-mail" /></span>
-                            <input type="text"/>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Repeat new email. -->
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">
-                            <span class="alert-star">*</span>
-                            Pakartokite naująjį adresą
-                            <span><i class="fi-mail" /></span>
-                            <input type="text"/>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Password. -->
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">
-                            <span class="alert-star">*</span>
-                            Dabartinis slaptažodis
-                            <span><i class="fi-lock" /></span>
-                            <input class="no-mar" type="text"/>
-                        </label>
-                        <!-- Required fields. -->
-                        <div class="mar-bot-5">
-                            <span class="alert-star">*</span>
-                            <span class="alert-text"> privalomi laukai</span>
+                <h:form>
+                    <!-- Current email. -->
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">
+                                Dabartinis adresas
+                                <i class="fi-torso"/>
+                                <h:inputText value="#{userController.getUserView().getEmail()}"
+                                             disabled="true"/>
+                            </label>
                         </div>
                     </div>
-                </div>
 
-                <!-- Submit. -->
-                <div class="row">
-                    <div class="columns">
-                        <button class="button success expanded">Keisti el. pašto adresą</button>
+                    <!-- New email. -->
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">
+                                <span class="alert-star">*</span>
+                                Naujasis adresas
+                                <span><i class="fi-mail"/></span>
+                                <h:inputText binding="#{newEmail}"/>
+                            </label>
+                        </div>
                     </div>
-                </div>
+
+                    <!-- Repeat new email. -->
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">
+                                <span class="alert-star">*</span>
+                                Pakartokite naująjį adresą
+                                <span><i class="fi-mail"/></span>
+                                <h:inputText binding="#{newEmailRepeat}"/>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Password. -->
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">
+                                <span class="alert-star">*</span>
+                                Dabartinis slaptažodis
+                                <span><i class="fi-lock"/></span>
+                                <h:inputSecret class="no-mar" binding="#{password}"/>
+                            </label>
+                            <!-- Required fields. -->
+                            <div class="mar-bot-5">
+                                <span class="alert-star">*</span>
+                                <span class="alert-text"> privalomi laukai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- For validation -->
+                    <h:inputHidden id="validationInput" value="true">
+                        <f:validator validatorId="ChangeEmailValidation"/>
+                        <f:attribute name="newEmail" value="#{newEmail}"/>
+                        <f:attribute name="newEmailRepeat" value="#{newEmailRepeat}"/>
+                        <f:attribute name="password" value="#{password}"/>
+                    </h:inputHidden>
+
+                    <!-- Error Message -->
+                    <div class="row">
+                        <div class="columns">
+                            <div class="mar-bot-5">
+                                <h:message class="alert-text" for="validationInput"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit. -->
+                    <div class="row">
+                        <div class="columns">
+                            <h:commandButton class="button success expanded"
+                                             value="Keisti el. pašto adresą">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
             </div>
         </div>
 
