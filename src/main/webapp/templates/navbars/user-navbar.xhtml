@@ -55,70 +55,104 @@
     </div> <!-- END OF NAVIGATION BAR. -->
 
 
+
     <!-- CHANGE PASSWORD MODAL. -->
     <div id="change-password-modal" class="reveal"
          data-reveal=""
          data-animation-in="fade-in fast">
-        <div class="row">
-            <div class="columns small-8 small-offset-2">
-                <h4 class="form-title text-center">
-                    Slaptažodžio keitimas
-                </h4>
-                <br/>
+        <h:form>
+            <div class="row">
+                <div class="columns small-8 small-offset-2">
+                    <h4 class="form-title text-center">
+                        Slaptažodžio keitimas
+                    </h4>
+                    <br/>
 
-                <!-- New password. -->
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">
-                            <span class="alert-star">*</span>
-                            Naujasis slaptažodis
-                            <span><i class="fi-lock"/></span>
-                            <input type="password"/>
-                        </label>
+                    <!-- New password. -->
+                    <div class="row align-middle">
+                        <div class="columns">
+                            <label class="input-label">
+                                <span class="alert-star">*</span>
+                                Naujasis slaptažodis
+                                <span><i class="fi-lock" /></span>
+                                <h:inputSecret binding="#{newPassword}"/>
+                            </label>
+                        </div>
+                        <div class="columns shrink">
+                        <span
+                                data-tooltip=""
+                                data-allow-html="true"
+                                class="has-tip right"
+                                title="- Bent 8 simbolių ilgio. &lt;br&gt;
+                                   - Bent viena didžioji raidė. &lt;br&gt;
+                                   - Bent viena mažoji raidė. &lt;br&gt;
+                                   - Bent vienas simbolis, kuris nebūtų raidė.">
+                                <i class="fi-info" />
+                        </span>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Repeat new password. -->
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">
-                            <span class="alert-star">*</span>
-                            Pakartokite naująjį slaptažodį
-                            <span><i class="fi-lock"/></span>
-                            <input type="password"/>
-                        </label>
+                    <!-- Repeat new password. -->
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">
+                                <span class="alert-star">*</span>
+                                Pakartokite naująjį slaptažodį
+                                <span><i class="fi-lock" /></span>
+                                <h:inputSecret binding="#{newPasswordRepeat}"/>
+                            </label>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Current password. -->
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">
-                            <span class="alert-star">*</span>
-                            Dabartinis slaptažodis
-                            <i class="fi-unlock"/>
-                            <input class="no-mar" type="password"/>
-                        </label>
-                        <!-- Required fields. -->
-                        <div class="mar-bot-5">
-                            <span class="alert-star">*</span>
-                            <span class="alert-text"> privalomi laukai</span>
+                    <!-- Current password. -->
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">
+                                <span class="alert-star">*</span>
+                                Dabartinis slaptažodis
+                                <i class="fi-unlock" />
+                                <h:inputSecret class="no-mar" binding="#{oldPassword}"/>
+                            </label>
+                            <!-- Required fields. -->
+                            <div class="mar-bot-5">
+                                <span class="alert-star">*</span>
+                                <span class="alert-text"> privalomi laukai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- For validation -->
+                    <h:inputHidden id="validationInput" value="true">
+                        <f:validator validatorId="ChangePasswordValidation" />
+                        <f:attribute name="newPassword" value="#{newPassword}" />
+                        <f:attribute name="newPasswordRepeat" value="#{newPasswordRepeat}" />
+                        <f:attribute name="oldPassword" value="#{oldPassword}" />
+                    </h:inputHidden>
+
+                    <!-- Error Message -->
+                    <div class="row">
+                        <div class="columns">
+                            <div class="mar-bot-5">
+                                <h:message class="alert-text" for="validationInput" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit. -->
+                    <div class="row">
+                        <div class="columns">
+                            <h:commandButton class="button success expanded" value="Keisti slaptažodį">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
                         </div>
                     </div>
                 </div>
-
-                <!-- Submit. -->
-                <div class="row">
-                    <div class="columns">
-                        <button class="button success expanded">Keisti slaptažodį</button>
-                    </div>
-                </div>
             </div>
-        </div>
 
-        <button class="close-button" data-close="" type="button">
-            <span>&times;</span>
-        </button>
+            <button class="close-button" data-close="" type="button">
+                <span>&times;</span>
+            </button>
+        </h:form>
     </div> <!-- END OF CHANGE PASSWORD MODAL. -->
 
 
