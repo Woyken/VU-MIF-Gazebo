@@ -6,9 +6,11 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ValidationUtils {
 
-    private final String REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d|(?=.*[$@!%*?&]))[a-zA-Z\\d$@!%*?&]{8,}$";
+    private final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d|(?=.*[$@!%*?&]))[a-zA-Z\\d$@!%*?&]{8,}$";
 
-    public static boolean ValidatePassword(String password){
-        return Pattern.matches(REGEX, password);
+    public static boolean isPasswordValid(String password){
+        return Pattern.matches(PASSWORD_REGEX, password);
     }
+
+
 }

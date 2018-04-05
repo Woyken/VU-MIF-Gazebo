@@ -1,6 +1,5 @@
 package lt.vu.mif.Utils;
 
-import lt.vu.mif.Utils.ValidationUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +10,8 @@ class ValidationUtilsTests {
 
     @Test
     void validatePassword_validatingPassword_success() {
-        boolean invalidResult = ValidationUtils.ValidatePassword(TEST_INVALID_PASSWORD);
-        boolean validResult = ValidationUtils.ValidatePassword(TEST_VALID_PASSWORD);
+        boolean invalidResult = ValidationUtils.isPasswordValid(TEST_INVALID_PASSWORD);
+        boolean validResult = ValidationUtils.isPasswordValid(TEST_VALID_PASSWORD);
 
         Assertions.assertEquals(invalidResult, false);
         Assertions.assertEquals(validResult, true);
