@@ -46,7 +46,12 @@
                     </div>
                     <div class="row">
                         <div class="columns">
-                            <h:outputLabel value="Neteisingi prisijungimo duomenys!" rendered="${!empty param['error']}" />
+                            <div class="mar-bot-5">
+                                <h:outputLabel
+                                    value="Neteisingi prisijungimo duomenys!"
+                                    rendered="${!empty param['error']}"
+                                    class="alert-text"/>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
