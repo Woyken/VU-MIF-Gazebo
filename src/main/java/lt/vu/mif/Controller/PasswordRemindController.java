@@ -65,7 +65,7 @@ public class PasswordRemindController implements Serializable  {
     }
 
     public void save() {
-        if (ValidationUtils.ValidatePassword(password)) {
+        if (ValidationUtils.isPasswordValid(password)) {
             user.setPassword(passwordEncoder.encode(password));
             user.setTokenCreationDate(null);
             user.setPasswordToken(null);
