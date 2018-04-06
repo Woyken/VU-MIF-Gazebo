@@ -14,29 +14,97 @@
 
 
     <!-- PAGE TITLE. -->
-    <div class="row column text-center section">
+    <div class="row medium-6 large-8 columns text-center section">
         <h1 class="section-title">PAGRINDINĖS PREKĖS</h1>
     </div> <!-- END OF PAGE TITLE. -->
 
 
-    <!-- PRODUCT LIST. -->
-    <ui:repeat value="#{productController.products}" var="productItem" varStatus="loop">
-        <h:outputText value="&lt;div class='row small-up-2 large-up-4 section'&gt;"
-                      escape="false" rendered="#{loop.index % 4 == 0}"/>
+    <!-- SEARCH ITEMS BAR. -->
+    <div class="row small-8 medium-6 large-4 columns input-group-rounded margin-top-3" id="search">
+        <section class="search-bar">
+            <form action="">
+                <div class="input-group">
+                    <input class="input-group-field" type="text" placeholder="Atraskite save"/>
+                    <div class="input-group-button">
+                        <input type="submit" class="button" value="Ieškoti"/>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div> <!-- END OF SEARCH ITEMS BAR. -->
 
-        <div class="column product-box">
-            <a href="../../product-details.xhtml">
-                <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
-                    <f:param name="id" value="#{productItem.images.get(0).id}"/>
-                </p:graphicImage>
-            </a>
-            <h5 class="product-name bor-bot">#{productItem.title}</h5>
-            <p class="product-price">€ #{productItem.price}</p>
-            <a href="#" class="button expanded primary">PRIDĖTI Į KREPŠELĮ</a>
-        </div>
-        <h:outputText value="&lt;/div&gt;" escape="false"
-                      rendered="#{loop.last or (loop.index + 1) % 4 == 0}"/>
-    </ui:repeat> <!-- END OF PRODUCT LIST. -->
+
+    <div class="row expanded">
+
+        <!-- FILTERING. -->
+        <aside class="product-filters medium-3 large-2 columns">
+            <div class="hide-for-small-only" data-sticky-container="">
+                <div class="sticky" data-sticky="" data-top-anchor="search">
+                    <h3 class="product-filters-header hide-for-small-only margin-top-3"><br/>Rūšiuokite:</h3>
+                    <ul class="vertical menu hide-for-small-only" data-accordion-menu="">
+                        <li class="product-filters-tab margin-top-1">
+                            <a href="#">Kategorija</a>
+                            <ul class="categories-menu menu vertical nested is-active">
+                                <li><input id="category-checkbox11" type="checkbox"/><label for="category-checkbox11">Category 1</label></li>
+                                <li><input id="category-checkbox22" type="checkbox"/><label for="category-checkbox22">Category 2</label></li>
+                                <li><input id="category-checkbox33" type="checkbox"/><label for="category-checkbox33">Category 3</label></li>
+                                <li><input id="category-checkbox44" type="checkbox"/><label for="category-checkbox44">Category 4</label></li>
+                                <li><input id="category-checkbox55" type="checkbox"/><label for="category-checkbox55">Category 5</label></li>
+                            </ul>
+                        </li>
+                        <li class="product-filters-tab margin-top-1">
+                            <a href="#">Kaina</a>
+                            <ul class="categories-menu menu vertical nested is-active">
+                                <li><input id="price-checkbox11" type="checkbox"/><label for="price-checkbox11">Under $25</label></li>
+                                <li><input id="price-checkbox22" type="checkbox"/><label for="price-checkbox22">$25–$50</label></li>
+                                <li><input id="price-checkbox33" type="checkbox"/><label for="price-checkbox33">$50–$250</label></li>
+                                <li><input id="price-checkbox44" type="checkbox"/><label for="price-checkbox44">$250–$600</label></li>
+                                <li><input id="price-checkbox55" type="checkbox"/><label for="price-checkbox55">$600–$1,000</label></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside> <!-- END OF FILTERING. -->
+
+
+        <!-- PRODUCT LIST. -->
+        <div class="small-12 medium-9 large-8 columns">
+            <ui:repeat value="#{productController.products}" var="productItem" varStatus="loop">
+                <h:outputText value="&lt;div class='row small-up-2 large-up-4 section'&gt;"
+                              escape="false" rendered="#{loop.index % 4 == 0}"/>
+
+                <div class="column product-box">
+                    <a href="../../product-details.xhtml">
+                        <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
+                            <f:param name="id" value="#{productItem.images.get(0).id}"/>
+                        </p:graphicImage>
+                    </a>
+                    <h5 class="product-name bor-bot">#{productItem.title}</h5>
+                    <p class="product-price">€ #{productItem.price}</p>
+                    <a href="#" class="button expanded primary">PRIDĖTI Į KREPŠELĮ</a>
+                </div>
+                <h:outputText value="&lt;/div&gt;" escape="false"
+                              rendered="#{loop.last or (loop.index + 1) % 4 == 0}"/>
+            </ui:repeat>
+        </div> <!-- END OF PRODUCT LIST. -->
+    </div>
+
+
+    <!-- ITEM PAGINATION. -->
+    <nav aria-label="Pagination">
+        <ul class="pagination text-center">
+            <li class="pagination-previous disabled">Ankstesnis</li>
+            <li class="current"><span class="show-for-sr">You're on page</span> 1</li>
+            <li><a href="#" aria-label="Page 2">2</a></li>
+            <li><a href="#" aria-label="Page 3">3</a></li>
+            <li><a href="#" aria-label="Page 4">4</a></li>
+            <li class="ellipsis"></li>
+            <li><a href="#" aria-label="Page 12">12</a></li>
+            <li><a href="#" aria-label="Page 13">13</a></li>
+            <li class="pagination-next"><a href="#" aria-label="Next page">Kitas</a></li>
+        </ul>
+    </nav> <!-- END OF ITEM PAGINATION. -->
 
 
 </ui:composition>
