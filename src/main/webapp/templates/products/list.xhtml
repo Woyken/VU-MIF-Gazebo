@@ -20,7 +20,7 @@
 
 
     <!-- SEARCH ITEMS BAR. -->
-    <div class="row small-8 medium-6 large-4 columns input-group-rounded margin-top-3">
+    <div class="row small-8 medium-6 large-4 columns input-group-rounded margin-top-3" id="search">
         <section class="search-bar">
             <form action="">
                 <div class="input-group">
@@ -37,10 +37,10 @@
     <div class="row expanded">
 
         <!-- FILTERING. -->
-        <div class="product-filters medium-3 large-2 columns">
-            <!--<div data-sticky-container="">-->
-                <!--<div data-sticky="">-->
-                    <h3 class="product-filters-header hide-for-small-only margin-top-3">Rūšiuokite:</h3>
+        <aside class="product-filters medium-3 large-2 columns">
+            <div class="hide-for-small-only" data-sticky-container="">
+                <div class="sticky" data-sticky="" data-top-anchor="search">
+                    <h3 class="product-filters-header hide-for-small-only margin-top-3"><br/>Rūšiuokite:</h3>
                     <ul class="vertical menu hide-for-small-only" data-accordion-menu="">
                         <li class="product-filters-tab margin-top-1">
                             <a href="#">Kategorija</a>
@@ -63,9 +63,9 @@
                             </ul>
                         </li>
                     </ul>
-                <!--</div>-->
-            <!--</div>-->
-        </div> <!-- END OF FILTERING. -->
+                </div>
+            </div>
+        </aside> <!-- END OF FILTERING. -->
 
 
         <!-- PRODUCT LIST. -->
