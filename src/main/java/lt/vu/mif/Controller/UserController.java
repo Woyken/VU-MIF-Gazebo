@@ -24,7 +24,7 @@ public class UserController {
     public void onPageLoad() {
         users = userRepository.getAll().stream().map(UserView::new).collect(Collectors.toList());
         User user = userRepository.get(User.class, 2L);
-        userView = new UserView(user);
+        userView = user == null ? null : new UserView(user);
     }
 
     public void updateUser(){

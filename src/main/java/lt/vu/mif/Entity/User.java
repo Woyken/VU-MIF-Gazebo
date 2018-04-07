@@ -34,4 +34,13 @@ public class User implements Serializable {
 
     @Column(name = "TOKEN_CREATION_DATE")
     private LocalDateTime tokenCreationDate;
+
+    public User() {
+    }
+
+    public User(String password, String email, Role role) {
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
 }
