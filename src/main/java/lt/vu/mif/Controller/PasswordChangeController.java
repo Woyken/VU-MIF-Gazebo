@@ -21,10 +21,12 @@ public class PasswordChangeController {
     private UserService userService;
 
     private String password;
+    private String successMessage;
 
     public void changePassword() {
         User user = userService.getLoggedUser();
         user.setPassword(new BCryptPasswordEncoder().encode(password));
         userRepository.update(user);
+        successMessage = "Slaptažodis sėkmingai pakeistas";
     }
 }

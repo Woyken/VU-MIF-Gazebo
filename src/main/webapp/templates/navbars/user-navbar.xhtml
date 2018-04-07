@@ -146,9 +146,10 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}">
+                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="successMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
+                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="successMessage"/>
                         </div>
                     </div>
                 </div>
