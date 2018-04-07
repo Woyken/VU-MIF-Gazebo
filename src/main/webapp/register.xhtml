@@ -3,11 +3,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
-<f:metadata>
-    <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
-    <f:event type="preRenderView" listener="#{userController.onPageLoad}"/>
-</f:metadata>
+      xmlns:p="http://java.sun.com/jsf/html">
 
 <h:head>
     <title>Home</title>
@@ -22,30 +18,29 @@
 
     <!-- REGISTRATION FORM -->
     <div id="registration-window">
-
         <div class="row section">
             <div class="columns small-10 small-offset-1 medium-6 medium-offset-3 large-4 large-offset-4">
                 <h4 class="form-title text-center">
                     Naujos paskyros kūrimas
                 </h4>
                 <br />
-
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">El. paštas
-                            <i class="fi-torso" />
-                            <input type="text"/>
-                        </label>
+                <h:form>
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">El. paštas
+                                <i class="fi-torso" />
+                                <p:inputText value="#{userRegistrationController.email}"/>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row align-middle">
-                    <div class="columns">
-                        <label class="input-label">Slaptažodis
-                            <span><i class="fi-lock" /></span>
-                            <input type="text"/>
-                        </label>
-                    </div>
-                    <div class="columns shrink">
+                    <div class="row align-middle">
+                        <div class="columns">
+                            <label class="input-label">Slaptažodis
+                                <span><i class="fi-lock" /></span>
+                                <p:inputSecret value="#{userRegistrationController.password}"/>
+                            </label>
+                        </div>
+                        <div class="columns shrink">
                         <span
                                 data-tooltip=""
                                 data-allow-html="true"
@@ -56,21 +51,23 @@
                                    - Bent vienas simbolis, kuris nebūtų raidė.">
                                 <i class="fi-info" />
                         </span>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="columns">
-                        <label class="input-label">Pakartokite slaptažodį
-                            <span><i class="fi-lock" /></span>
-                            <input type="text"/>
-                        </label>
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">Pakartokite slaptažodį
+                                <span><i class="fi-lock" /></span>
+                                <p:inputSecret value="#{userRegistrationController.passwordRepeat}"/>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="columns">
-                        <button class="button success expanded">REGISTRUOTIS</button>
+                    <div class="row">
+                        <div class="columns">
+                            <p:commandButton class="button success expanded" action="#{userRegistrationController.saveUser}" value="REGISTRUOTIS" update="message"/>
+                            <p:outputLabel value="#{userRegistrationController.message}" id="message"/>
+                        </div>
                     </div>
-                </div>
+                </h:form>
             </div>
         </div>
 
