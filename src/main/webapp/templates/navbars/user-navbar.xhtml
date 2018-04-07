@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+<html xmlns:p="http://java.sun.com/jsf/html">
 
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
@@ -244,9 +244,10 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}">
+                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}" update="successMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
+                            <p:outputLabel value="#{emailChangeController.successMessage}" id="successMessage"/>
                         </div>
                     </div>
                 </h:form>
