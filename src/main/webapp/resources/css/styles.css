@@ -345,6 +345,9 @@ label.input-label {
 	font-weight: bold;
 }
 
+.large-text {
+	font-size: larger;
+}
 
 /* --- --- --- UTILITIES */
 

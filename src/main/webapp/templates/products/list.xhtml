@@ -75,7 +75,7 @@
                               escape="false" rendered="#{loop.index % 4 == 0}"/>
 
                 <div class="column product-box">
-                    <a href="../../product-details.xhtml">
+                    <a href="../../product-details.xhtml?productId=#{productItem.id}">
                         <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
                             <f:param name="id" value="#{productItem.images.get(0).id}"/>
                         </p:graphicImage>
