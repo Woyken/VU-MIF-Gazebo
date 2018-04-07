@@ -75,7 +75,7 @@
                                 <span class="alert-star">*</span>
                                 Naujasis slaptažodis
                                 <span><i class="fi-lock" /></span>
-                                <h:inputSecret binding="#{newPassword}"/>
+                                <h:inputSecret binding="#{newPassword}" value="#{passwordChangeController.password}"/>
                             </label>
                         </div>
                         <div class="columns shrink">
@@ -141,7 +141,7 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti slaptažodį">
+                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
                         </div>
