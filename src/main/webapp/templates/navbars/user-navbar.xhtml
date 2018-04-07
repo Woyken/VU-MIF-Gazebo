@@ -1,12 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
+
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
-        xmlns:f="http://xmlns.jcp.org/jsf/core"
->
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{emailChangeController.onPageLoad}"/>
+    </f:metadata>
+
 
     <!-- NAVIGATION BAR. -->
     <div data-sticky-container="">
@@ -74,7 +79,7 @@
                             <label class="input-label">
                                 <span class="alert-star">*</span>
                                 Naujasis slaptažodis
-                                <span><i class="fi-lock" /></span>
+                                <span><i class="fi-lock"/></span>
                                 <h:inputSecret binding="#{newPassword}" value="#{passwordChangeController.password}"/>
                             </label>
                         </div>
@@ -87,7 +92,7 @@
                                    - Bent viena didžioji raidė. &lt;br&gt;
                                    - Bent viena mažoji raidė. &lt;br&gt;
                                    - Bent vienas simbolis, kuris nebūtų raidė.">
-                                <i class="fi-info" />
+                                <i class="fi-info"/>
                         </span>
                         </div>
                     </div>
@@ -98,7 +103,7 @@
                             <label class="input-label">
                                 <span class="alert-star">*</span>
                                 Pakartokite naująjį slaptažodį
-                                <span><i class="fi-lock" /></span>
+                                <span><i class="fi-lock"/></span>
                                 <h:inputSecret binding="#{newPasswordRepeat}"/>
                             </label>
                         </div>
@@ -110,7 +115,7 @@
                             <label class="input-label">
                                 <span class="alert-star">*</span>
                                 Dabartinis slaptažodis
-                                <i class="fi-unlock" />
+                                <i class="fi-unlock"/>
                                 <h:inputSecret class="no-mar" binding="#{oldPassword}"/>
                             </label>
                             <!-- Required fields. -->
@@ -123,17 +128,17 @@
 
                     <!-- For validation -->
                     <h:inputHidden id="validationInput" value="true">
-                        <f:validator validatorId="ChangePasswordValidation" />
-                        <f:attribute name="newPassword" value="#{newPassword}" />
-                        <f:attribute name="newPasswordRepeat" value="#{newPasswordRepeat}" />
-                        <f:attribute name="oldPassword" value="#{oldPassword}" />
+                        <f:validator validatorId="ChangePasswordValidation"/>
+                        <f:attribute name="newPassword" value="#{newPassword}"/>
+                        <f:attribute name="newPasswordRepeat" value="#{newPasswordRepeat}"/>
+                        <f:attribute name="oldPassword" value="#{oldPassword}"/>
                     </h:inputHidden>
 
                     <!-- Error Message -->
                     <div class="row">
                         <div class="columns">
                             <div class="mar-bot-5">
-                                <h:message class="alert-text" for="validationInput" />
+                                <h:message class="alert-text" for="validationInput"/>
                             </div>
                         </div>
                     </div>
@@ -174,8 +179,7 @@
                             <label class="input-label">
                                 Dabartinis adresas
                                 <i class="fi-torso"/>
-                                <h:inputText value="#{userController.getUserView().getEmail()}"
-                                             disabled="true"/>
+                                <h:inputText value="#{emailChangeController.loggedUserEmail}" disabled="true"/>
                             </label>
                         </div>
                     </div>
@@ -187,7 +191,7 @@
                                 <span class="alert-star">*</span>
                                 Naujasis adresas
                                 <span><i class="fi-mail"/></span>
-                                <h:inputText binding="#{newEmail}"/>
+                                <h:inputText binding="#{newEmail}" value="#{emailChangeController.newEmail}"/>
                             </label>
                         </div>
                     </div>
@@ -241,8 +245,7 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded"
-                                             value="Keisti el. pašto adresą">
+                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
                         </div>

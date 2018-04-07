@@ -1,9 +1,7 @@
 package lt.vu.mif.Service;
 
 import javax.inject.Named;
-import lt.vu.mif.Entity.Roles.Role;
-import lt.vu.mif.Entity.User;
-import lt.vu.mif.Repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,6 +9,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import lt.vu.mif.Entity.User;
+import lt.vu.mif.Repository.UserRepository;
 
 @Named("UserService")
 @Service
@@ -37,6 +38,10 @@ public class UserService {
             return userRepository.getUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         }
         return null;
+    }
+
+    public String getLoggedUserUserEmail() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     public User findByUsername(String username) throws UsernameNotFoundException {
