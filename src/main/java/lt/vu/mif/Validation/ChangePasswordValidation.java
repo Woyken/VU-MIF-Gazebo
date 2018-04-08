@@ -1,4 +1,4 @@
-package lt.vu.mif.Utils;
+package lt.vu.mif.Validation;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -7,6 +7,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import lt.vu.mif.Utils.ValidationUtils;
 
 @FacesValidator(value = "ChangePasswordValidation")
 public class ChangePasswordValidation implements Validator {

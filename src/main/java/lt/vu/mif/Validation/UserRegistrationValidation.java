@@ -1,4 +1,4 @@
-package lt.vu.mif.Utils;
+package lt.vu.mif.Validation;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -8,6 +8,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import lt.vu.mif.Repository.UserRepository;
+import lt.vu.mif.Utils.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

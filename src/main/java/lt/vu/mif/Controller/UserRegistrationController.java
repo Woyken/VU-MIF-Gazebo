@@ -5,9 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Entity.Roles;
 import lt.vu.mif.Entity.User;
-import lt.vu.mif.Repository.UserRepository;
+import lt.vu.mif.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Named
 @Getter
@@ -15,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class UserRegistrationController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     private String email;
     private String password;
@@ -24,8 +23,8 @@ public class UserRegistrationController {
     private String message;
 
     public void saveUser() {
-        userRepository
-            .save(new User(new BCryptPasswordEncoder().encode(password), email, Roles.Role.USER));
+        userService
+            .save(new User(password, email, Roles.Role.USER));
         message = "Naudotojas " + email + " sėkmingai sukurtas";
     }
 }
