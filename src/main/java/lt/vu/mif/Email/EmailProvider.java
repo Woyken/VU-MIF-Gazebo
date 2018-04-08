@@ -1,5 +1,7 @@
 package lt.vu.mif.Email;
 
+import javax.mail.Message.RecipientType;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,9 @@ public class EmailProvider {
     public void sendSimpleMailTo(String toEmail, String subject, String htmlMessage) {
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
             mimeMessage.setContent(htmlMessage, "text/html; charset=UTF-8");
-            helper.setTo(toEmail);
-            helper.setSubject(subject);
+            mimeMessage.setRecipient(RecipientType.TO, InternetAddress.parse(toEmail)[0]);
+            mimeMessage.setSubject(subject);
             javaMailSender.send(mimeMessage);
         } catch (Exception ex) {
             ex.printStackTrace();
