@@ -20,6 +20,7 @@ public class EmailChangeController {
 
     private String loggedUserEmail;
     private String newEmail = null;
+    private String successMessage;
 
     public void onPageLoad() {
         loggedUserEmail = userService.getLoggedUserUserEmail();
@@ -28,7 +29,7 @@ public class EmailChangeController {
     public void updateUser() {
         User loggedUser = userService.getLoggedUser();
         loggedUser.setEmail(newEmail);
-
         userRepository.update(loggedUser);
+        successMessage = "El. paštas sėkmingai pakeistas";
     }
 }

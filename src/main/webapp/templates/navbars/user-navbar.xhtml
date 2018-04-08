@@ -146,10 +146,10 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="successMessage">
+                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="passwordSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="successMessage"/>
+                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="passwordSuccessMessage"/>
                         </div>
                     </div>
                 </div>
@@ -246,9 +246,10 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}">
+                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}" update="emailSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
+                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="emailSuccessMessage"/>
                         </div>
                     </div>
                 </h:form>
