@@ -1,15 +1,18 @@
 package lt.vu.mif.Utils;
 
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
-class ValidationUtilsTests {
+@RunWith(SpringRunner.class)
+public class ValidationUtilsTests {
 
     private static final String TEST_INVALID_PASSWORD = "neteisingas";
     private static final String TEST_VALID_PASSWORD = "Teisingas?";
 
     @Test
-    void validatePassword_validatingPassword_success() {
+    public void validatePassword_validatingPassword_success() {
         boolean invalidResult = ValidationUtils.isPasswordValid(TEST_INVALID_PASSWORD);
         boolean validResult = ValidationUtils.isPasswordValid(TEST_VALID_PASSWORD);
 
