@@ -82,7 +82,11 @@
                     </a>
                     <h5 class="product-name bor-bot">#{productItem.title}</h5>
                     <p class="product-price">€ #{productItem.price}</p>
-                    <a href="#" class="button expanded primary">PRIDĖTI Į KREPŠELĮ</a>
+                    <h:form>
+                        <h:commandButton class="button expanded primary" value="PRIDĖTI Į KREPŠELĮ" actionListener="#{cartController.addProductToCart(productItem.id)}">
+                            <f:ajax execute="@form" render="@none" />
+                        </h:commandButton>
+                    </h:form>
                 </div>
                 <h:outputText value="&lt;/div&gt;" escape="false"
                               rendered="#{loop.last or (loop.index + 1) % 4 == 0}"/>
