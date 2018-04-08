@@ -71,7 +71,7 @@
 
                     <!-- For validation -->
                     <h:inputHidden id="validationInput" value="true">
-                        <f:validator validatorId="UserRegistrationValidation"/>
+                        <f:validator binding="#{userRegistrationValidation}"/>
                         <f:attribute name="email" value="#{email}"/>
                         <f:attribute name="password" value="#{password}"/>
                         <f:attribute name="passwordRepeat" value="#{passwordRepeat}"/>

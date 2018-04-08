@@ -127,7 +127,7 @@
                     </div>
 
                     <!-- For validation -->
-                    <h:inputHidden id="validationInput" value="true">
+                    <h:inputHidden id="passwordValidationInput" value="true">
                         <f:validator validatorId="ChangePasswordValidation"/>
                         <f:attribute name="newPassword" value="#{newPassword}"/>
                         <f:attribute name="newPasswordRepeat" value="#{newPasswordRepeat}"/>
@@ -138,7 +138,7 @@
                     <div class="row">
                         <div class="columns">
                             <div class="mar-bot-5">
-                                <h:message class="alert-text" for="validationInput"/>
+                                <h:message class="alert-text" for="passwordValidationInput"/>
                             </div>
                         </div>
                     </div>
@@ -227,7 +227,7 @@
                     </div>
 
                     <!-- For validation -->
-                    <h:inputHidden id="validationInput" value="true">
+                    <h:inputHidden id="emailValidationInput" value="true">
                         <f:validator validatorId="ChangeEmailValidation"/>
                         <f:attribute name="newEmail" value="#{newEmail}"/>
                         <f:attribute name="newEmailRepeat" value="#{newEmailRepeat}"/>
@@ -238,7 +238,7 @@
                     <div class="row">
                         <div class="columns">
                             <div class="mar-bot-5">
-                                <h:message class="alert-text" for="validationInput"/>
+                                <h:message class="alert-text" for="emailValidationInput"/>
                             </div>
                         </div>
                     </div>
