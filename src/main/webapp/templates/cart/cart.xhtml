@@ -3,7 +3,9 @@
 <html>
 <ui:composition
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
 >
 
     <div id="cart-window">
@@ -35,103 +37,38 @@
         </div>
 
         <div id="shopping-list-body" class="row align-middle">
-        <!-- PRODUCT ONE -->
-            <div class="small-6 columns">
-                <div class="row align-middle align-top">
-                    <!-- Product image. -->
-                    <div class="small-6 columns align-right">
-                        <a href="../../product-details.xhtml">
-                            <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                        </a>
-                    </div>
-                    <!-- Product name. -->
-                    <div class="small-6 columns">
-                        <a href="../../product-details.xhtml">
-                            <h5>GZ Air Force v4</h5>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- Product quantity. -->
-            <div class="small-3 columns">
-                <input class="half-width" type="number" value="1" min="1" max="99"/>
-            </div>
-            <!-- Price of the product. -->
-            <div class="small-2 columns">
-                <h5 class="shopping-cart-price">123.99 €</h5>
-            </div>
-            <div class="small-1 columns">
-                <a class="button primary" href="#" data-open="remove-item-from-cart-modal">&times;</a>
-            </div>
-
-
-
-            <!-- PRODUCT TWO -->
-            <div class="small-6 columns">
-                <div class="row align-middle align-top">
-                    <!-- Product image. -->
-                    <div class="small-6 columns align-right">
-                        <a href="../../product-details.xhtml">
-                            <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                        </a>
-                    </div>
-                    <!-- Product name. -->
-                    <div class="small-6 columns">
-                        <a href="../../product-details.xhtml">
-                            <h5>GZ Titan X</h5>
-                        </a>
+            <ui:repeat value="#{cartController.productsInCart.keySet()}" var="productItem" varStatus="loop">
+                <!-- PRODUCT LINE -->
+                <div class="small-6 columns">
+                    <div class="row align-middle align-top">
+                        <!-- Product image. -->
+                        <div class="small-6 columns align-right">
+                            <a href="../../product-details.xhtml?productId=#{productItem.id}">
+                                <p:graphicImage class="thumbnail no-top-mar" value="#{imageStreamer.image}">
+                                    <f:param name="id" value="#{productItem.images.get(0).id}"/>
+                                </p:graphicImage>
+                            </a>
+                        </div>
+                        <!-- Product name. -->
+                        <div class="small-6 columns">
+                            <a href="../../product-details.xhtml?productId=#{productItem.id}">
+                                <h5>#{productItem.title}</h5>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Product quantity. -->
-            <div class="small-3 columns">
-                <input class="half-width" type="number" value="1" min="1" max="99"/>
-            </div>
-            <!-- Price of the product. -->
-            <div class="small-2 columns">
-                <h5 class="shopping-cart-price">64.99 €</h5>
-            </div>
-            <div class="small-1 columns">
-                <a class="button primary" href="#" data-open="remove-item-from-cart-modal">&times;</a>
-            </div>
-
-
-
-            <!-- PRODUCT THREE -->
-            <div class="small-6 columns">
-                <div class="row align-middle align-top">
-                    <!-- Product image. -->
-                    <div class="small-6 columns align-right">
-                        <a href="../../product-details.xhtml">
-                            <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                        </a>
-                    </div>
-                    <!-- Product name. -->
-                    <div class="small-6 columns">
-                        <a href="../../product-details.xhtml">
-                            <h5>GZ Velocity</h5>
-                        </a>
-                    </div>
+                <!-- Product quantity. -->
+                <div class="small-3 columns">
+                    <input class="half-width" type="number" value="#{cartController.productsInCart.get(productItem)}" min="1" max="99"/>
                 </div>
-            </div>
-            <!-- Product quantity. -->
-            <div class="small-3 columns">
-                <input class="half-width" type="number" value="1" min="1" max="99"/>
-            </div>
-            <!-- Price of the product. -->
-            <div class="small-2 columns">
-                <h5 class="shopping-cart-price">89.99 €</h5>
-            </div>
-            <div class="small-1 columns">
-                <a class="button primary" href="#" data-open="remove-item-from-cart-modal">&times;</a>
-            </div>
-            </div>
-
-
-            <div id="shopping-list-total" class="row align-right">
-            <div class="columns">
-                <h4 class="text-right">Galutinė suma: <span>278.97 €</span></h4>
-            </div>
+                <!-- Price of the product. -->
+                <div class="small-2 columns">
+                    <h5 class="shopping-cart-price">#{productItem.price * cartController.productsInCart.get(productItem)} €</h5>
+                </div>
+                <div class="small-1 columns">
+                    <a class="button primary" href="#" data-open="remove-item-from-cart-modal">&times;</a>
+                </div>
+            </ui:repeat>
         </div>
         <!-- END OF SHOPPING CART ITEMS -->
 
