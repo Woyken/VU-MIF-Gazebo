@@ -12,8 +12,6 @@ import lt.vu.mif.Utils.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-//Injection doesn't work with FacesValidator annotation
-//@FacesValidator(value = "UserRegistrationValidation")
 @Named
 @Component
 public class UserRegistrationValidation implements Validator {

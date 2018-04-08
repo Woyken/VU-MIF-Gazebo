@@ -128,7 +128,7 @@
 
                     <!-- For validation -->
                     <h:inputHidden id="passwordValidationInput" value="true">
-                        <f:validator validatorId="ChangePasswordValidation"/>
+                        <f:validator binding="#{changePasswordValidation}"/>
                         <f:attribute name="newPassword" value="#{newPassword}"/>
                         <f:attribute name="newPasswordRepeat" value="#{newPasswordRepeat}"/>
                         <f:attribute name="oldPassword" value="#{oldPassword}"/>
@@ -228,7 +228,7 @@
 
                     <!-- For validation -->
                     <h:inputHidden id="emailValidationInput" value="true">
-                        <f:validator validatorId="ChangeEmailValidation"/>
+                        <f:validator binding="#{changeEmailValidation}"/>
                         <f:attribute name="newEmail" value="#{newEmail}"/>
                         <f:attribute name="newEmailRepeat" value="#{newEmailRepeat}"/>
                         <f:attribute name="password" value="#{password}"/>
