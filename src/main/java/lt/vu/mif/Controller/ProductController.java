@@ -11,7 +11,7 @@ import lt.vu.mif.View.ProductView;
 import lt.vu.mif.View.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+s
 @Named
 @Getter
 @Controller
