@@ -23,6 +23,14 @@ public class ProductView {
     public ProductView() {
     }
 
+    public ProductView(ProductView other) {
+        this.id = other.id;
+        this.title = other.title;
+        this.price = other.price;
+        this.description = other.description;
+        this.images = new ArrayList<>(other.images);
+    }
+
     public ProductView(Product product) {
         this.id = product.getId();
         this.title = product.getTitle();
