@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.Predicate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,6 +31,14 @@ public class PersistenceUtils {
             }
         } else {
             return null;
+        }
+    }
+
+    public static Predicate[] toArray(List<Predicate> predicates) {
+        if (predicates == null) {
+            throw new IllegalArgumentException("Parameter predicates is required");
+        } else {
+            return predicates.toArray(new Predicate[predicates.size()]);
         }
     }
 }
