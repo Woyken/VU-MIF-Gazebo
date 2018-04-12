@@ -25,11 +25,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable(); //temporary disabled to allow h2-console
 
         http.authorizeRequests()
-                .antMatchers("/main-page-logged-in.xhtml").access("hasAnyRole('USER', 'ADMIN')")
-                .and()
-                .formLogin().loginPage("/login.xhtml").defaultSuccessUrl("/main.xhtml", true).failureUrl("/login.xhtml?error=true").permitAll()
-                .and()
-                .logout().logoutSuccessUrl("/main.xhtml").invalidateHttpSession(true).deleteCookies("remove").permitAll().and().csrf().disable();
+            .antMatchers("/main-page-logged-in.xhtml").access("hasAnyRole('USER', 'ADMIN')")
+            .and()
+            .formLogin().loginPage("/login.xhtml").defaultSuccessUrl("/main.xhtml", true)
+            .failureUrl("/login.xhtml?error=true").permitAll()
+            .and()
+            .logout().logoutSuccessUrl("/main.xhtml").invalidateHttpSession(true)
+            .deleteCookies("remove").permitAll().and().csrf().disable();
     }
 
     @Bean

@@ -1,15 +1,26 @@
-package lt.vu.mif.Utils;
+package lt.vu.mif.Validation;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import javax.inject.Named;
+import lt.vu.mif.Service.UserService;
+import lt.vu.mif.Utils.ValidationUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
-@FacesValidator(value = "ChangeEmailValidation")
+@Named
+@Component
 public class ChangeEmailValidation implements Validator {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    UserService userService;
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
@@ -28,6 +39,10 @@ public class ChangeEmailValidation implements Validator {
 
         if (!newEmail.equals(newEmailRepeat)) {
             throw new ValidatorException(new FacesMessage("Įvesti el. pašto adresai nesutampa"));
+        }
+
+        if(!passwordEncoder.matches(password, userService.getLoggedUser().getPassword())) {
+            throw new ValidatorException(new FacesMessage("Įvestas neteisingas slaptažodis"));
         }
     }
 }

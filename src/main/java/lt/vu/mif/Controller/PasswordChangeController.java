@@ -3,13 +3,13 @@ package lt.vu.mif.Controller;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Entity.User;
 import lt.vu.mif.Repository.UserRepository;
 import lt.vu.mif.Service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Named
 @Getter
@@ -19,13 +19,15 @@ public class PasswordChangeController {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private String password;
     private String successMessage;
 
     public void changePassword() {
         User user = userService.getLoggedUser();
-        user.setPassword(new BCryptPasswordEncoder().encode(password));
+        user.setPassword(passwordEncoder.encode(password));
         userRepository.update(user);
         successMessage = "Slaptažodis sėkmingai pakeistas";
     }

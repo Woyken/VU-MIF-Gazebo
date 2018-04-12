@@ -127,8 +127,8 @@
                     </div>
 
                     <!-- For validation -->
-                    <h:inputHidden id="validationInput" value="true">
-                        <f:validator validatorId="ChangePasswordValidation"/>
+                    <h:inputHidden id="passwordValidationInput" value="true">
+                        <f:validator binding="#{changePasswordValidation}"/>
                         <f:attribute name="newPassword" value="#{newPassword}"/>
                         <f:attribute name="newPasswordRepeat" value="#{newPasswordRepeat}"/>
                         <f:attribute name="oldPassword" value="#{oldPassword}"/>
@@ -138,7 +138,7 @@
                     <div class="row">
                         <div class="columns">
                             <div class="mar-bot-5">
-                                <h:message class="alert-text" for="validationInput"/>
+                                <h:message class="alert-text" for="passwordValidationInput"/>
                             </div>
                         </div>
                     </div>
@@ -146,10 +146,10 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="successMessage">
+                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="passwordSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="successMessage"/>
+                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="passwordSuccessMessage"/>
                         </div>
                     </div>
                 </div>
@@ -227,8 +227,8 @@
                     </div>
 
                     <!-- For validation -->
-                    <h:inputHidden id="validationInput" value="true">
-                        <f:validator validatorId="ChangeEmailValidation"/>
+                    <h:inputHidden id="emailValidationInput" value="true">
+                        <f:validator binding="#{changeEmailValidation}"/>
                         <f:attribute name="newEmail" value="#{newEmail}"/>
                         <f:attribute name="newEmailRepeat" value="#{newEmailRepeat}"/>
                         <f:attribute name="password" value="#{password}"/>
@@ -238,7 +238,7 @@
                     <div class="row">
                         <div class="columns">
                             <div class="mar-bot-5">
-                                <h:message class="alert-text" for="validationInput"/>
+                                <h:message class="alert-text" for="emailValidationInput"/>
                             </div>
                         </div>
                     </div>
@@ -246,9 +246,10 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}">
+                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}" update="emailSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
+                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="emailSuccessMessage"/>
                         </div>
                     </div>
                 </h:form>
