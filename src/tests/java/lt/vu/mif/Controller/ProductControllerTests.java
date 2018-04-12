@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import lt.vu.mif.Entity.Product;
 import lt.vu.mif.Repository.ProductRepository;
+import lt.vu.mif.Search.ProductSearch;
 import lt.vu.mif.View.ProductView;
 
 @Rollback
@@ -63,5 +64,38 @@ public class ProductControllerTests {
     public void searchProducts_validSearch_multipleResults() {
         List<ProductView> result =  productController.searchProducts("long");
         Assertions.assertEquals(2, result.size());
+    }
+
+    @Test
+    public void searchProducts() {
+        ProductSearch productSearch = new ProductSearch();
+
+        List<Product> products = productRepository.findProducts(productSearch);
+        Assertions.assertEquals(2, products.size());
+
+        productSearch.setMinPrice(new BigDecimal(10L));
+        products = productRepository.findProducts(productSearch);
+        Assertions.assertEquals(2, products.size());
+
+        productSearch.setMinPrice(new BigDecimal(12L));
+        products = productRepository.findProducts(productSearch);
+        Assertions.assertEquals(1, products.size());
+
+        productSearch.setMaxPrice(new BigDecimal(20L));
+        products = productRepository.findProducts(productSearch);
+        Assertions.assertEquals(1, products.size());
+
+        productSearch.setMaxPrice(new BigDecimal(50L));
+        products = productRepository.findProducts(productSearch);
+        Assertions.assertEquals(1, products.size());
+
+        productSearch.setMaxPrice(new BigDecimal(15L));
+        products = productRepository.findProducts(productSearch);
+        Assertions.assertEquals(0, products.size());
+
+        productSearch.setMinPrice(null);
+        productSearch.setMaxPrice(new BigDecimal(20L));
+        products = productRepository.findProducts(productSearch);
+        Assertions.assertEquals(2, products.size());
     }
 }
