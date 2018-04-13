@@ -60,7 +60,11 @@
                 </div>
             </div>
 
-            <a href="#" class="button large hollow expanded primary-inverted">DĖTI Į KREPŠELĮ</a>
+            <h:form>
+                <h:commandButton class="button large hollow expanded primary-inverted" value="PRIDĖTI Į KREPŠELĮ" actionListener="#{cartController.addProductToCart(productDetailsController.productView.id)}">
+                    <f:ajax execute="@form" render="@none" />
+                </h:commandButton>
+            </h:form>
         </div>
     </div> <!-- END OF PRODUCT DETAILS -->
 
