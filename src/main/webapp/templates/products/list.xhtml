@@ -4,6 +4,7 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 >
 
 
@@ -83,7 +84,7 @@
                     <h5 class="product-name bor-bot">#{productItem.title}</h5>
                     <p class="product-price">€ #{productItem.price}</p>
                     <h:form>
-                        <h:commandButton class="button expanded primary" value="PRIDĖTI Į KREPŠELĮ" actionListener="#{cartController.addProductToCart(productItem.id)}">
+                        <h:commandButton class="button expanded primary" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal" actionListener="#{cartController.addProductToCart(productItem.id)}">
                             <f:ajax execute="@form" render="@none" />
                         </h:commandButton>
                     </h:form>
@@ -109,6 +110,28 @@
             <li class="pagination-next"><a href="#" aria-label="Next page">Kitas</a></li>
         </ul>
     </nav> <!-- END OF ITEM PAGINATION. -->
+
+
+    <!-- INFORM USER ABOUT ADDING TO CART MODAL -->
+    <div id="inform-user-about-adding-to-cart-modal"
+         class="reveal"
+         data-reveal=""
+         data-overlay="false"
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    Prekė pridėta prie jūsų krepšelio
+                </h4>
+                <br />
+                <div class="row">
+                    <div class="columns small-12">
+                        <a class="button orange expanded" data-close="">Supratau</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END OF INFORM USER ABOUT ADDING TO CART MODAL -->
 
 
 </ui:composition>
