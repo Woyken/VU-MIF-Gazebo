@@ -3,13 +3,8 @@ package lt.vu.mif.Controller;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,8 +33,9 @@ public class CartController implements Serializable {
     }
 
     public void removeSelectedProduct() {
-        if(null != productSelectedForRemoval)
+        if (null != productSelectedForRemoval) {
             productsInCart.remove(productSelectedForRemoval);
+        }
     }
 
     public void addProductToCart(Long id) {
@@ -49,7 +45,8 @@ public class CartController implements Serializable {
     public BigDecimal getSum() {
         BigDecimal totalSum = new BigDecimal(0);
         for (CartProductView product : productsInCart) {
-            BigDecimal productPrice = product.getPrice().multiply(new BigDecimal(product.getAmount()));
+            BigDecimal productPrice = product.getPrice()
+                .multiply(new BigDecimal(product.getAmount()));
             totalSum = totalSum.add(productPrice);
         }
         return totalSum;
@@ -57,14 +54,15 @@ public class CartController implements Serializable {
 
     private void addOrIncrementProduct(Long id) {
         for (CartProductView product : productsInCart) {
-            if (product.getId().equals(id)){
+            if (product.getId().equals(id)) {
                 product.setAmount(product.getAmount() + 1);
                 return;
             }
         }
         List<Long> idsList = new ArrayList<>();
         idsList.add(id);
-        CartProductView productToAdd = new CartProductView(new ProductView(productRepository.get(idsList).get(0)));
+        CartProductView productToAdd = new CartProductView(
+            new ProductView(productRepository.get(idsList).get(0)));
         productToAdd.setAmount(1L);
         productsInCart.add(productToAdd);
     }
