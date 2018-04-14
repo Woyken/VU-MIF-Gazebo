@@ -6,10 +6,20 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
+
         <!-- NAVIGATION BAR -->
         <div data-sticky-container="">
             <div data-sticky="" data-options="marginTop: 0">
-                <div class="top-bar">
+
+                <!-- Menu button for mobile devices -->
+                <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium" style="display: none;">
+                    <button class="menu-icon" type="button" data-toggle=""/>
+                    <div class="title-bar-title">Meniu</div>
+                </div>
+
+                <div class="top-bar navigation-bar" id="main-menu">
+
+                    <!-- Left side -->
                     <div class="top-bar-left">
                         <ul class="menu">
                             <li>
@@ -17,27 +27,38 @@
                             </li>
                         </ul>
                     </div>
+
+                    <!-- Right side -->
                     <div class="top-bar-right">
-                        <ul class="dropdown menu"
-                            data-dropdown-menu=""
-                            data-closing-time="200">
-                            <li role="menuitem">
+                        <ul class="menu vertical medium-horizontal expanded dropdown"
+                            data-responsive-menu="drilldown medium-dropdown"
+                            role="menubar">
+
+                            <!-- Cart button -->
+                            <li role="menuitem" class="display-contents">
                                 <a id="cart-button" href="../../cart.xhtml">
                                     <i class="fi-shopping-cart"/>
                                     Mano krepšelis
                                 </a>
                             </li>
-                            <li class="is-dropdown-submenu-parent">
-                                <a id="account-settings" class="primary" href="#"> Paskyra </a>
-                                <ul class="menu">
-                                    <li>
-                                        <i class="fi-home" />
-                                        <a href="../../login.xhtml">Prisijungti</a>
-                                    </li>
 
-                                    <li>
-                                        <i class="fi-plus" />
-                                        <a href="../../register.xhtml">Registruotis</a>
+                            <!-- Account settings dropdown -->
+                            <li class="has-submenu is-dropdown-submenu-parent is-right-arrow opens-right display-contents" role="menuitem">
+                                <a>Paskyra</a>
+                                <ul class="menu vertical submenu is-dropdown-submenu first-sub" role="menu" data-submenu="">
+
+                                    <!-- Login -->
+                                    <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
+                                        <a href="../../login.xhtml">
+                                            <i class="fi-home" />
+                                            Prisijungti</a>
+                                    </li>
+                                    <!-- Register -->
+
+                                    <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
+                                        <a href="../../register.xhtml">
+                                            <i class="fi-plus" />
+                                            Registruotis</a>
                                     </li>
                                 </ul>
                             </li>
@@ -45,7 +66,8 @@
                     </div>
                 </div>
             </div>
-        </div> <!-- END OF NAVIGATION BAR. -->
+        </div> <!-- END OF NAVIGATION BAR -->
+
 
     </ui:composition>
 </html>
