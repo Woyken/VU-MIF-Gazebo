@@ -22,6 +22,7 @@ import lt.vu.mif.TokenGenerator;
 @Setter
 @RequestScope
 public class PasswordRemindController {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -35,7 +36,10 @@ public class PasswordRemindController {
     public void remindPassword() {
         if (StringUtils.isNotBlank(email) && userRepository.checkIfUserExists(email)) {
             String token = TokenGenerator.generateToken();
-            String emailContent= "Slaptažodį pakeisti galite:" + "<a href=\"http://localhost:8080/password-change.xhtml?" + Constants.PASSWORD_REQUEST_PARAMETER + "=" + token + "\">čia</a>";
+            String emailContent =
+                "Slaptažodį pakeisti galite:" + "<a href=\"http://" + Constants.ENVIRONMENT
+                    + "password-change.xhtml?" + Constants.PASSWORD_REQUEST_PARAMETER + "=" + token
+                    + "\">čia</a>";
 
             User user = userRepository.getUserByEmail(email);
             user.setTokenCreationDate(LocalDateTime.now());
