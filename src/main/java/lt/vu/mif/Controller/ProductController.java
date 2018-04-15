@@ -3,7 +3,7 @@ package lt.vu.mif.Controller;
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Named
 @Getter
 @Setter
-@SessionScoped
+@RequestScoped
 public class ProductController implements Serializable {
 
     @Autowired
