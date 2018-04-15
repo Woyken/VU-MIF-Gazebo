@@ -2,6 +2,7 @@ package lt.vu.mif.Controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,13 +32,16 @@ public class ProductController {
     public String searchPhrase;
 
     public void onPageLoad() {
+        
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
+            return;
+        }
+
         User user = userService.getLoggedUser();
         loggedUser = user == null ? null : new UserView(user);
 
-        if(null == products) {
-            products = productRepository.getAll().stream().map(ProductView::new)
+        products = productRepository.getAll().stream().map(ProductView::new)
                 .collect(Collectors.toList());
-        }
     }
 
     public void searchProducts() {
