@@ -23,17 +23,18 @@
     <!-- SEARCH ITEMS BAR. -->
     <div class="row small-8 medium-6 large-4 columns input-group-rounded margin-top-3" id="search">
         <section class="search-bar">
-            <form action="">
+            <h:form>
                 <div class="input-group">
-                    <input class="input-group-field" type="text" placeholder="Atraskite save"/>
+                    <h:inputText id="searchInput" class="input-group-field" value="#{productController.searchPhrase}" placeholder="Atraskite save"/>
                     <div class="input-group-button">
-                        <input type="submit" class="button" value="Ieškoti"/>
+                        <h:commandButton class="button" value="Ieškoti">
+                            <f:ajax execute="searchInput" listener="#{productController.searchProducts()}" render="productList"/>
+                        </h:commandButton>
                     </div>
                 </div>
-            </form>
+            </h:form>
         </section>
     </div> <!-- END OF SEARCH ITEMS BAR. -->
-
 
     <div class="row expanded">
 
@@ -71,27 +72,29 @@
 
         <!-- PRODUCT LIST. -->
         <div class="small-12 medium-9 large-8 columns">
-            <ui:repeat value="#{productController.products}" var="productItem" varStatus="loop">
-                <h:outputText value="&lt;div class='row small-up-2 large-up-4 section'&gt;"
-                              escape="false" rendered="#{loop.index % 4 == 0}"/>
+            <h:panelGroup id="productList">
+                <ui:repeat value="#{productController.products}" var="productItem" varStatus="loop">
+                    <h:outputText value="&lt;div class='row small-up-2 large-up-4 section'&gt;"
+                                  escape="false" rendered="#{loop.index % 4 == 0}"/>
 
-                <div class="column product-box">
-                    <a href="../../product-details.xhtml?productId=#{productItem.id}">
-                        <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
-                            <f:param name="id" value="#{productItem.images.get(0).id}"/>
-                        </p:graphicImage>
-                    </a>
-                    <h5 class="product-name bor-bot">#{productItem.title}</h5>
-                    <p class="product-price">€ #{productItem.price}</p>
-                    <h:form>
-                        <h:commandButton class="button expanded primary" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal" actionListener="#{cartController.addProductToCart(productItem.id)}">
-                            <f:ajax execute="@form" render="@none" />
-                        </h:commandButton>
-                    </h:form>
-                </div>
-                <h:outputText value="&lt;/div&gt;" escape="false"
-                              rendered="#{loop.last or (loop.index + 1) % 4 == 0}"/>
-            </ui:repeat>
+                    <div class="column product-box">
+                        <a href="../../product-details.xhtml?productId=#{productItem.id}">
+                            <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
+                                <f:param name="id" value="#{productItem.images.get(0).id}"/>
+                            </p:graphicImage>
+                        </a>
+                        <h5 class="product-name bor-bot">#{productItem.title}</h5>
+                        <p class="product-price">€ #{productItem.price}</p>
+                        <h:form>
+                            <h:commandButton class="button expanded primary" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal" actionListener="#{cartController.addProductToCart(productItem.id)}">
+                                <f:ajax execute="@form" render="@none" />
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                    <h:outputText value="&lt;/div&gt;" escape="false"
+                                  rendered="#{loop.last or (loop.index + 1) % 4 == 0}"/>
+                </ui:repeat>
+            </h:panelGroup>
         </div> <!-- END OF PRODUCT LIST. -->
     </div>
 

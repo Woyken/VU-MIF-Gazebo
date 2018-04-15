@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.inject.Named;
 import lombok.Getter;
+import lombok.Setter;
 import lt.vu.mif.Entity.User;
 import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.Service.UserService;
@@ -26,20 +27,21 @@ public class ProductController {
 
     private List<ProductView> products;
 
+    @Setter
+    public String searchPhrase;
+
     public void onPageLoad() {
         User user = userService.getLoggedUser();
         loggedUser = user == null ? null : new UserView(user);
 
-        products = productRepository.getAll().stream().map(ProductView::new)
-            .collect(Collectors.toList());
+        if(null == products) {
+            products = productRepository.getAll().stream().map(ProductView::new)
+                .collect(Collectors.toList());
+        }
     }
 
-    public List<ProductView> searchProducts(String input) throws IllegalArgumentException {
-        if (input.isEmpty()) {
-            throw new IllegalArgumentException("The search bar is empty");
-        }
-
-        return productRepository.getAll().stream().filter(p -> p.getTitle().contains(input))
+    public void searchProducts() {
+        products = productRepository.getAll().stream().filter(p -> p.getTitle().contains(searchPhrase))
             .map(ProductView::new).collect(Collectors.toList());
     }
 }
