@@ -7,9 +7,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-import lt.vu.mif.Entity.User;
 import lt.vu.mif.Service.UserService;
 import lt.vu.mif.Utils.ValidationUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -19,9 +19,9 @@ import org.springframework.stereotype.Component;
 public class ChangePasswordValidation implements Validator {
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o)
@@ -31,24 +31,29 @@ public class ChangePasswordValidation implements Validator {
             .getValue();
         String newPasswordRepeat = (String) ((UIInput) uiComponent.getAttributes()
             .get("newPasswordRepeat")).getValue();
-        String oldPassword = (String) ((UIInput) uiComponent.getAttributes().get("oldPassword"))
-            .getValue();
 
-        if (newPassword.isEmpty() || newPasswordRepeat.isEmpty() || oldPassword.isEmpty()) {
-            throw new ValidatorException(new FacesMessage("Užpildyti ne visi privalomi laukai"));
+
+        String oldPassword = null;
+        boolean oldPasswordRequired = Boolean.valueOf((String)uiComponent.getAttributes().get("oldPasswordRequired"));
+
+        if (oldPasswordRequired) {
+            oldPassword = (String) ((UIInput) uiComponent.getAttributes().get("oldPassword"))
+                    .getValue();
         }
 
-        if (!ValidationUtils.isPasswordValid(newPassword)) {
-            throw new ValidatorException(new FacesMessage("Slaptažodis neatitinka reikalavimų"));
+        if (newPassword.isEmpty() || newPasswordRepeat.isEmpty() || (oldPasswordRequired && oldPassword.isEmpty())) {
+            throw new ValidatorException(new FacesMessage("Užpildyti ne visi privalomi laukai"));
         }
 
         if (!newPassword.equals(newPasswordRepeat)) {
             throw new ValidatorException(new FacesMessage("Įvesti slaptažodžiai nesutampa"));
         }
 
-        User user = userService.getLoggedUser();
+        if (!ValidationUtils.isPasswordValid(newPassword)) {
+            throw new ValidatorException(new FacesMessage("Slaptažodis neatitinka reikalavimų"));
+        }
 
-        if(!passwordEncoder.matches(oldPassword, userService.getLoggedUser().getPassword())) {
+        if(oldPasswordRequired && !passwordEncoder.matches(oldPassword, userService.getLoggedUser().getPassword())) {
             throw new ValidatorException(new FacesMessage("Įvestas neteisingas dabartinis slaptažodis"));
         }
     }
