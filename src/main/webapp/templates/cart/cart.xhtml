@@ -99,7 +99,7 @@
                         Atgal į katalogą</a>
                 </div>
                 <div class="columns small-3 small-offset-6">
-                    <p:commandLink class="button orange expanded js-buy-products" value="Pirkti prekes" pt:disabled="#{cartController.productsInCart.size()==0}"/>
+                    <p:commandLink class="button orange expanded js-buy-products" value="Pirkti prekes" p:rendered="#{cartController.productsInCart.size()!=0}"/>
                 </div>
             </div>  <!-- END OF BOTTOM BUTTONS -->
         </h:form>
