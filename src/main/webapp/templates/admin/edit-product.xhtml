@@ -1,76 +1,86 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
 >
 <ui:composition
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
 >
 
     <div id="add-product-window">
+        <h:form>
+            <!-- PAGE TITLE -->
+            <div class="row column text-center section">
+                <h1 class="section-title">Redaguoti prekę</h1>
+            </div> <!-- END OF PAGE TITLE -->
 
-        <!-- PAGE TITLE -->
-        <div class="row column text-center section">
-            <h1 class="section-title">Redaguoti prekę</h1>
-        </div> <!-- END OF PAGE TITLE -->
 
+            <!-- ADD PRODUCT -->
+            <div class="section">
 
-        <!-- ADD PRODUCT -->
-        <div class="section">
-
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Įveskite SKU kodą</h5>
+                <!-- SKU code -->
+                <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">SKU</h5>
+                    </div>
+                    <div class="columns medium-9 small-12">
+                        <h:inputText value="#{productEditController.productView.sku}"/>
+                    </div>
                 </div>
-                <div class="columns small-9">
-                    <input type="text" placeholder="RS06-B" />
+
+                <!-- Name -->
+                <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Pavadinimas</h5>
+                    </div>
+                    <div class="columns medium-9 small-12">
+                        <h:inputText value="#{productEditController.productView.title}"/>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Kaina</h5>
+                    </div>
+                    <div class="columns medium-9 small-12">
+                        <h:inputText type="number" value="#{productEditController.productView.price}"/>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Aprašymas</h5>
+                    </div>
+                    <div class="columns medium-9 small-12">
+                        <h:inputTextarea value="#{productEditController.productView.description}" rows="4"/>
+                    </div>
+                </div>
+
+                <!-- Images -->
+                <!--<div class="row align-middle">-->
+                <!--<div class="columns medium-3 small-12">-->
+                <!--<h5 class="font-bold">Nuotrauka</h5>-->
+                <!--</div>-->
+                <!--<div class="columns medium-9 small-12">-->
+                <!--<input type="file" accept="image/*"/>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <div class="row section">
+                    <div class="columns">
+                        <p:commandLink
+                            class="button orange expanded"
+                            value="Išsaugoti pakeitimus"
+                            action="#{productEditController.saveChanges}"
+                        />
+                    </div>
                 </div>
             </div>
-
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Pavadinimas</h5>
-                </div>
-                <div class="columns small-9">
-                    <input type="text" disabled="" />
-                </div>
-            </div>
-
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Kaina</h5>
-                </div>
-                <div class="columns small-9">
-                    <input type="number" disabled="" />
-                </div>
-            </div>
-
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Aprašymas</h5>
-                </div>
-                <div class="columns small-9">
-                    <textarea rows="4" disabled="" />
-                </div>
-            </div>
-
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Nuotrauka</h5>
-                </div>
-                <div class="columns small-9">
-                    <input type="file" accept="image/*" disabled="" />
-                </div>
-            </div>
-
-            <div class="row section">
-                <div class="columns">
-                    <a href="#" class="button expanded orange">Išsaugoti pakeitimus</a>
-                </div>
-            </div>
-        </div>
+        </h:form>
         <!-- END OF EDIT PRODUCT -->
-
     </div>
 
 </ui:composition>
