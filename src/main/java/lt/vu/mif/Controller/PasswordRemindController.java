@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.inject.Named;
 
-import org.junit.platform.commons.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
 
