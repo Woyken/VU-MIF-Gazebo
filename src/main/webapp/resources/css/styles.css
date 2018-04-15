@@ -123,6 +123,7 @@ ul.dropdown.menu > li[role] > a:hover {
 }
 
 #cart-button {
+	width: 10rem;
 	background: #9fc832;
 	color: white;
 	font-style: italic;

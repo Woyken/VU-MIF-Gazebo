@@ -5,10 +5,13 @@
 
     <!-- NAVIGATION BAR -->
     <div data-sticky-container="">
-        <div data-sticky="" data-options="marginTop: 0">
+        <div data-sticky="" data-options="marginTop:0; stickTo:top; stickyOn:small;">
 
             <!-- Menu button for mobile devices -->
-            <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium" style="display: none;">
+            <div class="title-bar"
+                 data-responsive-toggle="main-menu"
+                 data-hide-for="medium"
+                 style="display: none;">
                 <button class="menu-icon" type="button" data-toggle=""/>
                 <div class="title-bar-title">Meniu</div>
             </div>
@@ -27,13 +30,13 @@
                 <!-- Right side -->
                 <div class="top-bar-right">
                     <ul class="menu vertical medium-horizontal expanded dropdown"
-                        data-responsive-menu="drilldown medium-dropdown"
+                        data-responsive-menu="accordion medium-dropdown"
                         role="menubar">
 
                         <!-- Product settings dropdown -->
-                        <li class="has-submenu is-dropdown-submenu-parent is-right-arrow opens-right display-contents" role="menuitem">
+                        <li class="has-submenu is-dropdown-submenu-parent is-right-arrow opens-right" role="menuitem">
                             <a>Prekės</a>
-                            <ul class="menu vertical submenu is-dropdown-submenu first-sub" role="menu" data-submenu="">
+                            <ul class="menu vertical" role="menu" data-submenu="">
 
                                 <!-- Add product -->
                                 <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
