@@ -73,7 +73,7 @@
                             <!-- [Mobile] Product name -->
                             <div class="small-12 columns show-for-small-only">
                                 <a href="../../product-details.xhtml?productId=#{productItem.id}">
-                                    <h5 class="text-center">#{productItem.title}</h5>
+                                    <h5 class="font-bold font-italic text-center">#{productItem.title}</h5>
                                 </a>
                             </div>
                         </div>
@@ -155,19 +155,37 @@
                     <a class="button primary expanded" href="../../main.xhtml">
                         <i class="fi-arrow-left" />
                         Atgal į katalogą</a>
-                </div>
+                </div>               
 
                 <!-- [Button] Buy cart items -->
                 <div class="hide-for-small-only medium-3 medium-offset-6">
-                    <p:commandLink class="button orange expanded js-buy-products" value="Pirkti prekes" pt:disabled="#{cartController.productsInCart.size()==0}"/>
+                    <!--When user is logged in-->
+                    <p:commandLink class="button orange expanded js-buy-products"
+                                   value="Pirkti prekes"
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and UserService.isLoggedIn()}"
+                    />
+                    <!--When user is not logged in-->
+                    <p:commandLink class="button orange expanded"
+                                   value="Pirkti prekes"
+                                   action="/login.xhtml"
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and !UserService.isLoggedIn()}"/>
                 </div>
 
 
                 <!-- [Button][Mobile] Buy cart items  -->
                 <div class="hide-for-medium columns small-12 ">
-                    <p:commandLink class="button orange expanded js-buy-products" value="Pirkti prekes" pt:disabled="#{cartController.productsInCart.size()==0}"/>
+                    <!--When user is logged in-->
+                    <p:commandLink class="button orange expanded js-buy-products"
+                                   value="Pirkti prekes"
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and UserService.isLoggedIn()}"
+                    />
+                    <!--When user is not logged in-->
+                    <p:commandLink class="button orange expanded"
+                                   value="Pirkti prekes"
+                                   action="/login.xhtml"
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and !UserService.isLoggedIn()}"/>
                 </div>
-
+                    
                 <!-- [Button][Mobile] Return to list -->
                 <div class="hide-for-medium columns small-12">
                     <a class="button primary expanded" href="../../main.xhtml">
