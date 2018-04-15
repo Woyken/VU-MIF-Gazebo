@@ -9,20 +9,23 @@
     <!-- PAGE TITLE. -->
     <div class="row column text-center section">
         <h1 class="section-title">
-            <p:outputLabel styleClass="large-text" value="#{productDetailsController.productView.title}"/>
+            <p:outputLabel styleClass="large-text" value="Patirk naujovę"/>
         </h1>
     </div> <!-- END OF PAGE TITLE. -->
 
 
-    <!-- PRODUCT DETAILS -->
-    <div class="row align-middle align-center product-details-row">
-        <div class="medium-6 columns">
-            <!-- Main image. -->
+    <!-- PRODUCT INFO -->
+    <div class="row section align-justify">
+
+        <!-- Product Images -->
+        <div class="small-12 medium-6 columns">
+
+            <!-- Main image -->
             <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
                 <f:param name="id" value="#{productDetailsController.productView.images.get(0).id}"/>
             </p:graphicImage>
 
-            <!-- Smaller images. -->
+            <!-- Thumbnails -->
             <div class="row small-up-4">
                 <ui:repeat value="#{productDetailsController.productView.images}" var="image" varStatus="loop">
                     <!--Image is cached by default. If you want to refresh, add cache="false"-->
@@ -33,34 +36,40 @@
                     <h:outputText value="&lt;/div&gt;" escape="false" rendered="#{!loop.first}"/>
                 </ui:repeat>
             </div>
-
         </div>
 
-        <!-- Side column. -->
-        <div class="medium-6 large-5 columns">
-            <p class="text-justify">
-                <p:outputLabel value="#{productDetailsController.productView.description}"/>
-            </p>
+        <!-- Text Section -->
+        <div class="small-12 medium-6 large-5 columns">
+
+            <!-- Name -->
+            <h3 class="text-center font-italic">#{productDetailsController.productView.title}</h3>
+
+            <!-- Description -->
+            <p class="text-justify">#{productDetailsController.productView.description}</p>
+
+            <!-- Quantity -->
             <div class="row">
-                <div class="small-6 columns shrink">
-                    <label for="middle-label" class="middle">Kiekis</label>
+                <div class="small-3 columns">
+                    <label for="product-quantity" class="font-bold middle">Kiekis:</label>
                 </div>
-                <div class="small-6 columns">
+                <div class="small-9 columns">
                     <!-- TODO: Max skaičius priklauso nuo prekių kiekio sandelyje! -->
-                    <input class="half-width" type="number" id="middle-label" value="1" min="1" max="99" />
+                    <input type="number" id="product-quantity" value="1" min="1" max="99"/>
                 </div>
             </div>
 
+            <!-- Price -->
             <div class="row">
-                <div class="small-6 columns shrink">
-                    <p>Kaina:</p>
+                <div class="small-3 columns">
+                    <label for="product-quantity" class="font-bold">Kaina:</label>
                 </div>
-                <div class="small-6 columns">
+                <div class="small-9 columns">
                     <!-- TODO: Galutinė kaina priklausys nuo prekių kiekio! -->
-                    <p>€ #{productDetailsController.productView.price}</p>
+                    <p> #{productDetailsController.productView.price} €</p>
                 </div>
             </div>
 
+            <!-- Add to cart -->
             <h:form>
                 <h:commandButton class="button large hollow expanded primary-inverted" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal" actionListener="#{cartController.addProductToCart(productDetailsController.productView.id)}">
                     <f:ajax execute="@form" render="@none" />
