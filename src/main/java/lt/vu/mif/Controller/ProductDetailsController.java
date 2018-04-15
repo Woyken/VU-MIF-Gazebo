@@ -3,7 +3,7 @@ package lt.vu.mif.Controller;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import org.junit.platform.commons.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;

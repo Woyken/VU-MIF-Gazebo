@@ -25,6 +25,9 @@
 
 
 /* --- --- --- Foundation overrides. */
+.top-bar {
+    background-color: white;
+}
 .row {
 	max-width: 75rem;
 }
@@ -120,10 +123,11 @@ ul.dropdown.menu > li[role] > a:hover {
 }
 
 #cart-button {
-	border-color: #9fc832;
+	width: 10rem;
 	background: #9fc832;
 	color: white;
 	font-style: italic;
+    border: 1px solid white;
 }
 #cart-button:hover {
 	color:black;
@@ -175,7 +179,6 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 	margin-left: 5%;
 }
 
-
 /* --- --- --- Our styles. */
 
 
@@ -187,11 +190,6 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 }
 #shopping-list-header h5 {
 	font-weight: bold;
-}
-
-#shopping-list-body .thumbnail {
-	max-width: 10vw;
-	max-height: 15vh;
 }
 
 /* Remove item from cart button */
@@ -242,6 +240,15 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 	-webkit-box-shadow: 0 0 5px -1px #2e2e2e;
 	-moz-box-shadow: 0 0 5px -1px #2e2e2e;
 	box-shadow: 0 0 5px -1px #2e2e2e;
+}
+.navigation-bar {
+    background-color: white;
+    border-bottom: 1px solid #2e2e2e;
+    padding-left: 10%;
+    padding-right: 10%;
+    -webkit-box-shadow: 0 0 5px -1px #2e2e2e;
+    -moz-box-shadow: 0 0 5px -1px #2e2e2e;
+    box-shadow: 0 0 5px -1px #2e2e2e;
 }
 /* Store name. */
 .top-bar > .top-bar-left > ul.menu > li > a {
@@ -374,4 +381,7 @@ label.input-label {
 }
 .quarter-width {	/* quarter width*/
 	width: 25%;
+}
+.display-contents {
+    display: contents;
 }
