@@ -155,14 +155,7 @@
                     <a class="button primary expanded" href="../../main.xhtml">
                         <i class="fi-arrow-left" />
                         Atgal į katalogą</a>
-                </div>
-
-                <!-- [Button][Mobile] Return to list -->
-                <div class="hide-for-medium columns small-12">
-                    <a class="button primary expanded" href="../../main.xhtml">
-                        <i class="fi-arrow-left" />
-                        Atgal į katalogą</a>
-                </div>
+                </div>               
 
                 <!-- [Button] Buy cart items -->
                 <div class="hide-for-small-only medium-3 medium-offset-6">
@@ -191,6 +184,13 @@
                                    value="Pirkti prekes"
                                    action="/login.xhtml"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !UserService.isLoggedIn()}"/>
+                </div>
+                    
+                <!-- [Button][Mobile] Return to list -->
+                <div class="hide-for-medium columns small-12">
+                    <a class="button primary expanded" href="../../main.xhtml">
+                        <i class="fi-arrow-left" />
+                        Atgal į katalogą</a>
                 </div>
 
             </div>  <!-- END OF BOTTOM BUTTONS -->
