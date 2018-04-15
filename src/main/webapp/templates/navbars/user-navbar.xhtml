@@ -12,11 +12,22 @@
         <f:event type="preRenderView" listener="#{emailChangeController.onPageLoad}"/>
     </f:metadata>
 
-
-    <!-- NAVIGATION BAR. -->
+    <!-- NAVIGATION BAR -->
     <div data-sticky-container="">
-        <div data-sticky="" data-options="marginTop: 0">
-            <div class="top-bar">
+        <div data-sticky="" data-options="marginTop:0; stickTo:top; stickyOn:small;">
+
+            <!-- Menu button for mobile devices -->
+            <div class="title-bar"
+                 data-responsive-toggle="main-menu"
+                 data-hide-for="medium"
+                 style="display: none;">
+                <button class="menu-icon" type="button" data-toggle=""/>
+                <div class="title-bar-title">Meniu</div>
+            </div>
+
+            <div class="top-bar navigation-bar" id="main-menu">
+
+                <!-- Left side -->
                 <div class="top-bar-left">
                     <ul class="menu">
                         <li>
@@ -24,40 +35,51 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- Right side -->
                 <div class="top-bar-right">
-                    <ul class="dropdown menu"
-                        data-dropdown-menu=""
-                        data-closing-time="200">
+                    <ul class="menu vertical medium-horizontal expanded dropdown"
+                        data-responsive-menu="accordion medium-dropdown"
+                        role="menubar">
+
+                        <!-- Cart button -->
                         <li role="menuitem">
                             <a id="cart-button" href="../../cart.xhtml">
                                 <i class="fi-shopping-cart"/>
                                 Mano krepšelis
                             </a>
                         </li>
-                        <li class="is-dropdown-submenu-parent">
-                            <a id="account-settings" class="primary" href="#">Paskyra</a>
-                            <ul class="menu">
-                                <li>
-                                    <i class="fi-lock"/>
-                                    <a href="#"
-                                       data-open="change-password-modal">Keisti slaptažodį</a>
+
+                        <!-- Account settings dropdown -->
+                        <li class="has-submenu is-dropdown-submenu-parent is-right-arrow opens-right display-contents" role="menuitem">
+                            <a>Paskyra</a>
+                            <ul class="menu vertical" role="menu" data-submenu="" >
+
+                                <!-- Change password -->
+                                <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
+                                    <a data-open="change-password-modal" href="../../login.xhtml">
+                                        <i class="fi-lock" />
+                                        Keisti slaptažodį</a>
                                 </li>
 
-                                <li>
-                                    <i class="fi-mail"/>
-                                    <a href="#" data-open="change-email-modal">Keisti el. paštą</a>
+                                <!-- Change email -->
+                                <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
+                                    <a data-open="change-email-modal" href="../../register.xhtml">
+                                        <i class="fi-mail" />
+                                        Keisti el. paštą</a>
                                 </li>
                             </ul>
                         </li>
+
+                        <!-- Logout button -->
                         <li role="menuitem">
-                            <h:outputLink
-                                    value="${pageContext.request.contextPath}/logout">Atsijungti</h:outputLink>
+                            <h:outputLink value="${pageContext.request.contextPath}/logout">Atsijungti</h:outputLink>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div> <!-- END OF NAVIGATION BAR. -->
+    </div> <!-- END OF NAVIGATION BAR -->
 
 
 
@@ -127,18 +149,19 @@
                     </div>
 
                     <!-- For validation -->
-                    <h:inputHidden id="validationInput" value="true">
-                        <f:validator validatorId="ChangePasswordValidation"/>
+                    <h:inputHidden id="passwordValidationInput" value="true">
+                        <f:validator binding="#{changePasswordValidation}"/>
                         <f:attribute name="newPassword" value="#{newPassword}"/>
                         <f:attribute name="newPasswordRepeat" value="#{newPasswordRepeat}"/>
                         <f:attribute name="oldPassword" value="#{oldPassword}"/>
+                        <f:attribute name="oldPasswordRequired" value="true"/>
                     </h:inputHidden>
 
                     <!-- Error Message -->
                     <div class="row">
                         <div class="columns">
                             <div class="mar-bot-5">
-                                <h:message class="alert-text" for="validationInput"/>
+                                <h:message class="alert-text" for="passwordValidationInput"/>
                             </div>
                         </div>
                     </div>
@@ -146,10 +169,10 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="successMessage">
+                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="passwordSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="successMessage"/>
+                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="passwordSuccessMessage"/>
                         </div>
                     </div>
                 </div>
@@ -227,8 +250,8 @@
                     </div>
 
                     <!-- For validation -->
-                    <h:inputHidden id="validationInput" value="true">
-                        <f:validator validatorId="ChangeEmailValidation"/>
+                    <h:inputHidden id="emailValidationInput" value="true">
+                        <f:validator binding="#{changeEmailValidation}"/>
                         <f:attribute name="newEmail" value="#{newEmail}"/>
                         <f:attribute name="newEmailRepeat" value="#{newEmailRepeat}"/>
                         <f:attribute name="password" value="#{password}"/>
@@ -238,7 +261,7 @@
                     <div class="row">
                         <div class="columns">
                             <div class="mar-bot-5">
-                                <h:message class="alert-text" for="validationInput"/>
+                                <h:message class="alert-text" for="emailValidationInput"/>
                             </div>
                         </div>
                     </div>
@@ -246,10 +269,10 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}" update="successMessage">
+                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}" update="emailSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <p:outputLabel value="#{emailChangeController.successMessage}" id="successMessage"/>
+                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="emailSuccessMessage"/>
                         </div>
                     </div>
                 </h:form>

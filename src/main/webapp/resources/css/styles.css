@@ -25,6 +25,12 @@
 
 
 /* --- --- --- Foundation overrides. */
+.top-bar {
+    background-color: white;
+}
+.row {
+	max-width: 75rem;
+}
 .button {
 	text-transform: uppercase;
 	font-weight: 700;
@@ -92,10 +98,6 @@
 	max-width: 25rem;
 }
 
-.thumbnail {
-	margin-top: 1rem;
-}
-
 /* Navigation buttons */
 ul.dropdown.menu > li {
 	padding: 0 1% 0 1%;
@@ -121,10 +123,11 @@ ul.dropdown.menu > li[role] > a:hover {
 }
 
 #cart-button {
-	border-color: #9fc832;
+	width: 10rem;
 	background: #9fc832;
 	color: white;
 	font-style: italic;
+    border: 1px solid white;
 }
 #cart-button:hover {
 	color:black;
@@ -176,7 +179,6 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 	margin-left: 5%;
 }
 
-
 /* --- --- --- Our styles. */
 
 
@@ -188,11 +190,6 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 }
 #shopping-list-header h5 {
 	font-weight: bold;
-}
-
-#shopping-list-body .thumbnail {
-	max-width: 10vw;
-	max-height: 15vh;
 }
 
 /* Remove item from cart button */
@@ -244,6 +241,15 @@ div[data-sticky-container] > div[data-sticky] > div.top-bar {
 	-moz-box-shadow: 0 0 5px -1px #2e2e2e;
 	box-shadow: 0 0 5px -1px #2e2e2e;
 }
+.navigation-bar {
+    background-color: white;
+    border-bottom: 1px solid #2e2e2e;
+    padding-left: 10%;
+    padding-right: 10%;
+    -webkit-box-shadow: 0 0 5px -1px #2e2e2e;
+    -moz-box-shadow: 0 0 5px -1px #2e2e2e;
+    box-shadow: 0 0 5px -1px #2e2e2e;
+}
 /* Store name. */
 .top-bar > .top-bar-left > ul.menu > li > a {
 	font: italic 24px 'Oswald', sans-serif;
@@ -281,6 +287,9 @@ ul.menu {
 .product-box:hover {
 	border: 1px #000000 solid;
 	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+.product-box > a > .thumbnail {
+    margin-top: 1em;
 }
 .product-box > h5.product-name {
 	text-align: center;
@@ -330,7 +339,7 @@ label.input-label {
 
 .product-details-row {
 	margin-top: 3%;
-	max-width: 60%;
+	max-width: 85%;
 }
 
 
@@ -372,4 +381,7 @@ label.input-label {
 }
 .quarter-width {	/* quarter width*/
 	width: 25%;
+}
+.display-contents {
+    display: contents;
 }

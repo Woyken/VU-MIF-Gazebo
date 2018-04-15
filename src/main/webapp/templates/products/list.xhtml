@@ -4,11 +4,12 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 >
 
 
     <!-- MAIN PAGE COVER. -->
-    <div class="section section-cover"
+    <div class="section section-cover hide-for-small-only"
          style="background: url(../../resources/images/main-page-cover-16-9-1.jpg);">
     </div> <!-- END OF MAIN PAGE COVER. -->
 
@@ -45,21 +46,21 @@
                         <li class="product-filters-tab margin-top-1">
                             <a href="#">Kategorija</a>
                             <ul class="categories-menu menu vertical nested is-active">
-                                <li><input id="category-checkbox11" type="checkbox"/><label for="category-checkbox11">Category 1</label></li>
-                                <li><input id="category-checkbox22" type="checkbox"/><label for="category-checkbox22">Category 2</label></li>
-                                <li><input id="category-checkbox33" type="checkbox"/><label for="category-checkbox33">Category 3</label></li>
-                                <li><input id="category-checkbox44" type="checkbox"/><label for="category-checkbox44">Category 4</label></li>
-                                <li><input id="category-checkbox55" type="checkbox"/><label for="category-checkbox55">Category 5</label></li>
+                                <li><input id="category-checkbox1" type="checkbox"/><label for="category-checkbox1">Category 1</label></li>
+                                <li><input id="category-checkbox2" type="checkbox"/><label for="category-checkbox2">Category 2</label></li>
+                                <li><input id="category-checkbox3" type="checkbox"/><label for="category-checkbox3">Category 3</label></li>
+                                <li><input id="category-checkbox4" type="checkbox"/><label for="category-checkbox4">Category 4</label></li>
+                                <li><input id="category-checkbox5" type="checkbox"/><label for="category-checkbox5">Category 5</label></li>
                             </ul>
                         </li>
                         <li class="product-filters-tab margin-top-1">
                             <a href="#">Kaina</a>
                             <ul class="categories-menu menu vertical nested is-active">
-                                <li><input id="price-checkbox11" type="checkbox"/><label for="price-checkbox11">Under $25</label></li>
-                                <li><input id="price-checkbox22" type="checkbox"/><label for="price-checkbox22">$25–$50</label></li>
-                                <li><input id="price-checkbox33" type="checkbox"/><label for="price-checkbox33">$50–$250</label></li>
-                                <li><input id="price-checkbox44" type="checkbox"/><label for="price-checkbox44">$250–$600</label></li>
-                                <li><input id="price-checkbox55" type="checkbox"/><label for="price-checkbox55">$600–$1,000</label></li>
+                                <li><input id="price-checkbox1" type="checkbox"/><label for="price-checkbox1">Under $25</label></li>
+                                <li><input id="price-checkbox2" type="checkbox"/><label for="price-checkbox2">$25–$50</label></li>
+                                <li><input id="price-checkbox3" type="checkbox"/><label for="price-checkbox3">$50–$250</label></li>
+                                <li><input id="price-checkbox4" type="checkbox"/><label for="price-checkbox4">$250–$600</label></li>
+                                <li><input id="price-checkbox5" type="checkbox"/><label for="price-checkbox5">$600–$1,000</label></li>
                             </ul>
                         </li>
                     </ul>
@@ -83,7 +84,7 @@
                     <h5 class="product-name bor-bot">#{productItem.title}</h5>
                     <p class="product-price">€ #{productItem.price}</p>
                     <h:form>
-                        <h:commandButton class="button expanded primary" value="PRIDĖTI Į KREPŠELĮ" actionListener="#{cartController.addProductToCart(productItem.id)}">
+                        <h:commandButton class="button expanded primary" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal" actionListener="#{cartController.addProductToCart(productItem.id)}">
                             <f:ajax execute="@form" render="@none" />
                         </h:commandButton>
                     </h:form>
@@ -109,6 +110,28 @@
             <li class="pagination-next"><a href="#" aria-label="Next page">Kitas</a></li>
         </ul>
     </nav> <!-- END OF ITEM PAGINATION. -->
+
+
+    <!-- INFORM USER ABOUT ADDING TO CART MODAL -->
+    <div id="inform-user-about-adding-to-cart-modal"
+         class="reveal"
+         data-reveal=""
+         data-overlay="false"
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    Prekė pridėta prie jūsų krepšelio
+                </h4>
+                <br />
+                <div class="row">
+                    <div class="columns small-12">
+                        <a class="button orange expanded" data-close="">Supratau</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END OF INFORM USER ABOUT ADDING TO CART MODAL -->
 
 
 </ui:composition>
