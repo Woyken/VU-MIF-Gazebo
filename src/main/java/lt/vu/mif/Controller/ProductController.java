@@ -1,7 +1,9 @@
 package lt.vu.mif.Controller;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
@@ -12,12 +14,12 @@ import lt.vu.mif.Service.UserService;
 import lt.vu.mif.View.ProductView;
 import lt.vu.mif.View.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 @Named
 @Getter
-@Controller
-public class ProductController {
+@Setter
+@SessionScoped
+public class ProductController implements Serializable {
 
     @Autowired
     private ProductRepository productRepository;
@@ -25,11 +27,8 @@ public class ProductController {
     private UserService userService;
 
     private UserView loggedUser;
-
     private List<ProductView> products;
-
-    @Setter
-    public String searchPhrase;
+    private String searchPhrase;
 
     public void onPageLoad() {
         
