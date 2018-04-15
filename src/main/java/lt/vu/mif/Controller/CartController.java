@@ -26,7 +26,7 @@ public class CartController implements Serializable {
     private UserService userService;
 
     private List<CartProductView> productsInCart = new ArrayList<>();
-    CartProductView productSelectedForRemoval;
+    private CartProductView productSelectedForRemoval;
 
     public void selectForRemoval(CartProductView product) {
         productSelectedForRemoval = product;
