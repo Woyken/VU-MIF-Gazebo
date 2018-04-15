@@ -1,31 +1,28 @@
 package lt.vu.mif.Controller;
 
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.mif.Entity.Image;
 import lt.vu.mif.Entity.Product;
 import lt.vu.mif.Repository.ProductRepository;
-import lt.vu.mif.View.ImageView;
 import lt.vu.mif.View.ProductView;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
 @Named
 public class ProductEditController {
+
     @Autowired
     private ProductRepository productRepository;
 
     private ProductView productView;
 
     public void onPageLoad() {
-        String productId  = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("productId");
+        String productId = FacesContext.getCurrentInstance().getExternalContext()
+            .getRequestParameterMap().get("productId");
         if (StringUtils.isBlank(productId)) {
             throw new IllegalArgumentException("Invalid request parameter");
         }
@@ -33,7 +30,7 @@ public class ProductEditController {
         Product entity = productRepository.get(Product.class, Long.valueOf(productId));
 
         if (entity == null) {
-            throw new IllegalStateException("Product" + "with ID=" + productId +  "not found");
+            throw new IllegalStateException("Product" + "with ID=" + productId + "not found");
         }
         productView = new ProductView(entity);
     }

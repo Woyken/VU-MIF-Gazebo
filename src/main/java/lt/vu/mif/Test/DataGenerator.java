@@ -6,17 +6,15 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Component;
-
 import lt.vu.mif.Entity.Image;
 import lt.vu.mif.Entity.Product;
 import lt.vu.mif.Entity.Roles.Role;
 import lt.vu.mif.Entity.User;
 import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
 
 @Component
 public class DataGenerator {

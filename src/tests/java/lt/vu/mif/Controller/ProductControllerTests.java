@@ -2,9 +2,10 @@ package lt.vu.mif.Controller;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import javax.transaction.Transactional;
-
+import lt.vu.mif.Entity.Product;
+import lt.vu.mif.Repository.ProductRepository;
+import lt.vu.mif.Search.ProductSearch;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -13,11 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import lt.vu.mif.Entity.Product;
-import lt.vu.mif.Repository.ProductRepository;
-import lt.vu.mif.Search.ProductSearch;
-import lt.vu.mif.View.ProductView;
 
 @Rollback
 @Transactional
@@ -38,32 +34,31 @@ public class ProductControllerTests {
         product.setTitle("Very long title");
         product.setDescription("Description 1");
         product.setPrice(new BigDecimal(10L));
+        product.setSku("sku1");
         productRepository.save(product);
 
         product = new Product();
         product.setTitle("long title");
         product.setDescription("Description 2");
         product.setPrice(new BigDecimal(20L));
-
+        product.setSku("sku2");
         productRepository.save(product);
     }
 
     @Test
-    public void searchProducts_emptySearch_fail() {
-        Assertions.assertThrows(IllegalArgumentException.class, ()->{productController.searchProducts("");});
-    }
-
-    @Test
     public void searchProducts_validSearch_singleResult() {
-        List<ProductView> result =  productController.searchProducts("Very");
-        Assertions.assertEquals(1, result.size());
-        Assertions.assertEquals("Very long title", result.get(0).getTitle());
+        productController.setSearchPhrase("Very");
+        productController.searchProducts();
+        Assertions.assertEquals(1, productController.getProducts().size());
+        Assertions
+            .assertEquals("Very long title", productController.getProducts().get(0).getTitle());
     }
 
     @Test
     public void searchProducts_validSearch_multipleResults() {
-        List<ProductView> result =  productController.searchProducts("long");
-        Assertions.assertEquals(2, result.size());
+        productController.setSearchPhrase("long");
+        productController.searchProducts();
+        Assertions.assertEquals(2, productController.getProducts().size());
     }
 
     @Test

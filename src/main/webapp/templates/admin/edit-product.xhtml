@@ -1,11 +1,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
 <ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
 >
 
     <div id="add-product-window">
@@ -45,7 +45,8 @@
                         <h5 class="font-bold">Kaina</h5>
                     </div>
                     <div class="columns medium-9 small-12">
-                        <h:inputText type="number" value="#{productEditController.productView.price}"/>
+                        <h:inputText type="number"
+                                     value="#{productEditController.productView.price}"/>
                     </div>
                 </div>
 
@@ -55,7 +56,8 @@
                         <h5 class="font-bold">Aprašymas</h5>
                     </div>
                     <div class="columns medium-9 small-12">
-                        <h:inputTextarea value="#{productEditController.productView.description}" rows="4"/>
+                        <h:inputTextarea value="#{productEditController.productView.description}"
+                                         rows="4"/>
                     </div>
                 </div>
 
@@ -72,9 +74,9 @@
                 <div class="row section">
                     <div class="columns">
                         <p:commandLink
-                            class="button orange expanded"
-                            value="Išsaugoti pakeitimus"
-                            action="#{productEditController.saveChanges}"
+                                class="button orange expanded"
+                                value="Išsaugoti pakeitimus"
+                                action="#{productEditController.saveChanges}"
                         />
                     </div>
                 </div>

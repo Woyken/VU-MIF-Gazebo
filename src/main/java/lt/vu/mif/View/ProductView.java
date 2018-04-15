@@ -1,14 +1,13 @@
 package lt.vu.mif.View;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Entity.Product;
-
-import javax.inject.Named;
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Named
 @Getter
@@ -42,7 +41,8 @@ public class ProductView {
         this.images = product.getImages().stream().map(image -> new ImageView(image)).collect(Collectors.toList());
     }
 
-    public ProductView(Long id, String sku, String title, BigDecimal price, String description, List<ImageView> images) {
+    public ProductView(Long id, String sku, String title, BigDecimal price, String description,
+        List<ImageView> images) {
         this.id = id;
         this.sku = sku;
         this.title = title;
