@@ -192,11 +192,6 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 	font-weight: bold;
 }
 
-#shopping-list-body .thumbnail {
-	max-width: 10vw;
-	max-height: 15vh;
-}
-
 /* Remove item from cart button */
 .remove-item {
 	border: 1px solid #2e2e2e;
