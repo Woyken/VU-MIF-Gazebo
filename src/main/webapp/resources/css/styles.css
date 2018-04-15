@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400i,600');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+/* --- --- --- CONSTANTS.
+
+
+-- COLORS
+	Default (gray):		#616161;
+	Default darker:		#2e2e2e;
+	Success:			#4CAF50;
+	Success on hover:	#9fc832;
+
+-- FONTS
+	Default:			'Roboto', sans-serif;
+	Store title:		'Oswald', sans-serif;
+	Buttons:			'Roboto', sans-serif;
+	Section titles:		'Playfair Display', serif;
+	Product name:		'IBM Plex Sans', sans-serif;
+
+
+/* End of constants. */
+
+
+/* --- --- --- Foundation overrides. */
+.top-bar {
+    background-color: white;
+}
+.row {
+	max-width: 75rem;
+}
+.button {
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	font-weight: 700;
+	font-family: 'Roboto', sans-serif;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	-moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+.button.primary {
+	background-color: white;
+	color: black;
+}
+.button.primary:hover,
+.button.primary:focus {
+	background: linear-gradient(141deg, #4f4f4f 0%, #3d3d3d 51%, #3b3b3b 75%);
+	color: white;
+}
+
+
+.button.orange {
+	color: white;
+	background-color: #FF9800;
+}
+.button.orange:hover {
+	background-color: #F57C00;;
+}
+
+.button.success {
+	color: white;
+	background-color: #4CAF50;
+}
+.button.success:hover {
+	color: white;
+	background-color: #9fc832;
+}
+
+
+.button.hollow.secondary {
+	color: #808090;
+	border-color: #808090;
+}
+.button.hollow.secondary:hover {
+	color: #616161;
+	border-color: #616161;
+}
+
+
+.button.primary-inverted {
+	color: white;
+	background-color: #2e2e2e;
+	border: 1px solid white;
+	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	-moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+.button.primary-inverted:hover {
+	color: #2e2e2e;
+	border: 1px solid #2e2e2e;
+}
+
+.tooltip {
+	max-width: 25rem;
+}
+
+/* Navigation buttons */
+ul.dropdown.menu > li {
+	padding: 0 1% 0 1%;
+	border-radius: 3px;
+}
+
+/* Menu button */
+ul.dropdown.menu > li[role] > a {
+	color: #2e2e2e;
+	border-radius: 3px;
+	border: 1px solid white;
+	-webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	-moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+ul.dropdown.menu > li[role] > a:hover {
+	color: #2e2e2e;
+	border: 1px solid #2e2e2e;
+}
+
+.button > i {
+	margin-right: 4%;
+}
+
+#cart-button {
+	width: 10rem;
+	background: #9fc832;
+	color: white;
+	font-style: italic;
+    border: 1px solid white;
+}
+#cart-button:hover {
+	color:black;
+	border: 1px solid #4CAF50;
+	background: white;
+}
+
+/* Menu drop down list button */
+ul.dropdown.menu > li.is-dropdown-submenu-parent > a.primary {
+	color: #2e2e2e;
+}
+ul.dropdown.menu > li.is-dropdown-submenu-parent > a.primary:hover {
+	color: #2e2e2e;
+}
+
+/* Menu drop down list button arrow */
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after {
+	border-top-color: #616161;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+}
+
+/* Menu drop down list row */
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item {
+	padding-top: 5%;
+	padding-bottom: 5%;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item:hover {
+	background-color: #2e2e2e;
+	color: white;
+}
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item:last-child {
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+
+/* Menu drop down list item */
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item > a {
+	color: #2e2e2e;
+	display: inline;
+}
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item > a:hover {
+	color: white;
+}
+ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-item > i {
+	padding-left: 5%;
+	margin-left: 5%;
+}
+
+/* --- --- --- Our styles. */
+
+
+/* Shopping cart */
+#shopping-list-header {
+	margin-bottom: 2%;
+	border-bottom: 1px solid black;
+	text-transform: uppercase;
+}
+#shopping-list-header h5 {
+	font-weight: bold;
+}
+
+/* Remove item from cart button */
+.remove-item {
+	border: 1px solid #2e2e2e;
+	background-color: #2e2e2e;
+	color: white;
+}
+
+/* Price of an individual product */
+.shopping-cart-price {
+	font-weight: bold;
+	color: #9fc832;
+}
+
+#shopping-list-total {
+	margin-top: 1.5%;
+	text-transform: uppercase;
+	border-top: 1px solid black;
+}
+/* Total price text */
+#shopping-list-total h4 {
+	font-weight: bold;
+	margin-top: 0.5rem;
+	font-style: italic;
+
+}
+/* Total price number itself */
+#shopping-list-total span {
+	color: #9fc832;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	color: #2e2e2e;
+}
+body::-webkit-scrollbar {
+	display: none;
+}
+
+/* Navigation bar. */
+div[data-sticky-container] > div[data-sticky] > div.top-bar {
+	background-color: white;
+	border-bottom: 1px solid #2e2e2e;
+	padding-left: 10%;
+	padding-right: 10%;
+	-webkit-box-shadow: 0 0 5px -1px #2e2e2e;
+	-moz-box-shadow: 0 0 5px -1px #2e2e2e;
+	box-shadow: 0 0 5px -1px #2e2e2e;
+}
+.navigation-bar {
+    background-color: white;
+    border-bottom: 1px solid #2e2e2e;
+    padding-left: 10%;
+    padding-right: 10%;
+    -webkit-box-shadow: 0 0 5px -1px #2e2e2e;
+    -moz-box-shadow: 0 0 5px -1px #2e2e2e;
+    box-shadow: 0 0 5px -1px #2e2e2e;
+}
+/* Store name. */
+.top-bar > .top-bar-left > ul.menu > li > a {
+	font: italic 24px 'Oswald', sans-serif;
+}
+ul.menu {
+	background-color: white;
+}
+
+
+.section {
+	margin-top: 3%;
+	margin-right: auto;
+	margin-left:auto;
+}
+.section.section-cover {
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+	background-size:cover !important;
+	width: 94vw;
+	height: 60vh;
+}
+.section > h1.section-title {
+	text-transform: uppercase;
+	font-family: 'Playfair Display', serif;
+	border-bottom: 1px solid #666565;
+}
+
+
+
+.product-box {
+	border: 1px #ffffff solid;
+	border-radius: 3px;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+.product-box:hover {
+	border: 1px #000000 solid;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+.product-box > a > .thumbnail {
+    margin-top: 1em;
+}
+.product-box > h5.product-name {
+	text-align: center;
+	font-family: 'IBM Plex Sans', sans-serif;
+	font-weight: 600;
+	font-size: 1.5rem;
+	margin-bottom: 0;
+}
+.product-box > p.product-price {
+	text-align: center;
+	font-family: 'IBM Plex Sans', sans-serif;
+	font-weight: 400;
+	font-style: italic;
+	font-size: 1rem;
+}
+
+
+h4.form-title {
+	color: #616161;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	margin-top: 0.5rem;
+}
+label.input-label {
+	color: #616161;
+	font-weight: 700;
+}
+
+
+#footer {
+	margin-top: 3%;
+	padding-top: 2vh;
+	color: #616161;
+	font-size: 0.8em;
+	background-color: #2e2e2e;
+}
+
+.link {
+	text-decoration: underline;
+	color: #616161;
+	border-color: #616161;
+}
+.link:hover {
+	color: #2e2e2e;
+	border-color: #2e2e2e;
+}
+
+.product-details-row {
+	margin-top: 3%;
+	max-width: 85%;
+}
+
+
+.alert-text {
+	color: #c60f13;
+	font-size: 12px;
+	font-weight: bold;
+}
+.alert-star {
+	color: #c60f13;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.large-text {
+	font-size: larger;
+}
+
+/* --- --- --- UTILITIES */
+
+.no-mar {	/* no margin*/
+	margin: 0;
+}
+.no-top-mar { 	/* no top margin */
+	margin-top: 0;
+}
+.mar-bot-5 {	/* margin bottom 5% */
+	margin-bottom: 5%;
+}
+.no-bor-bot { 	/* no bottom border */
+	border-width: 0;
+	border-bottom-style: none;
+}
+.bor-bot { 		/* bottom border */
+	border-bottom: solid 1px #2e2e2e;
+}
+.half-width {	/* half width */
+	width: 50%;
+}
+.quarter-width {	/* quarter width*/
+	width: 25%;
+}
+.display-contents {
+    display: contents;
+}

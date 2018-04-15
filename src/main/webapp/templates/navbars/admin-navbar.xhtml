@@ -1,0 +1,75 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- NAVIGATION BAR -->
+    <div data-sticky-container="">
+        <div data-sticky="" data-options="marginTop:0; stickTo:top; stickyOn:small;">
+
+            <!-- Menu button for mobile devices -->
+            <div class="title-bar"
+                 data-responsive-toggle="main-menu"
+                 data-hide-for="medium"
+                 style="display: none;">
+                <button class="menu-icon" type="button" data-toggle=""/>
+                <div class="title-bar-title">Meniu</div>
+            </div>
+
+            <div class="top-bar navigation-bar" id="main-menu">
+
+                <!-- Left side -->
+                <div class="top-bar-left">
+                    <ul class="menu">
+                        <li>
+                            <a href="../../main.xhtml" class="menu-text">G A Z E B O</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right side -->
+                <div class="top-bar-right">
+                    <ul class="menu vertical medium-horizontal expanded dropdown"
+                        data-responsive-menu="accordion medium-dropdown"
+                        role="menubar">
+
+                        <!-- Product settings dropdown -->
+                        <li class="has-submenu is-dropdown-submenu-parent is-right-arrow opens-right" role="menuitem">
+                            <a>Prekės</a>
+                            <ul class="menu vertical" role="menu" data-submenu="">
+
+                                <!-- Add product -->
+                                <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
+                                    <a href="../../admin-add-product.xhtml">
+                                        <i class="fi-lock" />
+                                        Pridėti prekę</a>
+                                </li>
+
+                                <!-- Import products -->
+                                <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
+                                    <a href="#">
+                                        <i class="fi-mail" />
+                                        Importuoti prekes</a>
+                                </li>
+
+                                <!-- Edit product -->
+                                <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
+                                    <a href="../../admin-edit-product.xhtml">
+                                        <i class="fi-wrench" />
+                                        Redaguoti prekę</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Logout button -->
+                        <li role="menuitem">
+                            <h:outputLink value="${pageContext.request.contextPath}/logout">Atsijungti</h:outputLink>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END OF NAVIGATION BAR -->
+
+
+</ui:composition>

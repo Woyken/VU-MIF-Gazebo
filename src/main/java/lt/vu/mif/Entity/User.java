@@ -2,41 +2,45 @@ package lt.vu.mif.Entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
+import lombok.Getter;
+import lombok.Setter;
+import lt.vu.mif.Entity.Roles.Role;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "USER")
 public class User implements Serializable {
 
-    private Long id;
-    private String password;
-    private String email;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    public Long getId() {
-        return id;
-    }
+    private Long id;
 
-    @Column(name = "PASSWORD", nullable = false)
-    public String getPassword() {
-        return password;
-    }
+    @Column(name = "HASHED_PASSWORD", nullable = false)
+    private String password;
 
     @Column(name = "EMAIL", nullable = false, unique = true)
-    public String getEmail() {
-        return email;
+    private String email;
+
+    @Column(name = "ROLE", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(name = "PASSWORD_TOKEN")
+    private String passwordToken;
+
+    @Column(name = "TOKEN_CREATION_DATE")
+    private LocalDateTime tokenCreationDate;
+
+    public User() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setPassword(String password) {
+    public User(String password, String email, Role role) {
         this.password = password;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
+        this.role = role;
     }
 }
