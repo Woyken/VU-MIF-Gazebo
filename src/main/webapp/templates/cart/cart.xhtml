@@ -95,14 +95,15 @@
                 </div>
                 <div class="columns small-3 small-offset-6">
                     <!--When user is logged in-->
-                    <p:commandLink class="button orange expanded js-buy-products"
+                    <p:commandLink class="button orange expanded #{UserService.isLoggedIn()?'js-buy-products':''}"
                                    value="Pirkti prekes"
-                                   p:rendered="#{cartController.productsInCart.size()!=0 and userService.loggedIn()}"/>
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and UserService.isLoggedIn()}"
+                    />
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
                                    action="/login.xhtml"
-                                   p:rendered="#{cartController.productsInCart.size()!=0 and !userService.loggedIn()}"/>
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and !UserService.isLoggedIn()}"/>
                 </div>
             </div>  <!-- END OF BOTTOM BUTTONS -->
         </h:form>
