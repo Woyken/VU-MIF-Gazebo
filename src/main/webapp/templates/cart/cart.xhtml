@@ -42,21 +42,25 @@
 
             <!-- SHOPPING CART ITEMS -->
             <div id="shopping-list-header" class="row section">
-                <div class="small-6 columns"> <h5>Prekė</h5>    </div>
-                <div class="small-3 columns"> <h5>Kiekis</h5>   </div>
-                <div class="small-3 columns"> <h5>Kaina</h5>    </div>
-                <div id="shopping-list-price-sum" class="columns shopping-cart-price">Viso: #{cartController.sum} €</div>
+                <div class="small-6 columns"><h5>Prekė</h5></div>
+                <div class="small-3 columns"><h5>Kiekis</h5></div>
+                <div class="small-3 columns"><h5>Kaina</h5></div>
+                <div id="shopping-list-price-sum"
+                     class="columns shopping-cart-price">Viso: #{cartController.sum} €
+                </div>
             </div>
 
             <div id="shopping-list-body" class="row align-middle">
-                <ui:repeat value="#{cartController.productsInCart}" var="productItem" varStatus="loop">
+                <ui:repeat value="#{cartController.productsInCart}" var="productItem"
+                           varStatus="loop">
                     <!-- PRODUCT LINE -->
                     <div class="small-6 columns">
                         <div class="row align-middle align-top">
                             <!-- Product image. -->
                             <div class="small-6 columns align-right">
                                 <a href="../../product-details.xhtml?productId=#{productItem.id}">
-                                    <p:graphicImage class="thumbnail no-top-mar" value="#{imageStreamer.image}">
+                                    <p:graphicImage class="thumbnail no-top-mar"
+                                                    value="#{imageStreamer.image}">
                                         <f:param name="id" value="#{productItem.images.get(0).id}"/>
                                     </p:graphicImage>
                                 </a>
@@ -73,8 +77,8 @@
                     <div class="small-3 columns">
                         <h:inputText class="half-width" value="#{productItem.amount}">
                             <f:convertNumber integerOnly="true" type="number"/>
-                            <f:validateLongRange minimum="1" />
-                            <p:ajax event="change" update="@form" />
+                            <f:validateLongRange minimum="1"/>
+                            <p:ajax event="change" update="@form"/>
                         </h:inputText>
                     </div>
                     <!-- Price of the product. -->
@@ -82,8 +86,10 @@
                         <h5 class="shopping-cart-price">#{productItem.price * productItem.amount} €</h5>
                     </div>
                     <div class="small-1 columns">
-                        <h:commandLink class="button primary" value="&times;" pt:data-open="remove-item-from-cart-modal" action="#{cartController.selectForRemoval(productItem)}">
-                            <p:ajax update="@form" />
+                        <h:commandLink class="button primary" value="&times;"
+                                       pt:data-open="remove-item-from-cart-modal"
+                                       action="#{cartController.selectForRemoval(productItem)}">
+                            <p:ajax update="@form"/>
                         </h:commandLink>
                     </div>
                 </ui:repeat>
@@ -95,11 +101,19 @@
             <div class="row collapse section">
                 <div class="columns small-3">
                     <a class="button primary expanded" href="../../main.xhtml">
-                        <i class="fi-arrow-left" />
+                        <i class="fi-arrow-left"/>
                         Atgal į katalogą</a>
                 </div>
                 <div class="columns small-3 small-offset-6">
-                    <p:commandLink class="button orange expanded js-buy-products" value="Pirkti prekes" pt:disabled="#{cartController.productsInCart.size()==0}"/>
+                    <!--When user is logged in-->
+                    <p:commandLink class="button orange expanded js-buy-products"
+                                   value="Pirkti prekes"
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and userService.loggedIn()}"/>
+                    <!--When user is not logged in-->
+                    <p:commandLink class="button orange expanded"
+                                   value="Pirkti prekes"
+                                   action="/login.xhtml"
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and !userService.loggedIn()}"/>
                 </div>
             </div>  <!-- END OF BOTTOM BUTTONS -->
         </h:form>
@@ -116,11 +130,13 @@
                     <h4 class="form-title text-center">
                         Pašalinti prekę iš krepšelio?
                     </h4>
-                    <br />
+                    <br/>
                     <div class="row">
                         <div class="columns small-6">
                             <h:form>
-                                <h:commandLink class="button primary expanded" pt:data-close="" value="Taip" action="#{cartController.removeSelectedProduct()}">
+                                <h:commandLink class="button primary expanded" pt:data-close=""
+                                               value="Taip"
+                                               action="#{cartController.removeSelectedProduct()}">
                                     <p:ajax update=":shopping-cart-items-form"/>
                                 </h:commandLink>
                             </h:form>
