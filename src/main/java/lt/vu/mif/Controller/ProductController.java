@@ -31,7 +31,7 @@ public class ProductController implements Serializable {
     private String searchPhrase;
 
     public void onPageLoad() {
-        
+
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
             return;
         }
@@ -40,11 +40,12 @@ public class ProductController implements Serializable {
         loggedUser = user == null ? null : new UserView(user);
 
         products = productRepository.getAll().stream().map(ProductView::new)
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
     }
 
     public void searchProducts() {
-        products = productRepository.getAll().stream().filter(p -> p.getTitle().contains(searchPhrase))
+        products = productRepository.getAll().stream()
+            .filter(p -> p.getTitle().toLowerCase().contains(searchPhrase.toLowerCase()))
             .map(ProductView::new).collect(Collectors.toList());
     }
 }
