@@ -1,11 +1,9 @@
 package lt.vu.mif.Utils;
 
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Constants;
 
-@Named
 @Setter
 @Getter
 public class Paging {
@@ -13,6 +11,7 @@ public class Paging {
 
     private int index = 0;
     private int activePage = Constants.ACTIVE_PAGE;
+    private int pageSize = Constants.PAGE_SIZE;
     private int totalPages;
 
     public Paging() {
@@ -42,8 +41,10 @@ public class Paging {
         }
     }
 
-    public void resetActivePage() {
+    public void reset() {
         activePage = Constants.ACTIVE_PAGE;
+        totalPages = 0;
+        index = 0;
     }
 
     public Object[] getTotalPages() {

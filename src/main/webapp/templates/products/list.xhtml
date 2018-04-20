@@ -147,7 +147,7 @@
                     </li>
                 </ui:repeat>
                 <li class="pagination-next">
-                    <h:commandLink value="Pirmyn" disabled="#{productController.productsPage.totalPages - productController.paging.index - productController.paging.pagesToShow eq 0}">
+                    <h:commandLink value="Pirmyn" disabled="#{productController.paging.activePage + productController.paging.index + 1 eq productController.productsPage.totalPages}">
                         <f:ajax execute="@form" listener="#{productController.next}" render="productList paging-form"/>
                     </h:commandLink>
                 </li>

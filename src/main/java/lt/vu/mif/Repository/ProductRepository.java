@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import lt.vu.mif.Entity.Product;
 import lt.vu.mif.Entity.Product_;
 import lt.vu.mif.Search.ProductSearch;
+import lt.vu.mif.Utils.Paging;
 import lt.vu.mif.Utils.PersistenceUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,8 +91,8 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> {
         return predicates;
     }
 
-    public Page<Product> getProductsPage(ProductSearch productSearch) {
-        PageRequest pageRequest = PageRequest.of(productSearch.getActivePage(), productSearch.getPageSize());
+    public Page<Product> getProductsPage(ProductSearch productSearch, Paging paging) {
+        PageRequest pageRequest = PageRequest.of(paging.getActivePage(), paging.getPageSize());
 
         Specification<Product> specification = (root, criteriaQuery, criteriaBuilder) ->
             criteriaBuilder.and(PersistenceUtils.toArray(buildSearchPredicates(productSearch, root, criteriaBuilder)));

@@ -32,7 +32,7 @@ public class ProductController implements Serializable {
     private ProductSearch productSearch = new ProductSearch();
 
     private Page<ProductView> productsPage;
-    private Paging paging;
+    private Paging paging = new Paging();
 
     public void onPageLoad() {
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
@@ -44,35 +44,36 @@ public class ProductController implements Serializable {
 
         resetProductSearch();
         searchProducts();
-        paging = new Paging(productsPage.getTotalPages());
     }
 
     public void searchProducts() {
-        productsPage = productRepository.getProductsPage(productSearch).map(ProductView::new);
+        paging.reset();
+        search();
+        paging.setTotalPages(productsPage.getTotalPages());
+    }
+
+    private void search() {
+        productsPage = productRepository.getProductsPage(productSearch, paging).map(ProductView::new);
     }
 
     private void resetProductSearch() {
-        productSearch.setMaxPrice(null);
-        productSearch.setMinPrice(null);
-        productSearch.setTitle(null);
-        paging.resetActivePage();
-        paging.setTotalPages(productsPage.getTotalPages());
+        productSearch.reset();
+        paging.reset();
     }
 
     public void next() {
         paging.next();
-        searchProducts();
+        search();
     }
 
     public void previous() {
         paging.previous();
-        searchProducts();
+        search();
     }
 
     public void searchProducts(int activePage) {
-        productSearch.setActivePage(activePage);
         paging.setActivePage(activePage);
-        searchProducts();
+        productsPage = productRepository.getProductsPage(productSearch, paging).map(ProductView::new);
     }
 
     public int getPagingIndex() {
