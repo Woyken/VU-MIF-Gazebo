@@ -342,7 +342,9 @@ label.input-label {
 	margin-top: 3%;
 	max-width: 85%;
 }
-
+.admin-product-box {
+    margin-bottom: 3%;
+}
 
 .alert-text {
 	color: #c60f13;
