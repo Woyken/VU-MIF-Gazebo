@@ -3,6 +3,7 @@ package lt.vu.mif.Repository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -77,7 +78,8 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> {
         List<Predicate> predicates = new ArrayList<>();
 
         if (StringUtils.isNotBlank(search.getTitle())) {
-            predicates.add(builder.like(root.get(Product_.title), "%" + search.getTitle() + "%"));
+            predicates.add(builder.like(builder.lower(root.get(Product_.title)), "%" + search.getTitle().toLowerCase(
+                Locale.getDefault()) + "%"));
         }
 
         if (search.getMinPrice() != null) {
