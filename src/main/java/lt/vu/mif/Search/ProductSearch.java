@@ -8,6 +8,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductSearch {
+    private String title;
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
+
+    public void reset() {
+        title = null;
+        minPrice = null;
+        maxPrice = null;
+    }
 }

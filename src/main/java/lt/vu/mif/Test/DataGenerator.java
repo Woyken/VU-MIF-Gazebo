@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import lt.vu.mif.Entity.Image;
 import lt.vu.mif.Entity.Product;
 import lt.vu.mif.Entity.Roles.Role;
@@ -68,12 +69,20 @@ public class DataGenerator {
     public void insertProducts() {
         List<Product> products = new ArrayList<>();
 
+        for (int i = 0; i < 15; i++) {
+            addProducts(products);
+        }
+
+        productRepository.saveAll(products);
+    }
+
+    private void addProducts(List<Product> products) {
         for (int i = 1; i <= 9; i++) {
             Product product = new Product();
             product.setDescription(getProductDescription(i));
             product.setPrice(new BigDecimal(i * 5));
             product.setTitle(getProductTitle(i));
-            product.setSku("RS0" + i + "-B");
+            product.setSku(UUID.randomUUID().toString());
             product.getImages().add(getImage("static/images/products/shoe-" + i + ".jpg"));
             product.getImages().add(getImage("static/images/products/shoe-1.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-2.jpg"));
@@ -81,8 +90,6 @@ public class DataGenerator {
             product.getImages().add(getImage("static/images/products/shoe-4.jpg"));
             products.add(product);
         }
-
-        productRepository.save(products);
     }
 
     private String getProductDescription(int index) {

@@ -27,7 +27,7 @@ public class ProductEditController {
             throw new IllegalArgumentException("Invalid request parameter");
         }
 
-        Product entity = productRepository.get(Product.class, Long.valueOf(productId));
+        Product entity = productRepository.get(Long.valueOf(productId));
 
         if (entity == null) {
             throw new IllegalStateException("Product" + "with ID=" + productId + "not found");

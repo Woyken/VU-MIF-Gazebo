@@ -47,18 +47,17 @@ public class ProductControllerTests {
 
     @Test
     public void searchProducts_validSearch_singleResult() {
-        productController.setSearchPhrase("Very");
+        productController.getProductSearch().setTitle("Very");
         productController.searchProducts();
-        Assertions.assertEquals(1, productController.getProducts().size());
-        Assertions
-            .assertEquals("Very long title", productController.getProducts().get(0).getTitle());
+        Assertions.assertEquals(1, productController.getProductsPage().getContent().size());
+        Assertions.assertEquals("Very long title", productController.getProductsPage().getContent().get(0).getTitle());
     }
 
     @Test
     public void searchProducts_validSearch_multipleResults() {
-        productController.setSearchPhrase("long");
+        productController.getProductSearch().setTitle("long");
         productController.searchProducts();
-        Assertions.assertEquals(2, productController.getProducts().size());
+        Assertions.assertEquals(2, productController.getProductsPage().getContent().size());
     }
 
     @Test
