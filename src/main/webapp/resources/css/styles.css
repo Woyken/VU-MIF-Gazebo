@@ -224,12 +224,15 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	color: #2e2e2e;
 }
-body::-webkit-scrollbar {
-	display: none;
+.body-wrapper {
+    flex: 1 0 auto;
 }
 
 /* Navigation bar. */
@@ -321,6 +324,7 @@ label.input-label {
 
 
 #footer {
+    flex-shrink: 0;
 	margin-top: 3%;
 	padding-top: 2vh;
 	color: #616161;
