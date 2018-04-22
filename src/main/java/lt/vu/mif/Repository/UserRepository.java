@@ -28,19 +28,6 @@ public class UserRepository extends BaseRepository<User> {
         return getEntityManager().createQuery(criteria).getResultList();
     }
 
-    public User get(Long id) {
-        Objects.requireNonNull(id);
-
-        CriteriaBuilder builder = getCriteriaBuilder();
-        CriteriaQuery<User> criteria = builder.createQuery(User.class);
-        Root<User> root = criteria.from(User.class);
-
-        criteria.select(root);
-        criteria.where(builder.equal(root.get(User_.id), id));
-
-        return PersistenceUtils.uniqueResult(getEntityManager().createQuery(criteria));
-    }
-
     public boolean checkIfUserExists(String email) {
         Objects.requireNonNull(email);
 
