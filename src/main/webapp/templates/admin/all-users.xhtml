@@ -13,7 +13,7 @@
             <h:panelGroup id="lala" style="display:contents">
                 <ui:repeat value="#{usersController.users}" var="user">
                     <div class="columns medium-3 small-6 admin-user-box">
-                        <a href="../../admin-details-user.xhtml?userId=1">
+                        <a href="../../admin-details-user.xhtml?userId=#{user.id}">
                             <p class="user-email-box">
                                 <b>
                                     #{user.email}
