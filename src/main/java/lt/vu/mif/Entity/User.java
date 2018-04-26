@@ -35,6 +35,9 @@ public class User implements Serializable {
     @Column(name = "TOKEN_CREATION_DATE")
     private LocalDateTime tokenCreationDate;
 
+    @Column(name = "IS_BLOCKED")
+    private boolean blocked;
+
     public User() {
     }
 
