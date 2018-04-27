@@ -1,14 +1,14 @@
 package lt.vu.mif.Controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Repository.UserRepository;
+import lt.vu.mif.Utils.Paging;
 import lt.vu.mif.View.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 
 @Getter
 @Setter
@@ -17,13 +17,44 @@ public class UsersController {
     @Autowired
     private UserRepository userRepository;
 
-    private List<UserView> users = new ArrayList<>();
+    private Page<UserView> usersPage;
+    private Paging paging = new Paging();
 
     public void onPageLoad() {
-        users = userRepository.getAll().stream().map(UserView::new).collect(Collectors.toList());
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
+            return;
+        }
+
+        paging.reset();
+        searchUsers();
     }
 
     public void blockUser(UserView userView) {
         userRepository.blockUser(userView.getId(), !userView.isBlocked());
+        userView.setBlocked(!userView.isBlocked());
+    }
+
+    public void next() {
+        paging.next();
+        searchUsers();
+    }
+
+    public void previous() {
+        paging.previous();
+        searchUsers();
+    }
+
+    public int getPagingIndex() {
+        return paging.getIndex();
+    }
+
+    public void searchUsers(int activePage) {
+        paging.setActivePage(activePage);
+        searchUsers();
+    }
+
+    private void searchUsers() {
+        usersPage = userRepository.getUsersPage(paging).map(UserView::new);
+        paging.setTotalPages(usersPage.getTotalPages());
     }
 }

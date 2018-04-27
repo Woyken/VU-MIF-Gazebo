@@ -10,8 +10,8 @@
 
     <div id="all-users-window">
         <div class="row section">
-            <h:panelGroup id="lala" style="display:contents">
-                <ui:repeat value="#{usersController.users}" var="user">
+            <h:panelGroup id="users-list" style="display:contents">
+                <ui:repeat value="#{usersController.usersPage.content}" var="user">
                     <div class="columns medium-3 small-6 admin-user-box">
                         <a href="../../admin-details-user.xhtml?userId=#{user.id}">
                             <p class="user-email-box">
@@ -30,7 +30,7 @@
                         <h:form id="my-form">
                             <div class="small-8 small-offset-2 medium-12 medium-offset-0">
                                 <h:commandButton value="#{user.blocked ? 'Atblokuoti' : 'Blokuoti'}" styleClass="button expanded #{user.blocked ? 'green' : 'orange'}">
-                                    <f:ajax execute="@form" listener="#{usersController.blockUser(user)}" render="lala"/>
+                                    <f:ajax execute="@form" listener="#{usersController.blockUser(user)}" render="users-list"/>
                                 </h:commandButton>
                             </div>
                         </h:form>
@@ -38,6 +38,34 @@
                 </ui:repeat>
             </h:panelGroup>
         </div>
+        <!--PAGING-->
+        <h:form id="paging-form">
+            <nav aria-label="Pagination">
+                <ul class="pagination text-center">
+                    <li class="pagination-previous">
+                        <h:commandLink value="Atgal" disabled="#{usersController.pagingIndex eq 0 and usersController.paging.activePage eq 0}">
+                            <f:ajax execute="@form" listener="#{usersController.previous}" render="users-list paging-form"/>
+                        </h:commandLink>
+                    </li>
+                    <ui:repeat value="#{usersController.paging.totalPages}" var="page" varStatus="status" size="#{usersController.paging.minValue}">
+                        <li>
+                            <h:commandLink rendered="#{(status.index + 1 + usersController.pagingIndex) le usersController.usersPage.totalPages}"
+                                           value="#{status.index + 1 + usersController.pagingIndex}"
+                                           styleClass="#{status.index + usersController.pagingIndex eq usersController.paging.activePage ? 'current' : ''}">
+                                <f:ajax execute="@form" listener="#{usersController.searchUsers(status.index + usersController.pagingIndex)}"
+                                        render="users-list paging-form"/>
+                            </h:commandLink>
+                        </li>
+                    </ui:repeat>
+                    <li class="pagination-next">
+                        <h:commandLink value="Pirmyn" disabled="#{usersController.paging.activePage + usersController.paging.index + 1 eq usersController.usersPage.totalPages}">
+                            <f:ajax execute="@form" listener="#{usersController.next}" render="users-list paging-form"/>
+                        </h:commandLink>
+                    </li>
+                </ul>
+            </nav>
+        </h:form>
+        <!--PAGING-->
     </div>
 
 </ui:composition>
