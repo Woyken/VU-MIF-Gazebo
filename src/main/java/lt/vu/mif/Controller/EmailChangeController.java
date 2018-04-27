@@ -28,7 +28,7 @@ public class EmailChangeController {
         loggedUserEmail = userService.getLoggedUserUserEmail();
     }
 
-    public void updateUser() {
+    public void changeEmail() {
         User loggedUser = userService.getLoggedUser();
         loggedUser.setEmail(newEmail);
         userRepository.update(loggedUser);

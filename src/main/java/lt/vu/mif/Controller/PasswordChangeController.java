@@ -17,6 +17,7 @@ import org.springframework.web.context.annotation.RequestScope;
 @Setter
 @RequestScope
 public class PasswordChangeController {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
