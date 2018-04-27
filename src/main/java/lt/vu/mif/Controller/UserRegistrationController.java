@@ -7,10 +7,12 @@ import lt.vu.mif.Entity.Roles;
 import lt.vu.mif.Entity.User;
 import lt.vu.mif.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Named
 @Getter
 @Setter
+@RequestScope
 public class UserRegistrationController {
 
     @Autowired
