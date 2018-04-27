@@ -96,6 +96,20 @@
                     </h4>
                     <br/>
 
+                    <!-- Current password. -->
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">
+                                <span class="alert-star">*</span>
+                                Dabartinis slaptažodis
+                                <i class="fi-unlock"/>
+                                <h:inputSecret class="no-mar" binding="#{oldPassword}"/>
+                            </label>
+                        </div>
+                    </div>
+
+                    <br/>
+
                     <!-- New password. -->
                     <div class="row align-middle">
                         <div class="columns">
@@ -128,18 +142,6 @@
                                 Pakartokite naująjį slaptažodį
                                 <span><i class="fi-lock"/></span>
                                 <h:inputSecret binding="#{newPasswordRepeat}"/>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Current password. -->
-                    <div class="row">
-                        <div class="columns">
-                            <label class="input-label">
-                                <span class="alert-star">*</span>
-                                Dabartinis slaptažodis
-                                <i class="fi-unlock"/>
-                                <h:inputSecret class="no-mar" binding="#{oldPassword}"/>
                             </label>
                             <!-- Required fields. -->
                             <div class="mar-bot-5">
