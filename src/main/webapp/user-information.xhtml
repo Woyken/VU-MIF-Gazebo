@@ -27,15 +27,54 @@
                 <h1 class="section-title">Asmeninė informacija</h1>
             </div> <!-- END OF PAGE TITLE -->
 
-            <!-- USER INFORMATION -->
+            <br/>
 
-            <!-- [Button] GO TO CART HISTORY -->
+            <!-- USER INFORMATION -->
+            <div class="row">
+                <div class="columns">
+                    <h:outputLabel for="email" value="Jūsų el. paštas:"/>
+                    <h:outputText value="#{emailChangeController.loggedUserEmail}" id="email"/>
+                </div>
+            </div>
+            <!-- END OF USER INFORMATION -->
+
+
             <div class="row section">
+
+                <!-- [Button] Cart history -->
                 <div class="hide-for-small-only columns medium-3">
                     <a href="../../cart-history.xhtml" class="button expanded hollow primary-inverted">
                         Pirkimo istorija</a>
                 </div>
-            </div> <!-- END OF [Button] GO TO CART HISTORY -->
+                <!-- [Button][Mobile] Return to list -->
+                <div class="hide-for-medium columns small-12">
+                    <a href="../../cart-history.xhtml" class="button expanded hollow primary-inverted">
+                        Pirkimo istorija</a>
+                </div>
+
+                <!-- [Button] Change Email -->
+                <div class="hide-for-small-only columns medium-3">
+                    <a href="#" data-open="change-email-modal" class="button expanded hollow primary-inverted">
+                        Keisti el. paštą</a>
+                </div>
+                <!-- [Button][Mobile] Change Email -->
+                <div class="hide-for-medium columns small-12">
+                    <a href="#" data-open="change-email-modal" class="button expanded hollow primary-inverted">
+                        Keisti el. paštą</a>
+                </div>
+
+                <!-- [Button] Change Password -->
+                <div class="hide-for-small-only columns medium-3">
+                    <a href="#" data-open="change-password-modal" class="button expanded hollow primary-inverted">
+                        Keisti slaptažodį</a>
+                </div>
+                <!-- [Button][Mobile] Change Password -->
+                <div class="hide-for-medium columns small-12">
+                    <a href="#" data-open="change-password-modal" class="button expanded hollow primary-inverted">
+                        Keisti slaptažodį</a>
+                </div>
+            </div>
+
 
             <!-- BOTTOM BUTTONS -->
             <div class="row section">
