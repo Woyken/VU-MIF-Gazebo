@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <h:outputStylesheet name="/css/vendor/foundation.css" />
+    <h:outputStylesheet name="/css/vendor/foundation-icons.css" />
+    <h:outputStylesheet name="/css/styles.css" />
+</h:head>
+<h:body>
+
+    <div class="body-wrapper">
+        <!-- NAVIGATION BAR -->
+        <ui:include src="./templates/navbars/_container.xhtml" />
+
+
+        <div id="account-info-window">
+
+            <!-- PAGE TITLE -->
+            <div class="row column text-center section">
+                <h1 class="section-title">Asmeninė informacija</h1>
+            </div> <!-- END OF PAGE TITLE -->
+
+            <!-- USER INFORMATION -->
+
+            <!-- [Button] GO TO CART HISTORY -->
+            <div class="row section">
+                <div class="hide-for-small-only columns medium-3">
+                    <a href="../../cart-history.xhtml" class="button expanded hollow primary-inverted">
+                        Pirkimo istorija</a>
+                </div>
+            </div> <!-- END OF [Button] GO TO CART HISTORY -->
+
+            <!-- BOTTOM BUTTONS -->
+            <div class="row section">
+                <!-- [Button] Return to list -->
+                <div class="hide-for-small-only columns medium-3">
+                    <a class="button primary expanded" href="../../main.xhtml">
+                        <i class="fi-arrow-left" />
+                        Atgal į katalogą</a>
+                </div>
+                <!-- [Button][Mobile] Return to list -->
+                <div class="hide-for-medium columns small-12">
+                    <a class="button primary expanded" href="../../main.xhtml">
+                        <i class="fi-arrow-left" />
+                        Atgal į katalogą</a>
+                </div>
+            </div>  <!-- END OF BOTTOM BUTTONS -->
+
+        </div>
+
+
+    </div>
+
+    <!-- FOOTER -->
+    <ui:include src="./templates/footers/footer.xhtml" />
+
+    <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
+    <h:outputScript name="js/vendor/foundation.js"/>
+    <h:outputScript name="js/foundation-app.js"/>
+    <h:outputScript name="js/vendor/what-input.js"/>
+
+</h:body>
+</ui:composition>
+</html>
