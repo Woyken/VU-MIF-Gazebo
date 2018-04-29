@@ -39,7 +39,7 @@ public class CartController implements Serializable {
     }
 
     public void addProductToCart(Long id) {
-        addOrIncrementProduct(id);
+        addOrIncrementProduct(id, 1L);
     }
 
     public void addProductToCart(Long id, Long amount) {
@@ -54,21 +54,6 @@ public class CartController implements Serializable {
             totalSum = totalSum.add(productPrice);
         }
         return totalSum;
-    }
-
-    private void addOrIncrementProduct(Long id) {
-        for (CartProductView product : productsInCart) {
-            if (product.getId().equals(id)) {
-                product.setAmount(product.getAmount() + 1);
-                return;
-            }
-        }
-        List<Long> idsList = new ArrayList<>();
-        idsList.add(id);
-        CartProductView productToAdd = new CartProductView(
-            new ProductView(productRepository.get(idsList).get(0)));
-        productToAdd.setAmount(1L);
-        productsInCart.add(productToAdd);
     }
 
     private void addOrIncrementProduct(Long id, Long amount) {
