@@ -1,6 +1,7 @@
 package lt.vu.mif.Controller;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -27,6 +28,9 @@ public class ProductController implements Serializable {
     @Autowired
     private UserService userService;
 
+    private String minPrice;
+    private String maxPrice;
+
     private UserView loggedUser;
 
     private ProductSearch productSearch = new ProductSearch();
@@ -50,6 +54,13 @@ public class ProductController implements Serializable {
         paging.reset();
         search();
         paging.setTotalPages(productsPage.getTotalPages());
+    }
+
+    public void searchPrice() {
+        productSearch.setMinPrice(minPrice.isEmpty() ? null : new BigDecimal(minPrice));
+        productSearch.setMaxPrice(maxPrice.isEmpty() ? null : new BigDecimal(maxPrice));
+
+        searchProducts();
     }
 
     private void search() {
