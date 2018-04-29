@@ -10,7 +10,7 @@
 
     <div id="all-users-window">
         <div class="row section">
-            <h:panelGroup id="lala" style="display:contents">
+            <h:panelGroup id="allUsersPanel" style="display:contents">
                 <ui:repeat value="#{usersController.users}" var="user">
                     <div class="columns medium-3 small-6 admin-user-box">
                         <a href="../../admin-details-user.xhtml?userId=#{user.id}">
@@ -30,7 +30,7 @@
                         <h:form id="my-form">
                             <div class="small-8 small-offset-2 medium-12 medium-offset-0">
                                 <h:commandButton value="#{user.blocked ? 'Atblokuoti' : 'Blokuoti'}" styleClass="button expanded #{user.blocked ? 'green' : 'orange'}">
-                                    <f:ajax execute="@form" listener="#{usersController.blockUser(user)}" render="lala"/>
+                                    <f:ajax execute="@form" listener="#{usersController.blockUser(user)}" render="allUsersPanel"/>
                                 </h:commandButton>
                             </div>
                         </h:form>
