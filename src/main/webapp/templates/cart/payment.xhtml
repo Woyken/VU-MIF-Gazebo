@@ -14,59 +14,138 @@
         <!-- PAYMENT INFORMATION -->
         <div class="section">
             <div class="row">
-                <div class="columns">
+                <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
                     <a href="#"
                        class="button expanded primary js-back-to-cart">Grįžti į prekių krepšelį</a>
                 </div>
             </div>
 
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Pristatymo adresas</h5>
+            <!-- Form -->
+            <div class="section">
+
+                <!-- Name -->
+                <div class="row align-middle">
+                    <div class="columns small-10 small-offset-1 medium-3 medium-offset-2">
+                        <h5 class="font-bold">Vardas</h5>
+                    </div>
+                    <div class="columns small-10 small-offset-1 medium-5 medium-offset-0">
+                        <input type="text" placeholder="Antanas" />
+                    </div>
                 </div>
-                <div class="columns small-9">
-                    <input type="text" placeholder="Didlaukio g. 59 1212B" />
+
+                <!-- Surname -->
+                <div class="row align-middle">
+                    <div class="columns small-10 small-offset-1 medium-3 medium-offset-2">
+                        <h5 class="font-bold">Pavardė</h5>
+                    </div>
+                    <div class="columns small-10 small-offset-1 medium-5 medium-offset-0">
+                        <input type="text" placeholder="Mitašiūnas" />
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="row align-middle">
+                    <div class="columns small-10 small-offset-1 medium-3 medium-offset-2">
+                        <h5 class="font-bold">Pristatymo adresas</h5>
+                    </div>
+                    <div class="columns small-10 small-offset-1 medium-5 medium-offset-0">
+                        <input type="text" placeholder="Didlaukio g. 59 1212B" />
+                    </div>
+                </div>
+
+                <!-- Card number -->
+                <div class="row align-middle">
+                    <div class="columns small-10 small-offset-1 medium-3 medium-offset-2">
+                        <h5 class="font-bold">Kortelės numeris</h5>
+                    </div>
+                    <div class="columns small-10 small-offset-1 medium-5 medium-offset-0">
+                        <input type="number" placeholder="6654 4456 9987 2213 4123" />
+                    </div>
+                </div>
+
+                <!-- Card security numbers -->
+                <div class="row align-middle hide-for-small-only">
+                    <div class="columns medium-3 medium-offset-2">
+                        <h5>Apsauga</h5>
+                    </div>
+
+                    <div class="columns medium-2 medium-offset-0 shrink">
+                        <h5 class="font-bold">MM/YY</h5>
+                    </div>
+
+                    <!-- MM -->
+                    <div class="columns medium-1">
+                        <input type="number" placeholder="08" />
+                    </div>
+
+                    <div class="columns medium-1 shrink padding-0">
+                        <h5 class="font-bold">/</h5>
+                    </div>
+
+                    <!-- YY -->
+                    <div class="columns medium-1">
+                        <input type="number" placeholder="12" />
+                    </div>
+
+                    <!-- CVS -->
+                    <div class="columns medium-1">
+                        <h5 class="font-bold text-right">CVS</h5>
+                    </div>
+                    <div class="columns medium-1">
+                        <input type="number" placeholder="679" />
+                    </div>
+                </div> <!-- End of card security numbers -->
+
+                <!-- [Mobile] Card security numbers -->
+                <div class="section hide-for-medium">
+                    <div class="columns small-10 small-offset-1">
+                        <h5 class="font-bold">MM/YY</h5>
+                    </div>
+
+                    <!-- MM -->
+                    <div class="columns small-10 small-offset-1">
+                        <div class="row align-middle">
+                            <div class="columns small-5 margin-0 padding-0">
+                                <input type="number" placeholder="08" />
+                            </div>
+
+                            <div class="columns small-1 shrink">
+                                <h5 class="font-bold">/</h5>
+                            </div>
+
+                            <div class="columns small-5 margin-0 padding-0">
+                                <input type="number" placeholder="12" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="columns small-10 small-offset-1">
+                        <h5 class="font-bold">CVS</h5>
+                    </div>
+                    <div class="columns small-10 small-offset-1">
+                        <input type="number" placeholder="687" />
+                    </div>
+
+                </div> <!-- End of [Mobile] Card security numbers -->
+
+            </div> <!-- End of form -->
+
+            <div class="section">
+                <!-- Total -->
+                <div class="row margin-bottom-1">
+                    <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
+                        <h3 class="text-right">
+                            <strong>Galutinė kaina: </strong>
+                            249.97 €
+                        </h3>
+                    </div>
                 </div>
             </div>
 
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Kortelės numeris</h5>
-                </div>
-                <div class="columns small-9">
-                    <input type="number" placeholder="6654 4456 9987 2213 4123" />
-                </div>
-            </div>
 
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">MM / YY</h5>
-                </div>
-                <div class="columns small-9">
-                    <input type="text" placeholder="08 / 12" />
-                </div>
-            </div>
-
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Apsaugos kodas</h5>
-                </div>
-                <div class="columns small-9">
-                    <input type="number" placeholder="679" />
-                </div>
-            </div>
-
-            <div class="row margin-bottom-1">
-                <div class="columns small-12">
-                    <h3 class="text-right">
-                        <strong>Galutinė kaina: </strong>
-                        249.97 €
-                    </h3>
-                </div>
-            </div>
-
+            <!-- [Button] Pay -->
             <div class="row">
-                <div class="columns">
+                <div class="columns medium-8 medium-offset-2">
                     <a href="../../main.xhtml" class="button expanded orange">Apmokėti</a>
                 </div>
             </div>

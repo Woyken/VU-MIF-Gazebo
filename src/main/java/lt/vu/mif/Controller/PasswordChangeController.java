@@ -10,11 +10,14 @@ import lt.vu.mif.Entity.User;
 import lt.vu.mif.Repository.UserRepository;
 import lt.vu.mif.Service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Named
 @Getter
 @Setter
+@RequestScope
 public class PasswordChangeController {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
