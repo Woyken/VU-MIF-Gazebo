@@ -57,18 +57,8 @@ public class ProductController implements Serializable {
     }
 
     public void searchPrice() {
-
-        if (minPrice.isEmpty()) {
-            productSearch.setMinPrice(null);
-        } else {
-            productSearch.setMinPrice(new BigDecimal(minPrice));
-        }
-
-        if (maxPrice.isEmpty()) {
-            productSearch.setMaxPrice(null);
-        } else {
-            productSearch.setMaxPrice(new BigDecimal(maxPrice));
-        }
+        productSearch.setMinPrice(minPrice.isEmpty() ? null : new BigDecimal(minPrice));
+        productSearch.setMaxPrice(maxPrice.isEmpty() ? null : new BigDecimal(maxPrice));
 
         searchProducts();
     }
