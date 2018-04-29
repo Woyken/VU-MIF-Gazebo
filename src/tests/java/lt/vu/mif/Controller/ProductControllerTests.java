@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import lt.vu.mif.Entity.Product;
 import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.Search.ProductSearch;
+import lt.vu.mif.Service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -21,13 +22,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class ProductControllerTests {
 
-    @Autowired
     private ProductController productController;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserService userService;
 
     @Before
     public void init() {
+        //Since @ViewScoped is JSF annotation, SpringBoot and JSF annotations can't be mixed. Creating this here, and setting autowired fields manually.
+        productController = new ProductController();
+        productController.setProductRepository(productRepository);
+        productController.setUserService(userService);
+
         Assertions.assertTrue(productRepository.getAll().isEmpty());
 
         Product product = new Product();
