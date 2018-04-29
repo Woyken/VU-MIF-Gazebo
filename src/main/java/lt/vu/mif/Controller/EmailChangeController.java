@@ -7,10 +7,12 @@ import lt.vu.mif.Entity.User;
 import lt.vu.mif.Repository.UserRepository;
 import lt.vu.mif.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Named
 @Getter
 @Setter
+@RequestScope
 public class EmailChangeController {
 
     @Autowired
@@ -26,7 +28,7 @@ public class EmailChangeController {
         loggedUserEmail = userService.getLoggedUserUserEmail();
     }
 
-    public void updateUser() {
+    public void changeEmail() {
         User loggedUser = userService.getLoggedUser();
         loggedUser.setEmail(newEmail);
         userRepository.update(loggedUser);
