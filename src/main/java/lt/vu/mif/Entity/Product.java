@@ -18,6 +18,7 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -37,4 +38,7 @@ public class Product {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Image> images = new ArrayList<>();
+
+    @Column(name = "IS_DELETED")
+    private boolean deleted;
 }
