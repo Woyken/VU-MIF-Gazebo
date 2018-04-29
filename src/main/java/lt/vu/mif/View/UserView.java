@@ -16,6 +16,10 @@ public class UserView {
     private String email;
     private String password;
     private Role role;
+    private boolean blocked;
+    private Long ordersCount;
+    private Long averageCount;
+    private Long ordersSum;
 
     public UserView() {
     }
@@ -25,5 +29,6 @@ public class UserView {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.role = user.getRole();
+        this.blocked = user.isBlocked();
     }
 }
