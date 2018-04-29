@@ -48,31 +48,32 @@
             <!-- Description -->
             <p class="text-justify">#{productDetailsController.productView.description}</p>
 
-            <!-- Quantity -->
-            <div class="row">
-                <div class="small-3 columns">
-                    <label for="product-quantity" class="font-bold middle">Kiekis:</label>
-                </div>
-                <div class="small-9 columns">
-                    <!-- TODO: Max skaičius priklauso nuo prekių kiekio sandelyje! -->
-                    <input type="number" id="product-quantity" value="1" min="1" max="99"/>
-                </div>
-            </div>
-
-            <!-- Price -->
-            <div class="row">
-                <div class="small-3 columns">
-                    <label for="product-quantity" class="font-bold">Kaina:</label>
-                </div>
-                <div class="small-9 columns">
-                    <!-- TODO: Galutinė kaina priklausys nuo prekių kiekio! -->
-                    <p> #{productDetailsController.productView.price} €</p>
-                </div>
-            </div>
-
-            <!-- Add to cart -->
             <h:form>
-                <h:commandButton class="button large hollow expanded primary-inverted" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal" actionListener="#{cartController.addProductToCart(productDetailsController.productView.id)}">
+                <!-- Quantity -->
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="product-quantity" class="font-bold middle">Kiekis:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <!-- TODO: Max skaičius priklauso nuo prekių kiekio sandelyje! -->
+                        <h:inputText type="number" id="product-quantity" value="1" min="1" max="99" binding="#{amount}"/>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label for="product-quantity" class="font-bold">Kaina:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <!-- TODO: Galutinė kaina priklausys nuo prekių kiekio! -->
+                        <p> #{productDetailsController.productView.price} €</p>
+                    </div>
+                </div>
+
+                <!-- Add to cart -->
+                <h:commandButton class="button large hollow expanded primary-inverted" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal"
+                                 actionListener="#{cartController.addProductToCart(productDetailsController.productView.id, amount.value)}">
                     <f:ajax execute="@form" render="@none" />
                 </h:commandButton>
             </h:form>
@@ -94,7 +95,7 @@
                 </c:when>
             </c:choose>
         </div>
-    </div> <!-- END OF PRODUCT DETAILS -->
+    </div> <!-- END OF PRODUCT INFO -->
 
 
     <!-- INFORM USER ABOUT ADDING TO CART MODAL -->
