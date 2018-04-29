@@ -5,7 +5,8 @@
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 >
 
     <div id="add-product-window">
@@ -25,17 +26,19 @@
                         <h5 class="font-bold">SKU</h5>
                     </div>
                     <div class="columns medium-9 small-12">
-                        <h:inputText value="#{productEditController.productView.sku}"/>
+                        <h:inputText value="#{productEditController.productView.sku}"
+                                     binding="#{sku}"/>
                     </div>
                 </div>
 
-                <!-- Name -->
+                <!-- Title -->
                 <div class="row align-middle">
                     <div class="columns medium-3 small-12">
                         <h5 class="font-bold">Pavadinimas</h5>
                     </div>
                     <div class="columns medium-9 small-12">
-                        <h:inputText value="#{productEditController.productView.title}"/>
+                        <h:inputText value="#{productEditController.productView.title}"
+                                     binding="#{title}"/>
                     </div>
                 </div>
 
@@ -45,8 +48,9 @@
                         <h5 class="font-bold">Kaina</h5>
                     </div>
                     <div class="columns medium-9 small-12">
-                        <h:inputText type="number"
-                                     value="#{productEditController.productView.price}"/>
+                        <h:inputText pt:type="number" pt:min="0"
+                                     value="#{productEditController.productView.price}"
+                                     binding="#{price}"/>
                     </div>
                 </div>
 
@@ -71,13 +75,32 @@
                 <!--</div>-->
                 <!--</div>-->
 
+                <!-- For validation -->
+                <h:inputHidden id="validationInput" value="true">
+                    <f:validator binding="#{editProductValidation}"/>
+                    <f:attribute name="sku" value="#{sku}"/>
+                    <f:attribute name="title" value="#{title}"/>
+                    <f:attribute name="price" value="#{price}"/>
+                </h:inputHidden>
+
+                <!-- Error Message -->
+                <div class="row">
+                    <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
+                        <div class="text-center">
+                            <h:message class="alert-text-large" for="validationInput"/>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row section">
                     <div class="columns">
-                        <p:commandLink
+                        <h:commandButton
                                 class="button orange expanded"
                                 value="Išsaugoti pakeitimus"
                                 action="#{productEditController.saveChanges}"
-                        />
+                        >
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
                     </div>
                 </div>
             </div>
