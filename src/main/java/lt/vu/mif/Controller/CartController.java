@@ -42,6 +42,10 @@ public class CartController implements Serializable {
         addOrIncrementProduct(id);
     }
 
+    public void addProductToCart(Long id, Long amount) {
+        addOrIncrementProduct(id, amount);
+    }
+
     public BigDecimal getSum() {
         BigDecimal totalSum = new BigDecimal(0);
         for (CartProductView product : productsInCart) {
@@ -64,6 +68,21 @@ public class CartController implements Serializable {
         CartProductView productToAdd = new CartProductView(
             new ProductView(productRepository.get(idsList).get(0)));
         productToAdd.setAmount(1L);
+        productsInCart.add(productToAdd);
+    }
+
+    private void addOrIncrementProduct(Long id, Long amount) {
+        for (CartProductView product : productsInCart) {
+            if (product.getId().equals(id)) {
+                product.setAmount(product.getAmount() + amount);
+                return;
+            }
+        }
+        List<Long> idsList = new ArrayList<>();
+        idsList.add(id);
+        CartProductView productToAdd = new CartProductView(
+                new ProductView(productRepository.get(idsList).get(0)));
+        productToAdd.setAmount(amount);
         productsInCart.add(productToAdd);
     }
 }
