@@ -163,6 +163,7 @@
                     <p:commandLink class="button orange expanded js-buy-products"
                                    value="Pirkti prekes"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and UserService.isLoggedIn()}"
+                                   action="#{cartController.buyProducts}"
                     />
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"

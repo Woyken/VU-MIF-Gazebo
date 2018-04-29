@@ -26,10 +26,14 @@
         <section class="search-bar">
             <h:form>
                 <div class="input-group">
-                    <h:inputText id="searchInput" class="input-group-field" value="#{productController.productSearch.title}" placeholder="Atraskite save"/>
+                    <h:inputText id="searchInput" class="input-group-field"
+                                 value="#{productController.productSearch.title}"
+                                 placeholder="Atraskite save"/>
                     <div class="input-group-button">
                         <h:commandButton class="button" value="Ieškoti">
-                            <f:ajax execute="searchInput" listener="#{productController.searchProducts()}" render="productList paging-form"/>
+                            <f:ajax execute="searchInput"
+                                    listener="#{productController.searchProducts()}"
+                                    render="productList paging-form"/>
                         </h:commandButton>
                     </div>
                 </div>
@@ -43,26 +47,59 @@
         <aside class="product-filters medium-3 large-2 columns">
             <div class="hide-for-small-only" data-sticky-container="">
                 <div class="sticky" data-sticky="" data-top-anchor="search">
-                    <h3 class="product-filters-header hide-for-small-only margin-top-3"><br/>Rūšiuokite:</h3>
+                    <h3 class="product-filters-header hide-for-small-only margin-top-3"><br/>Rūšiuokite:
+                    </h3>
                     <ul class="vertical menu hide-for-small-only" data-accordion-menu="">
                         <li class="product-filters-tab margin-top-1">
-                            <a href="#">Kategorija</a>
+                            <h5> &#8194; Kategorija</h5>
                             <ul class="categories-menu menu vertical nested is-active">
-                                <li><input id="category-checkbox1" type="checkbox"/><label for="category-checkbox1">Category 1</label></li>
-                                <li><input id="category-checkbox2" type="checkbox"/><label for="category-checkbox2">Category 2</label></li>
-                                <li><input id="category-checkbox3" type="checkbox"/><label for="category-checkbox3">Category 3</label></li>
-                                <li><input id="category-checkbox4" type="checkbox"/><label for="category-checkbox4">Category 4</label></li>
-                                <li><input id="category-checkbox5" type="checkbox"/><label for="category-checkbox5">Category 5</label></li>
+                                <li><input id="category-checkbox1" type="checkbox"/><label
+                                        for="category-checkbox1">Category 1</label></li>
+                                <li><input id="category-checkbox2" type="checkbox"/><label
+                                        for="category-checkbox2">Category 2</label></li>
+                                <li><input id="category-checkbox3" type="checkbox"/><label
+                                        for="category-checkbox3">Category 3</label></li>
+                                <li><input id="category-checkbox4" type="checkbox"/><label
+                                        for="category-checkbox4">Category 4</label></li>
+                                <li><input id="category-checkbox5" type="checkbox"/><label
+                                        for="category-checkbox5">Category 5</label></li>
                             </ul>
                         </li>
                         <li class="product-filters-tab margin-top-1">
-                            <a href="#">Kaina</a>
+                            <h5> &#8194; Kaina</h5>
                             <ul class="categories-menu menu vertical nested is-active">
-                                <li><input id="price-checkbox1" type="checkbox"/><label for="price-checkbox1">Under $25</label></li>
-                                <li><input id="price-checkbox2" type="checkbox"/><label for="price-checkbox2">$25–$50</label></li>
-                                <li><input id="price-checkbox3" type="checkbox"/><label for="price-checkbox3">$50–$250</label></li>
-                                <li><input id="price-checkbox4" type="checkbox"/><label for="price-checkbox4">$250–$600</label></li>
-                                <li><input id="price-checkbox5" type="checkbox"/><label for="price-checkbox5">$600–$1,000</label></li>
+                                <h:form>
+
+                                    <!--Minimum price input-->
+                                    <li>
+                                        <div class="input-group">
+                                            <span class="input-group-label">Nuo</span>
+                                            <h:inputText class="input-group-field"
+                                                         pt:type="number" pt:min="0"
+                                                         value="#{productController.minPrice}"/>
+                                        </div>
+                                    </li>
+
+                                    <!--Maximum price input-->
+                                    <li>
+                                        <div class="input-group">
+                                            <span class="input-group-label">Iki</span>
+                                            <h:inputText class="input-group-field"
+                                                         pt:type="number" pt:min="0"
+                                                         value="#{productController.maxPrice}"/>
+                                        </div>
+                                    </li>
+
+                                    <!--Confirm button-->
+                                    <li>
+                                        <h:commandButton class="button" value="Rūšiuoti">
+                                            <f:ajax execute="@form"
+                                                    listener="#{productController.searchPrice()}"
+                                                    render="productList paging-form"/>
+                                        </h:commandButton>
+
+                                    </li>
+                                </h:form>
                             </ul>
                         </li>
                     </ul>
@@ -74,7 +111,8 @@
         <!-- PRODUCT LIST. -->
         <div class="small-12 medium-9 large-8 columns">
             <h:panelGroup id="productList">
-                <ui:repeat value="#{productController.productsPage.content}" var="productItem" varStatus="loop">
+                <ui:repeat value="#{productController.productsPage.content}" var="productItem"
+                           varStatus="loop">
                     <h:outputText value="&lt;div class='row small-up-2 large-up-4 section'&gt;"
                                   escape="false" rendered="#{loop.index % 4 == 0}"/>
 
@@ -127,28 +165,36 @@
         </div> <!-- END OF PRODUCT LIST. -->
     </div>
 
+    <br/>
     <!--PAGING-->
     <h:form id="paging-form">
         <nav aria-label="Pagination">
             <ul class="pagination text-center">
                 <li class="pagination-previous">
-                    <h:commandLink value="Atgal" disabled="#{productController.pagingIndex eq 0 and productController.paging.activePage eq 0}">
-                        <f:ajax execute="@form" listener="#{productController.previous}" render="productList paging-form"/>
+                    <h:commandLink value="Atgal"
+                                   disabled="#{productController.pagingIndex eq 0 and productController.paging.activePage eq 0}">
+                        <f:ajax execute="@form" listener="#{productController.previous}"
+                                render="productList paging-form"/>
                     </h:commandLink>
-            </li>
-                <ui:repeat value="#{productController.paging.totalPages}" var="page" varStatus="status" size="#{productController.paging.minValue}">
+                </li>
+                <ui:repeat value="#{productController.paging.totalPages}" var="page"
+                           varStatus="status" size="#{productController.paging.minValue}">
                     <li>
-                        <h:commandLink rendered="#{(status.index + 1 + productController.pagingIndex) le productController.productsPage.totalPages}"
-                                       value="#{status.index + 1 + productController.pagingIndex}"
-                                       styleClass="#{status.index + productController.pagingIndex eq productController.paging.activePage ? 'current' : ''}">
-                            <f:ajax execute="@form" listener="#{productController.searchProducts(status.index + productController.pagingIndex)}"
+                        <h:commandLink
+                                rendered="#{(status.index + 1 + productController.pagingIndex) le productController.productsPage.totalPages}"
+                                value="#{status.index + 1 + productController.pagingIndex}"
+                                styleClass="#{status.index + productController.pagingIndex eq productController.paging.activePage ? 'current' : ''}">
+                            <f:ajax execute="@form"
+                                    listener="#{productController.searchProducts(status.index + productController.pagingIndex)}"
                                     render="productList paging-form"/>
                         </h:commandLink>
                     </li>
                 </ui:repeat>
                 <li class="pagination-next">
-                    <h:commandLink value="Pirmyn" disabled="#{productController.paging.activePage + productController.paging.index + 1 eq productController.productsPage.totalPages}">
-                        <f:ajax execute="@form" listener="#{productController.next}" render="productList paging-form"/>
+                    <h:commandLink value="Pirmyn"
+                                   disabled="#{productController.paging.activePage + productController.paging.index + 1 eq productController.productsPage.totalPages}">
+                        <f:ajax execute="@form" listener="#{productController.next}"
+                                render="productList paging-form"/>
                     </h:commandLink>
                 </li>
             </ul>
@@ -167,7 +213,7 @@
                 <h4 class="form-title text-center">
                     Prekė pridėta prie jūsų krepšelio
                 </h4>
-                <br />
+                <br/>
                 <div class="row">
                     <div class="columns small-12">
                         <a class="button orange expanded" data-close="">Supratau</a>
