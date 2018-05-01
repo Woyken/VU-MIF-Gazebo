@@ -1,6 +1,6 @@
 package lt.vu.mif.Payments;
 
-class PaymentError {
+public class PaymentError {
 
     public String error;
     public String message;

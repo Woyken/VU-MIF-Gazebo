@@ -1,3 +1,6 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html">
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -5,8 +8,7 @@
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 >
-
-    <div id="payment-window" hidden="">
+    <div id="payment-window">
 
         <!-- PAGE TITLE -->
         <div class="row column text-center section">
@@ -19,8 +21,8 @@
             <div class="section">
                 <div class="row">
                     <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
-                        <a href="#"
-                           class="button expanded primary js-back-to-cart">Grįžti į prekių krepšelį</a>
+                        <a href="cart.xhtml"
+                           class="button expanded primary">Grįžti į prekių krepšelį</a>
                     </div>
                 </div>
 
@@ -33,7 +35,8 @@
                             <h5 class="font-bold">Vardas</h5>
                         </div>
                         <div class="columns small-10 small-offset-1 medium-5 medium-offset-0">
-                            <h:inputText binding="#{name}" pt:placeholder="Vardenis"/>
+                            <h:inputText binding="#{name}" value="#{paymentController.name}"
+                                         pt:placeholder="Vardenis"/>
                         </div>
                     </div>
 
@@ -43,7 +46,8 @@
                             <h5 class="font-bold">Pavardė</h5>
                         </div>
                         <div class="columns small-10 small-offset-1 medium-5 medium-offset-0">
-                            <h:inputText binding="#{surname}" pt:placeholder="Pavardenis"/>
+                            <h:inputText binding="#{surname}" value="#{paymentController.surname}"
+                                         pt:placeholder="Pavardenis"/>
                         </div>
                     </div>
 
@@ -53,7 +57,7 @@
                             <h5 class="font-bold">Pristatymo adresas</h5>
                         </div>
                         <div class="columns small-10 small-offset-1 medium-5 medium-offset-0">
-                            <h:inputText binding="#{address}"
+                            <h:inputText binding="#{address}" value="#{paymentController.address}"
                                          pt:placeholder="Didlaukio g. 59 1212B"/>
                         </div>
                     </div>
@@ -65,6 +69,7 @@
                         </div>
                         <div class="columns small-10 small-offset-1 medium-5 medium-offset-0">
                             <h:inputText pt:type="number" pt:min="0" binding="#{cardNumber}"
+                                         value="#{paymentController.cardNumber}"
                                          pt:placeholder="1111222233334444"/>
                         </div>
                     </div>
@@ -83,6 +88,7 @@
                         <div class="columns medium-1">
                             <h:inputText pt:type="number" pt:min="1" pt:max="12"
                                          binding="#{monthDesktop}"
+                                         value="#{paymentController.monthDesktop}"
                                          placeholder="08"/>
                         </div>
 
@@ -94,6 +100,7 @@
                         <div class="columns medium-1">
                             <h:inputText pt:type="number" pt:min="1" pt:max="31"
                                          binding="#{yearDesktop}"
+                                         value="#{paymentController.yearDesktop}"
                                          placeholder="04"/>
                         </div>
 
@@ -103,6 +110,7 @@
                         </div>
                         <div class="columns medium-1">
                             <h:inputText pt:type="number" pt:min="0" binding="#{cvsDesktop}"
+                                         value="#{paymentController.cvsDesktop}"
                                          placeholder="679"/>
                         </div>
                     </div> <!-- End of card security numbers -->
@@ -118,7 +126,9 @@
                             <div class="row align-middle">
                                 <div class="columns small-5 margin-0 padding-0">
                                     <h:inputText pt:type="number" pt:min="1" pt:max="12"
-                                                 binding="#{monthMobile}" placeholder="08"/>
+                                                 binding="#{monthMobile}"
+                                                 value="#{paymentController.monthMobile}"
+                                                 placeholder="08"/>
                                 </div>
 
                                 <div class="columns small-1 shrink">
@@ -127,7 +137,9 @@
 
                                 <div class="columns small-5 margin-0 padding-0">
                                     <h:inputText pt:type="number" pt:min="1" pt:max="31"
-                                                 binding="#{yearMobile}" placeholder="04"/>
+                                                 binding="#{yearMobile}"
+                                                 value="#{paymentController.yearMobile}"
+                                                 placeholder="04"/>
                                 </div>
                             </div>
                         </div>
@@ -137,6 +149,7 @@
                         </div>
                         <div class="columns small-10 small-offset-1">
                             <h:inputText pt:type="number" pt:min="0" binding="#{cvsMobile}"
+                                         value="#{paymentController.cvsMobile}"
                                          placeholder="679"/>
                         </div>
 
@@ -164,6 +177,8 @@
                     <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
                         <div class="text-center">
                             <h:message class="alert-text-large" for="cardValidationInput"/>
+                            <h:outputLabel class="alert-text-large"
+                                           value="#{paymentController.message}"/>
                         </div>
                     </div>
                 </div>
@@ -174,7 +189,7 @@
                         <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
                             <h3 class="text-right">
                                 <strong>Galutinė kaina: </strong>
-                                249.97 €
+                                #{cartController.sum}
                             </h3>
                         </div>
                     </div>
@@ -184,7 +199,8 @@
                 <!-- [Button] Pay -->
                 <div class="row">
                     <div class="columns medium-8 medium-offset-2">
-                        <h:commandButton class="button expanded orange" value="Apmokėti">
+                        <h:commandButton class="button expanded orange" value="Apmokėti"
+                                         action="#{paymentController.makePayment}">
                             <f:ajax execute="@form" render="@form"/>
                         </h:commandButton>
                     </div>
@@ -196,3 +212,4 @@
     </div>
 
 </ui:composition>
+</html>

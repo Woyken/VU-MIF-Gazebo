@@ -160,7 +160,7 @@
                 <!-- [Button] Buy cart items -->
                 <div class="hide-for-small-only medium-3 medium-offset-6">
                     <!--When user is logged in-->
-                    <p:commandLink class="button orange expanded js-buy-products"
+                    <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and UserService.isLoggedIn()}"
                                    action="#{cartController.buyProducts}"
@@ -176,9 +176,10 @@
                 <!-- [Button][Mobile] Buy cart items  -->
                 <div class="hide-for-medium columns small-12 ">
                     <!--When user is logged in-->
-                    <p:commandLink class="button orange expanded js-buy-products"
+                    <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and UserService.isLoggedIn()}"
+                                   action="#{cartController.buyProducts}"
                     />
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"

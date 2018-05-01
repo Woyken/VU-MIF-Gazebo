@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,11 +20,12 @@ import lt.vu.mif.View.CartProductView;
 import lt.vu.mif.View.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Named
 @Getter
 @Setter
-@SessionScoped
+@SessionScope
 public class CartController implements Serializable {
 
     @Autowired
@@ -81,9 +81,9 @@ public class CartController implements Serializable {
         productsInCart.add(productToAdd);
     }
 
-    public void buyProducts() {
+    public String buyProducts() {
         if (CollectionUtils.isEmpty(productsInCart)) {
-            return;
+            return null;
         }
         Order order = new Order();
         order.setCreationDate(LocalDateTime.now());
@@ -92,6 +92,8 @@ public class CartController implements Serializable {
         order.setProducts(getOrderProducts(order));
 
         orderRepository.save(order);
+
+        return "payment?faces-redirect=true";
     }
 
     private List<OrderProduct> getOrderProducts(Order order) {
