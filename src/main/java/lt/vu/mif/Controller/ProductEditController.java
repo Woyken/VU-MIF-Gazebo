@@ -21,6 +21,10 @@ public class ProductEditController {
     private ProductView productView;
 
     public void onPageLoad() {
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
+            return;
+        }
+
         String productId = FacesContext.getCurrentInstance().getExternalContext()
             .getRequestParameterMap().get("productId");
         if (StringUtils.isBlank(productId)) {
