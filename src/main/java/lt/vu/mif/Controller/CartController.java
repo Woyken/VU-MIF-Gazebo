@@ -81,9 +81,9 @@ public class CartController implements Serializable {
         productsInCart.add(productToAdd);
     }
 
-    public void buyProducts() {
+    public String buyProducts() {
         if (CollectionUtils.isEmpty(productsInCart)) {
-            return;
+            return null;
         }
         Order order = new Order();
         order.setCreationDate(LocalDateTime.now());
@@ -92,6 +92,8 @@ public class CartController implements Serializable {
         order.setProducts(getOrderProducts(order));
 
         orderRepository.save(order);
+
+        return "payment?faces-redirect=true";
     }
 
     private List<OrderProduct> getOrderProducts(Order order) {
