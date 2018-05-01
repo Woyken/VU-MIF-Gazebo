@@ -73,7 +73,7 @@ public class PaymentController {
 
         PaymentResponse response = paymentService
             .MakePayment(cartController.getSum().movePointRight(2).intValueExact(), cardNumber,
-                name + " " + surname, Integer.parseInt(year), Integer.parseInt(month), cvs);
+                name + " " + surname, Integer.parseInt(year) + 2000, Integer.parseInt(month), cvs);
 
         if (!response.isSuccess()) {
             return "payment?error=" + response.getError().error + "&faces-redirect=true";
