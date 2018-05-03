@@ -65,6 +65,7 @@ public class ProductController implements Serializable {
 
     private void search() {
         productsPage = productRepository.getProductsPage(productSearch, paging).map(ProductView::new);
+        paging.setTotalPages(productsPage.getTotalPages());
     }
 
     private void resetProductSearch() {
