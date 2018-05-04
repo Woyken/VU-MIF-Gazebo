@@ -82,32 +82,6 @@ public class CartController implements Serializable {
     }
 
     public String buyProducts() {
-        if (CollectionUtils.isEmpty(productsInCart)) {
-            return null;
-        }
-        Order order = new Order();
-        order.setCreationDate(LocalDateTime.now());
-        order.setStatus(OrderStatus.ACCEPTED);
-        order.setUser(userService.getLoggedUser());
-        order.setProducts(getOrderProducts(order));
-
-        orderRepository.save(order);
-
         return "payment?faces-redirect=true";
-    }
-
-    private List<OrderProduct> getOrderProducts(Order order) {
-        List<Product> products = productRepository.get(productsInCart.stream().map(ProductView::getId).collect(Collectors.toList()));
-        List<OrderProduct> orderProducts = new ArrayList<>();
-
-        for (Product product : products) {
-            OrderProduct orderProduct = new OrderProduct();
-            orderProduct.setProduct(product);
-            orderProduct.setQuantity(productsInCart.stream().filter(t -> t.getId().equals(product.getId())).findFirst().orElseThrow(() -> new IllegalArgumentException("Cannot find product")).getAmount());
-            orderProducts.add(orderProduct);
-            orderProduct.setOrder(order);
-        }
-
-        return orderProducts;
     }
 }
