@@ -17,4 +17,11 @@ public class Image {
     @Lob
     @Column(name = "CONTENT", nullable = false)
     private byte[] content;
+
+    public Image() {
+    }
+
+    public Image(byte[] content) {
+        this.content = content;
+    }
 }
