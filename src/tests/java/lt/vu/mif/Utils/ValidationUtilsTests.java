@@ -16,7 +16,7 @@ public class ValidationUtilsTests {
         boolean invalidResult = ValidationUtils.isPasswordValid(TEST_INVALID_PASSWORD);
         boolean validResult = ValidationUtils.isPasswordValid(TEST_VALID_PASSWORD);
 
-        Assertions.assertEquals(invalidResult, false);
-        Assertions.assertEquals(validResult, true);
+        Assertions.assertFalse(invalidResult);
+        Assertions.assertTrue(validResult);
     }
 }
