@@ -1,12 +1,24 @@
 package lt.vu.mif.Controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.Entity.Order;
+import lt.vu.mif.Entity.OrderProduct;
+import lt.vu.mif.Entity.OrderStatus;
+import lt.vu.mif.Entity.Product;
 import lt.vu.mif.Payments.PaymentResponse;
 import lt.vu.mif.Payments.PaymentService;
+import lt.vu.mif.Repository.OrderRepository;
+import lt.vu.mif.Repository.ProductRepository;
+import lt.vu.mif.Service.UserService;
+import lt.vu.mif.View.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -20,6 +32,12 @@ public class PaymentController {
     private CartController cartController;
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ProductRepository productRepository;
 
     private String message;
     private String name;
@@ -60,7 +78,6 @@ public class PaymentController {
                     return;
                 default:
                     message = "Apmokėjimo servisas grąžino klaidą: \"" + error + "\"";
-                    return;
             }
         }
 
@@ -79,7 +96,38 @@ public class PaymentController {
             return "payment?error=" + response.getError().error + "&faces-redirect=true";
         }
 
+        saveOrder();
         cartController.getProductsInCart().clear();
         return "main?faces-redirect=true";
+    }
+
+    private void saveOrder() {
+        Order order = new Order();
+        order.setCreationDate(LocalDateTime.now());
+        order.setStatus(OrderStatus.ACCEPTED);
+        order.setUser(userService.getLoggedUser());
+        order.setProducts(getOrderProducts(order));
+
+        orderRepository.save(order);
+    }
+
+    private List<OrderProduct> getOrderProducts(Order order) {
+        List<Product> products = productRepository.get(
+            cartController.getProductsInCart().stream().map(ProductView::getId).collect(Collectors
+                .toList()));
+        List<OrderProduct> orderProducts = new ArrayList<>();
+
+        for (Product product : products) {
+            OrderProduct orderProduct = new OrderProduct();
+            orderProduct.setProduct(product);
+            orderProduct.setQuantity(cartController.getProductsInCart().stream()
+                .filter(t -> t.getId().equals(product.getId())).findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find product"))
+                .getAmount());
+            orderProducts.add(orderProduct);
+            orderProduct.setOrder(order);
+        }
+
+        return orderProducts;
     }
 }
