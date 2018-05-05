@@ -47,20 +47,47 @@
                     <div class="columns medium-3 small-12">
                         <h5 class="font-bold">Kaina</h5>
                     </div>
-                    <div class="columns medium-2 small-12">
+                    <div class="columns medium-9 small-12">
                         <h:inputText pt:type="number" pt:min="0"
                                      value="#{productEditController.productView.price}"
                                      binding="#{price}"/>
                     </div>
+                </div>
 
-                    <!-- On sale -->
-                    <div class="columns medium-3 medium-offset-2 small-12">
-                        <h5 class="font-bold hide-for-medium">Nuolaida (nauja kaina):</h5>
-                        <h5 class="font-bold text-right hide-for-small-only">Nuolaida (nauja kaina):</h5>
+                <!-- Price on sale -->
+                <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
                     </div>
                     <!-- TODO: add a check that the new price (on sale) can't be bigger than the current price -->
-                    <div class="columns medium-2 small-12">
+                    <div class="columns medium-9 small-12">
                         <input type="number" min="0"/>
+                    </div>
+                </div>
+
+                <!-- TODO: if admin entered a sale price - show the row below -->
+                <!-- Sale date -->
+                <div class="row align-middle">
+
+                    <!-- The sale starts on -->
+                    <div class="columns medium-2 medium-offset-3 small-12">
+                        <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
+                        <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
+                    </div>
+
+                    <div class="columns medium-2 small-12">
+                        <!-- TODO: add min to be the current day -->
+                        <input type="date" min="2018-05-05" />
+                    </div>
+
+                    <!-- The sale ends on -->
+                    <div class="columns medium-2 medium-offset-1 small-12">
+                        <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
+                        <h5 class="font-bold hide-for-medium">Galioja iki</h5>
+                    </div>
+                    <div class="columns medium-2 small-12">
+                        <!-- TODO: add min to be the current day -->
+                        <input type="date" min="2018-05-05" />
                     </div>
                 </div>
 
