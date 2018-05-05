@@ -24,7 +24,7 @@ public class Product {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "SKU", nullable = false)
+    @Column(name = "SKU", nullable = false, unique = true)
     private String sku;
 
     @Column(name = "TITLE", nullable = false)
@@ -41,7 +41,4 @@ public class Product {
 
     @Column(name = "IS_DELETED")
     private boolean deleted;
-
-    @Column(name = "DISCOUNT")
-    private Long discount;
 }

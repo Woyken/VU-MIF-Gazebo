@@ -15,17 +15,17 @@ import java.io.ByteArrayInputStream;
 public class ImageView {
 
     private Long id;
-    private byte[] bytes;
+    private byte[] content;
 
     public ImageView() {
     }
 
     public ImageView(Image image) {
         this.id = image.getId();
-        this.bytes = image.getContent();
+        this.content = image.getContent();
     }
 
     public StreamedContent getContent() {
-        return new DefaultStreamedContent(new ByteArrayInputStream(bytes));
+        return new DefaultStreamedContent(new ByteArrayInputStream(content));
     }
 }
