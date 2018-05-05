@@ -1,20 +1,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui"
->
+        xmlns:p="http://primefaces.org/ui">
 
     <div id="details-user-window">
 
         <div class="row section">
             <div class="columns small-6">
-                <p>
+                <p class="user-email-box">
                     <b>
-                        benas.bagdanovas@gmail.com
+                        #{userDetailsController.user.email}
                     </b>
                 </p>
                 <!--    Total number of orders
@@ -38,152 +38,86 @@
         </div>
 
         <div id="shopping-list-body" class="row align-middle">
-            <!-- PRODUCT LINE -->
-            <div class="small-12 medium-5 columns">
-                <div class="row align-middle align-top">
+            <h:panelGroup id="productList" style="display:contents">
+                <ui:repeat value="#{userDetailsController.page.content}" var="product">
+                    <!-- PRODUCT LINE -->
+                    <div class="small-12 medium-5 columns">
+                        <div class="row align-middle align-top">
 
-                    <!-- Product image. -->
-                    <div class="small-12 medium-6 columns align-right">
-                        <a href="../../product-details.xhtml">
-                            <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                        </a>
+                            <!-- Product image. -->
+                            <div class="small-12 medium-6 columns align-right">
+                                <a href="../../product-details.xhtml?productId=#{product.productId}">
+                                    <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
+                                        <f:param name="id" value="#{product.image.id}"/>
+                                    </p:graphicImage>
+                                </a>
+                            </div>
+
+                            <!-- Product name. -->
+                            <div class="small-12 medium-6 columns">
+                                <a href="../../product-details.xhtml?productId=#{product.productId}">
+                                    <h5>GZ Air Force v4</h5>
+                                    <h:outputLabel value="#{product.title}"/>
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Product name. -->
-                    <div class="small-12 medium-6 columns">
-                        <!-- Todo: change 1 to a real product ID. -->
-                        <a href="../../product-details.xhtml?productId=1">
-                            <h5>GZ Air Force v4</h5>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Date bought. -->
-            <div class="medium-3 columns hide-for-small-only">
-                <div class="row column">
-                    <h5 class="">2017-05-28</h5>
-                </div>
-                <div class="row column">
-                    <h5 class="">19:09:25</h5>
-                </div>
-            </div>
-            <!-- [Mobile] Date bought -->
-            <div class="small-12 columns hide-for-medium">
-                <div class="row column">
-                    <h5 class="">2017-05-28 19:09:25</h5>
-                </div>
-            </div>
-
-            <!-- Product quantity. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="">2 vnt.</h5>
-            </div>
-
-            <!-- Price of the product. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="shopping-cart-price">124.99 €</h5>
-            </div>
-
-
-
-            <!-- PRODUCT LINE -->
-            <div class="small-12 medium-5 columns">
-                <div class="row align-middle align-top">
-
-                    <!-- Product image. -->
-                    <div class="small-12 medium-6 columns align-right">
-                        <a href="../../product-details.xhtml">
-                            <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                        </a>
+                    <!-- Date bought. -->
+                    <div class="medium-3 columns hide-for-small-only">
+                        <div class="row column">
+                            <h:outputText value="#{product.date}"/>
+                        </div>
                     </div>
 
-                    <!-- Product name. -->
-                    <div class="small-12 medium-6 columns">
-                        <!-- Todo: change 1 to a real product ID. -->
-                        <a href="../../product-details.xhtml?productId=1">
-                            <h5>GZ Air Force v4</h5>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Date bought. -->
-            <div class="medium-3 columns hide-for-small-only">
-                <div class="row column">
-                    <h5 class="">2017-05-28</h5>
-                </div>
-                <div class="row column">
-                    <h5 class="">19:09:25</h5>
-                </div>
-            </div>
-            <!-- [Mobile] Date bought -->
-            <div class="small-12 columns hide-for-medium">
-                <div class="row column">
-                    <h5 class="">2017-05-28 19:09:25</h5>
-                </div>
-            </div>
-
-            <!-- Product quantity. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="">2 vnt.</h5>
-            </div>
-
-            <!-- Price of the product. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="shopping-cart-price">124.99 €</h5>
-            </div>
-
-
-
-            <!-- PRODUCT LINE -->
-            <div class="small-12 medium-5 columns">
-                <div class="row align-middle align-top">
-
-                    <!-- Product image. -->
-                    <div class="small-12 medium-6 columns align-right">
-                        <a href="../../product-details.xhtml">
-                            <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                        </a>
+                    <!-- Product quantity. -->
+                    <div class="small-12 medium-2 columns">
+                        <p:outputLabel value="#{product.quantity}"/>
                     </div>
 
-                    <!-- Product name. -->
-                    <div class="small-12 medium-6 columns">
-                        <!-- Todo: change 1 to a real product ID. -->
-                        <a href="../../product-details.xhtml?productId=1">
-                            <h5>GZ Air Force v4</h5>
-                        </a>
+                    <!-- Price of the product. -->
+                    <div class="small-12 medium-2 columns">
+                        <p:outputLabel value="#{product.price}"/>
                     </div>
-                </div>
-            </div>
-
-            <!-- Date bought. -->
-            <div class="medium-3 columns hide-for-small-only">
-                <div class="row column">
-                    <h5 class="">2017-05-28</h5>
-                </div>
-                <div class="row column">
-                    <h5 class="">19:09:25</h5>
-                </div>
-            </div>
-            <!-- [Mobile] Date bought -->
-            <div class="small-12 columns hide-for-medium">
-                <div class="row column">
-                    <h5 class="">2017-05-28 19:09:25</h5>
-                </div>
-            </div>
-
-            <!-- Product quantity. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="">2 vnt.</h5>
-            </div>
-
-            <!-- Price of the product. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="shopping-cart-price">124.99 €</h5>
-            </div>
-
+                </ui:repeat>
+            </h:panelGroup>
         </div> <!-- END OF SHOPPING LIST BODY -->
+
+        <!--PAGING-->
+        <h:form id="paging-form">
+            <nav aria-label="Pagination">
+                <ul class="pagination text-center">
+                    <li class="pagination-previous">
+                        <h:commandLink value="Atgal"
+                                       disabled="#{userDetailsController.pagingIndex eq 0 and userDetailsController.paging.activePage eq 0}">
+                            <f:ajax execute="@form" listener="#{userDetailsController.previous}"
+                                    render="productList paging-form"/>
+                        </h:commandLink>
+                    </li>
+                    <ui:repeat value="#{userDetailsController.paging.totalPages}" var="page"
+                               varStatus="status" size="#{userDetailsController.paging.minValue}">
+                        <li>
+                            <h:commandLink
+                                    rendered="#{(status.index + 1 + userDetailsController.pagingIndex) le userDetailsController.page.totalPages}"
+                                    value="#{status.index + 1 + userDetailsController.pagingIndex}"
+                                    styleClass="#{status.index + userDetailsController.pagingIndex eq userDetailsController.paging.activePage ? 'current' : ''}">
+                                <f:ajax execute="@form"
+                                        listener="#{userDetailsController.search(status.index + userDetailsController.pagingIndex)}"
+                                        render="productList paging-form"/>
+                            </h:commandLink>
+                        </li>
+                    </ui:repeat>
+                    <li class="pagination-next">
+                        <h:commandLink value="Pirmyn"
+                                       disabled="#{userDetailsController.paging.activePage + userDetailsController.paging.index + 1 eq userDetailsController.page.totalPages}">
+                            <f:ajax execute="@form" listener="#{userDetailsController.next}"
+                                    render="productList paging-form"/>
+                        </h:commandLink>
+                    </li>
+                </ul>
+            </nav>
+        </h:form>
+        <!--PAGING-->
 
     </div> <!-- END OF WINDOW -->
 
