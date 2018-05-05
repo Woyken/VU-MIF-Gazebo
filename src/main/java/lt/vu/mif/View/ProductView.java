@@ -18,7 +18,7 @@ public class ProductView {
     private String title;
     private BigDecimal price;
     private String description;
-    private List<ImageView> images;
+    private List<ImageView> images = new ArrayList<>();
 
     public ProductView() {
     }
@@ -38,7 +38,7 @@ public class ProductView {
         this.title = product.getTitle();
         this.price = product.getPrice();
         this.description = product.getDescription();
-        this.images = product.getImages().stream().map(image -> new ImageView(image)).collect(Collectors.toList());
+        this.images = product.getImages().stream().map(ImageView::new).collect(Collectors.toList());
     }
 
     public ProductView(Long id, String sku, String title, BigDecimal price, String description,
