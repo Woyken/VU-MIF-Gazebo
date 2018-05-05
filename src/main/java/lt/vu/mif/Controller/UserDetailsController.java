@@ -5,7 +5,7 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Entity.User;
-import lt.vu.mif.Repository.BoughProductRepository;
+import lt.vu.mif.Repository.BoughtProductRepository;
 import lt.vu.mif.Repository.UserRepository;
 import lt.vu.mif.Utils.Paging;
 import lt.vu.mif.View.BoughtProductView;
@@ -21,7 +21,7 @@ public class UserDetailsController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private BoughProductRepository boughProductRepository;
+    private BoughtProductRepository boughtProductRepository;
 
     private Page<BoughtProductView> page;
     private UserView user;
@@ -40,7 +40,8 @@ public class UserDetailsController {
     }
 
     private void search() {
-        page = boughProductRepository.getBoughtProductsPage(paging, user.getId()).map(BoughtProductView::new);
+        page = boughtProductRepository.getBoughtProductsPage(paging, user.getId())
+            .map(BoughtProductView::new);
         paging.setTotalPages(page.getTotalPages());
     }
 

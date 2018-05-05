@@ -1,7 +1,6 @@
 package lt.vu.mif.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import lt.vu.mif.Entity.OrderProduct;
 import lt.vu.mif.Entity.OrderProduct_;
 import lt.vu.mif.Entity.Order_;
@@ -16,9 +15,9 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BoughProductRepository extends SimpleJpaRepository<OrderProduct, Long> {
+public class BoughtProductRepository extends SimpleJpaRepository<OrderProduct, Long> {
     @Autowired
-    public BoughProductRepository(EntityManager entityManager) {
+    public BoughtProductRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport.getEntityInformation(OrderProduct.class, entityManager),
             entityManager);
     }
