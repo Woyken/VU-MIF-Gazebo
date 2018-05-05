@@ -68,7 +68,6 @@
                 <!-- TODO: if admin entered a sale price - show the row below -->
                 <!-- Sale date -->
                 <div class="row align-middle">
-
                     <!-- The sale starts on -->
                     <div class="columns medium-2 medium-offset-3 small-12">
                         <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
@@ -89,7 +88,20 @@
                         <!-- TODO: add min to be the current day -->
                         <input type="date" min="2018-05-05" />
                     </div>
+
+                    <!-- TODO: on click set discount to null -->
+                    <!-- TODO: on click set dates to null -->
+                    <!-- TODO: on click hide this row -->
+                    <!-- [Button] Remove discount -->
+                    <div class="columns small-12 medium-9 medium-offset-3">
+                        <a class="button red expanded" href="#">
+                            <i class="fi-x">
+                                Panaikinti nuolaidą
+                            </i>
+                        </a>
+                    </div>
                 </div>
+
 
                 <!-- Description -->
                 <div class="row align-middle">
@@ -112,7 +124,7 @@
                         <div class="box-for-buttons-on-image">
                             <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
                             <!-- [Button] Remove image -->
-                            <a class="button primary" href="#">
+                            <a class="button red" href="#">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -121,7 +133,7 @@
                     <div class="columns medium-3 small-12">
                         <div class="box-for-buttons-on-image">
                             <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                            <a class="button primary" href="#">
+                            <a class="button red" href="#">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -130,7 +142,7 @@
                     <div class="columns medium-3 small-12">
                         <div class="box-for-buttons-on-image">
                             <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                            <a class="button primary" href="#">
+                            <a class="button red" href="#">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -139,7 +151,7 @@
                     <div class="columns medium-3 small-12">
                         <div class="box-for-buttons-on-image">
                             <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                            <a class="button primary" href="#">
+                            <a class="button red" href="#">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -148,7 +160,7 @@
                     <div class="columns medium-3 small-12">
                         <div class="box-for-buttons-on-image">
                             <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                            <a class="button primary" href="#">
+                            <a class="button red" href="#">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -157,7 +169,7 @@
                     <!-- [Button] Add image -->
                     <div class="columns medium-3 small-12">
                         Pridėti prekės nuotrauką
-                        <input class="button hollow" type="file" accept="image/*" />
+                        <input class="button hollow" type="file" accept="image/*" multiple=""/>
                     </div>
 
                 </div> <!-- End of images -->
@@ -182,7 +194,7 @@
                 <div class="row section">
                     <div class="columns">
                         <h:commandButton
-                                class="button orange expanded"
+                                class="button green expanded"
                                 value="Išsaugoti pakeitimus"
                                 action="#{productEditController.saveChanges}"
                         >
