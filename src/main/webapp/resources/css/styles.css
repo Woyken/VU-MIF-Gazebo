@@ -318,7 +318,6 @@ ul.menu {
     font-style: italic;
     font-size: 1.9rem;
 }
-
 .product-box .product-price-old {
     text-align: center;
     float: right;
@@ -336,6 +335,16 @@ ul.menu {
     margin-right: auto;
     text-align: center;
     font-size: 1rem;
+}
+.product-details-price-new {
+    display: inline;
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+.product-details-price-old {
+    float: left;
 }
 .strike {
     text-decoration: none;

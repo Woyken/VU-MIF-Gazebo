@@ -60,16 +60,40 @@
                     </div>
                 </div>
 
+
+                <!-- IF PRODUCT IS ON SALE - SHOW THIS -->
                 <!-- Price -->
-                <div class="row">
+                <!--<div class="row">-->
+                    <!--<div class="small-3 columns">-->
+                        <!--<label for="product-quantity" class="font-bold">Kaina:</label>-->
+                    <!--</div>-->
+                    <!--<div class="small-9 columns">-->
+                        <!--&lt;!&ndash; TODO: Galutinė kaina priklausys nuo prekių kiekio! &ndash;&gt;-->
+                        <!--<p> #{productDetailsController.productView.price} €</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!-- TODO: Add logic to show if on sale -->
+
+                <!-- IF PRODUCT IS NOT ON SALE - SHOW THIS -->
+                <!-- Price -->
+                <div class="row mar-bot-5">
                     <div class="small-3 columns">
                         <label for="product-quantity" class="font-bold">Kaina:</label>
                     </div>
                     <div class="small-9 columns">
+                        <div class="row">
+                            <div class="columns small-4">
+                                <p class="product-details-price-old strike" style="display: inline;">49,99 €</p>
+                            </div>
+                            <div class="columns small-8">
+                                <p class="product-details-price-new">#{productDetailsController.productView.price} €</p>
+                            </div>
+                        </div>
                         <!-- TODO: Galutinė kaina priklausys nuo prekių kiekio! -->
-                        <p> #{productDetailsController.productView.price} €</p>
                     </div>
                 </div>
+
 
                 <!-- Add to cart -->
                 <h:commandButton class="button large hollow expanded primary-inverted" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal"
