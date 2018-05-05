@@ -34,7 +34,7 @@
                         <!-- [Button] Delete product -->
                         <div class="columns small-2">
                             <!-- Todo: implement the removal of a product. -->
-                            <a href="#" class="button primary">
+                            <a href="#" class="button red" data-open="remove-product-modal">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="columns small-2">
                             <!-- Todo: implement the removal of a product. -->
-                            <a href="#" class="button primary">
+                            <a href="#" class="button red" data-open="remove-product-modal">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="columns small-2">
                             <!-- Todo: implement the removal of a product. -->
-                            <a href="#" class="button primary">
+                            <a href="#" class="button red" data-open="remove-product-modal">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="columns small-2">
                             <!-- Todo: implement the removal of a product. -->
-                            <a href="#" class="button primary">
+                            <a href="#" class="button red" data-open="remove-product-modal">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="columns small-2">
                             <!-- Todo: implement the removal of a product. -->
-                            <a href="#" class="button primary">
+                            <a class="button red" data-open="remove-product-modal">
                                 <i class="fi-x"></i>
                             </a>
                         </div>
@@ -181,6 +181,38 @@
         </div>
 
 
+    <!-- REMOVE PRODUCT MODAL. -->
+    <div id="remove-product-modal"
+         class="reveal"
+         data-reveal=""
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    Ar tikrai norite ištrinti prekę?
+                </h4>
+
+                <br/>
+
+                <div class="row">
+                    <!-- [Button] Delete product -->
+                    <!-- TODO: add logic to delete product -->
+                    <div class="columns small-3 small-offset-2">
+                        <a class="button red expanded" href="#"> Taip </a>
+                    </div>
+
+                    <!-- [Button] Cancel -->
+                    <div class="columns small-3 small-offset-2">
+                        <button class="button primary expanded" data-close="" type="button"> Ne </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="close-button" data-close="" type="button">
+            <i class="fi-x"></i>
+        </button>
+    </div> <!-- END OF REMOVE PRODUCT MODAL. -->
 
 
 </ui:composition>
