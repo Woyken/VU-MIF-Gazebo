@@ -91,4 +91,5 @@ public class ProductController implements Serializable {
     public int getPagingIndex() {
         return paging.getIndex();
     }
+
 }
