@@ -47,10 +47,20 @@
                     <div class="columns medium-3 small-12">
                         <h5 class="font-bold">Kaina</h5>
                     </div>
-                    <div class="columns medium-9 small-12">
+                    <div class="columns medium-2 small-12">
                         <h:inputText pt:type="number" pt:min="0"
                                      value="#{productEditController.productView.price}"
                                      binding="#{price}"/>
+                    </div>
+
+                    <!-- On sale -->
+                    <div class="columns medium-3 medium-offset-2 small-12">
+                        <h5 class="font-bold hide-for-medium">Nuolaida (nauja kaina):</h5>
+                        <h5 class="font-bold text-right hide-for-small-only">Nuolaida (nauja kaina):</h5>
+                    </div>
+                    <!-- TODO: add a check that the new price (on sale) can't be bigger than the current price -->
+                    <div class="columns medium-2 small-12">
+                        <input type="number" min="0"/>
                     </div>
                 </div>
 
