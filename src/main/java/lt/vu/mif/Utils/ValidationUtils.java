@@ -12,6 +12,7 @@ public class ValidationUtils {
     private final String YEAR_REGEX = "^\\d{2}$";
     private final String MONTH_REGEX = "^(0?[1-9]|1[012])$";
     private final String CVS_REGEX = "^\\d{3}$";
+    private final String DISCOUNT_REGEX = "^(100|[1-9][0-9]?)$";
 
 
     public static boolean isPasswordValid(String password) {
@@ -37,4 +38,6 @@ public class ValidationUtils {
     public static boolean isCvsValid(String cvs) {
         return Pattern.matches(CVS_REGEX, cvs);
     }
+
+    public static boolean isDiscountValid(String discount) { return Pattern.matches(DISCOUNT_REGEX, discount); }
 }
