@@ -127,8 +127,36 @@
                         <!-- Product name -->
                         <h5 class="product-name bor-bot">#{productItem.title}</h5>
 
+
+                        <!-- IF THE PRODUCT IS NOT ON SALE - SHOW THIS -->
                         <!-- Product price -->
                         <p class="product-price">€ #{productItem.price}</p>
+
+                        <!-- TODO: Add logic to show if on sale -->
+                        <!-- IF THE PRODUCT IS ON SALE - SHOW THIS -->
+                        <!--<div class="hide-for-small-only">-->
+                            <!--&lt;!&ndash; Product price &ndash;&gt;-->
+                            <!--<p class="product-price-new">€ #{productItem.price}</p>-->
+
+                            <!--&lt;!&ndash; Product old price &ndash;&gt;-->
+                            <!--<span class="product-price-old strike mar-bot-10">€ 59,99</span>-->
+                        <!--</div>-->
+
+                        <!--&lt;!&ndash; [Mobile] &ndash;&gt;-->
+                        <!--<div class="hide-for-medium">-->
+                            <!--<div class="row align-center">-->
+                                <!--<div class="columns small-8 small-offset-2 expanded">-->
+                                    <!--&lt;!&ndash; Product old price &ndash;&gt;-->
+                                    <!--<p class="product-price-mb-old strike mar-bot-5">€ 59,99</p>-->
+                                <!--</div>-->
+
+                                <!--<div class="columns small-12">-->
+                                    <!--&lt;!&ndash; Product price &ndash;&gt;-->
+                                    <!--<p class="product-price-mb">€ #{productItem.price}</p>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div> &lt;!&ndash; END OF PRODUCT ON SALE &ndash;&gt;-->
+
 
                         <!-- [Button] To cart -->
                         <h:form>
