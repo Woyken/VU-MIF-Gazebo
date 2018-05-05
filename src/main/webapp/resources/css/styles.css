@@ -387,6 +387,18 @@ label.input-label {
 	font-size: larger;
 }
 
+.box-for-buttons-on-image {
+	position: relative;
+}
+.box-for-buttons-on-image img {
+    max-height: 20%;
+}
+.box-for-buttons-on-image a {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
 /* --- --- --- UTILITIES */
 
 .no-mar {	/* no margin*/
