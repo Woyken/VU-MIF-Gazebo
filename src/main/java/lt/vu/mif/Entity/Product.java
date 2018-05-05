@@ -42,6 +42,6 @@ public class Product {
     @Column(name = "IS_DELETED")
     private boolean deleted;
 
-    @Column(name = "DISCOUNT")
-    private Long discount;
+    @Column(name = "NEWPRICE")
+    private BigDecimal newPrice;
 }

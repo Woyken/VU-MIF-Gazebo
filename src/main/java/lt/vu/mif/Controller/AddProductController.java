@@ -29,7 +29,7 @@ public class AddProductController {
         product.setTitle(productView.getTitle());
         product.setPrice(productView.getPrice());
         product.setSku(productView.getSku());
-        product.setDiscount(productView.getDiscount());
+        product.setNewPrice(productView.getNewPrice());
         product.getImages().addAll(productView.getImages().stream().map(image -> new Image(image.getBytes())).collect(Collectors.toList()));
         productRepository.save(product);
         showSuccessMessage = true;

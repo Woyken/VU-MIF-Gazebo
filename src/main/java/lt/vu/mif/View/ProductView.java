@@ -16,7 +16,7 @@ public class ProductView {
     private Long id;
     private String sku;
     private String title;
-    private Long discount;
+    private BigDecimal newPrice;
     private BigDecimal price;
     private String description;
     private List<ImageView> images = new ArrayList<>();
@@ -29,7 +29,7 @@ public class ProductView {
         this.sku = other.sku;
         this.title = other.title;
         this.price = other.price;
-        this.discount = other.discount;
+        this.newPrice = other.newPrice;
         this.description = other.description;
         this.images = new ArrayList<>(other.images);
     }
@@ -39,18 +39,18 @@ public class ProductView {
         this.sku = product.getSku();
         this.title = product.getTitle();
         this.price = product.getPrice();
-        this.discount = product.getDiscount();
+        this.newPrice = product.getNewPrice();
         this.description = product.getDescription();
         this.images = product.getImages().stream().map(ImageView::new).collect(Collectors.toList());
     }
 
-    public ProductView(Long id, String sku, String title, BigDecimal price, Long discount, String description,
+    public ProductView(Long id, String sku, String title, BigDecimal price, BigDecimal newPrice, String description,
         List<ImageView> images) {
         this.id = id;
         this.sku = sku;
         this.title = title;
         this.price = price;
-        this.discount = discount;
+        this.newPrice = newPrice;
         this.description = description;
         this.images = new ArrayList<>(images);
     }
