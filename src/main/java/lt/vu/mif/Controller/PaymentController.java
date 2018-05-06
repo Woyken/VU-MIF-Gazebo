@@ -18,6 +18,7 @@ import lt.vu.mif.Payments.PaymentService;
 import lt.vu.mif.Repository.OrderRepository;
 import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.Service.UserService;
+import lt.vu.mif.View.OrderView;
 import lt.vu.mif.View.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
@@ -38,6 +39,8 @@ public class PaymentController {
     private UserService userService;
     @Autowired
     private ProductRepository productRepository;
+
+    private OrderView orderView = new OrderView();
 
     private String message;
     private String name;
@@ -107,6 +110,7 @@ public class PaymentController {
         order.setStatus(OrderStatus.ACCEPTED);
         order.setUser(userService.getLoggedUser());
         order.setProducts(getOrderProducts(order));
+        order.setRating(orderView.getRating());
 
         orderRepository.save(order);
     }

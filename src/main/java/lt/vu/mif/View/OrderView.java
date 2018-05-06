@@ -16,22 +16,12 @@ import java.util.List;
 @Getter
 @Setter
 public class OrderView {
-    private Long id;
-    private User user;
     private Long rating;
-    private OrderStatus status;
-    private LocalDateTime creationDate;
-    private List<OrderProduct> products = new ArrayList<>();
 
     public OrderView() {
     }
 
     public OrderView(Order order) {
-        this.id = order.getId();
-        this.user = order.getUser();
         this.rating = order.getRating();
-        this.status = order.getStatus();
-        this.products = order.getProducts();
-        this.creationDate = order.getCreationDate();
     }
 }
