@@ -22,7 +22,7 @@ public class AllProductsController {
     private List<ProductView> products;
 
     @Setter
-    Long productToDeleteId;
+    private Long productToDeleteId;
 
 
     public void onPageLoad() {
@@ -30,10 +30,10 @@ public class AllProductsController {
             return;
         }
 
-        updateProducts();
+        getProducts();
     }
 
-    private void updateProducts() {
+    private void getProducts() {
         products = productRepository.getAll().stream().map(ProductView::new)
             .collect(Collectors.toList());
     }
@@ -45,7 +45,7 @@ public class AllProductsController {
 
         productRepository.deleteById(productToDeleteId);
 
-        updateProducts();
+        getProducts();
 
         return "admin-all-products?faces-redirect=true";
     }
