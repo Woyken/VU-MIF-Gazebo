@@ -29,7 +29,7 @@
                         </a>
                         <h:form id="my-form">
                             <div class="small-8 small-offset-2 medium-12 medium-offset-0">
-                                <h:commandButton value="#{user.blocked ? 'Atblokuoti' : 'Blokuoti'}" styleClass="button expanded #{user.blocked ? 'green' : 'orange'}">
+                                <h:commandButton value="#{user.blocked ? 'Atblokuoti' : 'Blokuoti'}" styleClass="button expanded #{user.blocked ? 'green' : 'orange'}" disabled="#{user.role == 'ADMIN' ? 'true' : 'false'}">
                                     <f:ajax execute="@form" listener="#{usersController.blockUser(user)}" render="allUsersPanel"/>
                                 </h:commandButton>
                             </div>
