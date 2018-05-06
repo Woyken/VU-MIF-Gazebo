@@ -53,13 +53,26 @@
 	color: white;
 }
 
-
+.button.green {
+    color: white;
+    background-color: #9fc832;
+}
+.button.green:hover {
+    background-color: #4CAF50;
+}
 .button.orange {
 	color: white;
 	background-color: #FF9800;
 }
 .button.orange:hover {
 	background-color: #F57C00;;
+}
+.button.red {
+	color: white;
+	background-color: #F44336;
+}
+.button.red:hover {
+	background-color: #D32F2F;
 }
 
 .button.success {
@@ -180,6 +193,14 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 	margin-left: 5%;
 }
 
+/* Pagination */
+.pagination li {
+	display: inline-block;
+}
+
+
+
+
 /* --- --- --- Our styles. */
 
 
@@ -281,7 +302,13 @@ ul.menu {
 	border-bottom: 1px solid #666565;
 }
 
-
+/* [Mobile] Off-canvas product filtering */
+#product-filter-canvas {
+    background-color: white;
+}
+#product-filter-canvas .filter-price-menu {
+    margin-left: 0;
+}
 
 .product-box {
 	border: 1px #ffffff solid;
@@ -295,21 +322,72 @@ ul.menu {
 .product-box > a > .thumbnail {
     margin-top: 1em;
 }
-.product-box > h5.product-name {
+.product-box h5.product-name {
 	text-align: center;
 	font-family: 'IBM Plex Sans', sans-serif;
 	font-weight: 600;
 	font-size: 1.5rem;
 	margin-bottom: 0;
 }
-.product-box > p.product-price {
+.product-box .product-price {
 	text-align: center;
 	font-family: 'IBM Plex Sans', sans-serif;
 	font-weight: 400;
 	font-style: italic;
-	font-size: 1rem;
+	font-size: 1.9rem;
 }
-
+.product-box .product-price-new {
+    display: inline;
+    margin-left: 10%;
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 1.9rem;
+}
+.product-box .product-price-old {
+    text-align: center;
+    float: right;
+    font-size: 1.1rem;
+}
+.product-box .product-price-mb {
+    text-align: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 1.4rem;
+}
+.product-box .product-price-mb-old {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 1rem;
+}
+.product-details-price-new {
+    display: inline;
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+.product-details-price-old {
+    float: left;
+}
+.strike {
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+}
+.strike:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 2px solid red;
+    height: 50%;
+    width: 100%;
+    transform: rotateZ(-6deg);
+}
 
 h4.form-title {
 	color: #616161;
@@ -391,6 +469,7 @@ label.input-label {
 	position: relative;
 }
 .box-for-buttons-on-image img {
+    /*width: 100%;*/
     max-height: 20%;
 }
 .box-for-buttons-on-image a {
@@ -409,6 +488,9 @@ label.input-label {
 }
 .mar-bot-5 {	/* margin bottom 5% */
 	margin-bottom: 5%;
+}
+.mar-bot-10 {
+    margin-bottom: 10%;
 }
 .no-bor-bot { 	/* no bottom border */
 	border-width: 0;

@@ -1,11 +1,10 @@
 <ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:c="http://java.sun.com/jsp/jstl/core">
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <!-- PAGE TITLE. -->
     <div class="row column text-center section">
@@ -55,27 +54,68 @@
                         <label for="product-quantity" class="font-bold middle">Kiekis:</label>
                     </div>
                     <div class="small-9 columns">
-                        <!-- TODO: Max skaičius priklauso nuo prekių kiekio sandelyje! -->
                         <h:inputText type="number" id="product-quantity" value="1" min="1" max="99" binding="#{amount}"/>
                     </div>
                 </div>
 
+
+                <!-- IF PRODUCT IS ON SALE - SHOW THIS -->
                 <!-- Price -->
-                <div class="row">
+                <!--<div class="row">-->
+                    <!--<div class="small-3 columns">-->
+                        <!--<label for="product-quantity" class="font-bold">Kaina:</label>-->
+                    <!--</div>-->
+                    <!--<div class="small-9 columns">-->
+                        <!--<p> #{productDetailsController.productView.price} €</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <!-- IF PRODUCT IS NOT ON SALE - SHOW THIS -->
+                <!-- Price -->
+                <div class="row mar-bot-5">
                     <div class="small-3 columns">
                         <label for="product-quantity" class="font-bold">Kaina:</label>
                     </div>
                     <div class="small-9 columns">
-                        <!-- TODO: Galutinė kaina priklausys nuo prekių kiekio! -->
-                        <p> #{productDetailsController.productView.price} €</p>
+                        <div class="row">
+                            <div class="columns small-4">
+                                <p class="product-details-price-old strike" style="display: inline;">49,99 €</p>
+                            </div>
+                            <div class="columns small-8">
+                                <p class="product-details-price-new">#{productDetailsController.productView.price} €</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- For validation -->
+                <h:inputHidden id="validationInput" value="true">
+                    <f:validator binding="#{buyProductValidation}"/>
+                    <f:attribute name="amount" value="#{amount}"/>
+                </h:inputHidden>
+
+                <!-- Error Message -->
+                <div class="row">
+                    <div class="columns">
+                        <div class="mar-bot-5">
+                            <h:message class="alert-text" for="validationInput"/>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Add to cart -->
-                <h:commandButton class="button large hollow expanded primary-inverted" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal"
-                                 actionListener="#{cartController.addProductToCart(productDetailsController.productView.id, amount.value)}">
-                    <f:ajax execute="@form" render="@none" />
+                <h:commandButton class="button large hollow expanded primary-inverted"
+                                 value="PRIDĖTI Į KREPŠELĮ">
+                    <f:actionListener
+                            binding="#{cartController.addProductToCart(productDetailsController.productView.id, amount.value)}"/>
+                    <f:actionListener
+                            binding="#{productDetailsController.setShowSuccessMessage(true)}"/>
+                    <f:ajax execute="@form" render="@form"/>
                 </h:commandButton>
+
+                <p:outputLabel rendered="#{productDetailsController.showSuccessMessage}"
+                               value="Prekė pridėta į krepšelį"/>
             </h:form>
 
             <!-- [Button][Admin] Edit product -->

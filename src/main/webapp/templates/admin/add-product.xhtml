@@ -1,80 +1,105 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://java.sun.com/jsf/html">
+      xmlns:p="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
 
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<div id="add-product-window">
+    <div id="add-product-window">
 
-    <!-- PAGE TITLE -->
-    <div class="row column text-center section">
-        <h1 class="section-title">Pridėti prekę</h1>
-    </div> <!-- END OF PAGE TITLE -->
+        <!-- PAGE TITLE -->
+        <div class="row column text-center section">
+            <h1 class="section-title">Pridėti prekę</h1>
+        </div> <!-- END OF PAGE TITLE -->
 
 
-    <!-- ADD PRODUCT -->
-    <div class="section">
-        <h:form>
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">SKU kodas</h5>
+        <!-- ADD PRODUCT -->
+        <div class="section">
+            <h:form>
+                <div class="row align-middle">
+                    <div class="columns small-3">
+                        <h5 class="font-bold">SKU kodas</h5>
+                    </div>
+                    <div class="columns small-9">
+                        <h:inputText value="#{addProductController.productView.sku}"
+                                     binding="#{sku}"/>
+                    </div>
                 </div>
-                <div class="columns small-9">
-                    <h:inputText value="#{addProductController.productView.sku}" />
-                </div>
-            </div>
 
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Pavadinimas</h5>
+                <div class="row align-middle">
+                    <div class="columns small-3">
+                        <h5 class="font-bold">Pavadinimas</h5>
+                    </div>
+                    <div class="columns small-9">
+                        <h:inputText value="#{addProductController.productView.title}"
+                                     binding="#{title}"/>
+                    </div>
                 </div>
-                <div class="columns small-9">
-                    <h:inputText value="#{addProductController.productView.title}"/>
-                </div>
-            </div>
 
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Kaina</h5>
+                <div class="row align-middle">
+                    <div class="columns small-3">
+                        <h5 class="font-bold">Kaina</h5>
+                    </div>
+                    <div class="columns small-9">
+                        <h:inputText value="#{addProductController.productView.price}"
+                                     binding="#{price}"/>
+                    </div>
                 </div>
-                <div class="columns small-9">
-                    <h:inputText value="#{addProductController.productView.price}"/>
-                </div>
-            </div>
 
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Aprašymas</h5>
+                <div class="row align-middle">
+                    <div class="columns small-3">
+                        <h5 class="font-bold">Aprašymas</h5>
+                    </div>
+                    <div class="columns small-9">
+                        <h:inputTextarea value="#{addProductController.productView.description}"
+                                         rows="4"/>
+                    </div>
                 </div>
-                <div class="columns small-9">
-                    <h:inputTextarea value="#{addProductController.productView.description}" rows="4"/>
-                </div>
-            </div>
 
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Nuotrauka</h5>
+                <div class="row align-middle">
+                    <div class="columns small-3">
+                        <h5 class="font-bold">Nuotrauka</h5>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row section">
-                <div class="columns">
-                    <h:commandButton class="button orange expanded" value="PRIDĖTI PREKĘ"
-                                     action="#{addProductController.saveProduct}">
-                    </h:commandButton>
+                <!-- For validation -->
+                <h:inputHidden id="validationInput" value="true">
+                    <f:validator binding="#{editProductValidation}"/>
+                    <f:attribute name="sku" value="#{sku}"/>
+                    <f:attribute name="title" value="#{title}"/>
+                    <f:attribute name="price" value="#{price}"/>
+                </h:inputHidden>
+
+                <!-- Error Message -->
+                <div class="row">
+                    <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
+                        <div class="text-center">
+                            <h:message class="alert-text-large" for="validationInput"/>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row column text-center">
-                <p:outputLabel rendered="#{addProductController.showSuccessMessage}" value="Produktas sėkmingai pridėtas!"/>
-            </div>
-        </h:form>
+
+                <div class="row section">
+                    <div class="columns">
+                        <h:commandButton class="button orange expanded" value="PRIDĖTI PREKĘ"
+                                         action="#{addProductController.saveProduct}">
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
+                    </div>
+                </div>
+                <div class="row column text-center">
+                    <p:outputLabel rendered="#{addProductController.showSuccessMessage}"
+                                   value="Produktas sėkmingai pridėtas!"/>
+                </div>
+            </h:form>
+        </div>
+        <!-- END OF ADD PRODUCT -->
+
     </div>
-    <!-- END OF ADD PRODUCT -->
-
-</div>
 
 </ui:composition>
 </html>

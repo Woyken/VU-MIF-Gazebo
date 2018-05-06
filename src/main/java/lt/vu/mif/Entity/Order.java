@@ -41,6 +41,9 @@ public class Order {
     @Enumerated(value = EnumType.STRING)
     private OrderStatus status;
 
+    @Column(name = "RATING")
+    private Long rating;
+
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> products = new ArrayList<>();
 }
