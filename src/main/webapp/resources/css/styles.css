@@ -294,7 +294,13 @@ ul.menu {
 	border-bottom: 1px solid #666565;
 }
 
-
+/* [Mobile] Off-canvas product filtering */
+#product-filter-canvas {
+    background-color: white;
+}
+#product-filter-canvas .filter-price-menu {
+    margin-left: 0;
+}
 
 .product-box {
 	border: 1px #ffffff solid;

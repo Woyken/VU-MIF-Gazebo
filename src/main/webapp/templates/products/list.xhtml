@@ -41,67 +41,213 @@
         </section>
     </div> <!-- END OF SEARCH ITEMS BAR. -->
 
+
+    <!-- [Mobile] OFF-CANVAS PRODUCT FILTER -->
+    <div class="row hide-for-medium">
+        <div class="off-canvas-wrapper">
+            <div id="product-filter-canvas" class="off-canvas position-left" data-off-canvas="">
+
+                <!-- [Mobile] PRICE FILTER -->
+                <div class="columns small-12 margin-top-1">
+                    <h5 class="text-center font-bold">Kaina</h5>
+
+                    <ul class="categories-menu menu vertical nested is-active filter-price-menu">
+                        <h:form>
+                            <!--Minimum price input-->
+                            <li>
+                                <span class="input-group-label">Nuo</span>
+                                <h:inputText class="input-group-field"
+                                    pt:type="number"
+                                    pt:min="0"
+                                    pt:placeholder="10"
+                                    value="#{productController.minPrice}"/>
+                            </li>
+
+                            <!--Maximum price input-->
+                            <li class="margin-top-1">
+                                <span class="input-group-label">Iki</span>
+                                <h:inputText class="input-group-field"
+                                    pt:type="number"
+                                    pt:min="0"
+                                    pt:placeholder="59"
+                                    value="#{productController.maxPrice}"/>
+                            </li>
+
+                            <!-- [Mobile][Button] Filter by price -->
+                            <li class="margin-top-1">
+                                <h:commandButton class="button expanded" value="Filtruoti" pt:data-close="">
+                                    <f:ajax execute="@form"
+                                            listener="#{productController.searchPrice()}"
+                                            render="productList paging-form"/>
+                                </h:commandButton>
+
+                            </li>
+                        </h:form>
+                    </ul>
+                </div> <!-- END OF [Mobile] PRICE FILTER -->
+
+
+                <!-- [Mobile] CATEGORY FILTER -->
+                <div class="columns small-12 margin-top-2">
+                    <h5 class="text-center font-bold"> Kategorija </h5>
+
+                    <ul class="categories-menu menu vertical nested is-active">
+
+                        <li>
+                            <input id="category-checkbox-mobile1" type="checkbox"/>
+                            <label for="category-checkbox-mobile1">
+                                Category 1
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="category-checkbox-mobile2" type="checkbox"/>
+                            <label for="category-checkbox-mobile2">
+                                Category 2
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="category-checkbox-mobile3" type="checkbox"/>
+                            <label for="category-checkbox-mobile3">
+                                Category 3
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="category-checkbox-mobile4" type="checkbox"/>
+                            <label for="category-checkbox-mobile4">
+                                Category 4
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="category-checkbox-mobile5" type="checkbox"/>
+                            <label for="category-checkbox-mobile5">
+                                Category 5
+                            </label>
+                        </li>
+
+                    </ul>
+
+                    <!-- [Button][Mobile] Filter by categories -->
+                    <button type="button" class="button expanded" data-close="">
+                        Filtruoti
+                    </button>
+
+                </div> <!-- END OF [Mobile] CATEGORY FILTER -->
+
+
+            </div>
+        </div>
+
+        <!-- [Mobile][Button] Filter by category -->
+        <div class="columns small-12">
+            <button type="button" class="button expanded" data-toggle="product-filter-canvas">
+                Filtruoti prekes
+            </button>
+        </div>
+
+    </div><!-- END OF [MOBILE] OFF-CANVAS PRODUCT FILTER -->
+
+
+
+    <!-- MAIN SECTION -->
     <div class="row expanded">
 
+
         <!-- FILTERING. -->
-        <aside class="product-filters medium-3 large-2 columns">
-            <div class="hide-for-small-only" data-sticky-container="">
+        <aside class="product-filters medium-3 large-2 columns hide-for-small-only">
+            <div data-sticky-container="">
                 <div class="sticky" data-sticky="" data-top-anchor="search">
-                    <h3 class="product-filters-header hide-for-small-only margin-top-3"><br/>Rūšiuokite:
-                    </h3>
-                    <ul class="vertical menu hide-for-small-only" data-accordion-menu="">
+                    <br/>
+                    <ul class="vertical menu margin-top-3" data-accordion-menu="">
+
+
+                        <!-- Filter by price -->
                         <li class="product-filters-tab margin-top-1">
-                            <h5> &#8194; Kategorija</h5>
-                            <ul class="categories-menu menu vertical nested is-active">
-                                <li><input id="category-checkbox1" type="checkbox"/><label
-                                        for="category-checkbox1">Category 1</label></li>
-                                <li><input id="category-checkbox2" type="checkbox"/><label
-                                        for="category-checkbox2">Category 2</label></li>
-                                <li><input id="category-checkbox3" type="checkbox"/><label
-                                        for="category-checkbox3">Category 3</label></li>
-                                <li><input id="category-checkbox4" type="checkbox"/><label
-                                        for="category-checkbox4">Category 4</label></li>
-                                <li><input id="category-checkbox5" type="checkbox"/><label
-                                        for="category-checkbox5">Category 5</label></li>
-                            </ul>
-                        </li>
-                        <li class="product-filters-tab margin-top-1">
-                            <h5> &#8194; Kaina</h5>
+                            <h5 class="text-center font-bold "> Kaina </h5>
                             <ul class="categories-menu menu vertical nested is-active">
                                 <h:form>
 
-                                    <!--Minimum price input-->
+                                    <!-- Minimum price input -->
                                     <li>
                                         <div class="input-group">
                                             <span class="input-group-label">Nuo</span>
                                             <h:inputText class="input-group-field"
-                                                         pt:type="number" pt:min="0"
-                                                         value="#{productController.minPrice}"/>
+                                                 pt:type="number"
+                                                 pt:min="0"
+                                                 pt:placeholder="9"
+                                                 value="#{productController.minPrice}"/>
                                         </div>
                                     </li>
 
-                                    <!--Maximum price input-->
+                                    <!-- Maximum price input -->
                                     <li>
                                         <div class="input-group">
                                             <span class="input-group-label">Iki</span>
                                             <h:inputText class="input-group-field"
-                                                         pt:type="number" pt:min="0"
-                                                         value="#{productController.maxPrice}"/>
+                                                 pt:type="number"
+                                                 pt:min="0"
+                                                 pt:placeholder="59"
+                                                 value="#{productController.maxPrice}"/>
                                         </div>
                                     </li>
 
                                     <!--Confirm button-->
                                     <li>
-                                        <h:commandButton class="button" value="Rūšiuoti">
+                                        <h:commandButton class="button expanded" value="Filtruoti">
                                             <f:ajax execute="@form"
                                                     listener="#{productController.searchPrice()}"
                                                     render="productList paging-form"/>
                                         </h:commandButton>
-
                                     </li>
+
                                 </h:form>
                             </ul>
                         </li>
+
+
+                        <!-- Filter by categories -->
+                        <li class="margin-top-2">
+                            <h5 class="text-center font-bold "> Kategorija </h5>
+                            <ul class="menu vertical nested is-active">
+                                <li>
+                                    <input id="category-checkbox1" type="checkbox"/>
+                                    <label for="category-checkbox1">
+                                        Sportiniai
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <input id="category-checkbox2" type="checkbox"/>
+                                    <label for="category-checkbox2">
+                                        Proginiai
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <input id="category-checkbox3" type="checkbox"/>
+                                    <label for="category-checkbox3">
+                                        Laisvalaikio
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <input id="category-checkbox4" type="checkbox"/>
+                                    <label for="category-checkbox4">
+                                        Šventėms
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <button type="button" class="button expanded">
+                                        Filtruoti
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -191,7 +337,8 @@
                 </ui:repeat>
             </h:panelGroup>
         </div> <!-- END OF PRODUCT LIST. -->
-    </div>
+
+    </div> <!-- END OF MAIN SECTION -->
 
     <br/>
     <!--PAGING-->
