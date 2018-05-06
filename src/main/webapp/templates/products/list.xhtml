@@ -194,41 +194,47 @@
     </div>
 
     <br/>
-    <!--PAGING-->
-    <h:form id="paging-form">
-        <nav aria-label="Pagination">
-            <ul class="pagination text-center">
-                <li class="pagination-previous">
-                    <h:commandLink value="Atgal"
-                                   disabled="#{productController.pagingIndex eq 0 and productController.paging.activePage eq 0}">
-                        <f:ajax execute="@form" listener="#{productController.previous}"
-                                render="productList paging-form"/>
-                    </h:commandLink>
-                </li>
-                <ui:repeat value="#{productController.paging.totalPages}" var="page"
-                           varStatus="status" size="#{productController.paging.minValue}">
-                    <li>
-                        <h:commandLink
-                                rendered="#{(status.index + 1 + productController.pagingIndex) le productController.productsPage.totalPages}"
-                                value="#{status.index + 1 + productController.pagingIndex}"
-                                styleClass="#{status.index + productController.pagingIndex eq productController.paging.activePage ? 'current' : ''}">
-                            <f:ajax execute="@form"
-                                    listener="#{productController.searchProducts(status.index + productController.pagingIndex)}"
-                                    render="productList paging-form"/>
-                        </h:commandLink>
-                    </li>
-                </ui:repeat>
-                <li class="pagination-next">
-                    <h:commandLink value="Pirmyn"
-                                   disabled="#{productController.paging.activePage + productController.paging.index + 1 eq productController.productsPage.totalPages}">
-                        <f:ajax execute="@form" listener="#{productController.next}"
-                                render="productList paging-form"/>
-                    </h:commandLink>
-                </li>
-            </ul>
-        </nav>
-    </h:form>
-    <!--PAGING-->
+
+    <!-- PAGINATION -->
+    <div class="row section">
+        <div class="columns small-12">
+            <h:form id="paging-form">
+                <nav aria-label="Pagination">
+                    <ul class="pagination text-center">
+                        <li class="pagination-previous">
+                            <h:commandLink value="Atgal"
+                                           disabled="#{productController.pagingIndex eq 0 and productController.paging.activePage eq 0}">
+                                <f:ajax execute="@form" listener="#{productController.previous}"
+                                        render="productList paging-form"/>
+                            </h:commandLink>
+                        </li>
+                        <ui:repeat value="#{productController.paging.totalPages}" var="page"
+                                   varStatus="status" size="#{productController.paging.minValue}">
+                            <li>
+                                <h:commandLink
+                                        rendered="#{(status.index + 1 + productController.pagingIndex) le productController.productsPage.totalPages}"
+                                        value="#{status.index + 1 + productController.pagingIndex}"
+                                        styleClass="#{status.index + productController.pagingIndex eq productController.paging.activePage ? 'current' : ''}">
+                                    <f:ajax execute="@form"
+                                            listener="#{productController.searchProducts(status.index + productController.pagingIndex)}"
+                                            render="productList paging-form"/>
+                                </h:commandLink>
+                            </li>
+                        </ui:repeat>
+                        <li class="pagination-next">
+                            <h:commandLink value="Pirmyn"
+                                           disabled="#{productController.paging.activePage + productController.paging.index + 1 eq productController.productsPage.totalPages}">
+                                <f:ajax execute="@form" listener="#{productController.next}"
+                                        render="productList paging-form"/>
+                            </h:commandLink>
+                        </li>
+                    </ul>
+                </nav>
+            </h:form>
+        </div>
+    </div> <!-- END OF PAGINATION -->
+
+
 
     <!-- INFORM USER ABOUT ADDING TO CART MODAL -->
     <div id="inform-user-about-adding-to-cart-modal"
