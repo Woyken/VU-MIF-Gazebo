@@ -55,7 +55,6 @@
                         <label for="product-quantity" class="font-bold middle">Kiekis:</label>
                     </div>
                     <div class="small-9 columns">
-                        <!-- TODO: Max skaičius priklauso nuo prekių kiekio sandelyje! -->
                         <h:inputText type="number" id="product-quantity" value="1" min="1" max="99" binding="#{amount}"/>
                     </div>
                 </div>
@@ -68,12 +67,10 @@
                         <!--<label for="product-quantity" class="font-bold">Kaina:</label>-->
                     <!--</div>-->
                     <!--<div class="small-9 columns">-->
-                        <!--&lt;!&ndash; TODO: Galutinė kaina priklausys nuo prekių kiekio! &ndash;&gt;-->
                         <!--<p> #{productDetailsController.productView.price} €</p>-->
                     <!--</div>-->
                 <!--</div>-->
 
-                <!-- TODO: Add logic to show if on sale -->
 
                 <!-- IF PRODUCT IS NOT ON SALE - SHOW THIS -->
                 <!-- Price -->
@@ -90,7 +87,6 @@
                                 <p class="product-details-price-new">#{productDetailsController.productView.price} €</p>
                             </div>
                         </div>
-                        <!-- TODO: Galutinė kaina priklausys nuo prekių kiekio! -->
                     </div>
                 </div>
 
