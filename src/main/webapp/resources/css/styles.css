@@ -193,6 +193,14 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 	margin-left: 5%;
 }
 
+/* Pagination */
+.pagination li {
+	display: inline-block;
+}
+
+
+
+
 /* --- --- --- Our styles. */
 
 
