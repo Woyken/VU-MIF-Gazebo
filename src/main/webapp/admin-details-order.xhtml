@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{ordersController.onPageLoad}"/>
+</f:metadata>
+
+<h:head>
+    <title>Home</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <h:outputStylesheet name="/css/vendor/foundation.css" />
+    <h:outputStylesheet name="/css/vendor/foundation-icons.css" />
+    <h:outputStylesheet name="/css/styles.css" />
+</h:head>
+<h:body>
+
+    <div class="body-wrapper">
+        <!-- NAVIGATION BAR -->
+        <ui:include src="./templates/navbars/_container.xhtml" />
+
+        <!-- VIEW ORDER DETAILS -->
+        <ui:include src="./templates/admin/order-details.xhtml" />
+    </div>
+
+    <!-- FOOTER -->
+    <ui:include src="./templates/footers/footer.xhtml" />
+
+    <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
+    <h:outputScript name="js/vendor/foundation.js"/>
+    <h:outputScript name="js/foundation-app.js"/>
+    <h:outputScript name="js/vendor/what-input.js"/>
+
+</h:body>
+</html>

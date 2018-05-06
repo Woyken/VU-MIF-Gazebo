@@ -16,6 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 public class OrderView {
+
     private Long id;
     private User user;
     private Long rating;
@@ -31,7 +32,7 @@ public class OrderView {
         this.user = order.getUser();
         this.rating = order.getRating();
         this.status = order.getStatus();
-        this.products = order.getProducts();
         this.creationDate = order.getCreationDate();
+        this.products = order.getProducts();
     }
 }

@@ -4,24 +4,28 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import lt.vu.mif.Entity.Image;
-import lt.vu.mif.Entity.Product;
+
+import lt.vu.mif.Entity.*;
 import lt.vu.mif.Entity.Roles.Role;
-import lt.vu.mif.Entity.User;
+import lt.vu.mif.Repository.OrderRepository;
 import lt.vu.mif.Repository.ProductRepository;
 import lt.vu.mif.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import sun.util.calendar.JulianCalendar;
 
 @Component
 public class DataGenerator {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderRepository orderRepository;
     @Autowired
     private UserService userService;
 
@@ -64,6 +68,15 @@ public class DataGenerator {
         users.add(admin);
 
         return users;
+    }
+
+    private User generateSimpleUser() {
+        User user = new User();
+        user.setPassword("user");
+        user.setEmail("user");
+        user.setRole(Role.USER);
+
+        return user;
     }
 
     public void insertProducts() {
@@ -130,5 +143,26 @@ public class DataGenerator {
         }
 
         return image;
+    }
+
+    public void insertOrders() {
+        List<Order> orders = new ArrayList<>();
+
+        for (int i = 0; i < 15; i++) {
+            addOrders(orders);
+        }
+
+        orderRepository.saveAll(orders);
+    }
+
+    private void addOrders(List<Order> orders) {
+        for (int i = 1; i <= 9; i++) {
+            Order order = new Order();
+            order.setRating(5L);
+            order.setCreationDate(LocalDateTime.now());
+            order.setStatus(OrderStatus.ACCEPTED);
+            order.setUser(generateSimpleUser());
+            orders.add(order);
+        }
     }
 }
