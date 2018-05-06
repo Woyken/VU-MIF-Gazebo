@@ -1,219 +1,104 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 >
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-        <!-- PAGE TITLE -->
-        <div class="row column text-center section">
-            <h1 class="section-title">Visos prekės</h1>
-        </div> <!-- END OF PAGE TITLE -->
+    <!-- PAGE TITLE -->
+    <div class="row column text-center section">
+        <h1 class="section-title">Visos prekės</h1>
+    </div> <!-- END OF PAGE TITLE -->
 
+    <h:form>
 
         <!-- PRODUCT LIST -->
         <div id="admin-all-products">
             <div class="row section">
+                <h:panelGroup id="allProductsPanel" style="display:contents">
+                    <ui:repeat value="#{allProductsController.products}" var="product">
 
-                <div class="columns medium-3 small-6 admin-product-box">
-                    <div class="row align-middle">
-                        <div class="columns medium-9 small-8">
-                            <!-- SKU code and name -->
-                            <p>
-                                <b>
-                                    BGCA6-V
-                                </b>
-                                <br/>
-                                Gazebo Air Force v2
-                            </p>
+                        <div class="columns medium-3 small-6 admin-product-box">
+                            <div class="row align-middle">
+                                <div class="columns medium-9 small-8">
+                                    <!-- SKU code and name -->
+                                    <p>
+                                        <b>
+                                            #{product.sku}
+                                        </b>
+                                        <br/>
+                                        #{product.title}
+                                    </p>
+                                </div>
+
+                                <!-- [Button] Delete product -->
+                                <div class="columns small-2">
+                                    <h:commandLink
+                                            action="#{allProductsController.setProductToDeleteId(product.id)}"
+                                            class="button red" pt:data-open="remove-product-modal">
+                                        <i class="fi-x"></i>
+                                    </h:commandLink>
+                                </div>
+                                <div class="columns small-2 expanded">
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <!-- [Button] Edit product -->
+                                <div class="columns medium-12">
+                                    <a href="../../admin-edit-product.xhtml?productId=#{product.id}"
+                                       class="button expanded">
+                                        <i class="fi-pencil"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
+                    </ui:repeat>
+                </h:panelGroup>
+            </div>
+        </div>
+
+
+        <!-- REMOVE PRODUCT MODAL. -->
+        <div id="remove-product-modal"
+             class="reveal"
+             data-reveal=""
+             data-animation-in="fade-in fast">
+            <div class="row">
+                <div class="columns small-8 small-offset-2">
+                    <h4 class="form-title text-center">
+                        Ar tikrai norite ištrinti prekę?
+                    </h4>
+
+                    <br/>
+
+                    <div class="row">
                         <!-- [Button] Delete product -->
-                        <div class="columns small-2">
-                            <!-- Todo: implement the removal of a product. -->
-                            <a href="#" class="button red" data-open="remove-product-modal">
-                                <i class="fi-x"></i>
-                            </a>
+                        <div class="columns small-5 large-3 large-offset-2">
+                            <h:commandLink class="button red expanded"
+                                           action="#{allProductsController.deleteProduct}"
+                                           value="Taip"/>
                         </div>
-                        <div class="columns small-2 expanded">
-                        </div>
-                    </div>
-                    <div class="row">
 
-                        <!-- [Button] Edit product -->
-                        <div class="columns medium-12">
-                            <!-- Todo: change the 1 to be a product's ID. -->
-                            <a href="../../admin-edit-product.xhtml?productId=1" class="button expanded">
-                                <i class="fi-pencil"></i>
-                            </a>
+                        <!-- [Button] Cancel -->
+                        <div class="columns small-5 small-offset-2 large-3 large-offset-2">
+                            <button class="button primary expanded" data-close=""
+                                    type="button"> Ne
+                            </button>
                         </div>
-                    </div>
-                </div>
-
-
-                <div class="columns medium-3 small-6 admin-product-box">
-                    <div class="row align-middle">
-                        <div class="columns medium-9 small-8">
-                            <p>
-                                <b>
-                                    BGCA6-V
-                                </b>
-                                <br/>
-                                Gazebo Air Force v2
-                            </p>
-                        </div>
-                        <div class="columns small-2">
-                            <!-- Todo: implement the removal of a product. -->
-                            <a href="#" class="button red" data-open="remove-product-modal">
-                                <i class="fi-x"></i>
-                            </a>
-                        </div>
-                        <div class="columns small-2 expanded">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="columns medium-12">
-                            <!-- Todo: change the 1 to be a product's ID. -->
-                            <a href="../../admin-edit-product.xhtml?productId=1" class="button expanded">
-                                <i class="fi-pencil"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="columns medium-3 small-6 admin-product-box">
-                    <div class="row align-middle">
-                        <div class="columns medium-9 small-8">
-                            <p>
-                                <b>
-                                    BGCA6-V
-                                </b>
-                                <br/>
-                                Gazebo Air Force v2
-                            </p>
-                        </div>
-                        <div class="columns small-2">
-                            <!-- Todo: implement the removal of a product. -->
-                            <a href="#" class="button red" data-open="remove-product-modal">
-                                <i class="fi-x"></i>
-                            </a>
-                        </div>
-                        <div class="columns small-2 expanded">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="columns medium-12">
-                            <!-- Todo: change the 1 to be a product's ID. -->
-                            <a href="../../admin-edit-product.xhtml?productId=1" class="button expanded">
-                                <i class="fi-pencil"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="columns medium-3 small-6 admin-product-box">
-                    <div class="row align-middle">
-                        <div class="columns medium-9 small-8">
-                            <p>
-                                <b>
-                                    BGCA6-V
-                                </b>
-                                <br/>
-                                Gazebo Air Force v2
-                            </p>
-                        </div>
-                        <div class="columns small-2">
-                            <!-- Todo: implement the removal of a product. -->
-                            <a href="#" class="button red" data-open="remove-product-modal">
-                                <i class="fi-x"></i>
-                            </a>
-                        </div>
-                        <div class="columns small-2 expanded">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="columns medium-12">
-                            <!-- Todo: change the 1 to be a product's ID. -->
-                            <a href="../../admin-edit-product.xhtml?productId=1" class="button expanded">
-                                <i class="fi-pencil"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="columns medium-3 small-6 admin-product-box">
-                    <div class="row align-middle">
-                        <div class="columns medium-9 small-8">
-                            <p>
-                                <b>
-                                    BGCA6-V
-                                </b>
-                                <br/>
-                                Gazebo Air Force v2
-                            </p>
-                        </div>
-                        <div class="columns small-2">
-                            <!-- Todo: implement the removal of a product. -->
-                            <a class="button red" data-open="remove-product-modal">
-                                <i class="fi-x"></i>
-                            </a>
-                        </div>
-                        <div class="columns small-2 expanded">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="columns medium-12">
-                            <!-- Todo: change the 1 to be a product's ID. -->
-                            <a href="../../admin-edit-product.xhtml?productId=1" class="button expanded">
-                                <i class="fi-pencil"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-    <!-- REMOVE PRODUCT MODAL. -->
-    <div id="remove-product-modal"
-         class="reveal"
-         data-reveal=""
-         data-animation-in="fade-in fast">
-        <div class="row">
-            <div class="columns small-8 small-offset-2">
-                <h4 class="form-title text-center">
-                    Ar tikrai norite ištrinti prekę?
-                </h4>
-
-                <br/>
-
-                <div class="row">
-                    <!-- [Button] Delete product -->
-                    <!-- TODO: add logic to delete product -->
-                    <div class="columns small-5 large-3 large-offset-2">
-                        <a class="button red expanded" href="#"> Taip </a>
-                    </div>
-
-                    <!-- [Button] Cancel -->
-                    <div class="columns small-5 small-offset-2 large-3 large-offset-2">
-                        <button class="button primary expanded" data-close="" type="button"> Ne </button>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <button class="close-button" data-close="" type="button">
-            <i class="fi-x"></i>
-        </button>
-    </div> <!-- END OF REMOVE PRODUCT MODAL. -->
 
 
+            <button class="close-button" data-close="" type="button">
+                <i class="fi-x"></i>
+            </button>
+        </div> <!-- END OF REMOVE PRODUCT MODAL. -->
+
+    </h:form>
 </ui:composition>
 </html>
