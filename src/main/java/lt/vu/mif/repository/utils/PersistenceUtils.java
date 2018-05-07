@@ -1,11 +1,9 @@
 package lt.vu.mif.repository.utils;
 
 import java.util.List;
-
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.Predicate;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

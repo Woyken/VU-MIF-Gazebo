@@ -1,16 +1,16 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import lt.vu.mif.model.product.Image;
-import lt.vu.mif.ui.view.ImageView;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import lt.vu.mif.model.product.Image;
+import lt.vu.mif.ui.view.ImageView;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 @Component("imageMapper")
 class ImageMapper {
+
     public Image toEntity(ImageView view) {
         Image image = new Image();
 

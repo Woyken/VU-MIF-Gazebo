@@ -1,7 +1,6 @@
 package lt.vu.mif.excel;
 
 import java.math.BigDecimal;
-
 import lombok.Getter;
 import lombok.Setter;
 

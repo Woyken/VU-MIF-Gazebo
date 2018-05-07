@@ -1,19 +1,18 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import lt.vu.mif.model.product.Product;
-import lt.vu.mif.ui.mappers.interfaces.IMapper;
-import lt.vu.mif.ui.view.CartProductView;
-import lt.vu.mif.ui.view.ProductView;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import lt.vu.mif.model.product.Product;
+import lt.vu.mif.ui.mappers.interfaces.IMapper;
+import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 @Component("productMapper")
 public class ProductMapper implements IMapper<Product, ProductView> {
+
     @Autowired
     private ImageMapper imageMapper;
 
@@ -44,8 +43,9 @@ public class ProductMapper implements IMapper<Product, ProductView> {
 
         view.setId(entity.getId());
         view.setDescription(entity.getDescription());
-        view.setNewPrice(entity.getNewPrice());
         view.setPrice(entity.getPrice());
+        view.setNewPrice(entity.getNewPrice());
+        view.setSku(entity.getSku());
         view.setTitle(entity.getTitle());
         view.setImages(imageMapper.toViews(entity.getImages()));
 

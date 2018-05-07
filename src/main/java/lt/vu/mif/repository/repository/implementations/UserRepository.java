@@ -1,9 +1,7 @@
 package lt.vu.mif.repository.repository.implementations;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Tuple;
@@ -13,17 +11,15 @@ import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-
+import lt.vu.mif.model.user.User;
+import lt.vu.mif.model.user.UserTokenTuple;
 import lt.vu.mif.model.user.User_;
+import lt.vu.mif.repository.repository.interfaces.IUserRepository;
+import lt.vu.mif.repository.utils.PersistenceUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
-
-import lt.vu.mif.model.user.User;
-import lt.vu.mif.model.user.UserTokenTuple;
-import lt.vu.mif.repository.repository.interfaces.IUserRepository;
-import lt.vu.mif.repository.utils.PersistenceUtils;
 
 @Transactional
 @Repository

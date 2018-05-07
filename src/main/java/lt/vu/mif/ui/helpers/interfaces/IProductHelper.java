@@ -10,6 +10,7 @@ import lt.vu.mif.utils.search.ProductSearch;
 import org.springframework.data.domain.Page;
 
 public interface IProductHelper {
+
     void createNewProduct(ProductView newProduct);
 
     ProductView getProduct(Long productId);

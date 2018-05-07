@@ -1,10 +1,11 @@
 package lt.vu.mif.repository.repository.implementations;
 
 import javax.persistence.EntityManager;
-
+import lt.vu.mif.model.order.OrderProduct;
 import lt.vu.mif.model.order.OrderProduct_;
 import lt.vu.mif.model.order.Order_;
 import lt.vu.mif.model.user.User_;
+import lt.vu.mif.repository.repository.interfaces.IBoughtProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,9 +13,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
-
-import lt.vu.mif.model.order.OrderProduct;
-import lt.vu.mif.repository.repository.interfaces.IBoughtProductRepository;
 
 @Repository
 public class BoughtProductRepository extends SimpleJpaRepository<OrderProduct, Long> implements

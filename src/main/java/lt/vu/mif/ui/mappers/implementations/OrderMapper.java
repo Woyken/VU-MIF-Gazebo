@@ -1,16 +1,10 @@
 package lt.vu.mif.ui.mappers.implementations;
 
+import java.util.List;
 import java.util.stream.Collectors;
-import javax.interceptor.AroundInvoke;
 import lt.vu.mif.model.order.Order;
-import lt.vu.mif.repository.repository.interfaces.IBoughtProductRepository;
-import lt.vu.mif.repository.repository.interfaces.IProductRepository;
-import lt.vu.mif.repository.repository.interfaces.IUserRepository;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.OrderView;
-import java.util.List;
-
-import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

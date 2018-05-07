@@ -1,11 +1,10 @@
 package lt.vu.mif.ui.controller;
 
-import lt.vu.mif.authentication.UserService;
-import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-
+import lt.vu.mif.authentication.UserService;
+import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
 

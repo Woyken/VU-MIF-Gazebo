@@ -1,11 +1,10 @@
 package lt.vu.mif.authentication;
 
+import lt.vu.mif.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-
-import lt.vu.mif.model.user.User;
 
 @Service(value = "CustomUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {

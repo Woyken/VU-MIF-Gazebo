@@ -1,8 +1,6 @@
 package lt.vu.mif.repository.repository.interfaces;
 
 import java.util.List;
-
-import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.user.User;
 import lt.vu.mif.model.user.UserTokenTuple;
 

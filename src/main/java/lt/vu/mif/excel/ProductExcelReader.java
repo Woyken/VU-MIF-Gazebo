@@ -8,7 +8,6 @@ import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.poi.ss.usermodel.Cell;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProductExcelReader {
+
     private static final Log LOG = LogFactory.getLog(ProductExcelReader.class);
 
     public List<ExcelProduct> readFile(InputStream inputStream) {

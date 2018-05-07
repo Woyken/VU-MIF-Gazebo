@@ -1,10 +1,9 @@
 package lt.vu.mif.ui.controller;
 
-import lt.vu.mif.ui.helpers.implementations.UserHelper;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-
+import lt.vu.mif.ui.helpers.implementations.UserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
 

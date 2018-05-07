@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProductParser implements IProductParser {
+
     @Autowired
     private IImageDownloader imageDownloader;
 

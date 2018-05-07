@@ -70,7 +70,7 @@
                     <ul class="pagination text-center">
                         <li class="pagination-previous">
                             <h:commandLink value="Atgal"
-                                           disabled="#{productController.pagingIndex eq 0 and productController.paging.activePage eq 0}">
+                                           disabled="#{productController.paging.activePage eq 0}">
                                 <f:ajax execute="@form" listener="#{productController.previous}"
                                         render="productList paging-form"/>
                             </h:commandLink>
@@ -80,10 +80,10 @@
                             <li>
                                 <h:commandLink
                                         rendered="#{productController.paging.isPageNumberShown(status.index)}"
-                                        value="#{status.index + 1 + productController.pagingIndex}"
-                                        styleClass="#{status.index + productController.pagingIndex eq productController.paging.activePage ? 'current' : ''}">
+                                        value="#{status.index + 1}"
+                                        styleClass="#{status.index eq productController.paging.activePage ? 'current' : ''}">
                                     <f:ajax execute="@form"
-                                            listener="#{productController.searchProducts(status.index + productController.pagingIndex)}"
+                                            listener="#{productController.searchProducts(status.index)}"
                                             render="productList paging-form"/>
                                 </h:commandLink>
                             </li>

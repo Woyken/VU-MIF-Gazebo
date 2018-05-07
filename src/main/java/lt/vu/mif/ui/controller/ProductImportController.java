@@ -1,12 +1,11 @@
 package lt.vu.mif.ui.controller;
 
-import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
-
+import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
 

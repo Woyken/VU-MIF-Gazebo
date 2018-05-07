@@ -10,7 +10,7 @@ public class EmailContentGenerator implements IEmailContentGenerator {
     @Override
     public String createPasswordRemindEmailBody(String token) {
         return "Slaptažodį pakeisti galite:" + "<a href=\"http://" + Constants.ENVIRONMENT
-                + "password-change.xhtml?" + Constants.PASSWORD_REQUEST_PARAMETER + "=" + token
-                + "\">čia</a>";
+            + "password-change.xhtml?" + Constants.PASSWORD_REQUEST_PARAMETER + "=" + token
+            + "\">čia</a>";
     }
 }

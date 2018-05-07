@@ -1,12 +1,11 @@
 package lt.vu.mif.ui.view;
 
+import java.io.ByteArrayInputStream;
+import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-
-import javax.inject.Named;
-import java.io.ByteArrayInputStream;
 
 @Named
 @Setter
