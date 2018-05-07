@@ -5,11 +5,11 @@
 >
 
     <c:choose>
-        <c:when test="#{UserService.isLoggedIn()}">
+        <c:when test="#{userService.isLoggedIn()}">
             <c:choose>
 
                 <!-- User logged in -->
-                <c:when test="#{UserService.getLoggedUser().getRole() == 'USER'}" >
+                <c:when test="#{userService.getLoggedUser().getRole() == 'USER'}" >
                     <ui:include src="./user-navbar.xhtml" />
                 </c:when>
 

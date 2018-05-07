@@ -2,17 +2,39 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Gazebo" />
-        <module name="VU-MIF-Gazebo" />
+        <module name="gazebo.authentication" />
+        <module name="gazebo.bl" />
+        <module name="gazebo.data.generator" />
+        <module name="gazebo.email" />
+        <module name="gazebo.model" />
+        <module name="gazebo.payment" />
+        <module name="gazebo.repository" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Gazebo" target="1.8" />
-      <module name="VU-MIF-Gazebo" target="1.8" />
+      <module name="gazebo-authentication" target="1.8" />
+      <module name="gazebo-bl" target="1.8" />
+      <module name="gazebo-data-generator" target="1.8" />
+      <module name="gazebo-email" target="1.8" />
+      <module name="gazebo-excel" target="1.8" />
+      <module name="gazebo-model" target="1.8" />
+      <module name="gazebo-payment" target="1.8" />
+      <module name="gazebo-repository" target="1.8" />
+      <module name="gazebo-ui" target="1.8" />
+      <module name="gazebo.authentication" target="1.8" />
+      <module name="gazebo.bl" target="1.8" />
+      <module name="gazebo.data.generator" target="1.8" />
+      <module name="gazebo.email" target="1.8" />
+      <module name="gazebo.model" target="1.8" />
+      <module name="gazebo.payment" target="1.8" />
+      <module name="gazebo.repository" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
