@@ -120,11 +120,11 @@
 
             <!-- [Button][Admin] Edit product -->
             <c:choose>
-                <c:when test="#{UserService.isLoggedIn()}">
+                <c:when test="#{userService.isLoggedIn()}">
                     <c:choose>
 
                         <!-- Admin logged in -->
-                        <c:when test="#{UserService.getLoggedUser().getRole() == 'ADMIN'}">
+                        <c:when test="#{userService.getLoggedUser().getRole() == 'ADMIN'}">
                             <a href="../../admin-edit-product.xhtml?productId=#{productDetailsController.productView.id}"
                                class="button large expanded">
                                 Redaguoti prekę
