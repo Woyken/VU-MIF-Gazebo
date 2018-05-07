@@ -2,6 +2,14 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Gazebo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gazebo-authentication" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gazebo-bl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gazebo-data-generator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gazebo-email" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gazebo-excel" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gazebo-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gazebo-payment" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gazebo-repository" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gazebo-ui" charset="UTF-8" />
   </component>
 </project>

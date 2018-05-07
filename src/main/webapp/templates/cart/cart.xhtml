@@ -162,14 +162,14 @@
                     <!--When user is logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
-                                   p:rendered="#{cartController.productsInCart.size()!=0 and UserService.isLoggedIn()}"
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and userService.isLoggedIn()}"
                                    action="#{cartController.buyProducts}"
                     />
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
                                    action="/login.xhtml"
-                                   p:rendered="#{cartController.productsInCart.size()!=0 and !UserService.isLoggedIn()}"/>
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
                 </div>
 
 
@@ -178,14 +178,14 @@
                     <!--When user is logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
-                                   p:rendered="#{cartController.productsInCart.size()!=0 and UserService.isLoggedIn()}"
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and userService.isLoggedIn()}"
                                    action="#{cartController.buyProducts}"
                     />
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
                                    action="/login.xhtml"
-                                   p:rendered="#{cartController.productsInCart.size()!=0 and !UserService.isLoggedIn()}"/>
+                                   p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
                 </div>
                     
                 <!-- [Button][Mobile] Return to list -->
