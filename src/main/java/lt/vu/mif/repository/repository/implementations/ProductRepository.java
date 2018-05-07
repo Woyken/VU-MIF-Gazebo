@@ -3,7 +3,6 @@ package lt.vu.mif.repository.repository.implementations;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import java.util.Locale;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,8 +11,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-
+import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.product.Product_;
+import lt.vu.mif.repository.repository.interfaces.IProductRepository;
+import lt.vu.mif.repository.utils.PersistenceUtils;
+import lt.vu.mif.utils.search.ProductSearch;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,11 +25,6 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformationSuppo
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
-
-import lt.vu.mif.bl.search.ProductSearch;
-import lt.vu.mif.model.product.Product;
-import lt.vu.mif.repository.repository.interfaces.IProductRepository;
-import lt.vu.mif.repository.utils.PersistenceUtils;
 
 @Transactional
 @Repository

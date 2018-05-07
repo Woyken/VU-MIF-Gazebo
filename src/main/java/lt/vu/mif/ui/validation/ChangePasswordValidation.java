@@ -1,7 +1,5 @@
 package lt.vu.mif.ui.validation;
 
-import lt.vu.mif.authentication.UserService;
-import lt.vu.mif.bl.validation.ValidationUtils;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -9,8 +7,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-
-
+import lt.vu.mif.authentication.UserService;
+import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

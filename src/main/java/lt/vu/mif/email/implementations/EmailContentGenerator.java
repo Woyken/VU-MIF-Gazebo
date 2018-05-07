@@ -1,7 +1,7 @@
 package lt.vu.mif.email.implementations;
 
-import lt.vu.mif.bl.constants.Constants;
 import lt.vu.mif.email.interfaces.IEmailContentGenerator;
+import lt.vu.mif.utils.constants.Constants;
 import org.springframework.stereotype.Component;
 
 @Component

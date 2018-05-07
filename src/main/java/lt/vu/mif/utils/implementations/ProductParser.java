@@ -1,16 +1,14 @@
-package lt.vu.mif.bl.implementations;
+package lt.vu.mif.utils.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import lt.vu.mif.bl.interfaces.IImageDownloader;
-import lt.vu.mif.bl.interfaces.IProductParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import lt.vu.mif.excel.ExcelProduct;
 import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
+import lt.vu.mif.utils.interfaces.IImageDownloader;
+import lt.vu.mif.utils.interfaces.IProductParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ProductParser implements IProductParser {

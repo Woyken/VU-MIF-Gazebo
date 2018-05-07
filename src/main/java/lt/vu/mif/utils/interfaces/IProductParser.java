@@ -1,4 +1,4 @@
-package lt.vu.mif.bl.interfaces;
+package lt.vu.mif.utils.interfaces;
 
 import java.util.List;
 import lt.vu.mif.excel.ExcelProduct;

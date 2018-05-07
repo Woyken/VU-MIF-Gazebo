@@ -1,15 +1,14 @@
 package lt.vu.mif.ui.controller;
 
-import lt.vu.mif.bl.constants.Constants;
-import lt.vu.mif.model.user.UserTokenTuple;
-import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-
+import lt.vu.mif.model.user.UserTokenTuple;
+import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
+import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter

@@ -7,11 +7,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
+import lt.vu.mif.repository.repository.interfaces.IUserRepository;
+import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import lt.vu.mif.bl.validation.ValidationUtils;
-import lt.vu.mif.repository.repository.interfaces.IUserRepository;
 
 @Named
 @Component

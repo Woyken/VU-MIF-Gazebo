@@ -1,10 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import lt.vu.mif.bl.search.ProductSearch;
-import lt.vu.mif.ui.helpers.implementations.ProductHelper;
-import lt.vu.mif.ui.paging.Paging;
-import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
-import lt.vu.mif.ui.view.ProductView;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.faces.context.FacesContext;
@@ -12,7 +7,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-
+import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.paging.Paging;
+import lt.vu.mif.ui.view.ProductView;
+import lt.vu.mif.utils.search.ProductSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;

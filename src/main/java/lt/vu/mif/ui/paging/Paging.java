@@ -2,7 +2,7 @@ package lt.vu.mif.ui.paging;
 
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.mif.bl.constants.Constants;
+import lt.vu.mif.utils.constants.Constants;
 
 @Setter
 @Getter

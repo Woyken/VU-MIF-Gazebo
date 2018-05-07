@@ -1,7 +1,6 @@
-package lt.vu.mif.bl.search;
+package lt.vu.mif.utils.search;
 
 import java.math.BigDecimal;
-
 import lombok.Getter;
 import lombok.Setter;
 

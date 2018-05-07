@@ -1,11 +1,9 @@
 package lt.vu.mif.repository.repository.interfaces;
 
 import java.util.List;
-
-import org.springframework.data.domain.Page;
-
-import lt.vu.mif.bl.search.ProductSearch;
 import lt.vu.mif.model.product.Product;
+import lt.vu.mif.utils.search.ProductSearch;
+import org.springframework.data.domain.Page;
 
 public interface IProductRepository {
 

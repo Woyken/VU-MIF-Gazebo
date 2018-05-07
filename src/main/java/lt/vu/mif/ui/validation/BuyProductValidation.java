@@ -7,8 +7,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-
-import lt.vu.mif.bl.validation.ValidationUtils;
+import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.stereotype.Component;
 
 @Named

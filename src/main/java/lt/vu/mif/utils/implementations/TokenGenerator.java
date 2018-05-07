@@ -1,7 +1,7 @@
-package lt.vu.mif.bl.implementations;
+package lt.vu.mif.utils.implementations;
 
 import java.util.UUID;
-import lt.vu.mif.bl.interfaces.ITokenGenerator;
+import lt.vu.mif.utils.interfaces.ITokenGenerator;
 import org.springframework.stereotype.Component;
 
 @Component

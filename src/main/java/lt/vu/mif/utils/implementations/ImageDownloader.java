@@ -1,11 +1,9 @@
-package lt.vu.mif.bl.implementations;
+package lt.vu.mif.utils.implementations;
 
 import java.io.InputStream;
 import java.net.URL;
-
-import lt.vu.mif.bl.interfaces.IImageDownloader;
+import lt.vu.mif.utils.interfaces.IImageDownloader;
 import org.apache.poi.util.IOUtils;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,4 +1,4 @@
-package lt.vu.mif.bl.validation;
+package lt.vu.mif.utils.validation;
 
 import java.util.regex.Pattern;
 import lombok.experimental.UtilityClass;

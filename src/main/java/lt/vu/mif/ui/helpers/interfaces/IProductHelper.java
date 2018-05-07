@@ -2,15 +2,12 @@ package lt.vu.mif.ui.helpers.interfaces;
 
 import java.io.InputStream;
 import java.util.List;
-
-import lt.vu.mif.model.order.OrderProduct;
+import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.view.BoughtProductView;
 import lt.vu.mif.ui.view.CartProductView;
-import org.springframework.data.domain.Page;
-
-import lt.vu.mif.bl.search.ProductSearch;
-import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.view.ProductView;
+import lt.vu.mif.utils.search.ProductSearch;
+import org.springframework.data.domain.Page;
 
 public interface IProductHelper {
     void createNewProduct(ProductView newProduct);
