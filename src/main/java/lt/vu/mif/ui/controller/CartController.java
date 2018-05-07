@@ -1,18 +1,14 @@
 package lt.vu.mif.ui.controller;
 
-import lt.vu.mif.ui.helpers.implementations.ProductHelper;
-import lt.vu.mif.ui.view.CartProductView;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Named;
-
 import lombok.Getter;
 import lombok.Setter;
-
+import lt.vu.mif.ui.helpers.implementations.ProductHelper;
+import lt.vu.mif.ui.view.CartProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -49,7 +45,8 @@ public class CartController implements Serializable {
     public BigDecimal getSum() {
         BigDecimal totalSum = new BigDecimal(0);
         for (CartProductView product : productsInCart) {
-            BigDecimal productPrice = product.getPrice().multiply(new BigDecimal(product.getAmount()));
+            BigDecimal productPrice = product.getPrice()
+                .multiply(new BigDecimal(product.getAmount()));
             totalSum = totalSum.add(productPrice);
         }
         return totalSum;

@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 @Transactional
 @Component
 public class ProductHelper implements IProductHelper {
+
     @Autowired
     private ProductMapper productMapper;
     @Autowired
@@ -37,8 +38,10 @@ public class ProductHelper implements IProductHelper {
     @Autowired
     private IBoughtProductRepository boughtProductRepository;
 
-    public Page<BoughtProductView> getBoughtProductsPage(int activePage, int pageSize, Long userId) {
-        return boughtProductRepository.getBoughtProductsPage(activePage, pageSize, userId).map(boughtProductMapper::toView);
+    public Page<BoughtProductView> getBoughtProductsPage(int activePage, int pageSize,
+        Long userId) {
+        return boughtProductRepository.getBoughtProductsPage(activePage, pageSize, userId)
+            .map(boughtProductMapper::toView);
     }
 
     @Override
@@ -56,7 +59,8 @@ public class ProductHelper implements IProductHelper {
     }
 
     public Page<ProductView> getProductsPage(int activePage, int pageSize, ProductSearch search) {
-        return productRepository.getProductsPage(search, activePage, pageSize).map(productMapper::toView);
+        return productRepository.getProductsPage(search, activePage, pageSize)
+            .map(productMapper::toView);
     }
 
     public void createNewProduct(ProductView newProduct) {
@@ -79,7 +83,7 @@ public class ProductHelper implements IProductHelper {
     }
 
     public void importProducts(InputStream inputStream) {
-        List<ExcelProduct> products =  productExcelReader.readFile(inputStream);
+        List<ExcelProduct> products = productExcelReader.readFile(inputStream);
         List<Product> toSave = productParser.parseProducts(products);
         productRepository.saveAll(toSave);
     }

@@ -1,9 +1,8 @@
 package lt.vu.mif.payment;
 
+import lombok.Getter;
 import org.primefaces.json.JSONException;
 import org.primefaces.json.JSONObject;
-
-import lombok.Getter;
 
 public class PaymentResponse {
 

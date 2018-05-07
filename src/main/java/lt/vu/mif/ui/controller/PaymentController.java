@@ -1,17 +1,14 @@
 package lt.vu.mif.ui.controller;
 
-import lt.vu.mif.payment.PaymentResponse;
-import lt.vu.mif.payment.PaymentService;
-import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
-import lt.vu.mif.ui.view.OrderView;
-
 import java.io.IOException;
-
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-
+import lt.vu.mif.payment.PaymentResponse;
+import lt.vu.mif.payment.PaymentService;
+import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
+import lt.vu.mif.ui.view.OrderView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
 

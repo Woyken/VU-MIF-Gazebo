@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ImageDownloader implements IImageDownloader {
+
     public byte[] downloadImage(String imageLink) {
         try(InputStream in = new URL(imageLink).openStream()){
             return IOUtils.toByteArray(in);

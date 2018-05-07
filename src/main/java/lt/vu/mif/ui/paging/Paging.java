@@ -7,6 +7,8 @@ import lt.vu.mif.utils.constants.Constants;
 @Setter
 @Getter
 public class Paging {
+
+    //Must be uneven
     private static final int PAGES_TO_SHOW = 5;
 
     private int index = 0;
@@ -19,6 +21,20 @@ public class Paging {
 
     public Paging(int totalPages) {
         this.totalPages = totalPages;
+    }
+
+    public boolean isPageNumberShown(int number) {
+        if (activePage < PAGES_TO_SHOW / 2) {
+            //When active page is at the start like 1 [2] 3  4  5
+            return number < PAGES_TO_SHOW;
+        } else if (activePage >= totalPages - (PAGES_TO_SHOW / 2)) {
+            //When active page is at the end like 5  6  7  8 [9] (9 total pages)
+            return number >= totalPages - PAGES_TO_SHOW;
+        } else {
+            //When active page is in the middle like 3  4 [5] 6  7
+            return number >= activePage - (PAGES_TO_SHOW / 2) &&
+                number <= activePage + (PAGES_TO_SHOW / 2);
+        }
     }
 
     public void next() {

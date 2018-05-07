@@ -1,13 +1,12 @@
 package lt.vu.mif.ui.controller;
 
-import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
-import lt.vu.mif.ui.view.ProductView;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-
+import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.view.ProductView;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 

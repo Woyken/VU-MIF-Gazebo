@@ -1,11 +1,11 @@
 package lt.vu.mif.model.user;
 
 import java.time.LocalDateTime;
-
 import lombok.Getter;
 
 @Getter
 public class UserTokenTuple {
+
     private String userEmail;
     private String token;
     private LocalDateTime creationDate;

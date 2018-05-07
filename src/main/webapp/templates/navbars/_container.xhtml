@@ -9,7 +9,7 @@
             <c:choose>
 
                 <!-- User logged in -->
-                <c:when test="#{userService.getLoggedUser().getRole() == 'USER'}" >
+                <c:when test="#{userService.getLoggedUser().getRole() == 'USER'}">
                     <ui:include src="./user-navbar.xhtml" />
                 </c:when>
 

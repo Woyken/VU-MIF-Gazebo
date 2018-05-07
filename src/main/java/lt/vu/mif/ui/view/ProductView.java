@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductView {
+
     private Long id;
     private String sku;
     private String title;

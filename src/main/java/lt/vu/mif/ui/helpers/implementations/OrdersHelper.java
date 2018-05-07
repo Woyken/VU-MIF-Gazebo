@@ -31,10 +31,10 @@ public class OrdersHelper implements IOrdersHelper {
     @Autowired
     private IProductRepository productRepository;
 
-   @Override
-   public List<OrderView> getAllOrders() {
-       return orderMapper.toViews(orderRepository.findAll());
-   }
+    @Override
+    public List<OrderView> getAllOrders() {
+        return orderMapper.toViews(orderRepository.findAll());
+    }
 
     @Override
     public void saveNewOrder(OrderView orderView, List<CartProductView> cartProductViews) {

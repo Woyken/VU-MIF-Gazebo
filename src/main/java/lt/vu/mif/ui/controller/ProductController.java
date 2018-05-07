@@ -1,4 +1,4 @@
-package lt.vu.mif.ui.controller;
+package lt.vu.mif.Controller;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -53,7 +53,7 @@ public class ProductController implements Serializable {
         searchProducts();
     }
 
-    private void search() {
+    public void search() {
         productsPage = productHelper
             .getProductsPage(paging.getActivePage(), paging.getPageSize(), productSearch);
         paging.setTotalPages(productsPage.getTotalPages());

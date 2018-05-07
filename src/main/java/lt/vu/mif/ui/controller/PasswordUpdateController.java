@@ -45,7 +45,8 @@ public class PasswordUpdateController implements Serializable  {
             return;
         }
 
-        if (LocalDateTime.now().isAfter(user.getCreationDate().plusMinutes(PASSWORD_LINK_EXPIRATION_TIME_IN_MINUTES))) {
+        if (LocalDateTime.now().isAfter(
+            user.getCreationDate().plusMinutes(PASSWORD_LINK_EXPIRATION_TIME_IN_MINUTES))) {
             message = LINK_EXPIRED_MESSAGE;
         }
     }
