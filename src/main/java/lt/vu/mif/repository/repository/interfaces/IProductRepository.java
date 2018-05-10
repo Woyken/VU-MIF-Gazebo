@@ -20,4 +20,6 @@ public interface IProductRepository {
     <S extends Product> S save(S entity);
 
     <S extends Product> List<S> saveAll(Iterable<S> entities);
+
+    void deleteAll(List<Long> productIds);
 }

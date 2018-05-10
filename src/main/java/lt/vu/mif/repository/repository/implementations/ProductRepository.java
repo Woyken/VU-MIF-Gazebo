@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
@@ -38,6 +39,21 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     public ProductRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport.getEntityInformation(Product.class, entityManager),
             entityManager);
+    }
+
+    public void deleteAll(List<Long> productIds) {
+        if (CollectionUtils.isEmpty(productIds)) {
+            return;
+        }
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaUpdate<Product> criteria = builder.createCriteriaUpdate(Product.class);
+        Root<Product> root = criteria.from(Product.class);
+
+        criteria.where(root.get(Product_.id).in(productIds));
+        criteria.set(root.get(Product_.deleted), true);
+
+        entityManager.createQuery(criteria).executeUpdate();
     }
 
     public Product get(Long id) {
