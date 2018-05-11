@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
-import lt.vu.mif.ui.controller.ProductController;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import lt.vu.mif.Controller.ProductController;
 
 @Rollback
 @Transactional
