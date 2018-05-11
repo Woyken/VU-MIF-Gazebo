@@ -1,4 +1,4 @@
-package lt.vu.mif.Controller;
+package lt.vu.mif.ui.controller;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

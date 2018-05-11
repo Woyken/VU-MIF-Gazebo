@@ -1,6 +1,7 @@
 package lt.vu.mif.ui.controller;
 
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,10 +12,12 @@ import lt.vu.mif.ui.view.BoughtProductView;
 import lt.vu.mif.ui.view.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Named
 @Getter
 @Setter
+@RequestScope
 public class UserDetailsController {
 
     @Autowired

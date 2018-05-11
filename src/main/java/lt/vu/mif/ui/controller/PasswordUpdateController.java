@@ -10,10 +10,12 @@ import lt.vu.mif.model.user.UserTokenTuple;
 import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
 import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Getter
 @Setter
 @Named
+@RequestScope
 public class PasswordUpdateController implements Serializable  {
     private static final String INVALID_LINK_MESSAGE = "Neteisinga nuoroda";
     private static final String LINK_EXPIRED_MESSAGE = "Nuorodos galiojimo laikas baigėsi";
