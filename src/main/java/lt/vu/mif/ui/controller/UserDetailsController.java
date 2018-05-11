@@ -12,11 +12,12 @@ import lt.vu.mif.ui.view.BoughtProductView;
 import lt.vu.mif.ui.view.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Named
 @Getter
 @Setter
-@ViewScoped
+@RequestScope
 public class UserDetailsController {
 
     @Autowired
