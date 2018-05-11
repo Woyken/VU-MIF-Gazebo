@@ -1,6 +1,7 @@
 package lt.vu.mif.ui.controller;
 
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 @Named
 @Getter
 @Setter
+@ViewScoped
 public class UserDetailsController {
 
     @Autowired

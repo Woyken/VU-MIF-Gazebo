@@ -6,8 +6,10 @@ import javax.inject.Named;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Named
+@RequestScope
 public class UserBlockedController {
 
     @Autowired
