@@ -54,47 +54,86 @@
                     </div>
                 </div>
 
-                <!-- Price on sale -->
-                <div class="row align-middle">
-                    <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
-                    </div>
-                    <div class="columns medium-9 small-12">
-                        <input type="number" min="0"/>
-                    </div>
-                </div>
+                <!-- Sale price -->
+                <div class="row align-middle margin-bottom-1">
+                    <div class="columns small-12">
+                        <fieldset>
+                            <legend> Pritaikyti nuolaidą </legend>
 
-                <!-- Sale date -->
-                <div class="row align-middle">
-                    <!-- The sale starts on -->
-                    <div class="columns medium-2 medium-offset-3 small-12">
-                        <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
-                        <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
-                    </div>
+                            <!-- Sale as concrete price -->
+                            <div class="row align-middle">
+                                <div class="columns medium-3 small-12">
+                                    <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
+                                </div>
 
-                    <div class="columns medium-2 small-12">
-                        <input type="date" min="2018-05-05" />
-                    </div>
+                                <div class="columns medium-9 small-12">
+                                    <input type="number" min="0" placeholder="49.99"/>
+                                </div>
+                            </div>
 
-                    <!-- The sale ends on -->
-                    <div class="columns medium-2 medium-offset-1 small-12">
-                        <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
-                        <h5 class="font-bold hide-for-medium">Galioja iki</h5>
-                    </div>
-                    <div class="columns medium-2 small-12">
-                        <input type="date" min="2018-05-05" />
-                    </div>
+                            <!-- Sale as % -->
+                            <div class="row align-middle">
+                                <div class="columns medium-3 small-12">
+                                    <h5 class="font-bold">Nuolaida (procentais)</h5>
+                                </div>
 
-                    <!-- [Button] Remove discount -->
-                    <div class="columns small-12 medium-9 medium-offset-3">
-                        <a class="button red expanded" href="#">
-                            <i class="fi-x">
-                                Panaikinti nuolaidą
-                            </i>
-                        </a>
-                    </div>
-                </div>
+                                <div class="columns medium-9 small-12">
+                                    <input type="number" min="0" placeholder="50"/>
+                                </div>
+                            </div>
 
+                            <!-- Apply price to what -->
+                            <div class="row align-middle">
+                                <div class="columns medium-3 small-12">
+                                    <h5 class="font-bold"> Taikyti </h5>
+                                </div>
+
+                                <div class="columns medium-9 small-12">
+                                    <select>
+                                        <option selected="selected"
+                                                value="this">
+                                            Šitai prekei
+                                        </option>
+                                        <option value="category"> Grupei </option>
+                                        <option value="all"> Visoms prekėms </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Sale date -->
+                            <div class="row align-middle">
+                                <!-- The sale starts on -->
+                                <div class="columns medium-2 medium-offset-3 small-12">
+                                    <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
+                                    <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
+                                </div>
+
+                                <div class="columns medium-2 small-12">
+                                    <input type="date" min="2018-05-05" />
+                                </div>
+
+                                <!-- The sale ends on -->
+                                <div class="columns medium-2 medium-offset-1 small-12">
+                                    <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
+                                    <h5 class="font-bold hide-for-medium">Galioja iki</h5>
+                                </div>
+
+                                <div class="columns medium-2 small-12">
+                                    <input type="date" min="2018-05-05" />
+                                </div>
+
+                                <!-- [Button] Remove discount -->
+                                <div class="columns small-12 medium-9 medium-offset-3">
+                                    <a class="button red expanded" href="#">
+                                        <i class="fi-x">
+                                            Panaikinti nuolaidą
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div> <!-- End of Sale price -->
 
                 <!-- Description -->
                 <div class="row align-middle">
