@@ -10,10 +10,36 @@
 
     <div id="details-order-window">
 
+        <!-- PAGE TITLE -->
+        <div class="row column text-center section">
+            <h1 class="section-title">Vykdyti užsakymus</h1>
+        </div> <!-- END OF PAGE TITLE -->
+
         <div class="row section">
             <div class="columns small-6">
                 <p>
-                    Bendra suma: 769€
+                    Pirkėjo paštas: <b>#{ordersController.orderView.user.email}</b>
+                </p>
+                <p>
+                    Užsakymo būsena: <b>#{ordersController.orderView.status}</b>
+                </p>
+                <p>
+                    Užsakymo kaina: <b>#{ordersController.orderView.user.ordersSum}</b>
+                </p>
+                <p>
+                    Užsakymo data: <b>#{ordersController.orderView.creationDate}</b>
+                </p>
+                <p>
+                    Užsakymo įvertinimas: <b>#{ordersController.orderView.rating}</b>
+                </p>
+                <p>
+                    Užsakymo įvertinimo data:
+                </p>
+                <p>
+                    Užsakymo prekės:
+                </p>
+                <p>
+                    daugiau apie pirkėją:
                 </p>
             </div>
         </div>

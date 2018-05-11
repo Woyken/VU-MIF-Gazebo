@@ -20,6 +20,8 @@ public class OrdersController {
     @Autowired
     private IOrdersHelper ordersHelper;
 
+    private OrderView orderView;
+
     private List<OrderView> orders = new ArrayList<>();
 
     public void onPageLoad() {
