@@ -465,6 +465,10 @@ label.input-label {
 	font-size: larger;
 }
 
+.larger-text {
+	font-size: xx-large;
+}
+
 .box-for-buttons-on-image {
 	position: relative;
 }

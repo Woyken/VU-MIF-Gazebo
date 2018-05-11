@@ -1,6 +1,7 @@
 package lt.vu.mif.ui.helpers.interfaces;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.List;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.view.BoughtProductView;
@@ -26,4 +27,8 @@ public interface IProductHelper {
     CartProductView getCartProductView(Long productId);
 
     Page<BoughtProductView> getBoughtProductsPage(int activePage, int pageSize, Long userId);
+
+    Page<BoughtProductView> getCurrentUserBoughtProductsPage(int activePage, int pageSize);
+
+    BigDecimal getProductsSum(List<BoughtProductView> productViews);
 }

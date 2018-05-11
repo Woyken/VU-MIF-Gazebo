@@ -1,7 +1,10 @@
 <ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <div id="cart-history-window">
 
@@ -10,251 +13,135 @@
             <h1 class="section-title">Pirkimo istorija</h1>
         </div> <!-- END OF PAGE TITLE -->
 
+        <h:panelGroup rendered="#{!empty userProductHistoryController.products.content}">
+            <!-- SHOPPING HISTORY -->
+            <div id="shopping-list-header" class="row section hide-for-small-only">
+                <div class="columns small-5"><h5>Prekė</h5></div>
+                <div class="columns small-2"><h5>Data</h5></div>
+                <div class="columns small-2"><h5>Kiekis</h5></div>
+                <div class="columns small-2"><h5>Kaina</h5></div>
+            </div>
 
-        <!-- SHOPPING HISTORY -->
-        <div id="shopping-list-header" class="row section hide-for-small-only">
-            <div class="columns small-5"> <h5>Prekė</h5>    </div>
-            <div class="columns small-2"> <h5>Data</h5>     </div>
-            <div class="columns small-2"> <h5>Kiekis</h5>   </div>
-            <div class="columns small-2"> <h5>Kaina</h5>    </div>
-        </div>
+            <div id="shopping-list-body" class="row align-middle">
+                <ui:repeat value="#{userProductHistoryController.products.content}" var="product">
+                    <!-- Product image and name -->
+                    <div class="small-12 medium-5 columns">
+                        <div class="row align-middle align-top">
 
-        <div id="shopping-list-body" class="row align-middle">
+                            <!-- Image -->
+                            <div class="small-12 medium-6 columns align-right">
+                                <a href="../../product-details.xhtml?productId=#{product.productId}">
+                                    <p:graphicImage class="thumbnail"
+                                                    value="#{imageStreamer.image}">
+                                        <f:param name="id" value="#{product.image.id}"/>
+                                    </p:graphicImage>
+                                </a>
+                            </div>
 
-            <!-- Product image and name -->
-            <div class="small-12 medium-5 columns">
-                <div class="row align-middle align-top">
-
-                    <!-- Image -->
-                    <div class="small-12 medium-6 columns align-right">
-                        <a href="../../product-details.xhtml">
-                            <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                        </a>
+                            <!-- Name -->
+                            <div class="small-12 medium-6 columns">
+                                <a href="../../product-details.xhtml?productId=1">
+                                    <p:outputLabel styleClass="large-text" value="#{product.title}"/>
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Name -->
-                    <div class="small-12 medium-6 columns">
-                        <a href="../../product-details.xhtml?productId=1">
-                            <h5>GZ Air Force v4</h5>
-                        </a>
+                    <!-- Date bought. -->
+                    <div class="medium-2 columns hide-for-small-only">
+                        <div class="row column">
+                            <p:outputLabel styleClass="large-text" value="#{product.date}"/>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Date bought. -->
-            <div class="medium-2 columns hide-for-small-only">
-                <div class="row column">
-                    <h5 class="">2017-05-28</h5>
-                </div>
-                <div class="row column">
-                    <h5 class="">19:09:25</h5>
-                </div>
-            </div>
-            <!-- [Mobile] Date bought -->
-            <div class="small-12 columns hide-for-medium">
-                <div class="row column">
-                    <h5 class="">2017-05-28 19:09:25</h5>
-                </div>
-            </div>
-
-            <!-- Product quantity. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="">2 vnt.</h5>
-            </div>
-
-            <!-- Price of the product. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="shopping-cart-price">124.99 €</h5>
-            </div>
-
-            <!-- [Button] Add to current cart -->
-            <div class="small-1 columns hide-for-small-only">
-                <span
-                        data-tooltip=""
-                        data-allow-html="true"
-                        class="has-tip right"
-                        title="Pridėti prekę į krepšelį">
-                    <a class="button primary" data-open="add-item-to-cart-modal">
-                        <i class="fi-plus"/>
-                    </a>
-                    </span>
-            </div>
-            <!-- [Mobile][Button] Add to current cart -->
-            <div class="small-12 columns hide-for-medium">
-                <a class="button primary expanded" data-open="add-item-to-cart-modal">
-                    Pridėti prekę į krepšelį
-                </a>
-            </div>
-
-
-
-
-
-
-
-            <!-- Product image and name -->
-            <div class="small-12 medium-5 columns">
-                <div class="row align-middle align-top">
-
-                    <!-- Image -->
-                    <div class="small-12 medium-6 columns align-right">
-                        <a href="../../product-details.xhtml">
-                            <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                        </a>
+                    <!-- [Mobile] Date bought -->
+                    <div class="small-12 columns hide-for-medium">
+                        <div class="row column">
+                            <p:outputLabel styleClass="large-text" value="#{product.date}"/>
+                        </div>
                     </div>
 
-                    <!-- Name -->
-                    <div class="small-12 medium-6 columns">
-                        <a href="../../product-details.xhtml?productId=1">
-                            <h5>GZ Air Force v4</h5>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Date bought. -->
-            <div class="medium-2 columns hide-for-small-only">
-                <div class="row column">
-                    <h5 class="">2017-05-28</h5>
-                </div>
-                <div class="row column">
-                    <h5 class="">19:09:25</h5>
-                </div>
-            </div>
-            <!-- [Mobile] Date bought -->
-            <div class="small-12 columns hide-for-medium">
-                <div class="row column">
-                    <h5 class="">2017-05-28 19:09:25</h5>
-                </div>
-            </div>
-
-            <!-- Product quantity. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="">2 vnt.</h5>
-            </div>
-
-            <!-- Price of the product. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="shopping-cart-price">124.99 €</h5>
-            </div>
-
-            <!-- [Button] Add to current cart -->
-            <div class="small-1 columns hide-for-small-only">
-                <span
-                        data-tooltip=""
-                        data-allow-html="true"
-                        class="has-tip right"
-                        title="Pridėti prekę į krepšelį">
-                    <a class="button primary" data-open="add-item-to-cart-modal">
-                        <i class="fi-plus"/>
-                    </a>
-                    </span>
-            </div>
-            <!-- [Mobile][Button] Add to current cart -->
-            <div class="small-12 columns hide-for-medium">
-                <a class="button primary expanded" data-open="add-item-to-cart-modal">
-                    Pridėti prekę į krepšelį
-                </a>
-            </div>
-
-
-
-
-
-            <!-- Product image and name -->
-            <div class="small-12 medium-5 columns">
-                <div class="row align-middle align-top">
-
-                    <!-- Image -->
-                    <div class="small-12 medium-6 columns align-right">
-                        <a href="../../product-details.xhtml">
-                            <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                        </a>
+                    <!-- Product quantity. -->
+                    <div class="small-12 medium-2 columns">
+                        <p:outputLabel styleClass="large-text" value="#{product.quantity} vnt."/>
                     </div>
 
-                    <!-- Name -->
-                    <div class="small-12 medium-6 columns">
-                        <a href="../../product-details.xhtml?productId=1">
-                            <h5>GZ Air Force v4</h5>
+                    <!-- Price of the product. -->
+                    <div class="small-12 medium-2 columns">
+                        <p:outputLabel styleClass="shopping-cart-price large-text" value="#{product.price} €"/>
+                    </div>
+
+                    <!-- [Button] Add to current cart -->
+                    <div class="small-1 columns hide-for-small-only">
+                        <h:form>
+                            <h:commandButton class="button expanded primary"
+                                             value="+"
+                                             pt:data-open="inform-user-about-adding-to-cart-modal"
+                                             actionListener="#{cartController.addProductToCart(product.productId)}">
+                                <f:ajax execute="@form" render="@none"/>
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                    <!-- [Mobile][Button] Add to current cart -->
+                    <div class="small-12 columns hide-for-medium">
+                        <a class="button primary expanded" data-open="add-item-to-cart-modal">
+                            Pridėti prekę į krepšelį
                         </a>
                     </div>
+                </ui:repeat>
+            </div> <!-- END OF SHOPPING HISTORY -->
+
+
+            <!-- ADD ITEM TO CART MODAL -->
+            <div id="add-item-to-cart-modal"
+                 class="reveal"
+                 data-reveal=""
+                 data-overlay="false"
+                 data-animation-in="fade-in fast">
+                <div class="row">
+                    <div class="columns small-8 small-offset-2">
+                        <h4 class="form-title text-center">
+                            Prekė pridėta prie krepšelio
+                        </h4>
+                    </div>
+                </div>
+                <button class="close-button" data-close="" type="button">
+                    <span>x</span>
+                </button>
+            </div> <!-- END OF ADD ITEM TO CART -->
+
+            <div id="shopping-list-total" class="row align-right">
+                <div class="columns">
+                    <p:outputLabel rendered="#{userProductHistoryController.totalSum ne null}"
+                                   styleClass="text-right larger-text"
+                                   value="Krepšelio vertė: #{userProductHistoryController.totalSum} €"/>
                 </div>
             </div>
+        </h:panelGroup>
 
-            <!-- Date bought. -->
-            <div class="medium-2 columns hide-for-small-only">
-                <div class="row column">
-                    <h5 class="">2017-05-28</h5>
-                </div>
-                <div class="row column">
-                    <h5 class="">19:09:25</h5>
-                </div>
-            </div>
-            <!-- [Mobile] Date bought -->
-            <div class="small-12 columns hide-for-medium">
-                <div class="row column">
-                    <h5 class="">2017-05-28 19:09:25</h5>
-                </div>
-            </div>
-
-            <!-- Product quantity. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="">2 vnt.</h5>
-            </div>
-
-            <!-- Price of the product. -->
-            <div class="small-12 medium-2 columns">
-                <h5 class="shopping-cart-price">124.99 €</h5>
-            </div>
-
-            <!-- [Button] Add to current cart -->
-            <div class="small-1 columns hide-for-small-only">
-                <span
-                        data-tooltip=""
-                        data-allow-html="true"
-                        class="has-tip right"
-                        title="Pridėti prekę į krepšelį">
-                    <a class="button primary" data-open="add-item-to-cart-modal">
-                        <i class="fi-plus"/>
-                    </a>
-                    </span>
-            </div>
-            <!-- [Mobile][Button] Add to current cart -->
-            <div class="small-12 columns hide-for-medium">
-                <a class="button primary expanded" data-open="add-item-to-cart-modal">
-                    Pridėti prekę į krepšelį
-                </a>
-            </div>
-
-
-        </div> <!-- END OF SHOPPING HISTORY -->
-
-
-        <!-- ADD ITEM TO CART MODAL -->
-        <div id="add-item-to-cart-modal"
-             class="reveal"
-             data-reveal=""
-             data-overlay="false"
-             data-animation-in="fade-in fast">
-            <div class="row">
-                <div class="columns small-8 small-offset-2">
-                    <h4 class="form-title text-center">
-                        Prekė pridėta prie krepšelio
-                    </h4>
-                </div>
-            </div>
-            <button class="close-button" data-close="" type="button">
-                <span>x</span>
-            </button>
-        </div> <!-- END OF ADD ITEM TO CART -->
-
-        <div id="shopping-list-total" class="row align-right">
-            <div class="columns">
-                <h4 class="text-right">Krepšelio vertė: <span>278.97 €</span></h4>
-            </div>
-        </div>
-
-
+        <h:panelGroup rendered="#{empty userProductHistoryController.products.content}">
+            <p:outputLabel styleClass="text-center" value="Jūs dar nei karto neapsipirkote"/>
+        </h:panelGroup>
     </div>
+
+    <!-- INFORM USER ABOUT ADDING TO CART MODAL -->
+    <div id="inform-user-about-adding-to-cart-modal"
+         class="reveal"
+         data-reveal=""
+         data-overlay="false"
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    Prekė pridėta prie jūsų krepšelio
+                </h4>
+                <br />
+                <div class="row">
+                    <div class="columns small-12">
+                        <a class="button orange expanded" data-close="">Supratau</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- END OF INFORM USER ABOUT ADDING TO CART MODAL -->
 
 </ui:composition>
