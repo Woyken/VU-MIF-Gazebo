@@ -16,12 +16,16 @@
     <h:outputStylesheet name="/css/vendor/foundation.css" />
     <h:outputStylesheet name="/css/vendor/foundation-icons.css" />
     <h:outputStylesheet name="/css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </h:head>
 <h:body>
 
     <div class="body-wrapper">
         <!-- NAVIGATION BAR -->
         <ui:include src="./templates/navbars/_container.xhtml" />
+
+        <!-- RATE SHOPPING EXPERIENCE -->
+        <ui:include src="templates/modals/rate-shopping-experience.xhtml" />
 
         <!-- PRODUCT LIST -->
         <ui:include src="./templates/products/list.xhtml" />
@@ -35,6 +39,7 @@
     <h:outputScript name="js/vendor/foundation.js"/>
     <h:outputScript name="js/foundation-app.js"/>
     <h:outputScript name="js/vendor/what-input.js"/>
+    <h:outputScript name="js/rate-shopping-experience.js" />
 
 </h:body>
 </html>
