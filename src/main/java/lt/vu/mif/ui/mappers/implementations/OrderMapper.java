@@ -8,11 +8,13 @@ import lt.vu.mif.ui.view.OrderView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("orderMapper")
+@Component
 public class OrderMapper implements IMapper<Order, OrderView> {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ProductMapper productMapper;
 
     @Override
     public Order toEntity(OrderView view) {
@@ -33,6 +35,9 @@ public class OrderMapper implements IMapper<Order, OrderView> {
         view.setRating(entity.getRating());
         view.setStatus(entity.getStatus());
         view.setUser(userMapper.toView(entity.getUser()));
+        view.setProducts(productMapper.toViews(
+            entity.getProducts().stream().map(product -> product.getProduct())
+                .collect(Collectors.toList())));
 
         return view;
     }
