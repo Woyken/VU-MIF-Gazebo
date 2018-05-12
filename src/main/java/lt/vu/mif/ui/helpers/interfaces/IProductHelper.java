@@ -3,6 +3,7 @@ package lt.vu.mif.ui.helpers.interfaces;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.view.BoughtProductView;
 import lt.vu.mif.ui.view.CartProductView;
@@ -16,7 +17,7 @@ public interface IProductHelper {
 
     ProductView getProduct(Long productId);
 
-    void importProducts(InputStream inputStream);
+    CompletableFuture<Void> importProducts(InputStream inputStream);
 
     Page<ProductView> getProductsPage(int activePage, int pageSize, ProductSearch search);
 

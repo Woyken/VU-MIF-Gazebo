@@ -3,7 +3,8 @@ package lt.vu.mif.ui.helpers.implementations;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import javax.transaction.Transactional;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.excel.ExcelProduct;
@@ -88,10 +89,13 @@ public class ProductHelper implements IProductHelper {
     }
 
     @Override
-    public void importProducts(InputStream inputStream) {
-        List<ExcelProduct> products = productExcelReader.readFile(inputStream);
-        List<Product> toSave = productParser.parseProducts(products);
-        productRepository.saveAll(toSave);
+    public CompletableFuture<Void> importProducts(InputStream inputStream) {
+        CompletionStage<List<ExcelProduct>> productPromise = productExcelReader
+            .readFile(inputStream);
+        return productPromise.thenAccept((List<ExcelProduct> products) -> {
+            List<Product> productsToSave = productParser.parseProducts(products);
+            saveAll(productsToSave);
+        }).toCompletableFuture();
     }
 
     @Override
