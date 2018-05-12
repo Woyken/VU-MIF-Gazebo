@@ -9,4 +9,6 @@ public interface IOrdersHelper {
     List<OrderView> getAllOrders();
 
     void saveNewOrder(OrderView orderView, List<CartProductView> cartProductViews);
+
+    OrderView getOrder(Long orderId);
 }

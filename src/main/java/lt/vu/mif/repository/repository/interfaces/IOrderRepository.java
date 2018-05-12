@@ -12,4 +12,6 @@ public interface IOrderRepository {
     List<Order> findAll();
 
     <S extends Order> List<S> saveAll(Iterable<S> entities);
+
+    Order get(Long Id);
 }

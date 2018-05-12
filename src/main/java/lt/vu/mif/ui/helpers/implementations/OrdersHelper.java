@@ -37,6 +37,11 @@ public class OrdersHelper implements IOrdersHelper {
     }
 
     @Override
+    public OrderView getOrder(Long orderId) {
+        return orderMapper.toView(orderRepository.get(orderId));
+    }
+
+    @Override
     public void saveNewOrder(OrderView orderView, List<CartProductView> cartProductViews) {
         Order order = new Order();
         order.setCreationDate(LocalDateTime.now());

@@ -12,25 +12,25 @@
 
         <!-- PAGE TITLE -->
         <div class="row column text-center section">
-            <h1 class="section-title">Vykdyti užsakymus</h1>
+            <h1 class="section-title">Užsakymo informacija</h1>
         </div> <!-- END OF PAGE TITLE -->
 
         <div class="row section">
-            <div class="columns small-6">
+            <div class="columns small-12">
                 <p>
-                    Pirkėjo paštas: <b>#{ordersController.orderView.user.email}</b>
+                    Pirkėjo paštas: <b>#{orderDetailsController.orderView.user.email}</b>
                 </p>
                 <p>
-                    Užsakymo būsena: <b>#{ordersController.orderView.status}</b>
+                    Užsakymo būsena: <b>#{orderDetailsController.orderView.status}</b>
                 </p>
                 <p>
-                    Užsakymo kaina: <b>#{ordersController.orderView.user.ordersSum}</b>
+                    Užsakymo kaina: <b>#{orderDetailsController.orderView.user.ordersSum}</b>
                 </p>
                 <p>
-                    Užsakymo data: <b>#{ordersController.orderView.creationDate}</b>
+                    Užsakymo data: <b>#{orderDetailsController.orderView.creationDate}</b>
                 </p>
                 <p>
-                    Užsakymo įvertinimas: <b>#{ordersController.orderView.rating}</b>
+                    Užsakymo įvertinimas: <b>#{orderDetailsController.orderView.rating}</b>
                 </p>
                 <p>
                     Užsakymo įvertinimo data:
@@ -41,6 +41,59 @@
                 <p>
                     daugiau apie pirkėją:
                 </p>
+            </div>
+        </div>
+
+        <!-- SECTION TITLE -->
+        <div class="row column text-center section">
+            <h1 class="section-title">Keisti užsakymo būseną</h1>
+        </div> <!-- END OF SECTION TITLE -->
+
+
+        <div class="row section">
+
+            <!-- [Button] ACCEPTED -->
+            <div class="hide-for-small-only columns medium-3">
+                <a href="#" class="button expanded hollow primary-inverted">
+                    Priimtas</a>
+            </div>
+            <!-- [Button][Mobile] ACCEPTED -->
+            <div class="hide-for-medium columns small-12">
+                <a href="#" class="button expanded hollow primary-inverted">
+                    Priimtas</a>
+            </div>
+
+            <!-- [Button] RENKAMAS -->
+            <div class="hide-for-small-only columns medium-3">
+                <a href="#" class="button expanded hollow primary-inverted">
+                    Renkamas</a>
+            </div>
+            <!-- [Button][Mobile] RENKAMAS -->
+            <div class="hide-for-medium columns small-12">
+                <a href="#" class="button expanded hollow primary-inverted">
+                    Renkamas</a>
+            </div>
+
+            <!-- [Button] SENT -->
+            <div class="hide-for-small-only columns medium-3">
+                <a href="#" class="button expanded hollow primary-inverted">
+                    Išsiųstas</a>
+            </div>
+            <!-- [Button][Mobile] SENT -->
+            <div class="hide-for-medium columns small-12">
+                <a href="#" class="button expanded hollow primary-inverted">
+                    Išsiųstas</a>
+            </div>
+
+            <!-- [Button] DELIVERED -->
+            <div class="hide-for-small-only columns medium-3">
+                <a href="#" class="button expanded hollow primary-inverted">
+                    Pristatytas</a>
+            </div>
+            <!-- [Button][Mobile] DELIVERED -->
+            <div class="hide-for-medium columns small-12">
+                <a href="#" class="button expanded hollow primary-inverted">
+                    Pristatytas</a>
             </div>
         </div>
 
