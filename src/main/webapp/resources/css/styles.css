@@ -493,6 +493,23 @@ legend {
     padding: 0em 0.5em; /* top/bottom and left/right */
 }
 
+/* Rate the shopping experience */
+.rating-star {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 3em;
+}
+.rating-star.empty:before {
+    content: "\f006";
+    color: #616161;
+}
+.rating-star.filled:before {
+    content: "\f005";
+    color: gold;
+}
+
 /* --- --- --- UTILITIES */
 
 .no-mar {	/* no margin*/

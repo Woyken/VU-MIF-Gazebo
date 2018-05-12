@@ -1,0 +1,64 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- RATE SHOPPING EXPERIENCE MODAL -->
+    <!-- !IMPORTANT! -->
+    <!-- The modal will only open if the attribute 'data-js-show' is set to 'true' -->
+    <div id="rate-shopping-experience-modal" class="reveal"
+         data-reveal=""
+         data-animation-in="fade-in fast"
+         data-js-show="false"
+    >
+        <h:form>
+            <div class="row">
+                <div class="columns small-8 small-offset-2">
+                    <h4 class="form-title text-center">
+                        Įvertinkite apsipirkimą
+                    </h4>
+
+                    <br/>
+
+                    <!-- Stars -->
+                    <div class="row align-center margin-top-1">
+                        <div class="columns small-10 shrink rating-stars">
+                            <span class="rating-star filled" data-value="1" />
+                            <span class="rating-star empty" data-value="2" />
+                            <span class="rating-star empty" data-value="3" />
+                            <span class="rating-star empty" data-value="4" />
+                            <span class="rating-star empty" data-value="5" />
+                        </div>
+                    </div>
+
+                    <!-- Comment -->
+                    <div class="row margin-top-1">
+                        <div class="columns small-12 rating-text">
+                            <h5 class="font-bold">Komentaras</h5>
+                        </div>
+
+                        <div class="columns small-12 rating-text">
+                            <textarea rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- [Button] Submit -->
+                    <div class="row margin-top-1">
+                        <div class="columns small-12">
+                            <button type="button" class="button green" data-close="">
+                                Palikti atsiliepimą
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <button class="close-button" data-close="" type="button">
+                <i class="fi-x" />
+            </button>
+        </h:form>
+    </div> <!-- END OF RATE SHOPPING EXPERIENCE MODAL -->
+
+</ui:composition>
