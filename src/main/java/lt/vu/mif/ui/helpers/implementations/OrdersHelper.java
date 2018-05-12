@@ -49,7 +49,7 @@ public class OrdersHelper implements IOrdersHelper {
         order.setUser(userService.getLoggedUser());
         order.setProducts(getOrderProducts(order, cartProductViews));
         order.setRating(orderView.getRating());
-        orderRepository.saveOrder(order);
+        orderRepository.save(order);
     }
 
     private List<OrderProduct> getOrderProducts(Order order, List<CartProductView> productViews) {

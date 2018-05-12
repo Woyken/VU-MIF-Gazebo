@@ -7,7 +7,7 @@ public interface IOrderRepository {
 
     List<Order> getAllUserOrders(Long userId);
 
-    void saveOrder(Order order);
+    Order save(Order order);
 
     List<Order> findAll();
 
