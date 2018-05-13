@@ -41,6 +41,11 @@ public class OrdersHelper implements IOrdersHelper {
     }
 
     @Override
+    public OrderView getOrder(Long orderId) {
+        return orderMapper.toView(orderRepository.get(orderId));
+    }
+
+    @Override
     public void saveNewOrder(OrderView orderView, List<CartProductView> cartProductViews) {
         User loggedUser = userService.getLoggedUser();
 
@@ -50,7 +55,7 @@ public class OrdersHelper implements IOrdersHelper {
         order.setUser(loggedUser);
         order.setProducts(getOrderProducts(order, cartProductViews));
         order.setRating(orderView.getRating());
-        orderRepository.saveOrder(order);
+        orderRepository.save(order);
 
         userRepository.update(loggedUser);
     }

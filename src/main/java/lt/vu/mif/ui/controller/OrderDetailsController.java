@@ -1,40 +1,41 @@
 package lt.vu.mif.ui.controller;
 
+import lombok.Getter;
+import lombok.Setter;
+import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
+import lt.vu.mif.ui.view.OrderView;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import lombok.Getter;
-import lombok.Setter;
-import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
-import lt.vu.mif.ui.view.ProductView;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
 @Named
 @ViewScoped
-public class ProductEditController {
+public class OrderDetailsController {
     @Autowired
-    private IProductHelper productHelper;
+    private IOrdersHelper ordersHelper;
 
-    private ProductView productView;
+    private OrderView orderView;
 
     public void onPageLoad() {
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
             return;
         }
 
-        String productId = FacesContext.getCurrentInstance().getExternalContext()
-            .getRequestParameterMap().get("productId");
-        if (StringUtils.isBlank(productId)) {
+        String orderId = FacesContext.getCurrentInstance().getExternalContext()
+                .getRequestParameterMap().get("orderId");
+        if (StringUtils.isBlank(orderId)) {
             throw new IllegalArgumentException("Invalid request parameter");
         }
 
-        productView = productHelper.getProduct(Long.valueOf(productId));
+        orderView = ordersHelper.getOrder(Long.valueOf(orderId));
 
-        if (productView == null) {
-            throw new IllegalStateException("Product" + "with ID=" + productId + "not found");
+        if (orderView == null) {
+            throw new IllegalStateException("Order" + "with ID=" + orderId + "not found");
         }
     }
 

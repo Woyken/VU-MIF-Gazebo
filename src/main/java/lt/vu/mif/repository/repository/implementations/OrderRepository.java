@@ -59,16 +59,6 @@ public class OrderRepository extends SimpleJpaRepository<Order, Long> implements
         return entityManager.createQuery(criteria).getResultList();
     }
 
-    @Override
-    public Order get(Long id) {
-        return entityManager.find(Order.class, id);
-    }
-
-    @Override
-    public void saveOrder(Order order) {
-        save(order);
-    }
-
     public List<Order> getAllUserOrders(Long userId) {
         Objects.requireNonNull(userId);
 
@@ -91,5 +81,17 @@ public class OrderRepository extends SimpleJpaRepository<Order, Long> implements
 
         return entityManager.createQuery(criteria).getResultList();
     }
+
+
+    @Override
+    public Order save(Order order) {
+        return super.save(order);
+    }
+
+    @Override
+    public Order get(Long id) {
+        return super.getOne(id);
+    }
+
 
 }
