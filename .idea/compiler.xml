@@ -15,6 +15,7 @@
         <module name="gazebo.model" />
         <module name="gazebo.payment" />
         <module name="gazebo.repository" />
+        <module name="VU-MIF-Gazebo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -35,6 +36,7 @@
       <module name="gazebo.model" target="1.8" />
       <module name="gazebo.payment" target="1.8" />
       <module name="gazebo.repository" target="1.8" />
+      <module name="VU-MIF-Gazebo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

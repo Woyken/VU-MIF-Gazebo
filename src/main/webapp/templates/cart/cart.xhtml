@@ -168,7 +168,7 @@
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
-                                   action="/login.xhtml"
+                                   action="#{cartController.buyWithoutLogin}"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
                 </div>
 
@@ -184,7 +184,7 @@
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
-                                   action="/login.xhtml"
+                                   action="#{cartController.buyWithoutLogin}"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
                 </div>
                     

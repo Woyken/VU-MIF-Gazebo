@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -27,11 +28,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/payment.xhtml").access("hasAnyRole('USER', 'ADMIN')")
             .and().authorizeRequests().antMatchers("/admin-*").hasRole("ADMIN")
             .and().exceptionHandling().accessDeniedPage("/access-denied.xhtml")
-            .and().formLogin().loginPage("/login.xhtml").defaultSuccessUrl("/main.xhtml", true)
+            .and().formLogin().loginPage("/login.xhtml").successHandler(successHandler())
             .failureUrl(
                 "/login.xhtml?error=true").permitAll().and().logout()
             .logoutSuccessUrl("/main.xhtml").invalidateHttpSession(true).deleteCookies("remove")
             .permitAll().and().csrf().disable();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return new CustomLoginSuccessHandler("/main.xhtml");
     }
 
     @Bean
