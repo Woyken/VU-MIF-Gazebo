@@ -2,9 +2,13 @@ package lt.vu.mif.ui.controller;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Named
 @ViewScoped
@@ -12,14 +16,40 @@ public class AllProductsController {
     @Autowired
     private IProductHelper productHelper;
 
-    @Setter
-    private Long productToDeleteId;
+    @Getter @Setter
+    private boolean multipleDeleteEnabled = false;
 
-    public void deleteProduct() {
-        if (productToDeleteId == null) {
-            throw new IllegalStateException("productToDelete was not set");
+    @Setter
+    private List<Long> productsToDeleteIds = new ArrayList<>();
+
+
+    public void addProductToDelete(Long productId) {
+        // The first item was checked - enable multiple delete
+        if (productsToDeleteIds.isEmpty()) {
+            multipleDeleteEnabled = true;
         }
 
-        productHelper.deleteById(productToDeleteId);
+        // If the same ID was passed a second time - the checkbox was unchecked
+        if (productsToDeleteIds.contains(productId)) {
+            productsToDeleteIds.remove(productId);
+        } else {
+            productsToDeleteIds.add(productId);
+        }
+
+        // All checkboxes were unselected - disable multiple delete
+        if (productsToDeleteIds.isEmpty()) {
+            multipleDeleteEnabled = false;
+        }
+    }
+
+    public String deleteMultipleProducts() {
+        if (productsToDeleteIds.isEmpty()) {
+            return null;
+        }
+
+        productHelper.deleteMultipleByIds(productsToDeleteIds);
+        multipleDeleteEnabled = false;
+        productsToDeleteIds.clear();
+        return "all-products?faces-redirect=true";
     }
 }

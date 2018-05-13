@@ -23,6 +23,8 @@ public interface IProductHelper {
 
     void deleteById(Long id);
 
+    void deleteMultipleByIds(List<Long> productIds);
+
     void saveAll(List<Product> productList);
 
     CartProductView getCartProductView(Long productId);
