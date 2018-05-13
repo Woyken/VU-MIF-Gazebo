@@ -40,24 +40,6 @@ public class OrderDetailsController {
     }
 
     public void saveChanges() {
-//        Product product = new Product();
-//        List<Image> images = new ArrayList<Image>();
-//        List<ImageView> viewImages = productView.getImages();
-//        for (int i = 0; i < viewImages.size(); i++)
-//        {
-//            ImageView current = viewImages.get(i);
-//            Image img = new Image();
-//            img.setId(current.getId());
-//            img.setContent(current.getContent());
-//            images.add(img);
-//        }
-//
-//        product.setId(productView.getId());
-//        product.setSku(productView.getSku());
-//        product.setTitle(productView.getTitle());
-//        product.setPrice(productView.getPrice());
-//        product.setDescription(productView.getDescription());
-//        product.setImages(viewImages);
-//        productRepository.save(product);
+
     }
 }

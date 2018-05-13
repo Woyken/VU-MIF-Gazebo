@@ -22,6 +22,7 @@ public class App {
 
         dataGenerator.insertProducts();
         dataGenerator.insertUsers();
+        dataGenerator.insertRatings();
         dataGenerator.insertOrders();
     }
 }
