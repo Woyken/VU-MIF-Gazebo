@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lt.vu.mif.model.order.Order;
+import lt.vu.mif.model.order.OrderRating;
 import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.user.Role;
 import lt.vu.mif.model.user.User;
+import lt.vu.mif.repository.repository.interfaces.IOrderRatingRepository;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
@@ -31,6 +33,8 @@ public class DataGenerator {
     private IOrderRepository orderRepository;
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private IOrderRatingRepository orderRatingRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -148,6 +152,13 @@ public class DataGenerator {
         return image;
     }
 
+    public void insertRatings(){
+        OrderRating rating = new OrderRating();
+        rating.setRating(4L);
+        rating.setDescription("I like food");
+        rating.setCreationDate(LocalDateTime.now());
+    }
+
     public void insertOrders() {
         for (int i = 1; i <= 10; i++) {
             insertOrder(1);
@@ -158,7 +169,7 @@ public class DataGenerator {
         List<Order> orders = new ArrayList<>();
 
         Order order = new Order();
-        order.setRating(5L);
+        order.setRating(orderRatingRepository.get(1L));
         order.setCreationDate(LocalDateTime.now());
         order.setStatus(OrderStatus.ACCEPTED);
         order.setUser(userRepository.getUserByEmail("user" + counter + "@gmail.com"));

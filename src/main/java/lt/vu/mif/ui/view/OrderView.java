@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.model.order.OrderRating;
 import lt.vu.mif.model.order.OrderStatus;
 
 @Named
@@ -15,7 +16,7 @@ public class OrderView {
 
     private Long id;
     private UserView user;
-    private Long rating;
+    private OrderRating rating;
     private OrderStatus status;
     private LocalDateTime creationDate;
     private List<ProductView> products = new ArrayList<>();
