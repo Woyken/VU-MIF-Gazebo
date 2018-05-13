@@ -5,10 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
 <f:metadata>
-    <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
-</f:metadata>
-<f:metadata>
-    <f:event type="preRenderView" listener="#{orderDetailsController.onPageLoad}"/>
+    <f:event type="preRenderView" listener="#{ordersController.onPageLoadUser(userService.getLoggedUser().email)}"/>
 </f:metadata>
 
 <h:head>
@@ -27,7 +24,7 @@
         <ui:include src="./templates/navbars/_container.xhtml" />
 
         <!-- CART HISTORY -->
-        <ui:include src="./templates/cart/history.xhtml" />
+        <ui:include src="./templates/cart/order.xhtml" />
     </div>
 
     <!-- FOOTER -->

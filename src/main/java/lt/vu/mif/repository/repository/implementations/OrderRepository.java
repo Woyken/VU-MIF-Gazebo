@@ -59,12 +59,12 @@ public class OrderRepository extends SimpleJpaRepository<Order, Long> implements
         return entityManager.createQuery(criteria).getResultList();
     }
 
-    public List<Order> getAllUserOrders(Long userId) {
-        Objects.requireNonNull(userId);
+    public List<Order> getAllUserOrders(String email) {
+        Objects.requireNonNull(email);
 
         Specification<Order> specification = Specification.where(
             (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .equal(root.get(Order_.user).get(User_.id), userId));
+                .equal(root.get(Order_.user).get(User_.email), email));
         return findAll(specification);
     }
 
