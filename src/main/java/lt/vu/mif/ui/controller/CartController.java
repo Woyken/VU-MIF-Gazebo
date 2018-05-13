@@ -23,6 +23,7 @@ public class CartController implements Serializable {
 
     private List<CartProductView> productsInCart = new ArrayList<>();
     private CartProductView productSelectedForRemoval;
+    private Boolean redirectAfterLogin = false;
 
     public void selectForRemoval(CartProductView product) {
         productSelectedForRemoval = product;
@@ -66,5 +67,10 @@ public class CartController implements Serializable {
 
     public String buyProducts() {
         return "payment?faces-redirect=true";
+    }
+
+    public String buyWithoutLogin() {
+        redirectAfterLogin = true;
+        return "login?faces-redirect=true";
     }
 }
