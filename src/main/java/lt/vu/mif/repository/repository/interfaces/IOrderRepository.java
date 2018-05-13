@@ -5,7 +5,7 @@ import lt.vu.mif.model.order.Order;
 
 public interface IOrderRepository {
 
-    List<Order> getAllUserOrders(Long userId);
+    List<Order> getAllUserOrders(String email);
 
     Order save(Order order);
 
