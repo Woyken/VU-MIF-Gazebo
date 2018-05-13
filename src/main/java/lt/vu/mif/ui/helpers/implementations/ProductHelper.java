@@ -61,6 +61,11 @@ public class ProductHelper implements IProductHelper {
     }
 
     @Override
+    public void deleteMultipleByIds(List<Long> productIds) {
+        productRepository.deleteAll(productIds);
+    }
+
+    @Override
     public void saveAll(List<Product> productList) {
         productRepository.saveAll(productList);
     }

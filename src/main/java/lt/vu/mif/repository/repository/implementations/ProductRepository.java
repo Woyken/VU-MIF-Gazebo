@@ -95,6 +95,11 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
                 .add(builder.lessThanOrEqualTo(root.get(Product_.price), search.getMaxPrice()));
         }
 
+        if (!search.isIncludeDeleted()) {
+            predicates
+                    .add(builder.isFalse(root.get(Product_.deleted)));
+        }
+
         return predicates;
     }
 
