@@ -13,5 +13,11 @@ public interface IOrderRepository {
 
     <S extends Order> List<S> saveAll(Iterable<S> entities);
 
-    Order get(Long Id);
+    List<Order> getCurrentUserOrdersToRate(String currentUserEmail);
+
+    Order get(Long id);
+
+    List<Order> getOrders(List<Long> ids);
+
+    void updateAll(List<Order> orders);
 }

@@ -104,7 +104,7 @@ public class ProductHelper implements IProductHelper {
 
         for (BoughtProductView productView : productViews) {
             if (productView.getPrice() != null) {
-                totalSum = totalSum.add(productView.getPrice());
+                totalSum = totalSum.add(productView.getPrice().multiply(new BigDecimal(productView.getQuantity())));
             }
         }
 
