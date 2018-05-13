@@ -24,14 +24,17 @@
 
             <div class="row section">
                 <div class="columns">
-                    <h:commandButton id="btn" onclick="document.getElementById('importForm:importMsg').innerText = 'Vykdoma..'" styleClass="button expanded orange" action="#{productImportController.importProducts}"
+                    <h:commandButton id="btn"
+                                     onclick="document.getElementById('importForm:importMsg').innerText = 'Vykdoma..'"
+                                     styleClass="button expanded orange"
+                                     action="#{productImportController.importProducts}"
                                      value="Importuoti produktus">
                         <f:ajax execute="@form" render="@form"/>
                     </h:commandButton>
                 </div>
             </div>
             <div class="row column text-center">
-                <h:outputLabel id="importMsg" value="#{productImportController.message}" />
+                <h:outputLabel id="importMsg" value="#{productImportController.message}"/>
             </div>
         </h:form>
     </div>
