@@ -157,6 +157,7 @@ public class DataGenerator {
         rating.setRating(4L);
         rating.setDescription("I like food");
         rating.setCreationDate(LocalDateTime.now());
+        orderRatingRepository.save(rating);
     }
 
     public void insertOrders() {
