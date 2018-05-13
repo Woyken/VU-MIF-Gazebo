@@ -23,13 +23,11 @@
             </div>
 
             <div id="shopping-list-body" class="row align-middle">
-                <ui:repeat value="#{ordersController.orders}" var="order">
+                <ui:repeat value="#{ordersController.userOrders}" var="order">
                     <!-- Order number -->
                     <div class="small-12 medium-2 columns">
                         <div class="row align-middle align-top">
-                            <a href="../../cart-history.xhtml?orderId=#{order.id}">
-                                <p:outputLabel styleClass="large-text" value="#{order.id}"/>
-                            </a>
+                            <p:outputLabel styleClass="large-text" value="#{order.id}"/>
                         </div>
                     </div>
 
@@ -53,19 +51,14 @@
 
                     <!-- Price of the product. -->
                     <div class="small-12 medium-2 columns">
-                        <p:outputLabel styleClass="shopping-cart-price large-text" value="#{order.rating} €"/>
+                        <p:outputLabel styleClass="shopping-cart-price large-text" value="20 €"/>
                     </div>
 
                     <!-- [Button] Add to current cart -->
                     <div class="small-2 columns hide-for-small-only">
-                        <h:form>
-                            <h:commandButton class="button expanded primary"
-                                             value="Peržiūrėti"
-                                             pt:data-open="inform-user-about-adding-to-cart-modal"
-                                             actionListener="#{cartController.addProductToCart(order.id)}">
-                                <f:ajax execute="@form" render="@none"/>
-                            </h:commandButton>
-                        </h:form>
+                        <a href="../../cart-history.xhtml?orderId=#{order.id}" class="button expanded primary">
+                            Peržiūrėti
+                        </a>
                     </div>
                     <!-- [Mobile][Button] Add to current cart -->
                     <div class="small-12 columns hide-for-medium">
@@ -76,51 +69,11 @@
                 </ui:repeat>
             </div> <!-- END OF SHOPPING HISTORY -->
 
-
-            <!-- ADD ITEM TO CART MODAL -->
-            <div id="add-item-to-cart-modal"
-                 class="reveal"
-                 data-reveal=""
-                 data-overlay="false"
-                 data-animation-in="fade-in fast">
-                <div class="row">
-                    <div class="columns small-8 small-offset-2">
-                        <h4 class="form-title text-center">
-                            Prekė pridėta prie krepšelio
-                        </h4>
-                    </div>
-                </div>
-                <button class="close-button" data-close="" type="button">
-                    <span>x</span>
-                </button>
-            </div> <!-- END OF ADD ITEM TO CART -->
-
         </h:panelGroup>
 
-        <h:panelGroup rendered="#{empty ordersController.orders}">
+        <h:panelGroup rendered="#{empty ordersController.userOrders}">
             <p:outputLabel styleClass="text-center" value="Jūs dar nei karto neapsipirkote"/>
         </h:panelGroup>
     </div>
-
-    <!-- INFORM USER ABOUT ADDING TO CART MODAL -->
-    <div id="inform-user-about-adding-to-cart-modal"
-         class="reveal"
-         data-reveal=""
-         data-overlay="false"
-         data-animation-in="fade-in fast">
-        <div class="row">
-            <div class="columns small-8 small-offset-2">
-                <h4 class="form-title text-center">
-                    Prekė pridėta prie jūsų krepšelio
-                </h4>
-                <br />
-                <div class="row">
-                    <div class="columns small-12">
-                        <a class="button orange expanded" data-close="">Supratau</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- END OF INFORM USER ABOUT ADDING TO CART MODAL -->
 
 </ui:composition>

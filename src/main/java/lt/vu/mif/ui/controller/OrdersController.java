@@ -2,7 +2,6 @@ package lt.vu.mif.ui.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,12 +23,18 @@ public class OrdersController {
 
     private List<OrderView> orders = new ArrayList<>();
 
+    private List<OrderView> userOrders = new ArrayList<>();
+
     public void onPageLoad() {
         orders = ordersHelper.getAllOrders();
     }
 
-//    public List<OrderView> getOrdersByUser(Long userId){
-//
-//    }
+    public void onPageLoadUser(String email) {
+        userOrders = ordersHelper.getAllUserOrders(email);
+    }
+
+    public List<OrderView> getOrdersByUser(String email){
+        return ordersHelper.getAllUserOrders(email);
+    }
 
 }

@@ -37,6 +37,11 @@ public class OrdersHelper implements IOrdersHelper {
     }
 
     @Override
+    public List<OrderView> getAllUserOrders(String email) {
+        return orderMapper.toViews(orderRepository.getAllUserOrders(email));
+    }
+
+    @Override
     public OrderView getOrder(Long orderId) {
         return orderMapper.toView(orderRepository.get(orderId));
     }
