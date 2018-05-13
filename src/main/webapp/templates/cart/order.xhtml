@@ -13,7 +13,7 @@
             <h1 class="section-title">Pirkimo istorija</h1>
         </div> <!-- END OF PAGE TITLE -->
 
-        <h:panelGroup>
+        <h:panelGroup rendered="#{!empty ordersController.userOrders}">
             <!-- ORDERS HISTORY -->
             <div id="shopping-list-header" class="row section hide-for-small-only">
                 <div class="columns small-2"><h5>Užsakymo Nr.</h5></div>
