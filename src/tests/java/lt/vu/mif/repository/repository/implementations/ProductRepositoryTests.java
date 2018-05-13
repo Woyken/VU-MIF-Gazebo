@@ -1,16 +1,13 @@
-package lt.vu.mif.repository.repository;
+package lt.vu.mif.repository.repository.implementations;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Product;
-import lt.vu.mif.repository.repository.implementations.ProductRepository;
 import lt.vu.mif.utils.search.ProductSearch;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
