@@ -1,5 +1,6 @@
 package lt.vu.mif;
 
+import lt.vu.mif.generator.DataGenerator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,18 +11,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class RegisterTestsIT {
+
+    @LocalServerPort
+    int localServerPort;
+
+    @Autowired
+    DataGenerator dataGenerator;
+
     private WebDriver driver;
 
     @Before
     public void before() {
         driver = new FirefoxDriver();
+        dataGenerator.insertProducts();
     }
 
     @After
@@ -33,7 +44,7 @@ public class RegisterTestsIT {
     public void registration_success() {
         Actions action = new Actions(driver);
         //Load main page
-        driver.get("http://localhost:8080/");
+        driver.get("http://localhost:" + localServerPort + "/");
         String title = driver.getTitle();
         Assertions.assertTrue(title.equals("Home"));
 
@@ -42,15 +53,24 @@ public class RegisterTestsIT {
         action.moveToElement(dropDown).pause(500).perform();
         driver.findElement(By.linkText("Registruotis")).click();
         //In register page enter credentials
-        driver.findElement(By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[1]/div/label/input")).sendKeys("thisisemail@email.com");
-        driver.findElement(By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[2]/div[1]/label/input")).sendKeys("Q!w2erty");
-        driver.findElement(By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[3]/div/label/input")).sendKeys("Q!w2erty");
+        driver.findElement(
+            By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[1]/div/label/input"))
+            .sendKeys("thisisemail@email.com");
+        driver.findElement(
+            By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[2]/div[1]/label/input"))
+            .sendKeys("Q!w2erty");
+        driver.findElement(
+            By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[3]/div/label/input"))
+            .sendKeys("Q!w2erty");
         //Click register
-        driver.findElement(By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[5]/div/input")).click();
-        Assertions.assertTrue(driver.findElement(By.id("j_idt9:message")).getText().contains("thisisemail@email.com sėkmingai sukurtas"));
+        driver
+            .findElement(By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[5]/div/input"))
+            .click();
+        Assertions.assertTrue(driver.findElement(By.id("j_idt9:message")).getText()
+            .contains("thisisemail@email.com sėkmingai sukurtas"));
 
         //TODO: Currently there's no way to navigate back. For now just directly move back.
-        driver.get("http://localhost:8080/");
+        driver.get("http://localhost:" + localServerPort + "/");
 
         //Do login
         dropDown = driver.findElement(By.linkText("Paskyra"));

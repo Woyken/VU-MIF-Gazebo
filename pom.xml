@@ -117,7 +117,44 @@
             <version>2.21.0</version>
         </dependency>
     </dependencies>
-
+    <profiles>
+        <profile>
+            <id>platform-windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <platform>windows</platform>
+                <webdriver.gecko.driver.binary>geckodriver-windows-64bit.exe</webdriver.gecko.driver.binary>
+            </properties>
+        </profile>
+        <profile>
+            <id>platform-mac</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <platform>mac</platform>
+                <webdriver.gecko.driver.binary>geckodriver-mac-64bit</webdriver.gecko.driver.binary>
+            </properties>
+        </profile>
+        <profile>
+            <id>platform-linux</id>
+            <activation>
+                <os>
+                    <family>linux</family>
+                </os>
+            </activation>
+            <properties>
+                <platform>linux</platform>
+                <webdriver.gecko.driver.binary>geckodriver-linux-64bit</webdriver.gecko.driver.binary>
+            </properties>
+        </profile>
+    </profiles>
     <build>
         <testSourceDirectory>src/tests/java</testSourceDirectory>
         <testResources>
@@ -126,6 +163,27 @@
             </testResource>
         </testResources>
         <plugins>
+            <plugin>
+                <groupId>com.github.webdriverextensions</groupId>
+                <artifactId>webdriverextensions-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-drivers</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <installationDirectory>${project.basedir}/drivers</installationDirectory>
+                    <drivers>
+                        <driver>
+                            <name>geckodriver</name>
+                        </driver>
+                    </drivers>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -178,6 +236,12 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <geb.build.reportsDir>${project.build.directory}/test-reports/geb</geb.build.reportsDir>
+                        <webdriver.gecko.driver>${project.basedir}/drivers/${webdriver.gecko.driver.binary}</webdriver.gecko.driver>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
         </plugins>
     </build>
