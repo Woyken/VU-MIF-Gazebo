@@ -24,8 +24,12 @@ public class OrdersController {
 
     private List<OrderView> orders = new ArrayList<>();
 
+    private List<OrderView> userOrders = new ArrayList<>();
+
     public void onPageLoad() {
         orders = ordersHelper.getAllOrders();
     }
+
+    public void onPageLoadUser(String email) { userOrders = ordersHelper.getAllUserOrders(email); }
 
 }
