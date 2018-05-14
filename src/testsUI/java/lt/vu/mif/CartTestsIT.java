@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CartTestsIT {
+
     @LocalServerPort
     int localServerPort;
 
@@ -30,7 +31,11 @@ public class CartTestsIT {
     @Before
     public void before() {
         driver = new FirefoxDriver();
-        dataGenerator.insertProducts();
+        driver.get("http://localhost:" + localServerPort + "/");
+        if (!TestPreparation.getSetuped("dataGenerator.insertProducts")) {
+            dataGenerator.insertProducts();
+            TestPreparation.setSetuped("dataGenerator.insertProducts");
+        }
     }
 
     @After
@@ -40,27 +45,33 @@ public class CartTestsIT {
 
     @Test
     public void addingProductsToCart_success() {
-        driver.get("http://localhost:" + localServerPort + "/");
         //Add first product to cart
-        driver.findElement(By.xpath("/html/body/div[1]/div[6]/div/span/div[1]/div[1]/form/input[2]")).click();
+        driver
+            .findElement(By.xpath("/html/body/div[1]/div[6]/div/span/div[1]/div[1]/form/input[2]"))
+            .click();
         //Go to cart
         driver.findElement(By.id("cart-button")).click();
         //Check cart item amount
-        WebElement cartItemAmount = driver.findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[3]/div[2]/input"));
+        WebElement cartItemAmount = driver
+            .findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[3]/div[2]/input"));
         Assertions.assertEquals("1", cartItemAmount.getAttribute("value"));
 
         //Click remove from cart
-        driver.findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[3]/div[4]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[3]/div[4]/a"))
+            .click();
         //click Yes
         driver.findElement(By.xpath("/html/body/div[3]/div/div/div/div[1]/form/a")).click();
         // make sure item is gone.
-        Assertions.assertEquals(0, driver.findElement(By.id("shopping-cart-items-form")).findElements(By.tagName("img")).size());
+        Assertions.assertEquals(0,
+            driver.findElement(By.id("shopping-cart-items-form")).findElements(By.tagName("img"))
+                .size());
         //back to catalog
         driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/div[4]/div[1]/a")).click();
         //open first item description
         driver.findElement(By.xpath("/html/body/div[1]/div[6]/div/span/div[1]/div[1]/a")).click();
         //set amount to 5
-        WebElement inputAmount = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/form/div[1]/div[2]/input"));
+        WebElement inputAmount = driver
+            .findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/form/div[1]/div[2]/input"));
         inputAmount.clear();
         inputAmount.sendKeys("5");
         //Click on add to cart
@@ -68,7 +79,8 @@ public class CartTestsIT {
         //Go to cart
         driver.findElement(By.id("cart-button")).click();
         //Check cart item amount
-        cartItemAmount = driver.findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[3]/div[2]/input"));
+        cartItemAmount = driver
+            .findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[3]/div[2]/input"));
         Assertions.assertEquals("5", cartItemAmount.getAttribute("value"));
     }
 }

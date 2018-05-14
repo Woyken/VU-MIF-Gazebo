@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -35,7 +36,10 @@ public class UserProfileTestsIT {
     public void before() {
         driver = new FirefoxDriver();
         driver.get("http://localhost:" + localServerPort + "/");
-        dataGenerator.insertUsers();
+        if (!TestPreparation.getSetuped("dataGenerator.insertUsers")) {
+            dataGenerator.insertUsers();
+            TestPreparation.setSetuped("dataGenerator.insertUsers");
+        }
     }
 
     @After
@@ -46,7 +50,7 @@ public class UserProfileTestsIT {
     public void loginFromCurrentWindow(WebDriver driver, String username, String password) {
         Actions action = new Actions(driver);
         WebElement dropDown = driver.findElement(By.linkText("Paskyra"));
-        action.moveToElement(dropDown).pause(500).perform();
+        action.moveToElement(dropDown).pause(500).build().perform();
         driver.findElement(By.linkText("Prisijungti")).click();
         //In login page enter credentials
         driver.findElement(By.id("username")).sendKeys(username);
