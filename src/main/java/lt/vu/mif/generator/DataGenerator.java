@@ -162,6 +162,7 @@ public class DataGenerator {
         order.setCreationDate(LocalDateTime.now());
         order.setStatus(OrderStatus.ACCEPTED);
         order.setUser(userRepository.getUserByEmail("user" + counter + "@gmail.com"));
+        order.setRated(true);
         orders.add(order);
 
         orderRepository.saveAll(orders);
