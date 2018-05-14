@@ -31,11 +31,11 @@ public class CartTestsIT {
     @Before
     public void before() {
         driver = new FirefoxDriver();
-        driver.get("http://localhost:" + localServerPort + "/");
         if (!TestPreparation.getSetuped("dataGenerator.insertProducts")) {
             dataGenerator.insertProducts();
             TestPreparation.setSetuped("dataGenerator.insertProducts");
         }
+        driver.get("http://localhost:" + localServerPort + "/");
     }
 
     @After
