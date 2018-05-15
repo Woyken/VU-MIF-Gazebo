@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import javax.faces.context.FacesContext;
 import javax.transaction.Transactional;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.excel.ExcelProduct;
@@ -20,6 +21,7 @@ import lt.vu.mif.ui.view.CartProductView;
 import lt.vu.mif.ui.view.ProductView;
 import lt.vu.mif.utils.interfaces.IProductParser;
 import lt.vu.mif.utils.search.ProductSearch;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -114,5 +116,27 @@ public class ProductHelper implements IProductHelper {
         }
 
         return totalSum;
+    }
+
+    @Override
+    public ProductView getProductViewFromNavigationQuery() {
+        String productId = FacesContext
+                            .getCurrentInstance()
+                            .getExternalContext()
+                            .getRequestParameterMap()
+                            .get("productId");
+
+        // No ID in query
+        if (StringUtils.isBlank(productId)) {
+            throw new IllegalArgumentException("Invalid request parameter");
+        }
+
+        ProductView productView = this.getProduct(Long.valueOf(productId));
+
+        if (productView == null) {
+            throw new IllegalStateException("Product" + "with ID=" + productId + "not found");
+        }
+
+        return productView;
     }
 }
