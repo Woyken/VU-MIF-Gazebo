@@ -14,8 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,15 +35,21 @@ public class Category {
     private String name;
 
     @ManyToOne(cascade = ALL)
-    @JoinColumn(name = "SUBCATEGORY_ID")
-    private Category subcategory;
+    @JoinColumn(name = "PARENT_CATEGORY_ID")
+    private Category parentCategory;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @JoinTable(name = "CATEGORY_ATTRIBUTE", joinColumns = @JoinColumn(name = "CATEGORY_ID"))
     @Column(name = "ATTRIBUTE")
     private List<String> attributes = new ArrayList<>();
 
-    @ManyToMany(fetch = LAZY, cascade = ALL)
-    @JoinTable(name = "CATEGORY_PRODUCTS", joinColumns = @JoinColumn(name = "CATEGORY_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+    @OneToMany(fetch = LAZY, cascade = ALL, mappedBy = "category")
     private List<Product> products = new ArrayList<>();
+
+    public Category() {
+    }
+
+    public Category(String name) {
+        this.name = name;
+    }
 }

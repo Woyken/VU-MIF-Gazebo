@@ -5,9 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.implementations.Category;
-import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -23,82 +21,40 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CategoryRepositoryTest {
 
     @Autowired
-    private ICategoryRepository categoryRepository;
-    @Autowired
     private IProductRepository productRepository;
 
-    @Before
-    public void init() {
-        createProducts();
-        createCategories();
-    }
 
     @Test
-    public void assignCategoryToProductTest() {
-        List<Product> products = productRepository.findAll();
-        List<Category> categories = categoryRepository.findAll();
+    public void insertProductsWithCategoryTest() {
+        Product newProduct = new Product();
+        newProduct.setTitle("Very long title");
+        newProduct.setDescription("Description 1");
+        newProduct.setPrice(new BigDecimal(10L));
+        newProduct.setSku("sku1");
+        newProduct.setCategory(getDefaultCategory());
+        productRepository.save(newProduct);
 
-        for (Product product : products) {
-            product.getCategories().addAll(categories);
+        List<Product> createdProducts = productRepository.findAll();
+
+        for (Product product : createdProducts) {
+            Assertions
+                .assertEquals(getDefaultCategory().getName(), product.getCategory().getName());
         }
-
-        productRepository.updateAll(products);
-
-        List<Product> updatedProducts = productRepository.findAll();
-
-        for (Product product : updatedProducts) {
-            Assertions.assertFalse(product.getCategories().isEmpty());
-        }
-    }
-
-    @Test
-    public void createProductWithCategory() {
-        Product product = new Product();
-        product.setTitle("Very long title");
-        product.setDescription("Description 1");
-        product.setPrice(new BigDecimal(10L));
-        product.setSku("sku1");
-        productRepository.save(product);
-        product.getCategories().add(getDefaultCategory());
-
-        productRepository.save(product);
-
-        Product createdProduct = productRepository.get(product.getId());
-        Assertions.assertFalse(createdProduct.getCategories().isEmpty());
-    }
-
-    private void createCategories() {
-        categoryRepository.save(getDefaultCategory());
     }
 
     private Category getDefaultCategory() {
-        Category category = new Category();
-        category.setName("furniture");
+        Category parentCategory = new Category();
+        parentCategory.setName("furniture");
 
-        category.getAttributes().add("color");
-        category.getAttributes().add("size");
+        parentCategory.getAttributes().add("color");
+        parentCategory.getAttributes().add("size");
 
         Category subcategory = new Category();
         subcategory.setName("kitchen");
 
-        category.setSubcategory(subcategory);
+        subcategory.setParentCategory(parentCategory);
 
-        return category;
+        return parentCategory;
     }
 
-    private void createProducts() {
-        Product product = new Product();
-        product.setTitle("Very long title");
-        product.setDescription("Description 1");
-        product.setPrice(new BigDecimal(10L));
-        product.setSku("sku1");
-        productRepository.save(product);
-
-        product = new Product();
-        product.setTitle("long title");
-        product.setDescription("Description 2");
-        product.setPrice(new BigDecimal(20L));
-        product.setSku("sku2");
-        productRepository.save(product);
-    }
 }
