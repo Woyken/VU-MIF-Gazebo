@@ -10,9 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.repository.repository.implementations.Category;
 
 @Getter
 @Setter
@@ -42,6 +45,11 @@ public class Product {
     @Column(name = "IS_DELETED")
     private boolean deleted;
 
-    @Column(name = "NEWPRICE")
+    @Column(name = "NEW_PRICE")
     private BigDecimal newPrice;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "CATEGORY_ID", nullable = false)
+    private Category category;
+
 }
