@@ -46,6 +46,12 @@ public class ProductHelper implements IProductHelper {
     private UserService userService;
 
     @Override
+    public void update(ProductView view) {
+        Product entity = productMapper.toEntity(view);
+        productRepository.update(entity);
+    }
+
+    @Override
     public Page<BoughtProductView> getBoughtProductsPage(int activePage, int pageSize,
         Long userId) {
         return boughtProductRepository.getBoughtProductsPage(activePage, pageSize, userId)

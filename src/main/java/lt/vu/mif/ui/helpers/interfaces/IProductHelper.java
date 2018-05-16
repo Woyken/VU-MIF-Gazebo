@@ -36,4 +36,6 @@ public interface IProductHelper {
     BigDecimal getProductsSum(List<BoughtProductView> productViews);
 
     ProductView getProductViewFromNavigationQuery();
+
+    void update(ProductView view);
 }
