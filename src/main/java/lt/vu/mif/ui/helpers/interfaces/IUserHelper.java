@@ -12,7 +12,7 @@ public interface IUserHelper {
 
     boolean checkIfUserExists(String userEmail);
 
-    void updateUserToken(String userEmail);
+    void remindPassword(String userEmail);
 
     UserTokenTuple getTokenCreationDate(String token);
 

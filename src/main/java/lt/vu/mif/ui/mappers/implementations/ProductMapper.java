@@ -1,9 +1,11 @@
 package lt.vu.mif.ui.mappers.implementations;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lt.vu.mif.model.product.Product;
+import lt.vu.mif.repository.repository.implementations.Category;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,11 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         product.setSku(view.getSku());
         product.setTitle(view.getTitle());
         product.setImages(imageMapper.toEntities(view.getImages()));
+        product.setCreationDate(LocalDateTime.now());
+
+        //TODO: change this when category view will be created.
+        //This is temporary solution because category field is not nullable
+        product.setCategory(new Category("DEFAULT"));
 
         return product;
     }

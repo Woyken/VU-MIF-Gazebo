@@ -58,8 +58,9 @@ public class UserRepository extends SimpleJpaRepository<User, Long> implements I
         CriteriaUpdate<User> criteria = builder.createCriteriaUpdate(User.class);
         Root<User> root = criteria.from(User.class);
 
-        criteria.where(builder.equal(root.get(User_.password), password));
-        criteria.set(root.get(User_.email), password);
+        criteria.where(builder.equal(root.get(User_.email), userEmail));
+        criteria.set(root.get(User_.password), password);
+
         entityManager.createQuery(criteria).executeUpdate();
     }
 
