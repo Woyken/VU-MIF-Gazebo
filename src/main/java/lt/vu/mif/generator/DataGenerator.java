@@ -184,23 +184,22 @@ public class DataGenerator {
     }
 
     public void insertOrders() {
-        List<Order> orders = new ArrayList<>();
-
-        for (int i = 0; i < 15; i++) {
-            addOrders(orders);
+        for (int i = 1; i <= 10; i++) {
+            insertOrder(1);
         }
-
-        orderRepository.saveAll(orders);
     }
 
-    private void addOrders(List<Order> orders) {
-        for (int i = 1; i <= 9; i++) {
-            Order order = new Order();
-            order.setRating(5L);
-            order.setCreationDate(LocalDateTime.now());
-            order.setStatus(OrderStatus.ACCEPTED);
-            order.setUser(generateSimpleUser());
-            orders.add(order);
-        }
+    public void insertOrder(int counter) {
+        List<Order> orders = new ArrayList<>();
+
+        Order order = new Order();
+        order.setRating(5L);
+        order.setCreationDate(LocalDateTime.now());
+        order.setStatus(OrderStatus.ACCEPTED);
+        order.setUser(userRepository.getUserByEmail("user" + counter + "@gmail.com"));
+        order.setRated(true);
+        orders.add(order);
+
+        orderRepository.saveAll(orders);
     }
 }

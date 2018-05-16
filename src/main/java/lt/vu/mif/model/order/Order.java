@@ -47,4 +47,10 @@ public class Order {
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Rating> ratings = new ArrayList<>();
+
+    @Column(name = "IS_RATED")
+    private boolean rated;
 }

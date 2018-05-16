@@ -1,0 +1,72 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!-- RATE SHOPPING EXPERIENCE MODAL -->
+    <!-- !IMPORTANT! -->
+    <!-- The modal will only open if the attribute 'data-js-show' is set to 'true' -->
+    <div id="rate-shopping-experience-modal" class="reveal"
+         data-reveal=""
+         data-animation-in="fade-in fast"
+         data-js-show="#{not empty ratingController.orderViews}">
+        <h:form>
+            <h4 class="form-title text-center">
+                Įvertinkite apsipirkimus
+            </h4>
+            <ui:repeat value="#{ratingController.ratingViews}" var="rating" varStatus="loop">
+                <div class="row">
+                    <div class="columns small-8 small-offset-2">
+                        <div>
+                            <p:outputLabel value="Apsipirkimas Nr.: #{loop.index + 1}"
+                                           styleClass="font-bold"/>
+                            <p:outputLabel value="Prekės:"/>
+                            <ui:repeat
+                                    value="#{ratingController.orderViews.get(loop.index).products}"
+                                    var="product">
+                                <p:outputLabel value="Pavadinimas: #{product.title}"/>
+                                <p:outputLabel value="Kaina: #{product.price} €"/>
+                            </ui:repeat>
+                        </div>
+
+                        <!-- Stars -->
+                        <div class="row align-center margin-top-1">
+                            <div class="columns small-10 shrink rating-stars">
+                                <p:commandLink styleClass="rating-star empty" pt:data-value="1" action="#{rating.setValue(1)}" ajax="true"/>
+                                <p:commandLink styleClass="rating-star empty" pt:data-value="2" action="#{rating.setValue(2)}" ajax="true"/>
+                                <p:commandLink styleClass="rating-star empty" pt:data-value="3" action="#{rating.setValue(3)}" ajax="true"/>
+                                <p:commandLink styleClass="rating-star empty" pt:data-value="4" action="#{rating.setValue(4)}" ajax="true"/>
+                                <p:commandLink styleClass="rating-star empty" pt:data-value="5" action="#{rating.setValue(5)}" ajax="true"/>
+                            </div>
+                        </div>
+
+                        <!-- Comment -->
+                        <div class="row margin-top-1">
+                            <div class="columns small-12 rating-text">
+                                <h5 class="font-bold">Komentaras</h5>
+                            </div>
+
+                            <div class="columns small-12 rating-text">
+                                <h:inputTextarea value="#{rating.comment}" rows="5"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:repeat>
+            <!-- [Button] Submit -->
+            <div class="row margin-top-1 text-center">
+                <div class="columns small-12">
+                    <h:commandButton value="Palikti atsiliepimą" styleClass="button green"
+                                     action="#{ratingController.rateOrders}"/>
+                </div>
+            </div>
+
+            <button class="close-button" data-close="" type="button">
+                <i class="fi-x"/>
+            </button>
+        </h:form>
+    </div> <!-- END OF RATE SHOPPING EXPERIENCE MODAL -->
+
+</ui:composition>

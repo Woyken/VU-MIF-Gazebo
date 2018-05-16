@@ -6,11 +6,12 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -23,29 +24,36 @@ public class ProductExcelReader {
 
     private static final Log LOG = LogFactory.getLog(ProductExcelReader.class);
 
-    public List<ExcelProduct> readFile(InputStream inputStream) {
+    public CompletionStage<List<ExcelProduct>> readFile(InputStream inputStream) {
+        return CompletableFuture.supplyAsync(() -> readFileSync(inputStream));
+    }
+
+    public List<ExcelProduct> readFileSync(InputStream inputStream) {
         List<ExcelProduct> result = new ArrayList<>();
         List<Object> rowValues = new ArrayList<>();
 
         try {
             Workbook workbook = new XSSFWorkbook(inputStream);
             Sheet sheet = workbook.getSheetAt(0);
-            Iterator<Row> iterator = sheet.iterator();
 
-            while(iterator.hasNext()) {
-                Row currentRow = iterator.next();
-
+            for (Row currentRow : sheet) {
                 if (currentRow.getRowNum() == 0) {
                     continue; //ignore header row
                 }
+                if (currentRow.getCell(0).getStringCellValue().isEmpty()) {
+                    // If SKU empty, stop reading new lines.
+                    break;
+                }
 
-                Iterator<Cell> cellIterator = currentRow.iterator();
-                currentRow.forEach(row -> {
+                currentRow.forEach(currentCell -> {
+                    FormulaEvaluator formulaEvaluator = workbook.getCreationHelper()
+                        .createFormulaEvaluator();
+                    CellValue cellValue = formulaEvaluator.evaluate(currentCell);
+                    if (cellValue == null) {
+                        return;
+                    }
 
-                    Cell currentCell = cellIterator.next();
-                    FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
-
-                    switch (formulaEvaluator.evaluate(currentCell).getCellTypeEnum()) {
+                    switch (cellValue.getCellTypeEnum()) {
                         case NUMERIC:
                             rowValues.add(currentCell.getNumericCellValue());
                             break;

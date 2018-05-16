@@ -1,19 +1,22 @@
 package lt.vu.mif.ui.controller;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.annotation.RequestScope;
 
 @Named
 @Getter
 @Setter
-@RequestScope
-public class ProductImportController {
+@SessionScoped
+public class ProductImportController implements Serializable {
+
     @Autowired
     private IProductHelper productHelper;
 
@@ -22,11 +25,16 @@ public class ProductImportController {
 
     public void importProducts() {
         try {
-            if (uploadedFile != null && uploadedFile.getInputStream() != null) {
-                productHelper.importProducts(uploadedFile.getInputStream());
-                message = "Importas sėkmingai atliktas";
+            if (null == uploadedFile) {
+                message = "Nepasirinktas failas.";
+                return;
             }
-        } catch (IOException ex) {
+            if (uploadedFile.getInputStream() != null) {
+                message = "Importavimas vykdomas.";
+                productHelper.importProducts(uploadedFile.getInputStream()).get();
+                message = "Importavimas sėkmingai atliktas.";
+            }
+        } catch (ExecutionException | InterruptedException | IOException ex) {
             ex.printStackTrace();
             message = "Įvyko klaida bandant importuoti failą";
         }

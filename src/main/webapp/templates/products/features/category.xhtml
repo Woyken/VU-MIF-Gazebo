@@ -1,0 +1,140 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <!-- PAGE TITLE. -->
+    <div class="row column text-center section">
+        <h1 class="section-title">
+            <p:outputLabel styleClass="large-text" value="Prekės kategorija ir požymiai"/>
+        </h1>
+    </div> <!-- END OF PAGE TITLE. -->
+
+
+
+    <div class="section">
+        <h:form>
+
+            <!-- New category -->
+            <div class="row align-middle">
+
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Pridėti naują kategoriją</h5>
+                </div>
+
+                <div class="columns small-10 medium-7">
+                    <h:inputText value="#{productCategoryController.newCategory}" />
+                </div>
+
+                <!-- [Button] Submit new category -->
+                <div class="columns small-2 medium-1">
+                    <h:commandButton
+                            class="button green"
+                            value="✓"
+                            action="#{productCategoryController.createNewCategory}">
+                        <f:ajax execute="@form" render="@form" />
+                    </h:commandButton>
+                </div>
+            </div>
+
+
+            <!-- Assign a current category -->
+            <div class="row align-middle">
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Priskirti esamą kategoriją</h5>
+                </div>
+
+                <div class="columns small-12 medium-7">
+                    <select>
+                        <option value="0" selected="selected">#{productCategoryController.currentCategory}</option>
+                        <option value="1">Sportiniai</option>
+                        <option value="2">Pramoginiai</option>
+                        <option value="3">Pokylių</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <!-- Assign a parent category to the selected category -->
+            <div class="row align-middle">
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Priskirtai kategorijai nustatyti tėvinę kategoriją</h5>
+                </div>
+
+                <div class="columns small-12 medium-7">
+                    <select>
+                        <option value="0" selected="selected">#{productCategoryController.currentCategory}</option>
+                        <option value="1">Sportiniai</option>
+                        <option value="2">Pramoginiai</option>
+                        <option value="3">Pokylių</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <!-- Attributes -->
+            <div class="row section">
+
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Kategorijos požymiai</h5>
+                </div>
+
+                <!-- Current attributes -->
+                <div class="columns small-12 medium-9">
+                    <div class="row">
+                        <div class="columns small-12 medium-3">
+
+                            <h:commandButton
+                                class="label warning"
+                                value="✖ Nike" >
+                                <f:ajax listener="#{productCategoryController.removeAttribute(1)}" />
+                            </h:commandButton>
+
+                            <h:commandButton
+                                class="label warning"
+                                value="✖ 36" >
+                                <f:ajax listener="#{productCategoryController.removeAttribute(2)}" />
+                            </h:commandButton>
+
+                            <h:commandButton
+                                class="label warning"
+                                value="✖ Red" >
+                                <f:ajax listener="#{productCategoryController.removeAttribute(3)}" />
+                            </h:commandButton>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Add new attribute -->
+            <div class="row">
+
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Pridėti požymį kategorijai</h5>
+                </div>
+
+                <div class="columns small-10 medium-7">
+                    <h:inputText value="#{productCategoryController.newAttribute}" />
+                </div>
+
+                <!-- [Button] Submit new category -->
+                <div class="columns small-2 medium-1">
+                    <h:commandButton
+                            class="button green"
+                            value="✓"
+                            action="#{productCategoryController.createNewAttribute}">
+                        <f:ajax execute="@form" render="@form" />
+                    </h:commandButton>
+                </div>
+
+            </div>
+        </h:form>
+
+    </div>
+
+</ui:composition>

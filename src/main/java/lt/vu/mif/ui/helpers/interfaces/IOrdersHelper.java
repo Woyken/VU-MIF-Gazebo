@@ -8,5 +8,9 @@ public interface IOrdersHelper {
 
     List<OrderView> getAllOrders();
 
+    List<OrderView> getAllUserOrders(String email);
+
     void saveNewOrder(OrderView orderView, List<CartProductView> cartProductViews);
+
+    OrderView getOrder(Long orderId);
 }

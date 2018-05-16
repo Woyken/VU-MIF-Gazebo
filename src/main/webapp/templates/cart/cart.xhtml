@@ -14,7 +14,7 @@
         <!-- [Button] GO TO CART HISTORY -->
         <div class="row section">
             <div class="columns small-12 medium-6 medium-offset-3">
-                <a href="../../cart-history.xhtml" class="button expanded hollow primary-inverted">
+                <a href="../../cart-orders.xhtml" class="button expanded hollow primary-inverted">
                     Peržiūrėti anksčiau pirktas prekes
                 </a>
             </div>
@@ -81,7 +81,9 @@
 
                     <!-- Product quantity. -->
                     <div class="medium-4 columns hide-for-small-only">
-                        <h:inputText class="half-width" value="#{productItem.amount}">
+                        <h:inputText class="half-width" value="#{productItem.amount}"
+                                     pt:type="number"
+                                     pt:min="1">
                             <f:convertNumber integerOnly="true" type="number"/>
                             <f:validateLongRange minimum="1" />
                             <p:ajax event="change" update="@form" />
@@ -107,7 +109,8 @@
                                 <p class="font-bold">Kiekis:</p>
                             </div>
                             <div class="columns small-7">
-                                <h:inputText class="" value="#{productItem.amount}">
+                                <h:inputText class="" value="#{productItem.amount}" pt:type="number"
+                                             pt:min="1">
                                     <f:convertNumber integerOnly="true" type="number"/>
                                     <f:validateLongRange minimum="1" />
                                     <p:ajax event="change" update="@form" />
@@ -168,7 +171,7 @@
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
-                                   action="/login.xhtml"
+                                   action="#{cartController.buyWithoutLogin}"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
                 </div>
 
@@ -184,7 +187,7 @@
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
-                                   action="/login.xhtml"
+                                   action="#{cartController.buyWithoutLogin}"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
                 </div>
                     

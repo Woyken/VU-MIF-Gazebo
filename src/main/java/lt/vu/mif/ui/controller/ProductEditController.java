@@ -1,6 +1,7 @@
 package lt.vu.mif.ui.controller;
 
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Getter
 @Setter
 @Named
+@ViewScoped
 public class ProductEditController {
     @Autowired
     private IProductHelper productHelper;

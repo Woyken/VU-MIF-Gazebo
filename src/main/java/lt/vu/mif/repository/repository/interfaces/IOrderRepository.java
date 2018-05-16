@@ -5,11 +5,19 @@ import lt.vu.mif.model.order.Order;
 
 public interface IOrderRepository {
 
-    List<Order> getAllUserOrders(Long userId);
+    List<Order> getAllUserOrders(String email);
 
-    void saveOrder(Order order);
+    Order save(Order order);
 
     List<Order> findAll();
 
     <S extends Order> List<S> saveAll(Iterable<S> entities);
+
+    List<Order> getCurrentUserOrdersToRate(String currentUserEmail);
+
+    Order get(Long id);
+
+    List<Order> getOrders(List<Long> ids);
+
+    void updateAll(List<Order> orders);
 }

@@ -1,7 +1,9 @@
 package lt.vu.mif.ui.helpers.interfaces;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.view.BoughtProductView;
 import lt.vu.mif.ui.view.CartProductView;
@@ -15,15 +17,23 @@ public interface IProductHelper {
 
     ProductView getProduct(Long productId);
 
-    void importProducts(InputStream inputStream);
+    CompletableFuture<Void> importProducts(InputStream inputStream);
 
     Page<ProductView> getProductsPage(int activePage, int pageSize, ProductSearch search);
 
     void deleteById(Long id);
+
+    void deleteMultipleByIds(List<Long> productIds);
 
     void saveAll(List<Product> productList);
 
     CartProductView getCartProductView(Long productId);
 
     Page<BoughtProductView> getBoughtProductsPage(int activePage, int pageSize, Long userId);
+
+    Page<BoughtProductView> getCurrentUserBoughtProductsPage(int activePage, int pageSize);
+
+    BigDecimal getProductsSum(List<BoughtProductView> productViews);
+
+    ProductView getProductViewFromNavigationQuery();
 }

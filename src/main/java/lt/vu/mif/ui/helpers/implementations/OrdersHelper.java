@@ -9,8 +9,10 @@ import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderProduct;
 import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.model.product.Product;
+import lt.vu.mif.model.user.User;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
+import lt.vu.mif.repository.repository.interfaces.IUserRepository;
 import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
 import lt.vu.mif.ui.mappers.implementations.OrderMapper;
 import lt.vu.mif.ui.view.CartProductView;
@@ -30,6 +32,8 @@ public class OrdersHelper implements IOrdersHelper {
     private UserService userService;
     @Autowired
     private IProductRepository productRepository;
+    @Autowired
+    private IUserRepository userRepository;
 
     @Override
     public List<OrderView> getAllOrders() {
@@ -37,14 +41,26 @@ public class OrdersHelper implements IOrdersHelper {
     }
 
     @Override
+    public List<OrderView> getAllUserOrders(String email) { return orderMapper.toViews(orderRepository.getAllUserOrders(email)); }
+
+    @Override
+    public OrderView getOrder(Long orderId) {
+        return orderMapper.toView(orderRepository.get(orderId));
+    }
+
+    @Override
     public void saveNewOrder(OrderView orderView, List<CartProductView> cartProductViews) {
+        User loggedUser = userService.getLoggedUser();
+
         Order order = new Order();
         order.setCreationDate(LocalDateTime.now());
         order.setStatus(OrderStatus.ACCEPTED);
-        order.setUser(userService.getLoggedUser());
+        order.setUser(loggedUser);
         order.setProducts(getOrderProducts(order, cartProductViews));
         order.setRating(orderView.getRating());
-        orderRepository.saveOrder(order);
+        orderRepository.save(order);
+
+        userRepository.update(loggedUser);
     }
 
     private List<OrderProduct> getOrderProducts(Order order, List<CartProductView> productViews) {

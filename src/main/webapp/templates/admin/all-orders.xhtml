@@ -11,22 +11,22 @@
             <h:panelGroup id="allOrdersPanel" style="display:contents">
                 <ui:repeat value="#{ordersController.orders}" var="order">
                     <div class="columns medium-3 small-6 admin-order-box">
-                        <a href="../../admin-details-order.xhtml?orderId=#{order.id}">
-                            <p class="order-rating-box">
-                                <b>
-                                    #{order.rating}
-                                </b>
-                            </p>
-                            <p>
-                                Bendra suma: 769€
-                            </p>
-                        </a>
-                        <h:form id="my-form">
-                            <div class="small-8 small-offset-2 medium-12 medium-offset-0">
-                                <h:commandButton value="Išsamiau" styleClass="button expanded">
-                                </h:commandButton>
-                            </div>
-                        </h:form>
+                        <p>
+                            Pirkėjo paštas: <b>#{order.user.email}</b>
+                        </p>
+                        <p>
+                            Užsakymo būsena: <b>#{order.status}</b>
+                        </p>
+                        <p>
+                            Užsakymo kaina: <b>#{order.user.ordersSum}</b>
+                        </p>
+
+                        <div class="small-8 small-offset-2 medium-12 medium-offset-0">
+                            <a href="../../admin-details-order.xhtml?orderId=#{order.id}" class="button expanded">
+                                Išsamiau
+                            </a>
+                        </div>
+
                     </div>
                 </ui:repeat>
             </h:panelGroup>

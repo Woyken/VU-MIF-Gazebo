@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
-import lt.vu.mif.Controller.ProductController;
+import lt.vu.mif.ui.controller.ProductController;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.junit.Before;
 import org.junit.Test;

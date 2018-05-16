@@ -9,13 +9,15 @@ import lt.vu.mif.payment.PaymentResponse;
 import lt.vu.mif.payment.PaymentService;
 import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
 import lt.vu.mif.ui.view.OrderView;
+import lt.vu.mif.utils.SessionManager;
+import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Named
-@RequestScope
 @Getter
 @Setter
+@SessionScope
 public class PaymentController {
 
     @Autowired
@@ -24,6 +26,8 @@ public class PaymentController {
     private IOrdersHelper ordersHelper;
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private SessionManager sessionManager;
 
     private OrderView orderView = new OrderView();
 
@@ -86,6 +90,9 @@ public class PaymentController {
 
         ordersHelper.saveNewOrder(orderView, cartController.getProductsInCart());
         cartController.getProductsInCart().clear();
+
+        sessionManager.setAttribute(Constants.SHOW_DIALOG_SESSION_PARAMETER, false);
+
         return "main?faces-redirect=true";
     }
 }
