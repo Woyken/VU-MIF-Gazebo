@@ -25,7 +25,7 @@ public class PasswordRemindController {
 
     public void remindPassword() {
         if (StringUtils.isNotBlank(email) && userHelper.checkIfUserExists(email)) {
-            userHelper.updateUserToken(email);
+            userHelper.remindPassword(email);
             message = "Laiškas su nuoroda sėkmingai nusiųstas";
         } else {
             message = "Naudotojas su nurodytu el. paštu neegzistuoja";

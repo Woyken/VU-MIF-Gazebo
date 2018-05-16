@@ -14,6 +14,7 @@ import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.user.Role;
 import lt.vu.mif.model.user.User;
+import lt.vu.mif.repository.repository.implementations.Category;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
@@ -103,10 +104,43 @@ public class DataGenerator {
             product.getImages().add(getImage("static/images/products/shoe-1.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-2.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-3.jpg"));
-            product.getImages().add(getImage("static/images/products/shoe-4.jpg"));
+            product.getImages().add(getImage("static/images/products/shoe-4.jpg"));      
             product.setCreationDate(LocalDateTime.now());
+            product.setCategory(i % 2 == 0 ? createFurnitureCategory() : createSportCategory());
             products.add(product);
         }
+    }
+
+    private Category createFurnitureCategory() {
+        Category furniture = new Category();
+        furniture.setName("furniture");
+
+        Category kitchen = new Category();
+        kitchen.setName("kitchen");
+
+        Category bedroom = new Category();
+        bedroom.setName("bedroom");
+
+        bedroom.setParentCategory(furniture);
+        bedroom.setParentCategory(kitchen);
+
+        return furniture;
+    }
+
+    private Category createSportCategory() {
+        Category sport = new Category();
+        sport.setName("sport");
+
+        Category basketball = new Category();
+        basketball.setName("basketball");
+
+        Category tennis = new Category();
+        tennis.setName("tennis");
+
+        basketball.setParentCategory(sport);
+        tennis.setParentCategory(sport);
+
+        return sport;
     }
 
     private String getProductDescription(int index) {
