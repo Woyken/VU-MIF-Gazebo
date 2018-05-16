@@ -68,7 +68,7 @@ public class UserHelper implements IUserHelper {
         return userRepository.checkIfUserExists(userEmail);
     }
 
-    public void updateUserToken(String userEmail) {
+    public void remindPassword(String userEmail) {
         User user = userRepository.getUserByEmail(userEmail);
         user.setTokenCreationDate(LocalDateTime.now());
 
@@ -96,8 +96,6 @@ public class UserHelper implements IUserHelper {
     //TODO: apgalvoti, ar emailo siuntimas turi vykti kitoje transakcijoje, ar ne
     private void sendEmail(String email, String token) {
         String emailContent = emailContentGenerator.createPasswordRemindEmailBody(token);
-
-        updateUserToken(email);
         emailProvider.sendSimpleMailTo(email, "Slaptažodžio pakeitimas", emailContent);
     }
 
