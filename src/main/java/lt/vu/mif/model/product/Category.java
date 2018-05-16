@@ -45,6 +45,10 @@ public class Category {
     @OneToMany(fetch = LAZY, cascade = ALL, mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 
+    @ManyToOne(cascade = ALL, fetch = LAZY)
+    @JoinColumn(name = "DISCOUNT_ID")
+    private Discount discount;
+
     public Category() {
     }
 
