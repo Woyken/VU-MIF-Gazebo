@@ -59,7 +59,7 @@
                         <select>
 
                             <!-- Create discount only for current product -->
-                            <h:panelGroup rendered="#{productDiscountController.wasProductFound}">
+                            <h:panelGroup rendered="#{productDiscountController.isProductFound}">
                                 <option value="productId">{product name}</option>
                             </h:panelGroup>
 
@@ -111,7 +111,7 @@
                     <div class="columns small-6 medium-4 medium-offset-4">
 
                         <!-- If we came here from edit-product.xhtml - send them back there -->
-                        <h:panelGroup rendered="#{productDiscountController.wasProductFound}">
+                        <h:panelGroup rendered="#{productDiscountController.isProductFound}">
                             <a
                                 class="button expanded red"
                                 href="../../../admin-edit-product.xhtml?productId=#{productDiscountController.productView.id}" >
@@ -120,7 +120,7 @@
                         </h:panelGroup>
 
                         <!-- If we came from main.xhtml - send them back there -->
-                        <h:panelGroup rendered="#{!productDiscountController.wasProductFound}">
+                        <h:panelGroup rendered="#{!productDiscountController.isProductFound}">
                             <a
                                 class="button expanded red"
                                 href="../../../main.xhtml" >

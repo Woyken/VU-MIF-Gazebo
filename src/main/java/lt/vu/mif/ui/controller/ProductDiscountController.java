@@ -21,7 +21,7 @@ public class ProductDiscountController {
     private IProductHelper productHelper;
     private ProductView productView;
 
-    private Boolean wasProductFound = true;
+    private Boolean isProductFound;
     private String discountAsPrice; // Because it can be a 59.99 (with a '.')
     private Integer discountAsPercent;
 
@@ -33,10 +33,10 @@ public class ProductDiscountController {
         // create a discount either for a category or for all of the products
         try {
             productView = productHelper.getProductViewFromNavigationQuery();
-            wasProductFound = true;
+            isProductFound = true;
         } catch (Exception x) {
             productView = new ProductView();
-            wasProductFound = false;
+            isProductFound = false;
         }
     }
 
