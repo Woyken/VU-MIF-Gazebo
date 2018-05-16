@@ -104,6 +104,7 @@ public class DataGenerator {
             product.getImages().add(getImage("static/images/products/shoe-2.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-3.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-4.jpg"));
+            product.setCreationDate(LocalDateTime.now());
             products.add(product);
         }
     }

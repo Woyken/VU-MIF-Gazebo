@@ -1,6 +1,7 @@
 package lt.vu.mif.model.product;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -44,4 +45,7 @@ public class Product {
 
     @Column(name = "NEWPRICE")
     private BigDecimal newPrice;
+
+    @Column(name = "CREATION_DATE")
+    private LocalDateTime creationDate;
 }

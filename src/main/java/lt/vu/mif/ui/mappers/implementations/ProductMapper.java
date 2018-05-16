@@ -1,5 +1,6 @@
 package lt.vu.mif.ui.mappers.implementations;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +31,7 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         product.setSku(view.getSku());
         product.setTitle(view.getTitle());
         product.setImages(imageMapper.toEntities(view.getImages()));
+        product.setCreationDate(LocalDateTime.now());
 
         return product;
     }
