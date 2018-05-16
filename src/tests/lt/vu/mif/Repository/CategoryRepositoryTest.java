@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Product;
-import lt.vu.mif.repository.repository.implementations.Category;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

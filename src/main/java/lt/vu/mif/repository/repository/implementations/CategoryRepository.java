@@ -3,6 +3,7 @@ package lt.vu.mif.repository.repository.implementations;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;

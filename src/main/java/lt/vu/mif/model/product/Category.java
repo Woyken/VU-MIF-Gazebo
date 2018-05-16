@@ -1,4 +1,4 @@
-package lt.vu.mif.repository.repository.implementations;
+package lt.vu.mif.model.product;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
@@ -19,7 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.mif.model.product.Product;
 
 @Getter
 @Setter
