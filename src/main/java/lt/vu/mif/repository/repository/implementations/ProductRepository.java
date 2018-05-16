@@ -75,7 +75,11 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
         CriteriaQuery<Product> criteria = builder.createQuery(Product.class);
         Root<Product> root = criteria.from(Product.class);
 
-        criteria.where(root.get(Product_.id).in(ids));
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(root.get(Product_.id).in(ids));
+        predicates.add(builder.isFalse(root.get(Product_.deleted)));
+
+        criteria.where(PersistenceUtils.toArray(predicates));
         criteria.select(root);
 
         return entityManager.createQuery(criteria).getResultList();
@@ -84,6 +88,7 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     private List<Predicate> buildSearchPredicates(ProductSearch search, Root<Product> root,
         CriteriaBuilder builder) {
         List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.isFalse(root.get(Product_.deleted)));
 
         if (StringUtils.isNotBlank(search.getTitle())) {
             predicates.add(builder
@@ -113,9 +118,10 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
         int pageSize) {
         PageRequest pageRequest = PageRequest.of(activePage, pageSize);
 
-        Specification<Product> specification = (root, criteriaQuery, criteriaBuilder) ->
-            criteriaBuilder.and(PersistenceUtils
-                .toArray(buildSearchPredicates(productSearch, root, criteriaBuilder)));
+        Specification<Product> specification = (root, criteriaQuery, criteriaBuilder) -> {
+            criteriaQuery.orderBy(criteriaBuilder.desc(root.get(Product_.creationDate)));
+            return criteriaBuilder.and(PersistenceUtils.toArray(buildSearchPredicates(productSearch, root, criteriaBuilder)));
+        };
 
         return findAll(specification, pageRequest);
     }

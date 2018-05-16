@@ -104,8 +104,8 @@ public class DataGenerator {
             product.getImages().add(getImage("static/images/products/shoe-1.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-2.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-3.jpg"));
-            product.getImages().add(getImage("static/images/products/shoe-4.jpg"));
-
+            product.getImages().add(getImage("static/images/products/shoe-4.jpg"));      
+            product.setCreationDate(LocalDateTime.now());
             product.setCategory(i % 2 == 0 ? createFurnitureCategory() : createSportCategory());
             products.add(product);
         }

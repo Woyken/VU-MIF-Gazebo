@@ -1,6 +1,7 @@
 package lt.vu.mif.model.product;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -48,8 +49,10 @@ public class Product {
     @Column(name = "NEW_PRICE")
     private BigDecimal newPrice;
 
+    @Column(name = "CREATION_DATE")
+    private LocalDateTime creationDate;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "CATEGORY_ID", nullable = false)
     private Category category;
-
 }
