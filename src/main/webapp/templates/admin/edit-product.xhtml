@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
 >
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
@@ -10,7 +11,7 @@
 >
 
     <div id="add-product-window">
-        <h:form>
+        <h:form enctype="multipart/form-data">
             <!-- PAGE TITLE -->
             <div class="row column text-center section">
                 <h1 class="section-title">Redaguoti prekę</h1>
@@ -164,65 +165,43 @@
 
                     <div class="columns small-12 medium-9">
                         <div class="row">
-
-                            <div class="columns small-12 medium-3">
-                                <div class="box-for-buttons-on-image">
-                                    <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                                    <!-- [Button] Remove image -->
-                                    <a class="button red" href="#">
-                                        <i class="fi-x"></i>
-                                    </a>
+                            <ui:repeat value="#{productEditController.productView.images}" var="image">
+                                <div class="columns small-12 medium-3">
+                                    <div class="box-for-buttons-on-image">
+                                        <p:graphicImage value="#{imageStreamer.image}" class="thumbnail">
+                                            <f:param name="id" value="#{image.id}"/>
+                                        </p:graphicImage>
+                                        <h:commandLink class="button red">
+                                            <f:ajax execute="@form" render="@form" listener="#{productEditController.removeImage(image)}"/>
+                                            <i class="fi-x" />
+                                        </h:commandLink>
+                                    </div>
                                 </div>
-                            </div>
+                            </ui:repeat>
 
-                            <div class="columns small-12 medium-3">
-                                <div class="box-for-buttons-on-image">
-                                    <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                                    <!-- [Button] Remove image -->
-                                    <a class="button red" href="#">
-                                        <i class="fi-x"></i>
-                                    </a>
+                            <!--NEW IMAGES-->
+                            <ui:repeat value="#{productEditController.newImages}" var="image">
+                                <div class="columns small-12 medium-3">
+                                    <div class="box-for-buttons-on-image">
+                                        <p:graphicImage value="#{productEditController.imageInMemoryStreamer.image}" class="thumbnail">
+                                            <f:param name="id" value="#{image.id}"/>
+                                        </p:graphicImage>
+                                        <h:commandLink class="button red">
+                                            <f:ajax execute="@form" render="@form" listener="#{productEditController.removeImage(image)}"/>
+                                            <i class="fi-x" />
+                                        </h:commandLink>
+                                    </div>
                                 </div>
-                            </div>
+                            </ui:repeat>
 
-                            <div class="columns small-12 medium-3">
-                                <div class="box-for-buttons-on-image">
-                                    <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                                    <!-- [Button] Remove image -->
-                                    <a class="button red" href="#">
-                                        <i class="fi-x"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="columns small-12 medium-3">
-                                <div class="box-for-buttons-on-image">
-                                    <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                                    <!-- [Button] Remove image -->
-                                    <a class="button red" href="#">
-                                        <i class="fi-x"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="columns small-12 medium-3">
-                                <div class="box-for-buttons-on-image">
-                                    <img class="thumbnail no-top-mar" src="https://placehold.it/250x200"/>
-                                    <!-- [Button] Remove image -->
-                                    <a class="button red" href="#">
-                                        <i class="fi-x"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- [Button] Add image -->
                             <div class="columns medium-3 small-12">
                                 Pridėti prekės nuotrauką
-                                <input class="button hollow" type="file" accept="image/*" multiple=""/>
+                                <h:inputFile value="#{productEditController.uploadedFile}" mode="simple" skinSimple="true" styleClass="button hollow">
+                                    <f:ajax listener="#{productEditController.handleUploadedFile}" execute="@form" render="@form"/>
+                                </h:inputFile>
                             </div>
                         </div>
                     </div>
-
                 </div> <!-- End of images -->
 
                 <!-- For validation -->
@@ -247,10 +226,13 @@
                         <h:commandButton
                                 class="button green expanded"
                                 value="Išsaugoti pakeitimus"
-                                action="#{productEditController.saveChanges}"
-                        >
+                                action="#{productEditController.saveChanges}">
                             <f:ajax execute="@form" render="@form"/>
                         </h:commandButton>
+                        <div class="text-center">
+                            <p:outputLabel rendered="#{productEditController.showSuccessMessage}"
+                                           value="Produkto duomenys sėkmingai atnaujinti"/>
+                        </div>
                     </div>
                 </div>
             </div>
