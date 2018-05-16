@@ -41,6 +41,11 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
             entityManager);
     }
 
+    @Override
+    public void update(Product entity) {
+        entityManager.merge(entity);
+    }
+
     public void deleteAll(List<Long> productIds) {
         if (CollectionUtils.isEmpty(productIds)) {
             return;
