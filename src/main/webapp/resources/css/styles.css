@@ -203,6 +203,18 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 
 /* --- --- --- Our styles. */
 
+html,
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+#filter-aside {
+    padding-right: 5%;
+    height: 80vh;
+	overflow: auto;
+}
 
 /* Shopping cart */
 #shopping-list-header {
@@ -517,6 +529,9 @@ legend {
 }
 .no-top-mar { 	/* no top margin */
 	margin-top: 0;
+}
+.mar-top-5 {
+	margin-top: 5%;
 }
 .mar-bot-5 {	/* margin bottom 5% */
 	margin-bottom: 5%;

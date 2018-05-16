@@ -131,17 +131,118 @@
                     </ul>
 
                     <!-- [Button][Mobile] Filter by categories -->
-                    <button type="button" class="button expanded" data-close="">
+                    <button type="button" class="button expanded margin-top-1" data-close="">
                         Filtruoti
                     </button>
 
                 </div> <!-- END OF [Mobile] CATEGORY FILTER -->
 
 
+                <!-- [Mobile] SUB-CATEGORY FILTER -->
+                <div class="columns small-12 margin-top-2">
+                    <h5 class="text-center font-bold"> Sub-kategorija </h5>
+
+                    <ul class="categories-menu menu vertical nested is-active">
+
+                        <li>
+                            <input id="sub-category-checkbox-mobile1" type="checkbox"/>
+                            <label for="sub-category-checkbox-mobile1">
+                                Sub-category 1
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="sub-category-checkbox-mobile2" type="checkbox"/>
+                            <label for="sub-category-checkbox-mobile2">
+                                Sub-category 2
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="sub-category-checkbox-mobile3" type="checkbox"/>
+                            <label for="sub-category-checkbox-mobile3">
+                                Sub-category 3
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="sub-category-checkbox-mobile4" type="checkbox"/>
+                            <label for="sub-category-checkbox-mobile4">
+                                Sub-category 4
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="sub-category-checkbox-mobile5" type="checkbox"/>
+                            <label for="sub-category-checkbox-mobile5">
+                                Sub-category 5
+                            </label>
+                        </li>
+
+                    </ul>
+
+                    <!-- [Button][Mobile] Filter by sub-categories -->
+                    <button type="button" class="button expanded margin-top-1" data-close="">
+                        Filtruoti
+                    </button>
+
+                </div> <!-- END OF [Mobile] SUB-CATEGORY FILTER -->
+
+
+                <!-- [Mobile] ATTRIBUTE FILTER -->
+                <div class="columns small-12 margin-top-2">
+                    <h5 class="text-center font-bold"> Požymiai </h5>
+
+                    <ul class="categories-menu menu vertical nested is-active">
+
+                        <li>
+                            <input id="attribute-checkbox-mobile1" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile1">
+                                Attribute 1
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="attribute-checkbox-mobile2" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile2">
+                                Attribute 2
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="attribute-checkbox-mobile3" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile3">
+                                Attribute 3
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="attribute-checkbox-mobile4" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile4">
+                                Attribute 4
+                            </label>
+                        </li>
+
+                        <li>
+                            <input id="attribute-checkbox-mobile5" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile5">
+                                Attribute 5
+                            </label>
+                        </li>
+
+                    </ul>
+
+                    <!-- [Button][Mobile] Filter by attribute -->
+                    <button type="button" class="button expanded margin-top-1" data-close="">
+                        Filtruoti
+                    </button>
+
+                </div> <!-- END OF [Mobile] ATTRIBUTE FILTER -->
+
             </div>
         </div>
 
-        <!-- [Mobile][Button] Filter by category -->
+        <!-- [Mobile][Button] Show off-canvas filter -->
         <div class="columns small-12">
             <button type="button" class="button expanded" data-toggle="product-filter-canvas">
                 Filtruoti prekes
@@ -156,12 +257,12 @@
     <div class="row expanded">
 
 
-        <!-- FILTERING. -->
+        <!-- FILTERING -->
         <aside class="product-filters medium-3 large-2 columns hide-for-small-only">
             <div data-sticky-container="">
                 <div class="sticky" data-sticky="" data-top-anchor="search">
                     <br/>
-                    <ul class="vertical menu margin-top-3" data-accordion-menu="">
+                    <ul id="filter-aside" class="vertical menu"  data-accordion-menu="">
 
 
                         <!-- Filter by price -->
@@ -194,7 +295,7 @@
                                         </div>
                                     </li>
 
-                                    <!--Confirm button-->
+                                    <!-- [Button] Filter by price -->
                                     <li>
                                         <h:commandButton class="button expanded" value="Filtruoti">
                                             <f:ajax execute="@form"
@@ -205,11 +306,11 @@
 
                                 </h:form>
                             </ul>
-                        </li>
+                        </li> <!-- End of filter by price -->
 
 
                         <!-- Filter by categories -->
-                        <li class="margin-top-2">
+                        <li class="margin-top-3">
                             <h5 class="text-center font-bold "> Kategorija </h5>
                             <ul class="menu vertical nested is-active">
                                 <li>
@@ -240,13 +341,98 @@
                                     </label>
                                 </li>
 
+                                <!-- [Button] Filter by category -->
                                 <li>
-                                    <button type="button" class="button expanded">
+                                    <button type="button" class="button expanded margin-top-1">
                                         Filtruoti
                                     </button>
                                 </li>
                             </ul>
-                        </li>
+                        </li> <!-- End of filter by category -->
+
+
+                        <!-- Filter by sub-category -->
+                        <li class="margin-top-3">
+                            <h5 class="text-center font-bold "> Sub-kategorija </h5>
+                            <ul class="menu vertical nested is-active">
+                                <li>
+                                    <input id="sub-category-checkbox1" type="checkbox"/>
+                                    <label for="sub-category-checkbox1">
+                                        Sub-sportiniai
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <input id="sub-category-checkbox2" type="checkbox"/>
+                                    <label for="sub-category-checkbox2">
+                                        Sub-proginiai
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <input id="sub-category-checkbox3" type="checkbox"/>
+                                    <label for="sub-category-checkbox3">
+                                        Sub-laisvalaikio
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <input id="sub-category-checkbox4" type="checkbox"/>
+                                    <label for="sub-category-checkbox4">
+                                        Sub-šventėms
+                                    </label>
+                                </li>
+
+                                <!-- [Button] Filter by sub-category -->
+                                <li>
+                                    <button type="button" class="button expanded margin-top-1">
+                                        Filtruoti
+                                    </button>
+                                </li>
+                            </ul>
+                        </li> <!-- End of filter by sub-category -->
+
+
+                        <!-- Filter by attributes -->
+                        <li class="margin-top-3">
+                            <h5 class="text-center font-bold "> Požymiai </h5>
+                            <ul class="menu vertical nested is-active">
+                                <li>
+                                    <input id="attribute-checkbox1" type="checkbox"/>
+                                    <label for="attribute-checkbox1">
+                                        Atributas 1
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <input id="attribute-checkbox2" type="checkbox"/>
+                                    <label for="attribute-checkbox2">
+                                        Atributas 2
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <input id="attribute-checkbox3" type="checkbox"/>
+                                    <label for="attribute-checkbox3">
+                                        Atributas 3
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <input id="attribute-checkbox4" type="checkbox"/>
+                                    <label for="attribute-checkbox4">
+                                        Atributas 4
+                                    </label>
+                                </li>
+
+                                <!-- [Button] Filter by attributes -->
+                                <li>
+                                    <button type="button" class="button expanded margin-top-1">
+                                        Filtruoti
+                                    </button>
+                                </li>
+                            </ul>
+                        </li> <!-- End of filter by attributes -->
 
                     </ul>
                 </div>
