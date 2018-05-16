@@ -4,12 +4,13 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:c="http://java.sun.com/jsp/jstl/core">
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <!-- PAGE TITLE. -->
     <div class="row column text-center section">
         <h1 class="section-title">
-            <p:outputLabel styleClass="large-text" value="Prekės nuolaida"/>
+            <p:outputLabel styleClass="large-text" value="Pridėti prekės nuolaidą"/>
         </h1>
     </div> <!-- END OF PAGE TITLE. -->
 
@@ -17,80 +18,119 @@
     <!-- Sale price -->
     <div class="row section align-middle margin-bottom-1">
         <div class="columns small-12">
+            <h:form style="display: contents;">
 
-            <!-- Sale as concrete price -->
-            <div class="row align-middle">
-                <div class="columns medium-3 small-12">
-                    <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
+                <!-- Sale as concrete price -->
+                <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
+                    </div>
+
+                    <div class="columns medium-9 small-12">
+                        <h:inputText
+                            pt:min="0"
+                            pt:placeholder="49.99"
+                            value="#{productDiscountController.discountAsPrice}" />
+                    </div>
                 </div>
 
-                <div class="columns medium-9 small-12">
-                    <input type="number" min="0" placeholder="49.99"/>
-                </div>
-            </div>
+                <!-- Sale as % -->
+                <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Nuolaida (procentais)</h5>
+                    </div>
 
-            <!-- Sale as % -->
-            <div class="row align-middle">
-                <div class="columns medium-3 small-12">
-                    <h5 class="font-bold">Nuolaida (procentais)</h5>
-                </div>
-
-                <div class="columns medium-9 small-12">
-                    <input type="number" min="0" placeholder="50"/>
-                </div>
-            </div>
-
-            <!-- Apply price to what -->
-            <div class="row align-middle">
-                <div class="columns medium-3 small-12">
-                    <h5 class="font-bold"> Taikyti </h5>
+                    <div class="columns medium-9 small-12">
+                        <h:inputText
+                            pt:type="number"
+                            pt:min="0"
+                            pt:placeholder="50"
+                            value="#{productDiscountController.discountAsPercent}" />
+                    </div>
                 </div>
 
-                <div class="columns medium-9 small-12">
-                    <select>
-                        <option selected="selected"
-                                value="this">
-                            Šitai prekei
-                        </option>
-                        <option value="category"> Grupei </option>
-                        <option value="all"> Visoms prekėms </option>
-                    </select>
-                </div>
-            </div>
+                <!-- Apply price to what -->
+                <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold"> Taikyti </h5>
+                    </div>
 
-            <!-- Sale date -->
-            <div class="row align-middle">
+                    <div class="columns medium-9 small-12">
+                        <select>
 
-                <!-- The sale starts on -->
-                <div class="columns medium-2 medium-offset-3 small-12">
-                    <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
-                    <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
-                </div>
+                            <!-- Create discount only for current product -->
+                            <h:panelGroup rendered="#{productDiscountController.wasProductFound}">
+                                <option value="productId">{product name}</option>
+                            </h:panelGroup>
 
-                <div class="columns medium-2 small-12">
-                    <input type="date" min="2018-05-05" />
+                            <!-- TODO: Iterate through all of the categories here -->
+                            <option value="categoryId1"> Sportiniai </option>
+                            <option value="categoryId2"> Pokylio </option>
+                            <option value="all"> Visoms prekėms </option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- The sale ends on -->
-                <div class="columns medium-2 medium-offset-1 small-12">
-                    <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
-                    <h5 class="font-bold hide-for-medium">Galioja iki</h5>
-                </div>
+                <!-- Sale date -->
+                <div class="row align-middle">
 
-                <div class="columns medium-2 small-12">
-                    <input type="date" min="2018-05-05" />
-                </div>
+                    <!-- The sale starts on -->
+                    <div class="columns medium-2 medium-offset-3 small-12">
+                        <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
+                        <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
+                    </div>
 
-                <!-- [Button] Remove discount -->
-                <div class="columns small-12 medium-9 medium-offset-3">
-                    <a class="button red expanded" href="#">
-                        <i class="fi-x">
-                            Panaikinti nuolaidą
-                        </i>
-                    </a>
-                </div>
+                    <div class="columns medium-2 small-12">
+                        <input type="date" min="2018-05-05" />
+                    </div>
 
-            </div> <!-- End of Sale date -->
+                    <!-- The sale ends on -->
+                    <div class="columns medium-2 medium-offset-1 small-12">
+                        <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
+                        <h5 class="font-bold hide-for-medium">Galioja iki</h5>
+                    </div>
+
+                    <div class="columns medium-2 small-12">
+                        <input type="date" min="2018-05-05" />
+                    </div>
+
+                </div> <!-- End of Sale date -->
+
+                <div class="row align-middle section">
+                    <!-- [Button] Add discount -->
+                    <div class="columns small-6 medium-4">
+                        <h:commandButton
+                            class="button expanded green"
+                            value="Patvirtinti"
+                            action="#{productDiscountController.addDiscount}">
+                            <f:ajax execute="@form" />
+                        </h:commandButton>
+                    </div>
+
+                    <!-- [Button] Cancel -->
+                    <div class="columns small-6 medium-4 medium-offset-4">
+
+                        <!-- If we came here from edit-product.xhtml - send them back there -->
+                        <h:panelGroup rendered="#{productDiscountController.wasProductFound}">
+                            <a
+                                class="button expanded red"
+                                href="../../../admin-edit-product.xhtml?productId=#{productDiscountController.productView.id}" >
+                                Atšaukti
+                            </a>
+                        </h:panelGroup>
+
+                        <!-- If we came from main.xhtml - send them back there -->
+                        <h:panelGroup rendered="#{!productDiscountController.wasProductFound}">
+                            <a
+                                class="button expanded red"
+                                href="../../../main.xhtml" >
+                                Atšaukti
+                            </a>
+                        </h:panelGroup>
+                    </div>
+
+                </div>
+            </h:form>
 
         </div>
     </div> <!-- End of Sale price -->
