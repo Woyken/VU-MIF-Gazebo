@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lt.vu.mif.model.product.Product;
-import lt.vu.mif.repository.repository.implementations.Category;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;

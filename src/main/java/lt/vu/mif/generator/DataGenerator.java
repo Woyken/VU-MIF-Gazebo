@@ -14,7 +14,7 @@ import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.user.Role;
 import lt.vu.mif.model.user.User;
-import lt.vu.mif.repository.repository.implementations.Category;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
