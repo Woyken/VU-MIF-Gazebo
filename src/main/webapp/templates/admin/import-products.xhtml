@@ -11,19 +11,23 @@
         <h1 class="section-title">Produktų importavimas</h1>
     </div>
 
+    <div class="margin-top-2 hide-for-medium" />
+
     <div class="section">
         <h:form id="importForm" enctype="multipart/form-data">
-            <div class="row align-middle">
-                <div class="columns small-3">
-                    <h5 class="font-bold">Įkelkite *. xlsx formato failą</h5>
+
+            <div class="row align-center">
+                <div class="columns small-12 medium-3 medium-offset-0">
+                    <h5 class="font-bold text-center">Įkelkite *. xlsx formato failą</h5>
                 </div>
-                <div class="columns small-9">
+
+                <div class="columns small-10 small-offset-1 medium-3 medium-offset-0 align-right">
                     <h:inputFile value="#{productImportController.uploadedFile}" mode="simple" skinSimple="true"/>
                 </div>
             </div>
 
-            <div class="row section">
-                <div class="columns">
+            <div class="row">
+                <div class="columns small-10 small-offset-1 medium-6 medium-offset-3 margin-top-1">
                     <h:commandButton id="btn"
                                      onclick="document.getElementById('importForm:importMsg').innerText = 'Vykdoma..'"
                                      styleClass="button expanded orange"
