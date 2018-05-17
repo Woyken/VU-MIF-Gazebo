@@ -152,19 +152,34 @@
                     </div>
                 </div>
 
-                <div class="row section">
-                    <div class="columns">
+
+                <div class="row align-middle section">
+
+                    <!-- [Button] Save changes -->
+                    <div class="columns small-6 medium-4">
                         <h:commandButton
-                                class="button green expanded"
-                                value="Išsaugoti pakeitimus"
+                                class="button success expanded"
+                                value="#{productEditController.productFound ? 'Išsaugoti pakeitimus' : 'Pridėti'}"
                                 action="#{productEditController.saveChanges}">
                             <f:ajax execute="@form" render="@form"/>
                         </h:commandButton>
+
                         <div class="text-center">
-                            <p:outputLabel rendered="#{productEditController.showSuccessMessage}"
-                                           value="Produkto duomenys sėkmingai atnaujinti"/>
+                            <p:outputLabel
+                                rendered="#{productEditController.showSuccessMessage}"
+                                value="#{productEditController.productFound ? 'Produkto duomenys sėkmingai atnaujinti' : 'Prekė sėkmingai pridėta'}"/>
                         </div>
                     </div>
+
+                    <!-- [Button] Cancel -->
+                    <div class="columns small-6 medium-4 medium-offset-4">
+                        <a
+                            class="button expanded red"
+                            href="../../main.xhtml" >
+                            Atšaukti
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </h:form>
