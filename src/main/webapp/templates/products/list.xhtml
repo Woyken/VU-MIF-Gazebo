@@ -506,9 +506,8 @@
 
                         <!-- [Button] To cart -->
                         <h:form>
-                            <h:commandButton class="button expanded primary"
+                            <h:commandButton class="button expanded primary js-add-to-cart"
                                              value="PRIDĖTI Į KREPŠELĮ"
-                                             pt:data-open="inform-user-about-adding-to-cart-modal"
                                              actionListener="#{cartController.addProductToCart(productItem.id)}">
                                 <f:ajax execute="@form" render="@none"/>
                             </h:commandButton>
@@ -581,28 +580,6 @@
         </div>
     </div> <!-- END OF PAGINATION -->
 
-
-
-    <!-- INFORM USER ABOUT ADDING TO CART MODAL -->
-    <div id="inform-user-about-adding-to-cart-modal"
-         class="reveal"
-         data-reveal=""
-         data-overlay="false"
-         data-animation-in="fade-in fast">
-        <div class="row">
-            <div class="columns small-8 small-offset-2">
-                <h4 class="form-title text-center">
-                    Prekė pridėta prie jūsų krepšelio
-                </h4>
-                <br/>
-                <div class="row">
-                    <div class="columns small-12">
-                        <a class="button orange expanded" data-close="">Supratau</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- END OF INFORM USER ABOUT ADDING TO CART MODAL -->
 
 
 </ui:composition>
