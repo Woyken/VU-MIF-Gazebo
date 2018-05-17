@@ -18,7 +18,7 @@
             </h4>
             <ui:repeat value="#{ratingController.ratingViews}" var="rating" varStatus="loop">
                 <div class="row">
-                    <div class="columns small-8 small-offset-2">
+                    <div class="columns small-12 medium-8 medium-offset-2">
                         <div>
                             <p:outputLabel value="Apsipirkimas Nr.: #{loop.index + 1}"
                                            styleClass="font-bold"/>
@@ -33,7 +33,7 @@
 
                         <!-- Stars -->
                         <div class="row align-center margin-top-1">
-                            <div class="columns small-10 shrink rating-stars">
+                            <div class="columns small-12 medium-10 shrink rating-stars">
                                 <p:commandLink styleClass="rating-star empty" pt:data-value="1" action="#{rating.setValue(1)}" ajax="true"/>
                                 <p:commandLink styleClass="rating-star empty" pt:data-value="2" action="#{rating.setValue(2)}" ajax="true"/>
                                 <p:commandLink styleClass="rating-star empty" pt:data-value="3" action="#{rating.setValue(3)}" ajax="true"/>
