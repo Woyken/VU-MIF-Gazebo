@@ -29,16 +29,24 @@ public class ProductEditController {
     private ProductView productView;
     private Part uploadedFile;
     private boolean showSuccessMessage;
+    private boolean isProductFound;
 
     private List<ImageView> newImages = new ArrayList<>();
 
     public void onPageLoad() {
-        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
-            return;
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
+
+        // If a product with passed in ID is not found -
+        // it means we want to add a new product
+        try {
+            productView = productHelper.getProductViewFromNavigationQuery();
+            isProductFound = true;
+        } catch (Exception x) {
+            productView = new ProductView();
+            isProductFound = false;
         }
 
         showSuccessMessage = false;
-        productView = productHelper.getProductViewFromNavigationQuery();
     }
 
     public void handleUploadedFile() throws Exception {

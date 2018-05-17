@@ -18,6 +18,35 @@
     <div class="section">
         <h:form>
 
+            <!-- Assign a category to a product -->
+            <h:panelGroup rendered="#{productCategoryController.productFound}">
+                <div class="row align-middle">
+                    <div class="columns small-12 medium-3">
+                        <h5 class="font-bold">Priskirti esamą kategoriją</h5>
+                    </div>
+
+                    <div class="columns small-10 medium-8">
+                        <select>
+                            <option value="0" selected="selected">#{productCategoryController.currentCategory}</option>
+                            <option value="1">Sportiniai</option>
+                            <option value="2">Pramoginiai</option>
+                            <option value="3">Pokylių</option>
+                        </select>
+                    </div>
+
+                    <!-- [Button] Assign category to product -->
+                    <div class="columns small-2 medium-1">
+                        <h:commandButton
+                                class="button success"
+                                value="✓"
+                                action="#{productCategoryController.createNewCategory}">
+                            <f:ajax execute="@form" render="@form" />
+                        </h:commandButton>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+
             <!-- New category -->
             <div class="row align-middle">
 
@@ -25,35 +54,18 @@
                     <h5 class="font-bold">Pridėti naują kategoriją</h5>
                 </div>
 
-                <div class="columns small-10 medium-7">
+                <div class="columns small-10 medium-8">
                     <h:inputText value="#{productCategoryController.newCategory}" />
                 </div>
 
                 <!-- [Button] Submit new category -->
                 <div class="columns small-2 medium-1">
                     <h:commandButton
-                            class="button green"
+                            class="button success"
                             value="✓"
                             action="#{productCategoryController.createNewCategory}">
                         <f:ajax execute="@form" render="@form" />
                     </h:commandButton>
-                </div>
-            </div>
-
-
-            <!-- Assign a current category -->
-            <div class="row align-middle">
-                <div class="columns small-12 medium-3">
-                    <h5 class="font-bold">Priskirti esamą kategoriją</h5>
-                </div>
-
-                <div class="columns small-12 medium-7">
-                    <select>
-                        <option value="0" selected="selected">#{productCategoryController.currentCategory}</option>
-                        <option value="1">Sportiniai</option>
-                        <option value="2">Pramoginiai</option>
-                        <option value="3">Pokylių</option>
-                    </select>
                 </div>
             </div>
 
@@ -64,13 +76,23 @@
                     <h5 class="font-bold">Priskirtai kategorijai nustatyti tėvinę kategoriją</h5>
                 </div>
 
-                <div class="columns small-12 medium-7">
+                <div class="columns small-10 medium-8">
                     <select>
                         <option value="0" selected="selected">#{productCategoryController.currentCategory}</option>
                         <option value="1">Sportiniai</option>
                         <option value="2">Pramoginiai</option>
                         <option value="3">Pokylių</option>
                     </select>
+                </div>
+
+                <!-- [Button] Attach parent category -->
+                <div class="columns small-2 medium-1">
+                    <h:commandButton
+                            class="button success"
+                            value="✓"
+                            action="#{productCategoryController.attachParentCategory}">
+                        <f:ajax execute="@form" render="@form" />
+                    </h:commandButton>
                 </div>
             </div>
 
@@ -118,14 +140,14 @@
                     <h5 class="font-bold">Pridėti požymį kategorijai</h5>
                 </div>
 
-                <div class="columns small-10 medium-7">
+                <div class="columns small-10 medium-8">
                     <h:inputText value="#{productCategoryController.newAttribute}" />
                 </div>
 
                 <!-- [Button] Submit new category -->
                 <div class="columns small-2 medium-1">
                     <h:commandButton
-                            class="button green"
+                            class="button success"
                             value="✓"
                             action="#{productCategoryController.createNewAttribute}">
                         <f:ajax execute="@form" render="@form" />
@@ -133,6 +155,44 @@
                 </div>
 
             </div>
+
+
+            <!-- Buttons -->
+            <div class="row align-middle section">
+
+                <!-- [Button] Save changes -->
+                <div class="columns small-6 medium-4">
+                    <h:commandButton
+                            class="button expanded success"
+                            value="Išsaugoti"
+                            action="#{productCategoryController.saveChanges}">
+                        <f:ajax execute="@form" />
+                    </h:commandButton>
+                </div>
+
+                <!-- [Button] Cancel -->
+                <div class="columns small-6 medium-4 medium-offset-4">
+                    <!-- If we came here from edit-product.xhtml - send them back there -->
+                    <h:panelGroup rendered="#{productCategoryController.productFound}">
+                        <a
+                                class="button expanded red"
+                                href="../../../admin-edit-product.xhtml?productId=#{productDiscountController.productView.id}" >
+                            Atšaukti
+                        </a>
+                    </h:panelGroup>
+
+                    <!-- If we came from main.xhtml - send them back there -->
+                    <h:panelGroup rendered="#{!productCategoryController.productFound}">
+                        <a
+                            class="button expanded red"
+                            href="../../../admin-edit-product.xhtml" >
+                            Atšaukti
+                        </a>
+                    </h:panelGroup>
+                </div>
+
+            </div>
+
         </h:form>
 
     </div>

@@ -21,6 +21,7 @@ public class ProductCategoryController {
     private ProductView productView;
 
     private boolean addCategoryEnabled = false;
+    private boolean isProductFound;
     private String currentCategory = "";
     private String newCategory = "";
     private String newAttribute = "";
@@ -28,7 +29,15 @@ public class ProductCategoryController {
     public void onPageLoad() {
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
 
-        productView = productHelper.getProductViewFromNavigationQuery();
+        // If a product with passed in ID is not found -
+        // it means we want to edit categories
+        try {
+            productView = productHelper.getProductViewFromNavigationQuery();
+            isProductFound = true;
+        } catch (Exception x) {
+            productView = new ProductView();
+            isProductFound = false;
+        }
     }
 
     public void toggleAddCategory() {
@@ -50,7 +59,11 @@ public class ProductCategoryController {
         newAttribute = "";
     }
 
+    public void attachParentCategory() { int a = 5; }
+    public void attachCategoryToProduct() { int a = 5; }
+
     public void removeAttribute(int attributeId) {
         int a = 5;
     }
+    public void saveChanges() { int a = 5; }
 }
