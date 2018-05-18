@@ -32,7 +32,7 @@
                         <h:commandButton class="button expanded" value="#{userDetailsController.user.blocked ? 'Atblokuoti' : 'Blokuoti'}"
                                          styleClass="button expanded #{userDetailsController.user.blocked ? 'green' : 'orange'}"
                                          disabled="#{userDetailsController.user.role == 'ADMIN' ? 'true' : 'false'}"
-                                         action="#{usersController.blockUser(userDetailsController.user)}">
+                                         action="#{userDetailsController.blockUser}">
                             <f:ajax execute="@form" render="@form"/>
                         </h:commandButton>
                     </div>
