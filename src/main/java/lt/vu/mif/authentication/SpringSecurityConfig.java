@@ -25,14 +25,34 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable(); //temporary disabled to allow h2-console
 
-        http.authorizeRequests().antMatchers("/payment.xhtml").access("hasAnyRole('USER', 'ADMIN')")
-            .and().authorizeRequests().antMatchers("/admin*").hasRole("ADMIN")
-            .and().exceptionHandling().accessDeniedPage("/access-denied.xhtml")
-            .and().formLogin().loginPage("/login.xhtml").successHandler(successHandler())
-            .failureUrl(
-                "/login.xhtml?error=true").permitAll().and().logout()
-            .logoutSuccessUrl("/main.xhtml").invalidateHttpSession(true).deleteCookies("remove")
-            .permitAll().and().csrf().disable();
+        http.authorizeRequests()
+            .antMatchers("/payment.xhtml")
+            .access("hasAnyRole('USER', 'ADMIN')")
+
+            .and()
+            .authorizeRequests()
+            .antMatchers("/admin*")
+            .hasRole("ADMIN")
+
+            .and()
+            .exceptionHandling()
+            .accessDeniedPage("/access-denied.xhtml")
+
+            .and()
+            .formLogin()
+            .loginPage("/login.xhtml")
+            .successHandler(successHandler())
+            .failureUrl("/login.xhtml?error=true")
+            .permitAll()
+
+            .and()
+            .logout()
+            .logoutSuccessUrl("/main.xhtml")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
+            .permitAll()
+
+            .and().csrf().disable();
     }
 
     @Bean
