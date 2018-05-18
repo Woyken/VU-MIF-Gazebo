@@ -2,6 +2,7 @@ package lt.vu.mif.Controller;
 
 import java.math.BigDecimal;
 import javax.transaction.Transactional;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.ui.controller.ProductController;
@@ -39,6 +40,9 @@ public class ProductControllerTests {
         product.setDescription("Description 1");
         product.setPrice(new BigDecimal(10L));
         product.setSku("sku1");
+        Category category = new Category();
+        category.setName("someCategory");
+        product.setCategory(category);
         productRepository.save(product);
 
         product = new Product();
@@ -46,6 +50,7 @@ public class ProductControllerTests {
         product.setDescription("Description 2");
         product.setPrice(new BigDecimal(20L));
         product.setSku("sku2");
+        product.setCategory(category);
         productRepository.save(product);
     }
 
