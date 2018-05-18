@@ -106,7 +106,7 @@
 
                 <!-- Add to cart -->
                 <h:commandButton class="button large hollow expanded primary-inverted"
-                                 value="PRIDĖTI Į KREPŠELĮ">
+                                 value="PRIDĖTI Į KREPŠELĮ" rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}">
                     <f:actionListener
                             binding="#{cartController.addProductToCart(productDetailsController.productView.id, amount.value)}"/>
                     <f:actionListener
