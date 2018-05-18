@@ -10,7 +10,7 @@
 
     <div id="details-user-window">
 
-        <div class="row section">
+        <div class="row section" id="info">
             <div class="columns small-6">
                 <p class="user-email-box">
                     <b>
@@ -27,6 +27,16 @@
                     <br/>
                     Bendra suma: 769€
                 </p>
+                <h:form id="my-form">
+                    <div class="small-8 medium-5 large-4">
+                        <h:commandButton class="button expanded" value="#{userDetailsController.user.blocked ? 'Atblokuoti' : 'Blokuoti'}"
+                                         styleClass="button expanded #{userDetailsController.user.blocked ? 'green' : 'orange'}"
+                                         disabled="#{userDetailsController.user.role == 'ADMIN' ? 'true' : 'false'}"
+                                         action="#{usersController.blockUser(userDetailsController.user)}">
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
+                    </div>
+                </h:form>
             </div>
         </div>
 

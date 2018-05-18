@@ -17,7 +17,7 @@ import org.springframework.web.context.annotation.RequestScope;
 @Named
 @Getter
 @Setter
-@RequestScope
+@ViewScoped
 public class UserDetailsController {
 
     @Autowired
