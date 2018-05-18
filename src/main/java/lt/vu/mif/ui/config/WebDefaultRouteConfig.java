@@ -11,6 +11,7 @@ public class WebDefaultRouteConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("forward:/main.xhtml");
+        registry.addViewController("/admin").setViewName("forward:/main.xhtml");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 }
