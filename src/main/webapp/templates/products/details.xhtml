@@ -41,6 +41,14 @@
         <!-- Text Section -->
         <div class="small-12 medium-6 large-5 columns">
 
+            <!-- SKU code for ADMIN -->
+            <h:form rendered="#{userService.getLoggedUser().getRole() == 'ADMIN'}" >
+                <h5 class="font-bold text-center">
+                    SKU -- #{productDetailsController.productView.sku}
+                </h5>
+                <br/>
+            </h:form>
+
             <!-- Name -->
             <h3 class="text-center font-italic">#{productDetailsController.productView.title}</h3>
 
