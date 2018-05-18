@@ -60,16 +60,16 @@ public class PaymentController {
         if (error != null) {
             switch (error) {
                 case "OutOfFunds":
-                    message = "Jūsų kortelėje nepakanka pinigų";
+                    message = "Jūsų kortelėje nepakanka pinigų.";
                     return;
                 case "CardExpired":
-                    message = "Jūsų kortelė nebegalioja";
+                    message = "Jūsų kortelė nebegalioja.";
                     return;
                 case "ValidationError":
-                    message = "Neteisingi kortelės duomenys";
+                    message = "Neteisingi kortelės duomenys.";
                     return;
                 default:
-                    message = "Apmokėjimo servisas grąžino klaidą: \"" + error + "\"";
+                    message = "Atsiprašome, įvyko nenumatyta klaida.";
             }
         }
 
