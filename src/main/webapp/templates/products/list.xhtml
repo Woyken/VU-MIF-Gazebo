@@ -256,7 +256,7 @@
     <div class="row align-middle margin-bottom-0">
 
         <div class="columns small-12 medium-3 medium-offset-4 shrink">
-            <span class="font-bold"> Rūšiuoti pagal </span>
+            <span class="font-bold"> Rikiuoti pagal </span>
         </div>
 
         <div class="columns small-12 medium-3 padding-top-1">
@@ -505,7 +505,7 @@
 
 
                         <!-- [Button] To cart -->
-                        <h:form>
+                        <h:form rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}">
                             <h:commandButton class="button expanded primary js-add-to-cart"
                                              value="PRIDĖTI Į KREPŠELĮ"
                                              actionListener="#{cartController.addProductToCart(productItem.id)}">
