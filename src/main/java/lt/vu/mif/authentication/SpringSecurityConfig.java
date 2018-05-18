@@ -26,7 +26,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable(); //temporary disabled to allow h2-console
 
         http.authorizeRequests().antMatchers("/payment.xhtml").access("hasAnyRole('USER', 'ADMIN')")
-            .and().authorizeRequests().antMatchers("/admin-*").hasRole("ADMIN")
+            .and().authorizeRequests().antMatchers("/admin*").hasRole("ADMIN")
             .and().exceptionHandling().accessDeniedPage("/access-denied.xhtml")
             .and().formLogin().loginPage("/login.xhtml").successHandler(successHandler())
             .failureUrl(
