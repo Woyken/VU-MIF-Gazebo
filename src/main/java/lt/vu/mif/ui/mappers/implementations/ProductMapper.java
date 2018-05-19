@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.helpers.interfaces.IPriceResolver;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.ProductView;
@@ -18,6 +18,8 @@ public class ProductMapper implements IMapper<Product, ProductView> {
 
     @Autowired
     private ImageMapper imageMapper;
+    @Autowired
+    private DiscountMapper discountMapper;
     @Autowired
     private IPriceResolver priceResolver;
 
@@ -33,6 +35,7 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         product.setPrice(view.getPrice());
         product.setSku(view.getSku());
         product.setTitle(view.getTitle());
+        product.setDiscount(discountMapper.toEntity(view.getDiscount()));
         product.setImages(imageMapper.toEntities(view.getImages()));
         product.setCreationDate(LocalDateTime.now());
 
@@ -56,6 +59,7 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         view.setNewPrice(priceResolver.resolvePriceWithDiscount(entity));
         view.setSku(entity.getSku());
         view.setTitle(entity.getTitle());
+        view.setDiscount(discountMapper.toView(entity.getDiscount()));
         view.setImages(imageMapper.toViews(entity.getImages()));
 
         return view;

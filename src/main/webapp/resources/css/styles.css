@@ -481,6 +481,18 @@ label.input-label {
 	font-weight: bold;
 }
 
+.success-text {
+	color: #4CAF50;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.success-text-large {
+	color: #4CAF50;
+	font-size: 20px;
+	font-weight: bold;
+}
+
 .large-text {
 	font-size: larger;
 }

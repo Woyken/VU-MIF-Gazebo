@@ -18,6 +18,7 @@ public class ProductView {
     private BigDecimal newPrice;
     private BigDecimal price;
     private String description;
+    private DiscountView discount;
     private List<ImageView> images = new ArrayList<>();
 
     public ProductView() {
@@ -30,6 +31,7 @@ public class ProductView {
         this.price = other.price;
         this.newPrice = other.newPrice;
         this.description = other.description;
+        this.discount = new DiscountView(other.getDiscount());
         this.images = new ArrayList<>(other.images);
     }
 }
