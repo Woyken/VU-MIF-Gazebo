@@ -139,32 +139,17 @@
                     <div class="columns small-6 medium-4">
                         <h:commandButton
                             class="button expanded success"
-                            value="Patvirtinti"
+                            value="Išsaugoti"
                             action="#{productDiscountController.addDiscount}">
                             <f:ajax execute="@form" render="@form"/>
                         </h:commandButton>
                     </div>
 
-                    <!-- [Button] Cancel -->
+                    <!-- [Button] Remove discount -->
                     <div class="columns small-6 medium-4 medium-offset-4">
-
-                        <!-- If we came here from edit-product.xhtml - send them back there -->
-                        <h:panelGroup rendered="#{productDiscountController.isProductFound}">
-                            <a
-                                class="button expanded red"
-                                href="../../../admin-edit-product.xhtml?productId=#{productDiscountController.productView.id}" >
-                                Atšaukti
-                            </a>
-                        </h:panelGroup>
-
-                        <!-- If we came from main.xhtml - send them back there -->
-                        <h:panelGroup rendered="#{!productDiscountController.isProductFound}">
-                            <a
-                                class="button expanded red"
-                                href="../../../main.xhtml" >
-                                Atšaukti
-                            </a>
-                        </h:panelGroup>
+                        <h:commandButton
+                            class="button expanded red"
+                            value="Panaikinti nuolaidą" />
                     </div>
 
                 </div>
