@@ -43,7 +43,7 @@ public class BoughtProductMapper implements IMapper<OrderProduct, BoughtProductV
             .format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm")));
         view.setQuantity(entity.getQuantity());
         view.setPrice(
-            entity.getProduct().getPrice().multiply(new BigDecimal(entity.getQuantity())));
+            entity.getPrice().multiply(new BigDecimal(entity.getQuantity())));
         view.setTitle(entity.getProduct().getTitle());
         view.setProductId(entity.getProduct().getId());
 
