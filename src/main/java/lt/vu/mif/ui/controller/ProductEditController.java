@@ -32,11 +32,6 @@ public class ProductEditController {
     private Part uploadedFile;
     private boolean showSuccessMessage;
     private boolean isProductFound;
-    // TODO: Remove this when real discount is used.
-    private Discount discount;
-
-    private BigDecimal discountAsPrice;
-    private long discountAsPercent;
 
     private List<ImageView> newImages = new ArrayList<>();
 
@@ -52,11 +47,6 @@ public class ProductEditController {
             productView = new ProductView();
             isProductFound = false;
         }
-
-        // TODO: Remove this when real discount is used.
-        discount = new Discount();
-        discount.setPercentageDiscount(15L);
-//        discount.setAbsoluteDiscount(new BigDecimal(49));
 
         showSuccessMessage = false;
     }

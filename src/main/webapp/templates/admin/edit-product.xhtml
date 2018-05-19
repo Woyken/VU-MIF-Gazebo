@@ -78,22 +78,22 @@
 
                     <div class="columns medium-7 small-12">
                         <!-- Discount was found -->
-                        <h:panelGroup rendered="#{productEditController.discount != null}">
+                        <h:panelGroup rendered="#{productEditController.productView.discount != null}">
                             <!-- Discount as percentage -->
                             <h:outputText
                                     class="font-bold font-italic success-text-large"
-                                    value="Pritaikyta #{productEditController.discount.percentageDiscount}% nuolaida"
-                                    rendered="#{productEditController.discount.percentageDiscount != null}" />
+                                    value="Pritaikyta #{productEditController.productView.discount.percentageDiscount}% nuolaida"
+                                    rendered="#{productEditController.productView.discount.percentageDiscount != null}" />
 
                             <!-- Discount as absolute price -->
                             <h:outputText
                                     class="font-bold font-italic success-text-large"
-                                    value="Naujoji kaina su nuolaida: #{productEditController.discount.absoluteDiscount}€"
-                                    rendered="#{productEditController.discount.absoluteDiscount != null}" />
+                                    value="Naujoji kaina su nuolaida: #{productEditController.productView.discount.absoluteDiscount}€"
+                                    rendered="#{productEditController.productView.discount.absoluteDiscount != null}" />
                         </h:panelGroup>
 
                         <!-- Discount was not found -->
-                        <h:panelGroup rendered="#{productEditController.discount == null}">
+                        <h:panelGroup rendered="#{productEditController.productView.discount == null}">
                             <h:outputText
                                 styleClass="font-bold font-italic alert-text-large"
                                 value="NEPRITAIKYTA"/>
