@@ -10,11 +10,12 @@ import java.util.List;
 import java.util.UUID;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderStatus;
+import lt.vu.mif.model.order.Rating;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.user.Role;
 import lt.vu.mif.model.user.User;
-import lt.vu.mif.model.product.Category;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
@@ -193,7 +194,7 @@ public class DataGenerator {
         List<Order> orders = new ArrayList<>();
 
         Order order = new Order();
-        order.setRating(5L);
+        order.setRating(getRating());
         order.setCreationDate(LocalDateTime.now());
         order.setStatus(OrderStatus.ACCEPTED);
         order.setUser(userRepository.getUserByEmail("user" + counter + "@gmail.com"));
@@ -201,5 +202,13 @@ public class DataGenerator {
         orders.add(order);
 
         orderRepository.saveAll(orders);
+    }
+
+    private Rating getRating() {
+        Rating rating = new Rating();
+        rating.setDate(LocalDateTime.now());
+        rating.setComment("Order comment");
+        rating.setValue(3L);
+        return rating;
     }
 }
