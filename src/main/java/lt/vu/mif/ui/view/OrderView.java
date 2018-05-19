@@ -1,6 +1,5 @@
 package lt.vu.mif.ui.view;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
@@ -15,8 +14,7 @@ public class OrderView {
 
     private Long id;
     private UserView user;
-    private Long rating;
     private OrderStatus status;
-    private LocalDateTime creationDate;
+    private String creationDate;
     private List<ProductView> products = new ArrayList<>();
 }
