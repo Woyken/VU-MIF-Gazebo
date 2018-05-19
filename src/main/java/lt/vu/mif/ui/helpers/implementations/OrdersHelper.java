@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderProduct;
@@ -15,14 +16,15 @@ import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
 import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
 import lt.vu.mif.ui.mappers.implementations.OrderMapper;
+import lt.vu.mif.ui.mappers.implementations.OrderPreviewMapper;
+import lt.vu.mif.ui.view.AdminOrderPreview;
 import lt.vu.mif.ui.view.CartProductView;
 import lt.vu.mif.ui.view.OrderView;
 import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
-
+@Transactional
 @Component
 public class OrdersHelper implements IOrdersHelper {
 
@@ -36,6 +38,8 @@ public class OrdersHelper implements IOrdersHelper {
     private IProductRepository productRepository;
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private OrderPreviewMapper orderPreviewMapper;
 
     @Override
     public List<OrderView> getAllOrders() {
@@ -43,11 +47,17 @@ public class OrdersHelper implements IOrdersHelper {
     }
 
     @Override
-    public List<OrderView> getAllUserOrders(String email) { return orderMapper.toViews(orderRepository.getAllUserOrders(email)); }
+    public List<OrderView> getAllUserOrders(String email) {
+        return orderMapper.toViews(orderRepository.getAllUserOrders(email));
+    }
 
     @Override
     public OrderView getOrder(Long orderId) {
         return orderMapper.toView(orderRepository.get(orderId));
+    }
+
+    public AdminOrderPreview getAdminOrder(Long orderId) {
+        return orderPreviewMapper.toAdminOrderPreview(orderRepository.get(orderId));
     }
 
     @Override
@@ -59,16 +69,14 @@ public class OrdersHelper implements IOrdersHelper {
         order.setStatus(OrderStatus.ACCEPTED);
         order.setUser(loggedUser);
         order.setProducts(getOrderProducts(order, cartProductViews));
-        order.setRating(orderView.getRating());
         orderRepository.save(order);
 
         userRepository.update(loggedUser);
     }
 
     @Override
-    @Transactional
-    public void setOrderStatus(OrderView orderView, OrderStatus status){
-        Order order = orderRepository.get(orderView.getId());
+    public void setOrderStatus(Long orderId, OrderStatus status) {
+        Order order = orderRepository.get(orderId);
         order.setStatus(status);
         orderRepository.update(order);
     }
@@ -88,6 +96,7 @@ public class OrdersHelper implements IOrdersHelper {
                 .getAmount());
             orderProducts.add(orderProduct);
             orderProduct.setOrder(order);
+            orderProduct.setPrice(product.getPrice());
         }
 
         return orderProducts;

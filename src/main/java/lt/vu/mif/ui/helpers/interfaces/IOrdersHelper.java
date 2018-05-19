@@ -3,6 +3,7 @@ package lt.vu.mif.ui.helpers.interfaces;
 import java.util.List;
 
 import lt.vu.mif.model.order.OrderStatus;
+import lt.vu.mif.ui.view.AdminOrderPreview;
 import lt.vu.mif.ui.view.CartProductView;
 import lt.vu.mif.ui.view.OrderView;
 
@@ -16,5 +17,7 @@ public interface IOrdersHelper {
 
     OrderView getOrder(Long orderId);
 
-    void setOrderStatus(OrderView orderView, OrderStatus status);
+    void setOrderStatus(Long orderId, OrderStatus status);
+
+    AdminOrderPreview getAdminOrder(Long orderId);
 }
