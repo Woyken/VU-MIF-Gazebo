@@ -24,20 +24,12 @@
                 <!-- Edit categories -->
                 <div class="columns small-12 medium-3">
                     <a
-                        class="button expanded primary"
+                        class="button expanded blue"
                         href="../../admin-product-category.xhtml?productId=#{productEditController.productView.id}">
                         Tvarkyti kategoriją
                     </a>
                 </div>
 
-                <!-- Edit discounts -->
-                <div class="columns small-12 medium-3">
-                    <a
-                            class="button expanded primary"
-                            href="../../admin-product-discount.xhtml?productId=#{productEditController.productView.id}">
-                        Tvarkyti nuolaidą
-                    </a>
-                </div>
             </div> <!-- END OF EXTRA FUNCTIONALITY -->
 
             <!-- ADD PRODUCT -->
@@ -77,8 +69,58 @@
                     </div>
                 </div>
 
-                <!-- Description -->
+                <!-- Discount -->
                 <div class="row align-middle">
+
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Nuolaida</h5>
+                    </div>
+
+                    <div class="columns medium-7 small-12">
+                        <!-- Discount was found -->
+                        <h:panelGroup rendered="#{productEditController.productView.discount != null}">
+                            <!-- Discount as percentage -->
+                            <h:outputText
+                                    class="font-bold font-italic success-text-large"
+                                    value="Pritaikyta #{productEditController.productView.discount.percentageDiscount}% nuolaida"
+                                    rendered="#{productEditController.productView.discount.percentageDiscount != null}" />
+
+                            <!-- Discount as absolute price -->
+                            <h:outputText
+                                    class="font-bold font-italic success-text-large"
+                                    value="Naujoji kaina su nuolaida: #{productEditController.productView.discount.absoluteDiscount}€"
+                                    rendered="#{productEditController.productView.discount.absoluteDiscount != null}" />
+                        </h:panelGroup>
+
+                        <!-- Discount was not found -->
+                        <h:panelGroup rendered="#{productEditController.productView.discount == null}">
+                            <h:outputText
+                                styleClass="font-bold font-italic alert-text-large"
+                                value="NEPRITAIKYTA"/>
+                        </h:panelGroup>
+                    </div>
+
+                    <!-- [Button] Edit discount -->
+                    <div class="columns small-3 medium-1">
+                        <a
+                            class="button expanded primary"
+                            href="../../admin-product-discount.xhtml?productId=#{productEditController.productView.id}">
+                            <i class="fi-pencil" />
+                        </a>
+                    </div>
+
+                    <!-- [Button] Remove discount -->
+                    <div class="columns small-3 small-offset-6 medium-1 medium-offset-0">
+                        <a
+                                class="button expanded red"
+                                href="">
+                            <i class="fi-x" />
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="row ">
                     <div class="columns medium-3 small-12">
                         <h5 class="font-bold">Aprašymas</h5>
                     </div>
