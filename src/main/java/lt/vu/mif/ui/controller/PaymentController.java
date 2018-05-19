@@ -12,12 +12,12 @@ import lt.vu.mif.ui.view.OrderView;
 import lt.vu.mif.utils.SessionManager;
 import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Named
 @Getter
 @Setter
-@SessionScope
+@RequestScope
 public class PaymentController {
 
     @Autowired
