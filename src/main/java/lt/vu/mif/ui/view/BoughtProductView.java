@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class BoughtProductView {
 
+    private Long id;
     private ImageView image;
     private String date;
     private long quantity;

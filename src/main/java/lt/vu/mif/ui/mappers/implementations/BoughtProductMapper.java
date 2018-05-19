@@ -36,7 +36,7 @@ public class BoughtProductMapper implements IMapper<OrderProduct, BoughtProductV
         }
 
         BoughtProductView view = new BoughtProductView();
-
+        view.setId(entity.getProduct().getId());
         //TODO: fetch only one product from DB, not all
         view.setImage(imageMapper.toView(entity.getProduct().getImages().get(0)));
         view.setDate(entity.getOrder().getCreationDate()

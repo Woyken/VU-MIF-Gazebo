@@ -11,4 +11,5 @@ public class RatingView {
     private Long orderId;
     private Long value;
     private String comment;
+    private String date;
 }

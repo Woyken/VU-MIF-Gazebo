@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +17,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "RATING")
 public class Rating {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +31,7 @@ public class Rating {
     @Column(name = "VALUE", nullable = false)
     private Long value;
 
-    @ManyToOne
-    @JoinColumn(name = "ORDER_ID", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "ORDER_ID")
     private Order order;
 }

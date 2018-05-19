@@ -1,6 +1,7 @@
 package lt.vu.mif.ui.mappers.implementations;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 @Component
 public class RatingMapper implements IMapper<Rating, RatingView> {
+
     @Autowired
     private IOrderRepository orderRepository;
 
@@ -45,6 +47,7 @@ public class RatingMapper implements IMapper<Rating, RatingView> {
         view.setComment(entity.getComment());
         view.setValue(entity.getValue());
         view.setOrderId(entity.getOrder().getId());
+        view.setDate(entity.getDate().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm")));
 
         return view;
     }

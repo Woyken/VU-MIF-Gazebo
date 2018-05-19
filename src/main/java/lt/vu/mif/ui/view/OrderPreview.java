@@ -1,5 +1,6 @@
 package lt.vu.mif.ui.view;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
@@ -10,11 +11,13 @@ import lt.vu.mif.model.order.OrderStatus;
 @Named
 @Getter
 @Setter
-public class OrderView {
+public class OrderPreview {
 
     private Long id;
-    private UserView user;
+    private Long userId;
+    private String userEmail;
     private OrderStatus status;
     private String creationDate;
-    private List<ProductView> products = new ArrayList<>();
+    private BigDecimal totalSum;
+    private List<BoughtProductView> products = new ArrayList<>();
 }
