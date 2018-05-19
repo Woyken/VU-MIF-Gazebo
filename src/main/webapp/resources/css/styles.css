@@ -560,6 +560,9 @@ legend {
 .mar-top-5 {
 	margin-top: 5%;
 }
+.mar-bot-1 {    /* margin bottom 1rem */
+    margin-bottom: 1rem;
+}
 .mar-bot-5 {	/* margin bottom 5% */
 	margin-bottom: 5%;
 }
