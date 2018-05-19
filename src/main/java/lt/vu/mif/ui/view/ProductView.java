@@ -31,7 +31,7 @@ public class ProductView {
         this.price = other.price;
         this.newPrice = other.newPrice;
         this.description = other.description;
-        this.discount = new DiscountView(other.getDiscount());
+        this.discount = other.getDiscount() == null ? null : new DiscountView(other.getDiscount());
         this.images = new ArrayList<>(other.images);
     }
 }

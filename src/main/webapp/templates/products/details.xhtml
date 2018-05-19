@@ -69,33 +69,42 @@
 
                 <!-- IF PRODUCT IS ON SALE - SHOW THIS -->
                 <!-- Price -->
-                <!--<div class="row">-->
-                    <!--<div class="small-3 columns">-->
-                        <!--<label for="product-quantity" class="font-bold">Kaina:</label>-->
-                    <!--</div>-->
-                    <!--<div class="small-9 columns">-->
-                        <!--<p> #{productDetailsController.productView.price} €</p>-->
-                    <!--</div>-->
-                <!--</div>-->
+                <h:panelGroup rendered="#{empty productDetailsController.productView.newPrice}">
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <label for="product-quantity" class="font-bold">Kaina:</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <p> #{productDetailsController.productView.price} €</p>
+                        </div>
+                    </div>
+                </h:panelGroup>
 
 
                 <!-- IF PRODUCT IS NOT ON SALE - SHOW THIS -->
                 <!-- Price -->
-                <div class="row mar-bot-5">
-                    <div class="small-3 columns">
-                        <label for="product-quantity" class="font-bold">Kaina:</label>
-                    </div>
-                    <div class="small-9 columns">
-                        <div class="row">
-                            <div class="columns small-4">
-                                <p class="product-details-price-old strike" style="display: inline;">49,99 €</p>
-                            </div>
-                            <div class="columns small-8">
-                                <p class="product-details-price-new">#{productDetailsController.productView.price} €</p>
+                <h:panelGroup rendered="#{not empty productDetailsController.productView.newPrice}">
+                    <div class="row mar-bot-5">
+                        <div class="small-3 columns">
+                            <label for="product-quantity" class="font-bold">Kaina:</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <div class="row">
+                                <div class="columns small-4">
+                                    <p class="product-details-price-old strike"
+                                       style="display: inline;">
+                                        #{productDetailsController.productView.price} €
+                                    </p>
+                                </div>
+                                <div class="columns small-8">
+                                    <p class="product-details-price-new">
+                                        #{productDetailsController.productView.newPrice} €
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </h:panelGroup>
 
                 <!-- For validation -->
                 <h:inputHidden id="validationInput" value="true">

@@ -12,6 +12,7 @@ import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.model.order.Rating;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.user.Role;
@@ -108,6 +109,7 @@ public class DataGenerator {
             product.getImages().add(getImage("static/images/products/shoe-4.jpg"));      
             product.setCreationDate(LocalDateTime.now());
             product.setCategory(i % 2 == 0 ? createFurnitureCategory() : createSportCategory());
+            product.setDiscount(i % 2 == 0 ? getDiscount() : null);
             products.add(product);
         }
     }
@@ -182,6 +184,15 @@ public class DataGenerator {
         }
 
         return image;
+    }
+
+    private Discount getDiscount() {
+        Discount discount = new Discount();
+        discount.setPercentageDiscount(50L);
+        discount.setFrom(LocalDateTime.now());
+        discount.setTo(LocalDateTime.now().plusDays(1L));
+
+        return discount;
     }
 
     public void insertOrders() {
