@@ -115,14 +115,24 @@
                     <f:attribute name="endTime" value="#{endTime}"/>
                 </h:inputHidden>
 
-                <!-- Error Message -->
+                <!-- Validation Error Message -->
                 <div class="row-align-middle text-center">
                     <div class="columns">
                         <div class="mar-bot-5">
                             <h:message class="alert-text-large" for="discountValidationInput"/>
+                            <h:outputText class="alert-text-large"
+                                          value="#{productDiscountController.errorMessage}"/>
+                            <f:event type="preValidate"
+                                     listener="#{productDiscountController.setErrorMessage('')}"/>
+                            <h:outputText rendered="#{productDiscountController.isSuccess}"
+                                          class="success-text-large"
+                                          value="Nuolaida sėkmingai išsaugota"/>
+                            <f:event type="preValidate"
+                                     listener="#{productDiscountController.setIsSuccess(false)}"/>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="row align-middle section">
                     <!-- [Button] Add discount -->
