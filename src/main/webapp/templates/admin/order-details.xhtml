@@ -24,134 +24,139 @@
             <div class="row section">
                 <!-- [Button] ACCEPTED -->
                 <div class="hide-for-small-only columns medium-3">
-                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'ACCEPTED') ? '' : 'hollow primary-inverted'}"
-                                     value="Priimtas"
-                                     action="#{orderDetailsController.updateOrderStatusAccepted}" >
-                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    <h:commandButton
+                            class="button expanded #{(orderDetailsController.orderView.status == 'ACCEPTED') ? '' : 'hollow primary-inverted'}"
+                            value="Priimtas"
+                            action="#{orderDetailsController.updateOrderStatus('ACCEPTED')}">
+                        <f:ajax execute="@form" render="order-info status-buttons"/>
                     </h:commandButton>
                 </div>
                 <!-- [Button][Mobile] ACCEPTED -->
                 <div class="hide-for-medium columns small-12">
-                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'ACCEPTED') ? '' : 'hollow primary-inverted'}"
-                                     value="Priimtas"
-                                     action="#{orderDetailsController.updateOrderStatusAccepted}" >
-                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    <h:commandButton
+                            class="button expanded #{(orderDetailsController.orderView.status == 'ACCEPTED') ? '' : 'hollow primary-inverted'}"
+                            value="Priimtas"
+                            action="#{orderDetailsController.updateOrderStatus('ACCEPTED')}">
+                        <f:ajax execute="@form" render="order-info status-buttons"/>
                     </h:commandButton>
                 </div>
 
                 <!-- [Button] RENKAMAS -->
                 <div class="hide-for-small-only columns medium-3">
-                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'ELECTED') ? '' : 'hollow primary-inverted'}"
-                                     value="Renkamas"
-                                     action="#{orderDetailsController.updateOrderStatusElected}" >
-                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    <h:commandButton
+                            class="button expanded #{(orderDetailsController.orderView.status == 'ELECTED') ? '' : 'hollow primary-inverted'}"
+                            value="Renkamas"
+                            action="#{orderDetailsController.updateOrderStatus('ELECTED')}">
+                        <f:ajax execute="@form" render="order-info status-buttons"/>
                     </h:commandButton>
                 </div>
                 <!-- [Button][Mobile] RENKAMAS -->
                 <div class="hide-for-medium columns small-12">
-                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'ELECTED') ? '' : 'hollow primary-inverted'}"
-                                     value="Renkamas"
-                                     action="#{orderDetailsController.updateOrderStatusElected}" >
-                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    <h:commandButton
+                            class="button expanded #{(orderDetailsController.orderView.status == 'ELECTED') ? '' : 'hollow primary-inverted'}"
+                            value="Renkamas"
+                            action="#{orderDetailsController.updateOrderStatus('ELECTED')}">
+                        <f:ajax execute="@form" render="order-info status-buttons"/>
                     </h:commandButton>
                 </div>
 
                 <!-- [Button] SENT -->
                 <div class="hide-for-small-only columns medium-3">
-                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'SENT') ? '' : 'hollow primary-inverted'}"
-                                     value="Išsiųstas"
-                                     action="#{orderDetailsController.updateOrderStatusSent}" >
-                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    <h:commandButton
+                            class="button expanded #{(orderDetailsController.orderView.status == 'SENT') ? '' : 'hollow primary-inverted'}"
+                            value="Išsiųstas"
+                            action="#{orderDetailsController.updateOrderStatus('SENT')}">
+                        <f:ajax execute="@form" render="order-info status-buttons"/>
                     </h:commandButton>
                 </div>
                 <!-- [Button][Mobile] SENT -->
                 <div class="hide-for-medium columns small-12">
-                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'SENT') ? '' : 'hollow primary-inverted'}"
-                                     value="Išsiųstas"
-                                     action="#{orderDetailsController.updateOrderStatusSent}" >
-                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    <h:commandButton
+                            class="button expanded #{(orderDetailsController.orderView.status == 'SENT') ? '' : 'hollow primary-inverted'}"
+                            value="Išsiųstas"
+                            action="#{orderDetailsController.updateOrderStatus('SENT')}">
+                        <f:ajax execute="@form" render="order-info status-buttons"/>
                     </h:commandButton>
                 </div>
 
                 <!-- [Button] DELIVERED -->
                 <div class="hide-for-small-only columns medium-3">
-                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'DELIVERED') ? '' : 'hollow primary-inverted'}"
-                                     value="Pristatytas"
-                                     action="#{orderDetailsController.updateOrderStatusDelivered}" >
-                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    <h:commandButton
+                            class="button expanded #{(orderDetailsController.orderView.status == 'DELIVERED') ? '' : 'hollow primary-inverted'}"
+                            value="Pristatytas"
+                            action="#{orderDetailsController.updateOrderStatus('DELIVERED')}">
+                        <f:ajax execute="@form" render="order-info status-buttons"/>
                     </h:commandButton>
                 </div>
                 <!-- [Button][Mobile] DELIVERED -->
                 <div class="hide-for-medium columns small-12">
-                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'DELIVERED') ? '' : 'hollow primary-inverted'}"
-                                     value="Pristatytas"
-                                     action="#{orderDetailsController.updateOrderStatusDelivered}" >
-                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    <h:commandButton
+                            class="button expanded #{(orderDetailsController.orderView.status == 'DELIVERED') ? '' : 'hollow primary-inverted'}"
+                            value="Pristatytas"
+                            action="#{orderDetailsController.updateOrderStatus('DELIVERED')}">
+                        <f:ajax execute="@form" render="order-info status-buttons"/>
                     </h:commandButton>
                 </div>
             </div>
         </h:form>
 
-        <!-- ORDER INFO TITLE -->
-        <div class="row column text-left section">
-            <h3 class="section-title">Bendra užsakymo informacija:</h3>
-        </div> <!-- END OF ORDER INFO TITLE -->
+        <div class="row secttion">
+            <!-- ORDER INFO TITLE -->
+            <div class="column text-left">
+                <h3>Užsakymo informacija</h3>
+                <h:panelGroup id="order-info">
+                    <div>
+                        <p>
+                            Pirkėjas:
+                            <a href="../../admin-details-user.xhtml?userId=#{orderDetailsController.orderView.userId}">
+                                <b>#{orderDetailsController.orderView.userEmail}</b>
+                            </a>
+                        </p>
+                        <p>
+                            Užsakymo būsena: <b>#{orderDetailsController.orderView.status.name}</b>
+                        </p>
+                        <p>
+                            Užsakymo kaina: <b>#{orderDetailsController.orderView.totalSum} €</b>
+                        </p>
+                        <p>
+                            Užsakymo data: <b>#{orderDetailsController.orderView.creationDate}</b>
+                        </p>
+                    </div>
+                </h:panelGroup>
+            </div> <!-- END OF ORDER INFO TITLE -->
 
-        <h:panelGroup id="order-info">
-            <div class="row section">
-                <div class="columns small-12">
-                    <p>
-                        Pirkėjas:
-                        <a href="../../admin-details-user.xhtml?userId=#{orderDetailsController.orderView.user.id}">
-                            <b>#{orderDetailsController.orderView.user.email}</b>
-                        </a>
-                    </p>
-                    <p>
-                        Užsakymo būsena: <b>#{orderDetailsController.orderView.status.name}</b>
-                    </p>
-                    <p>
-                        Užsakymo kaina: <b>#{orderDetailsController.orderView.user.ordersSum}</b>
-                    </p>
-                    <p>
-                        Užsakymo data: <b>#{orderDetailsController.orderView.creationDate}</b>
-                    </p>
+            <!-- ORDER RATING INFO TITLE -->
+            <div class="row columns text-left">
+                <h3 class="section-title">Užsakymo įvertinimas</h3>
+                <div class="row">
+                    <div class="columns small-12">
+                        <p>
+                            Užsakymo įvertinimas: #{orderDetailsController.orderView.ratingView.value}
+                        </p>
+                        <p>
+                            Užsakymo įvertinimao komentaras: #{orderDetailsController.orderView.ratingView.comment}
+                        </p>
+                        <p>
+                            Užsakymo įvertinimo data: #{orderDetailsController.orderView.ratingView.date}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </h:panelGroup>
-
-        <!-- ORDER RATING INFO TITLE -->
-        <div class="row column text-left section">
-            <h3 class="section-title">Užsakymo įvertinimas</h3>
         </div> <!-- END OF ORDER RATING INFO TITLE -->
 
-        <div class="row section">
-            <div class="columns small-12">
-                <p>
-                    Užsakymo įvertinimas:
-                </p>
-                <p>
-                    Užsakymo įvertinimao komentaras:
-                </p>
-                <p>
-                    Užsakymo įvertinimo data:
-                </p>
-            </div>
-        </div>
-
         <!-- ORDER ITEMS INFO TITLE -->
-        <div class="row column text-center section">
+        <div class="row column text-center">
             <h3 class="section-title">Užsakymo prekės</h3>
         </div> <!-- END OF ORDER ITEMS INFO TITLE -->
 
         <!-- ITEMS LIST -->
         <h:panelGroup rendered="#{not empty orderDetailsController.orderView.products}">
 
-        <div id="shopping-list-header" class="row section hide-for-small-only">
-            <div class="columns small-6"><h5>Prekė</h5></div>
-            <div class="columns small-2"><h5>Data</h5></div>
-            <div class="columns small-2"><h5>Kiekis</h5></div>
-            <div class="columns small-2"><h5>Kaina</h5></div>
-        </div>
+            <div id="shopping-list-header" class="row section hide-for-small-only">
+                <div class="columns small-6"><h5>Prekė</h5></div>
+                <div class="columns small-3"><h5>Kiekis</h5></div>
+                <div class="columns small-3"><h5>Kaina</h5></div>
+            </div>
 
             <div id="shopping-list-body" class="row align-middle">
                 <ui:repeat value="#{orderDetailsController.orderView.products}" var="product">
@@ -160,11 +165,11 @@
                         <div class="row align-middle align-top">
 
                             <!-- Image -->
-                            <div class="small-12 medium-6 columns align-right">
+                            <div class="small-8 small-offset-2 medium-offset-0 medium-4 columns align-right">
                                 <a href="../../product-details.xhtml?productId=#{product.id}">
-                                    <p:graphicImage class="thumbnail"
+                                    <p:graphicImage class="thumbnail no-top-mar"
                                                     value="#{imageStreamer.image}">
-                                        <f:param name="id" value="#{product.images.get(0).id}"/>
+                                        <f:param name="id" value="#{product.image.id}"/>
                                     </p:graphicImage>
                                 </a>
                             </div>
@@ -172,33 +177,23 @@
                             <!-- Name -->
                             <div class="small-12 medium-6 columns">
                                 <a href="../../product-details.xhtml?productId=#{product.id}">
-                                    <p:outputLabel styleClass="large-text" value="#{product.title}"/>
+                                    <p:outputLabel styleClass="large-text"
+                                                   value="#{product.title}"/>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Date bought. -->
-                    <div class="medium-2 columns hide-for-small-only">
-                        <div class="row column">
-                            <p:outputLabel styleClass="large-text" value="#{orderDetailsController.orderView.creationDate}"/>
-                        </div>
-                    </div>
-                    <!-- [Mobile] Date bought -->
-                    <div class="small-12 columns hide-for-medium">
-                        <div class="row column">
-                            <p:outputLabel styleClass="large-text" value="#{orderDetailsController.orderView.creationDate}"/>
-                        </div>
-                    </div>
 
                     <!-- Product quantity. -->
-                    <div class="small-12 medium-2 columns">
-                        <p:outputLabel styleClass="large-text" value="TODO vnt."/>
+                    <div class="small-12 medium-3 columns">
+                        <p:outputLabel styleClass="large-text" value="#{product.quantity} vnt."/>
                     </div>
 
                     <!-- Price of the product. -->
-                    <div class="small-12 medium-2 columns">
-                        <p:outputLabel styleClass="shopping-cart-price large-text" value="#{product.price} €"/>
+                    <div class="small-12 medium-3 columns">
+                        <p:outputLabel styleClass="shopping-cart-price large-text"
+                                       value="#{product.price} €"/>
                     </div>
 
                 </ui:repeat>
