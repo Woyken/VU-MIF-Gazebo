@@ -82,6 +82,13 @@ html {
 .button.red:hover {
 	background-color: #D32F2F;
 }
+.button.blue {
+	color: white;
+	background-color: #00BCD4;
+}
+.button.blue:hover {
+	background-color: #03A9F4;
+}
 
 .button.success {
 	color: white;
