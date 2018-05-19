@@ -10,25 +10,122 @@
 
     <div id="details-order-window">
 
-        <!-- PAGE TITLE -->
+        <!-- ORDER INFO TITLE -->
         <div class="row column text-center section">
-            <h1 class="section-title">Užsakymo informacija</h1>
-        </div> <!-- END OF PAGE TITLE -->
+            <h1 class="section-title">Valdyti užsakymą:</h1>
+        </div> <!-- END OF ORDER INFO TITLE -->
+
+        <!-- SECTION TITLE -->
+        <div class="row column text-center section">
+            <h3 class="section-title">Keisti užsakymo būseną</h3>
+        </div> <!-- END OF SECTION TITLE -->
+
+        <h:form id="status-buttons">
+            <div class="row section">
+                <!-- [Button] ACCEPTED -->
+                <div class="hide-for-small-only columns medium-3">
+                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'ACCEPTED') ? '' : 'hollow primary-inverted'}"
+                                     value="Priimtas"
+                                     action="#{orderDetailsController.updateOrderStatusAccepted}" >
+                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    </h:commandButton>
+                </div>
+                <!-- [Button][Mobile] ACCEPTED -->
+                <div class="hide-for-medium columns small-12">
+                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'ACCEPTED') ? '' : 'hollow primary-inverted'}"
+                                     value="Priimtas"
+                                     action="#{orderDetailsController.updateOrderStatusAccepted}" >
+                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    </h:commandButton>
+                </div>
+
+                <!-- [Button] RENKAMAS -->
+                <div class="hide-for-small-only columns medium-3">
+                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'ELECTED') ? '' : 'hollow primary-inverted'}"
+                                     value="Renkamas"
+                                     action="#{orderDetailsController.updateOrderStatusElected}" >
+                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    </h:commandButton>
+                </div>
+                <!-- [Button][Mobile] RENKAMAS -->
+                <div class="hide-for-medium columns small-12">
+                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'ELECTED') ? '' : 'hollow primary-inverted'}"
+                                     value="Renkamas"
+                                     action="#{orderDetailsController.updateOrderStatusElected}" >
+                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    </h:commandButton>
+                </div>
+
+                <!-- [Button] SENT -->
+                <div class="hide-for-small-only columns medium-3">
+                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'SENT') ? '' : 'hollow primary-inverted'}"
+                                     value="Išsiųstas"
+                                     action="#{orderDetailsController.updateOrderStatusSent}" >
+                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    </h:commandButton>
+                </div>
+                <!-- [Button][Mobile] SENT -->
+                <div class="hide-for-medium columns small-12">
+                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'SENT') ? '' : 'hollow primary-inverted'}"
+                                     value="Išsiųstas"
+                                     action="#{orderDetailsController.updateOrderStatusSent}" >
+                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    </h:commandButton>
+                </div>
+
+                <!-- [Button] DELIVERED -->
+                <div class="hide-for-small-only columns medium-3">
+                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'DELIVERED') ? '' : 'hollow primary-inverted'}"
+                                     value="Pristatytas"
+                                     action="#{orderDetailsController.updateOrderStatusDelivered}" >
+                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    </h:commandButton>
+                </div>
+                <!-- [Button][Mobile] DELIVERED -->
+                <div class="hide-for-medium columns small-12">
+                    <h:commandButton class="button expanded #{(orderDetailsController.orderView.status == 'DELIVERED') ? '' : 'hollow primary-inverted'}"
+                                     value="Pristatytas"
+                                     action="#{orderDetailsController.updateOrderStatusDelivered}" >
+                        <f:ajax execute="@form" render="order-info status-buttons" />
+                    </h:commandButton>
+                </div>
+            </div>
+        </h:form>
+
+        <!-- ORDER INFO TITLE -->
+        <div class="row column text-left section">
+            <h3 class="section-title">Bendra užsakymo informacija:</h3>
+        </div> <!-- END OF ORDER INFO TITLE -->
+
+        <h:panelGroup id="order-info">
+            <div class="row section">
+                <div class="columns small-12">
+                    <p>
+                        Pirkėjo paštas: <b>#{orderDetailsController.orderView.user.email}</b>
+                    </p>
+                    <p>
+                        Užsakymo būsena: <b>#{orderDetailsController.orderView.status}</b>
+                    </p>
+                    <p>
+                        Užsakymo kaina: <b>#{orderDetailsController.orderView.user.ordersSum}</b>
+                    </p>
+                    <p>
+                        Užsakymo kaina: <b>#{userProductHistoryController.totalSum}</b>
+                    </p>
+                    <p>
+                        Užsakymo data: <b>#{orderDetailsController.orderView.creationDate}</b>
+                    </p>
+                </div>
+            </div>
+        </h:panelGroup>
+
+        <!-- ORDER RATING INFO TITLE -->
+        <div class="row column text-left section">
+            <h3 class="section-title">Užsakymo įvertinimas</h3>
+        </div> <!-- END OF ORDER RATING INFO TITLE -->
 
         <div class="row section">
             <div class="columns small-12">
-                <p>
-                    Pirkėjo paštas: <b>#{orderDetailsController.orderView.user.email}</b>
-                </p>
-                <p>
-                    Užsakymo būsena: <b>#{orderDetailsController.orderView.status}</b>
-                </p>
-                <p>
-                    Užsakymo kaina: <b>#{orderDetailsController.orderView.user.ordersSum}</b>
-                </p>
-                <p>
-                    Užsakymo data: <b>#{orderDetailsController.orderView.creationDate}</b>
-                </p>
                 <p>
                     Užsakymo įvertinimas:
                 </p>
@@ -38,65 +135,19 @@
                 <p>
                     Užsakymo įvertinimo data:
                 </p>
-                <p>
-                    Užsakymo prekės:
-                </p>
-                <p>
-                    daugiau apie pirkėją:
-                </p>
             </div>
         </div>
 
-        <!-- SECTION TITLE -->
+        <!-- ORDER ITEMS INFO TITLE -->
         <div class="row column text-center section">
-            <h1 class="section-title">Keisti užsakymo būseną</h1>
-        </div> <!-- END OF SECTION TITLE -->
-
+            <h3 class="section-title">Užsakymo prekės</h3>
+        </div> <!-- END OF ORDER ITEMS INFO TITLE -->
 
         <div class="row section">
-
-            <!-- [Button] ACCEPTED -->
-            <div class="hide-for-small-only columns medium-3">
-                <a href="#" class="button expanded hollow primary-inverted">
-                    Priimtas</a>
-            </div>
-            <!-- [Button][Mobile] ACCEPTED -->
-            <div class="hide-for-medium columns small-12">
-                <a href="#" class="button expanded hollow primary-inverted">
-                    Priimtas</a>
-            </div>
-
-            <!-- [Button] RENKAMAS -->
-            <div class="hide-for-small-only columns medium-3">
-                <a href="#" class="button expanded hollow primary-inverted">
-                    Renkamas</a>
-            </div>
-            <!-- [Button][Mobile] RENKAMAS -->
-            <div class="hide-for-medium columns small-12">
-                <a href="#" class="button expanded hollow primary-inverted">
-                    Renkamas</a>
-            </div>
-
-            <!-- [Button] SENT -->
-            <div class="hide-for-small-only columns medium-3">
-                <a href="#" class="button expanded hollow primary-inverted">
-                    Išsiųstas</a>
-            </div>
-            <!-- [Button][Mobile] SENT -->
-            <div class="hide-for-medium columns small-12">
-                <a href="#" class="button expanded hollow primary-inverted">
-                    Išsiųstas</a>
-            </div>
-
-            <!-- [Button] DELIVERED -->
-            <div class="hide-for-small-only columns medium-3">
-                <a href="#" class="button expanded hollow primary-inverted">
-                    Pristatytas</a>
-            </div>
-            <!-- [Button][Mobile] DELIVERED -->
-            <div class="hide-for-medium columns small-12">
-                <a href="#" class="button expanded hollow primary-inverted">
-                    Pristatytas</a>
+            <div class="columns small-12">
+                <p>
+                    Užsakymo prekės:
+                </p>
             </div>
         </div>
 
