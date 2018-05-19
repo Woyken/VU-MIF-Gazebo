@@ -7,6 +7,7 @@
 <f:metadata>
     <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
     <f:event type="preRenderView" listener="#{userDetailsController.onPageLoad}"/>
+    <f:event type="preRenderView" listener="#{ordersController.onPageLoadUser(userDetailsController.user.email)}"/>
 </f:metadata>
 
 <h:head>

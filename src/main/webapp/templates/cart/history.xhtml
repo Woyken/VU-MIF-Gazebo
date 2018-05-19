@@ -72,7 +72,7 @@
 
                     <!-- [Button] Add to current cart -->
                     <div class="small-1 columns hide-for-small-only">
-                        <h:form>
+                        <h:form rendered="#{userService.getLoggedUser().getRole() != 'ADMIN'}">
                             <h:commandButton class="button expanded primary"
                                              value="+"
                                              pt:data-open="inform-user-about-adding-to-cart-modal"
