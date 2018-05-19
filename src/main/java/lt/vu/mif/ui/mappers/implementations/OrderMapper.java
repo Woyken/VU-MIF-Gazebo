@@ -1,5 +1,6 @@
 package lt.vu.mif.ui.mappers.implementations;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import lt.vu.mif.model.order.Order;
@@ -31,12 +32,14 @@ public class OrderMapper implements IMapper<Order, OrderView> {
     public OrderView toView(Order entity) {
         OrderView view = new OrderView();
 
-        view.setCreationDate(entity.getCreationDate());
+        view.setCreationDate(entity.getCreationDate()
+            .format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm")));
         view.setId(entity.getId());
-        view.setRating(entity.getRating());
         view.setStatus(entity.getStatus());
         view.setUser(userMapper.toView(entity.getUser()));
-        view.setProducts(productMapper.toViews(entity.getProducts().stream().map(OrderProduct::getProduct).collect(Collectors.toList())));
+        view.setProducts(productMapper.toViews(
+            entity.getProducts().stream().map(OrderProduct::getProduct)
+                .collect(Collectors.toList())));
 
         return view;
     }
