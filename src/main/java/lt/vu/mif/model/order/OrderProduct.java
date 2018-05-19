@@ -1,5 +1,6 @@
 package lt.vu.mif.model.order;
 
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,4 +34,7 @@ public class OrderProduct {
     @ManyToOne
     @JoinColumn(name = "ORDER_ID", nullable = false)
     private Order order;
+
+    @Column(name = "PRICE", nullable = false)
+    private BigDecimal price;
 }
