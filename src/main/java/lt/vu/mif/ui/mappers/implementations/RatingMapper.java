@@ -21,6 +21,10 @@ public class RatingMapper implements IMapper<Rating, RatingView> {
 
     @Override
     public Rating toEntity(RatingView view) {
+        if (view == null) {
+            return null;
+        }
+
         Rating entity = new Rating();
 
         entity.setComment(view.getComment());
@@ -42,6 +46,10 @@ public class RatingMapper implements IMapper<Rating, RatingView> {
 
     @Override
     public RatingView toView(Rating entity) {
+        if (entity == null) {
+            return null;
+        }
+
         RatingView view = new RatingView();
 
         view.setComment(entity.getComment());
