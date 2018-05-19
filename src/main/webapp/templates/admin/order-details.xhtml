@@ -101,7 +101,10 @@
             <div class="row section">
                 <div class="columns small-12">
                     <p>
-                        Pirkėjo paštas: <b>#{orderDetailsController.orderView.user.email}</b>
+                        Pirkėjas:
+                        <a href="../../admin-details-user.xhtml?userId=#{orderDetailsController.orderView.user.id}">
+                            <b>#{orderDetailsController.orderView.user.email}</b>
+                        </a>
                     </p>
                     <p>
                         Užsakymo būsena: <b>#{orderDetailsController.orderView.status}</b>
