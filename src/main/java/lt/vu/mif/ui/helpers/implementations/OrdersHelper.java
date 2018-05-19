@@ -21,6 +21,8 @@ import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+
 @Component
 public class OrdersHelper implements IOrdersHelper {
 
@@ -61,6 +63,14 @@ public class OrdersHelper implements IOrdersHelper {
         orderRepository.save(order);
 
         userRepository.update(loggedUser);
+    }
+
+    @Override
+    @Transactional
+    public void setOrderStatus(OrderView orderView, OrderStatus status){
+        Order order = orderRepository.get(orderView.getId());
+        order.setStatus(status);
+        orderRepository.update(order);
     }
 
     private List<OrderProduct> getOrderProducts(Order order, List<CartProductView> productViews) {

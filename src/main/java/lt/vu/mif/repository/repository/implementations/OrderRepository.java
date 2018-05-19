@@ -38,6 +38,11 @@ public class OrderRepository extends SimpleJpaRepository<Order, Long> implements
     }
 
     @Override
+    public void update(Order order){
+        entityManager.merge(order);
+    }
+
+    @Override
     public void updateAll(List<Order> orders) {
         for (Order order : orders) {
             entityManager.merge(order);
