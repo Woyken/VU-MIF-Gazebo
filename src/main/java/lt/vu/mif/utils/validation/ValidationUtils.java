@@ -1,5 +1,6 @@
 package lt.vu.mif.utils.validation;
 
+import java.math.BigDecimal;
 import java.util.regex.Pattern;
 import lombok.experimental.UtilityClass;
 
@@ -14,7 +15,15 @@ public class ValidationUtils {
     private final String CVS_REGEX = "^\\d{3}$";
     private final String PRICE_REGEX = "[0-9]+([,.][0-9]{1,2})?";
     private final String AMOUNT_REGEX = "^[1-9]\\d*$";
+    private final String TIME_REGEX = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
 
+    public final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm";
+
+    public static int getNumberOfDecimalPlaces(BigDecimal bigDecimal) {
+        String string = bigDecimal.stripTrailingZeros().toPlainString();
+        int index = string.indexOf(".");
+        return index < 0 ? 0 : string.length() - index - 1;
+    }
 
     public static boolean isPasswordValid(String password) {
         return Pattern.matches(PASSWORD_REGEX, password);
@@ -44,5 +53,9 @@ public class ValidationUtils {
 
     public static boolean isAmountValid(String amount) {
         return Pattern.matches(AMOUNT_REGEX, amount);
+    }
+
+    public static boolean isTimeValid(String time) {
+        return Pattern.matches(TIME_REGEX, time);
     }
 }

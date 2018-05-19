@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
+import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.stereotype.Component;
 
 @Named
@@ -31,6 +32,11 @@ public class EditProductValidation implements Validator {
 
         if (price == null) {
             throw new ValidatorException(new FacesMessage("Tokia kaina yra negalima"));
+        }
+
+        if (ValidationUtils.getNumberOfDecimalPlaces(price) > 2) {
+            throw new ValidatorException(
+                new FacesMessage("Kainoje įvesta per daug skaičių po kablelio"));
         }
 
         if (price.signum() == -1) {
