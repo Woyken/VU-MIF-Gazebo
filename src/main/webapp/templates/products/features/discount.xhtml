@@ -4,7 +4,6 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <!-- PAGE TITLE. -->
@@ -18,7 +17,7 @@
     <!-- Sale price -->
     <div class="row section align-middle margin-bottom-1">
         <div class="columns small-12">
-            <h:form style="display: contents;">
+            <h:form id="discountForm" style="display: contents;">
 
                 <!-- Sale as concrete price -->
                 <div class="row align-middle">
@@ -28,9 +27,11 @@
 
                     <div class="columns medium-9 small-12">
                         <h:inputText
-                            pt:min="0"
-                            pt:placeholder="49.99"
-                            value="#{productDiscountController.discountAsPrice}" />
+                                pt:type="number"
+                                pt:min="0"
+                                pt:placeholder="49.99"
+                                value="#{productDiscountController.discountAsPrice}"
+                                binding="#{discountPrice}"/>
                     </div>
                 </div>
 
@@ -42,34 +43,31 @@
 
                     <div class="columns medium-9 small-12">
                         <h:inputText
-                            pt:type="number"
-                            pt:min="0"
-                            pt:placeholder="50"
-                            value="#{productDiscountController.discountAsPercent}" />
+                                pt:type="number"
+                                pt:min="0"
+                                pt:placeholder="50"
+                                value="#{productDiscountController.discountAsPercent}"
+                                binding="#{discountPercentage}"/>
                     </div>
                 </div>
 
                 <!-- Apply price to what -->
-                <div class="row align-middle">
-                    <div class="columns medium-3 small-12">
-                        <h5 class="font-bold"> Taikyti </h5>
+                <h:panelGroup rendered="#{not productDiscountController.isProductFound}">
+                    <div class="row align-middle">
+                        <div class="columns medium-3 small-12">
+                            <h5 class="font-bold"> Taikyti </h5>
+                        </div>
+
+                        <div class="columns medium-9 small-12">
+                            <select>
+                                <!-- TODO: Iterate through all of the categories here -->
+                                <option value="categoryId1"> Sportiniai</option>
+                                <option value="categoryId2"> Pokylio</option>
+                                <option value="all"> Visoms prekėms</option>
+                            </select>
+                        </div>
                     </div>
-
-                    <div class="columns medium-9 small-12">
-                        <select>
-
-                            <!-- Create discount only for current product -->
-                            <h:panelGroup rendered="#{productDiscountController.isProductFound}">
-                                <option value="productId">{product name}</option>
-                            </h:panelGroup>
-
-                            <!-- TODO: Iterate through all of the categories here -->
-                            <option value="categoryId1"> Sportiniai </option>
-                            <option value="categoryId2"> Pokylio </option>
-                            <option value="all"> Visoms prekėms </option>
-                        </select>
-                    </div>
-                </div>
+                </h:panelGroup>
 
                 <!-- Sale date -->
                 <div class="row align-middle">
@@ -81,7 +79,12 @@
                     </div>
 
                     <div class="columns medium-2 small-12">
-                        <input type="date" min="2018-05-05" />
+                        <h:inputText pt:type="date"
+                                     value="#{productDiscountController.startDate}"
+                                     binding="#{startDate}"/>
+                        <h:inputText value="#{productDiscountController.startTime}"
+                                     binding="#{startTime}"
+                                     pt:placeholder="08:00"/>
                     </div>
 
                     <!-- The sale ends on -->
@@ -91,10 +94,35 @@
                     </div>
 
                     <div class="columns medium-2 small-12">
-                        <input type="date" min="2018-05-05" />
+                        <h:inputText pt:type="date"
+                                     value="#{productDiscountController.endDate}"
+                                     binding="#{endDate}"/>
+                        <h:inputText value="#{productDiscountController.endTime}"
+                                     binding="#{endTime}"
+                                     pt:placeholder="12:30"/>
                     </div>
 
                 </div> <!-- End of Sale date -->
+
+                <!-- For validation -->
+                <h:inputHidden id="discountValidationInput" value="true">
+                    <f:validator binding="#{discountValidation}"/>
+                    <f:attribute name="discountPrice" value="#{discountPrice}"/>
+                    <f:attribute name="discountPercentage" value="#{discountPercentage}"/>
+                    <f:attribute name="startDate" value="#{startDate}"/>
+                    <f:attribute name="startTime" value="#{startTime}"/>
+                    <f:attribute name="endDate" value="#{endDate}"/>
+                    <f:attribute name="endTime" value="#{endTime}"/>
+                </h:inputHidden>
+
+                <!-- Error Message -->
+                <div class="row-align-middle text-center">
+                    <div class="columns">
+                        <div class="mar-bot-5">
+                            <h:message class="alert-text-large" for="discountValidationInput"/>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row align-middle section">
                     <!-- [Button] Add discount -->
@@ -103,7 +131,7 @@
                             class="button expanded success"
                             value="Patvirtinti"
                             action="#{productDiscountController.addDiscount}">
-                            <f:ajax execute="@form" />
+                            <f:ajax execute="@form" render="@form"/>
                         </h:commandButton>
                     </div>
 
