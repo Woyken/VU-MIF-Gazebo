@@ -92,7 +92,8 @@
 
                     <!-- Price of the product. -->
                     <div class="medium-3 columns hide-for-small-only">
-                        <h5 class="shopping-cart-price">#{productItem.price * productItem.amount} €</h5>
+                        <h5 class="shopping-cart-price">#{empty productItem.newPrice ?
+                                productItem.price * productItem.amount : productItem.newPrice * productItem.amount} €</h5>
                     </div>
 
                     <!-- Remove item from cart -->
@@ -126,7 +127,9 @@
                                 <p class="font-bold">Kaina:</p>
                             </div>
                             <div class="columns small-7">
-                                <h5 class="shopping-cart-price">#{productItem.price * productItem.amount} €</h5>
+                                <h5 class="shopping-cart-price">#{empty productItem.newPrice ?
+                                        productItem.price * productItem.amount :
+                                        productItem.newPrice * productItem.amount} €</h5>
                             </div>
                         </div>
                     </div>

@@ -476,32 +476,36 @@
 
 
                         <!-- IF THE PRODUCT IS NOT ON SALE - SHOW THIS -->
-                        <!--&lt;!&ndash; Product price &ndash;&gt;-->
-                        <!--<p class="product-price">€ #{productItem.price}</p>-->
+                        <!--Product price -->
+                        <h:panelGroup rendered="#{empty productItem.newPrice}">
+                            <p class="product-price">€ #{productItem.price}</p>
+                        </h:panelGroup>
 
                         <!-- IF THE PRODUCT IS ON SALE - SHOW THIS -->
-                        <div class="hide-for-small-only">
-                            <!-- Product price -->
-                            <p class="product-price-new">€ #{productItem.price}</p>
+                        <h:panelGroup rendered="#{not empty productItem.newPrice}">
+                            <div class="hide-for-small-only">
+                                <!-- Product price -->
+                                <p class="product-price-new">€ #{productItem.newPrice}</p>
 
-                            <!-- Product old price -->
-                            <span class="product-price-old strike mar-bot-10">€ 59,99</span>
-                        </div>
+                                <!-- Product old price -->
+                                <span class="product-price-old strike mar-bot-10">€ #{productItem.price}</span>
+                            </div>
 
-                        <!-- [Mobile] -->
-                        <div class="hide-for-medium">
-                            <div class="row align-center">
-                                <div class="columns small-8 small-offset-2 expanded">
-                                    <!-- Product old price -->
-                                    <p class="product-price-mb-old strike mar-bot-5">€ 59,99</p>
-                                </div>
+                            <!-- [Mobile] -->
+                            <div class="hide-for-medium">
+                                <div class="row align-center">
+                                    <div class="columns small-8 small-offset-2 expanded">
+                                        <!-- Product old price -->
+                                        <p class="product-price-mb-old strike mar-bot-5">€ #{productItem.newPrice}</p>
+                                    </div>
 
-                                <div class="columns small-12">
-                                    <!-- Product price -->
-                                    <p class="product-price-mb">€ #{productItem.price}</p>
+                                    <div class="columns small-12">
+                                        <!-- Product price -->
+                                        <p class="product-price-mb">€ #{productItem.price}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div> <!-- END OF PRODUCT ON SALE -->
+                        </h:panelGroup><!-- END OF PRODUCT ON SALE -->
 
 
                         <!-- [Button] To cart -->

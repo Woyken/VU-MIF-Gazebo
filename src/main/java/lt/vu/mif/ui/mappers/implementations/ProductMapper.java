@@ -56,11 +56,12 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         view.setId(entity.getId());
         view.setDescription(entity.getDescription());
         view.setPrice(entity.getPrice());
-        view.setNewPrice(priceResolver.resolvePriceWithDiscount(entity));
         view.setSku(entity.getSku());
         view.setTitle(entity.getTitle());
         view.setDiscount(discountMapper.toView(entity.getDiscount()));
         view.setImages(imageMapper.toViews(entity.getImages()));
+        view.setNewPrice(entity.getDiscount() == null ? null :
+            priceResolver.resolvePriceWithDiscount(entity));
 
         return view;
     }

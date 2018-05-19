@@ -46,8 +46,9 @@ public class CartController implements Serializable {
     public BigDecimal getSum() {
         BigDecimal totalSum = new BigDecimal(0);
         for (CartProductView product : productsInCart) {
-            BigDecimal productPrice = product.getPrice()
-                .multiply(new BigDecimal(product.getAmount()));
+            BigDecimal productPrice = product.getNewPrice() == null ?
+                product.getPrice() : product.getNewPrice();
+            productPrice.multiply(new BigDecimal(product.getAmount()));
             totalSum = totalSum.add(productPrice);
         }
         return totalSum;
