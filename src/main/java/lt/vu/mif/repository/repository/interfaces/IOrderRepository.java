@@ -20,4 +20,6 @@ public interface IOrderRepository {
     List<Order> getOrders(List<Long> ids);
 
     void updateAll(List<Order> orders);
+
+    void update(Order order);
 }

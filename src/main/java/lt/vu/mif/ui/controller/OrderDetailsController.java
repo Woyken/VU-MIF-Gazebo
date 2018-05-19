@@ -2,6 +2,7 @@ package lt.vu.mif.ui.controller;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
 import lt.vu.mif.ui.view.OrderView;
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +38,26 @@ public class OrderDetailsController {
         if (orderView == null) {
             throw new IllegalStateException("Order" + "with ID=" + orderId + "not found");
         }
+    }
+
+    public void updateOrderStatusAccepted(){
+        ordersHelper.setOrderStatus(orderView, OrderStatus.ACCEPTED);
+        orderView = ordersHelper.getOrder(orderView.getId());
+    }
+
+    public void updateOrderStatusElected(){
+        ordersHelper.setOrderStatus(orderView, OrderStatus.ELECTED);
+        orderView = ordersHelper.getOrder(orderView.getId());
+    }
+
+    public void updateOrderStatusSent(){
+        ordersHelper.setOrderStatus(orderView, OrderStatus.SENT);
+        orderView = ordersHelper.getOrder(orderView.getId());
+    }
+
+    public void updateOrderStatusDelivered(){
+        ordersHelper.setOrderStatus(orderView, OrderStatus.DELIVERED);
+        orderView = ordersHelper.getOrder(orderView.getId());
     }
 
     public void saveChanges() {
