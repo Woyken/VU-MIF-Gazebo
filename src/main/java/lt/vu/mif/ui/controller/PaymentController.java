@@ -76,17 +76,17 @@ public class PaymentController {
     }
 
     public String makePayment() {
-//        String year = yearDesktop.isEmpty() ? yearMobile : yearDesktop;
-//        String month = monthDesktop.isEmpty() ? monthMobile : monthDesktop;
-//        String cvs = cvsDesktop.isEmpty() ? cvsMobile : cvsDesktop;
-//
-//        PaymentResponse response = paymentService
-//            .MakePayment(cartController.getSum().movePointRight(2).intValueExact(), cardNumber,
-//                name + " " + surname, Integer.parseInt(year) + 2000, Integer.parseInt(month), cvs);
-//
-//        if (!response.isSuccess()) {
-//            return "payment?error=" + response.getError().error + "&faces-redirect=true";
-//        }
+        String year = yearDesktop.isEmpty() ? yearMobile : yearDesktop;
+        String month = monthDesktop.isEmpty() ? monthMobile : monthDesktop;
+        String cvs = cvsDesktop.isEmpty() ? cvsMobile : cvsDesktop;
+
+        PaymentResponse response = paymentService
+            .MakePayment(cartController.getSum().movePointRight(2).intValueExact(), cardNumber,
+                name + " " + surname, Integer.parseInt(year) + 2000, Integer.parseInt(month), cvs);
+
+        if (!response.isSuccess()) {
+            return "payment?error=" + response.getError().error + "&faces-redirect=true";
+        }
 
         ordersHelper.saveNewOrder(orderView, cartController.getProductsInCart());
         cartController.getProductsInCart().clear();
