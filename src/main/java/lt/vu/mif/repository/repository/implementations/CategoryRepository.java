@@ -24,4 +24,9 @@ public class CategoryRepository extends SimpleJpaRepository<Category, Long> impl
                 .getEntityInformation(Category.class, entityManager),
             entityManager);
     }
+
+    @Override
+    public Category get(Long id) {
+        return entityManager.find(Category.class, id);
+    }
 }

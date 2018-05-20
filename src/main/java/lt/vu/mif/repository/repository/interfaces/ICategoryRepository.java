@@ -7,4 +7,6 @@ public interface ICategoryRepository {
     List<Category> findAll();
 
     <S extends Category> S save(S entity);
+
+    Category get(Long id);
 }
