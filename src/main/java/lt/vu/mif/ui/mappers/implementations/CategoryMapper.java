@@ -8,9 +8,12 @@ import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.CategoryView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+@Component
 public class CategoryMapper implements IMapper<Category, CategoryView> {
+
     @Autowired
     private ICategoryRepository categoryRepository;
 
@@ -23,7 +26,9 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
         Category entity = new Category();
 
         entity.setId(view.getId());
-        entity.setParentCategory(categoryRepository.get(view.getParenCategory().getId()));
+        if (view.getParentCategory() != null) {
+            entity.setParentCategory(categoryRepository.get(view.getParentCategory().getId()));
+        }
         entity.setName(view.getName());
         entity.setAttributes(view.getAttributes());
 
@@ -49,7 +54,7 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
 
         view.setId(entity.getId());
         view.setName(entity.getName());
-        view.setParenCategory(toView(entity.getParentCategory()));
+        view.setParentCategory(toView(entity.getParentCategory()));
 
         return view;
     }

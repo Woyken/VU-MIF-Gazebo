@@ -4,16 +4,18 @@ import java.util.List;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
-import lt.vu.mif.ui.mappers.implementations.CategoryMapper;
+import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.CategoryView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CategoryHelper implements ICategoryHelper {
 
     @Autowired
     private ICategoryRepository categoryRepository;
     @Autowired
-    private CategoryMapper categoryMapper;
+    private IMapper<Category, CategoryView> categoryMapper;
 
     @Override
     public List<CategoryView> findAll() {
@@ -23,6 +25,11 @@ public class CategoryHelper implements ICategoryHelper {
     @Override
     public CategoryView get(Long id) {
         return categoryMapper.toView(categoryRepository.get(id));
+    }
+
+    @Override
+    public CategoryView getCategoryByName(String name) {
+        return categoryMapper.toView(categoryRepository.getCategoryByName(name));
     }
 
     @Override

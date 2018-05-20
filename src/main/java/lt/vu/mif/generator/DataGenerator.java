@@ -17,6 +17,7 @@ import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.user.Role;
 import lt.vu.mif.model.user.User;
+import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
@@ -34,6 +35,8 @@ public class DataGenerator {
     private IOrderRepository orderRepository;
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private ICategoryRepository categoryRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -87,15 +90,18 @@ public class DataGenerator {
 
     public void insertProducts() {
         List<Product> products = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
+        categories.add(createSportCategory());
+        categories.add(createFurnitureCategory());
 
         for (int i = 0; i < 15; i++) {
-            addProducts(products);
+            addProducts(products, categories);
         }
 
         productRepository.saveAll(products);
     }
 
-    private void addProducts(List<Product> products) {
+    private void addProducts(List<Product> products, List<Category> categories) {
         for (int i = 1; i <= 9; i++) {
             Product product = new Product();
             product.setDescription(getProductDescription(i));
@@ -108,7 +114,7 @@ public class DataGenerator {
             product.getImages().add(getImage("static/images/products/shoe-3.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-4.jpg"));      
             product.setCreationDate(LocalDateTime.now());
-            product.setCategory(i % 2 == 0 ? createFurnitureCategory() : createSportCategory());
+            product.setCategory(categories.get(i % categories.size()));
             product.setDiscount(i % 2 == 0 ? getDiscount() : null);
             products.add(product);
         }
@@ -125,8 +131,9 @@ public class DataGenerator {
         bedroom.setName("bedroom");
 
         bedroom.setParentCategory(furniture);
-        bedroom.setParentCategory(kitchen);
+        kitchen.setParentCategory(furniture);
 
+        categoryRepository.save(furniture);
         return furniture;
     }
 
@@ -143,6 +150,7 @@ public class DataGenerator {
         basketball.setParentCategory(sport);
         tennis.setParentCategory(sport);
 
+        categoryRepository.save(sport);
         return sport;
     }
 

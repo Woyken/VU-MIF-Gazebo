@@ -48,7 +48,7 @@ public class Product {
     @Column(name = "CREATION_DATE")
     private LocalDateTime creationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", nullable = false)
     private Category category;
 
