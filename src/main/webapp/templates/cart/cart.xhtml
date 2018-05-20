@@ -35,17 +35,7 @@
                 <div class="small-4 columns"> <h5>Prekė</h5>    </div>
                 <div class="small-4 columns"> <h5>Kiekis</h5>   </div>
                 <div class="small-4 columns"> <h5>Kaina</h5>    </div>
-
-                <!-- Total sum -->
-                <div id="shopping-list-price-sum" class="columns shopping-cart-price">Viso: #{cartController.sum} €</div>
             </div>
-
-
-            <!-- [Mobile] Total sum -->
-            <div class="row section">
-                <div id="" class="columns shopping-cart-price hide-for-medium">Viso: #{cartController.sum} €</div>
-            </div>
-
 
             <div id="shopping-list-body" class="row align-middle">
                 <ui:repeat value="#{cartController.productsInCart}" var="productItem" varStatus="loop">
@@ -152,9 +142,13 @@
 
                 </ui:repeat>
             </div>
-
             <!-- END OF SHOPPING CART ITEMS -->
 
+            <!-- TOTAL SUM -->
+            <div class="row section ">
+                <h4 class="column medium-9 small-11 shopping-cart-price text-right">Viso: #{cartController.sum} €</h4>
+                <h4 class="column medium-3 small-1 shopping-cart-price text-right"> </h4>
+            </div>
 
             <!-- BOTTOM BUTTONS -->
             <div class="row section">
