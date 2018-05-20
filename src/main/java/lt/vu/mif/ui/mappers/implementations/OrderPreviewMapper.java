@@ -10,6 +10,7 @@ import lt.vu.mif.model.user.User;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.AdminOrderPreview;
 import lt.vu.mif.ui.view.OrderPreview;
+import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -38,13 +39,14 @@ public class OrderPreviewMapper implements IMapper<Order, OrderPreview> {
         OrderPreview view = new OrderPreview();
 
         view.setCreationDate(entity.getCreationDate()
-            .format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm")));
+            .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
         view.setId(entity.getId());
         view.setStatus(entity.getStatus());
         User user = entity.getUser();
         view.setUserEmail(user.getEmail());
         view.setUserId(user.getId());
         view.setProducts(boughtProductMapper.toViews(entity.getProducts()));
+        view.setTotalSum(getOrderTotalPrice(entity));
 
         return view;
     }
@@ -53,7 +55,7 @@ public class OrderPreviewMapper implements IMapper<Order, OrderPreview> {
         AdminOrderPreview view = new AdminOrderPreview();
 
         view.setCreationDate(entity.getCreationDate()
-            .format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm")));
+            .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
         view.setId(entity.getId());
         view.setStatus(entity.getStatus());
         User user = entity.getUser();

@@ -15,7 +15,4 @@ public class UserView {
     private String password;
     private Role role;
     private boolean blocked;
-    private Long ordersCount;
-    private Long averageCount;
-    private Long ordersSum;
 }

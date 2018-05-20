@@ -9,6 +9,7 @@ import lt.vu.mif.model.order.Rating;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.RatingView;
+import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -55,7 +56,8 @@ public class RatingMapper implements IMapper<Rating, RatingView> {
         view.setComment(entity.getComment());
         view.setValue(entity.getValue());
         view.setOrderId(entity.getOrder().getId());
-        view.setDate(entity.getDate().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm")));
+        view.setDate(
+            entity.getDate().format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
 
         return view;
     }

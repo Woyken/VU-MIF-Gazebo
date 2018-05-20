@@ -26,11 +26,11 @@
                         Average price or cart
                         Total price of all carts     -->
                 <p>
-                    Užsakymai: 54
+                    Užsakymai: #{userDetailsController.user.ordersCount}
                     <br/>
-                    Vidutinė suma: 19€
+                    Vidutinė suma #{userDetailsController.user.averagePrice} €
                     <br/>
-                    Bendra suma: 769€
+                    Bendra suma:  #{userDetailsController.user.ordersSum} €
                 </p>
                 <h:form id="my-form">
                     <div class="small-8 medium-5 large-4">
@@ -89,7 +89,7 @@
 
                     <!-- Price of the product. -->
                     <div class="small-12 medium-2 columns">
-                        <p:outputLabel styleClass="shopping-cart-price large-text" value="20 €"/>
+                        <p:outputLabel styleClass="shopping-cart-price large-text" value="#{order.totalSum} €"/>
                     </div>
 
                     <!-- [Button] Add to current cart -->
