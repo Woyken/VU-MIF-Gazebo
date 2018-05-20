@@ -8,8 +8,8 @@ import lombok.Setter;
 import lt.vu.mif.ui.helpers.implementations.ProductHelper;
 import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
 import lt.vu.mif.ui.paging.Paging;
+import lt.vu.mif.ui.view.AdminUserView;
 import lt.vu.mif.ui.view.BoughtProductView;
-import lt.vu.mif.ui.view.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
@@ -25,7 +25,7 @@ public class UserDetailsController {
     private IUserHelper userHelper;
 
     private Page<BoughtProductView> page;
-    private UserView user;
+    private AdminUserView user;
     private Paging paging = new Paging();
 
     public void onPageLoad() {
@@ -35,7 +35,7 @@ public class UserDetailsController {
 
         String userId = FacesContext.getCurrentInstance().getExternalContext()
             .getRequestParameterMap().get("userId");
-        user = userHelper.get(Long.valueOf(userId));
+        user = userHelper.getAdminView(Long.valueOf(userId));
 
         paging.reset();
         search();
@@ -43,7 +43,7 @@ public class UserDetailsController {
 
     public void blockUser() {
         userHelper.blockUser(user.getId(), !user.isBlocked());
-        user = userHelper.get(user.getId());
+        user = userHelper.getAdminView(user.getId());
     }
 
     private void search() {
