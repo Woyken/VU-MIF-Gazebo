@@ -18,19 +18,6 @@
                 <h1 class="section-title">#{productEditController.productFound ? 'Redaguoti prekę' : 'Pridėti prekę'}</h1>
             </div> <!-- END OF PAGE TITLE -->
 
-            <!-- EXTRA FUNCTIONALITY -->
-            <div class="row section">
-
-                <!-- Edit categories -->
-                <div class="columns small-12 medium-3">
-                    <a
-                        class="button expanded blue"
-                        href="../../admin-product-category.xhtml?productId=#{productEditController.productView.id}">
-                        Tvarkyti kategoriją
-                    </a>
-                </div>
-
-            </div> <!-- END OF EXTRA FUNCTIONALITY -->
 
             <!-- ADD PRODUCT -->
             <div class="section">
@@ -109,15 +96,62 @@
                         </a>
                     </div>
 
-                    <!-- [Button] Remove discount -->
-                    <div class="columns small-3 small-offset-6 medium-1 medium-offset-0">
+                    <!-- [Button] Remove discount if one exists -->
+                    <h:panelGroup rendered="#{productEditController.productView.discount != null}">
+                        <div class="columns small-3 small-offset-6 medium-1 medium-offset-0">
+                            <a
+                                    class="button expanded red"
+                                    href="">
+                                <i class="fi-x" />
+                            </a>
+                        </div>
+                    </h:panelGroup>
+                </div> <!-- End of Discount -->
+
+                <!-- Category -->
+                <div class="row align-middle">
+
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Kategorija</h5>
+                    </div>
+
+                    <div class="columns medium-7 small-12">
+                        <!-- Category was found -->
+                        <!-- TODO: Change this and others to 'productEditController.productView.category' -->
+                        <h:panelGroup rendered="#{productEditController.category != null}">
+                            <h:outputText
+                                    class="font-bold font-italic success-text-large"
+                                    value="#{productEditController.category.name}"  />
+                        </h:panelGroup>
+
+                        <!-- Category was not found -->
+                        <h:panelGroup rendered="#{productEditController.category == null}">
+                            <h:outputText
+                                    styleClass="font-bold font-italic alert-text-large"
+                                    value="NEPRITAIKYTA"/>
+                        </h:panelGroup>
+                    </div>
+
+                    <!-- [Button] Edit category -->
+                    <div class="columns small-3 medium-1">
                         <a
-                                class="button expanded red"
-                                href="">
-                            <i class="fi-x" />
+                                class="button expanded primary"
+                                href="../../admin-product-category.xhtml?productId=#{productEditController.productView.id}">
+                            <i class="fi-pencil" />
                         </a>
                     </div>
-                </div>
+
+                    <!-- [Button] Remove discount if one exists -->
+                    <h:panelGroup rendered="#{productEditController.category != null}">
+                        <div class="columns small-3 small-offset-6 medium-1 medium-offset-0">
+                            <a
+                                    class="button expanded red"
+                                    href="">
+                                <i class="fi-x" />
+                            </a>
+                        </div>
+                    </h:panelGroup>
+                </div> <!-- End of Category -->
 
                 <!-- Description -->
                 <div class="row ">
