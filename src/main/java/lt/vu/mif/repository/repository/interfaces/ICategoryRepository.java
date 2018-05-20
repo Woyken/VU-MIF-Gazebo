@@ -9,4 +9,6 @@ public interface ICategoryRepository {
     <S extends Category> S save(S entity);
 
     Category get(Long id);
+
+    Category getCategoryByName(String name);
 }

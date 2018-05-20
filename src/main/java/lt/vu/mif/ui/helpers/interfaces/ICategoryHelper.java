@@ -8,5 +8,7 @@ public interface ICategoryHelper {
 
     CategoryView get(Long id);
 
+    CategoryView getCategoryByName(String name);
+
     void save(CategoryView view);
 }

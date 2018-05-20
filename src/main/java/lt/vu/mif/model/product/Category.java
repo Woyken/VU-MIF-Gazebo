@@ -30,7 +30,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NAME", nullable = false, unique = true)
     private String name;
 
     @ManyToOne(cascade = ALL)
@@ -42,7 +42,7 @@ public class Category {
     @Column(name = "ATTRIBUTE")
     private List<String> attributes = new ArrayList<>();
 
-    @OneToMany(fetch = LAZY, cascade = ALL, mappedBy = "category")
+    @OneToMany(fetch = LAZY, mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 
     @ManyToOne(cascade = ALL, fetch = LAZY)

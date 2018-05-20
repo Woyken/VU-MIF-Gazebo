@@ -10,6 +10,6 @@ public class CategoryView {
 
     private Long id;
     private String name;
-    private CategoryView parenCategory;
+    private CategoryView parentCategory;
     private List<String> attributes;
 }

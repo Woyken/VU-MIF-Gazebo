@@ -1,43 +1,34 @@
 package lt.vu.mif.ui.controller;
 
-import lombok.Getter;
-import lombok.Setter;
-import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
-import lt.vu.mif.ui.view.ProductView;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import lombok.Getter;
+import lombok.Setter;
+import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
+import lt.vu.mif.ui.view.CategoryView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
 @Named
 @ViewScoped
 public class ProductCategoryController {
-
     @Autowired
-    private IProductHelper productHelper;
-    private ProductView productView;
+    ICategoryHelper categoryHelper;
+
+    private String newCategory;
+
+    private Boolean isCreationSuccess;
+    private String creationErrorMessage;
 
     private boolean addCategoryEnabled = false;
     private boolean isProductFound;
     private String currentCategory = "";
-    private String newCategory = "";
     private String newAttribute = "";
 
     public void onPageLoad() {
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
-
-        // If a product with passed in ID is not found -
-        // it means we want to edit categories
-        try {
-            productView = productHelper.getProductViewFromNavigationQuery();
-            isProductFound = true;
-        } catch (Exception x) {
-            productView = new ProductView();
-            isProductFound = false;
-        }
     }
 
     public void toggleAddCategory() {
@@ -45,8 +36,24 @@ public class ProductCategoryController {
     }
 
     public void createNewCategory() {
-        currentCategory = newCategory;
-        toggleAddCategory();
+        isCreationSuccess = false;
+        creationErrorMessage = "";
+
+        if (newCategory.isEmpty()) {
+            creationErrorMessage = "Įveskite kategorijos pavadinimą";
+            return;
+        }
+
+        if (categoryHelper.getCategoryByName(newCategory) != null) {
+            creationErrorMessage = "Tokia kategorija jau egzistuoja";
+            return;
+        }
+
+        CategoryView category = new CategoryView();
+        category.setName(newCategory);
+        categoryHelper.save(category);
+        newCategory = "";
+        isCreationSuccess = true;
     }
 
     public void discardNewCategory() {
