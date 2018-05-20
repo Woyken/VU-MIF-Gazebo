@@ -7,6 +7,7 @@ import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderProduct;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.OrderView;
+import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +34,7 @@ public class OrderMapper implements IMapper<Order, OrderView> {
         OrderView view = new OrderView();
 
         view.setCreationDate(entity.getCreationDate()
-            .format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm")));
+            .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
         view.setId(entity.getId());
         view.setStatus(entity.getStatus());
         view.setUser(userMapper.toView(entity.getUser()));
