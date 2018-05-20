@@ -19,6 +19,7 @@ import lt.vu.mif.ui.mappers.implementations.OrderMapper;
 import lt.vu.mif.ui.mappers.implementations.OrderPreviewMapper;
 import lt.vu.mif.ui.view.AdminOrderPreview;
 import lt.vu.mif.ui.view.CartProductView;
+import lt.vu.mif.ui.view.OrderPreview;
 import lt.vu.mif.ui.view.OrderView;
 import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +48,13 @@ public class OrdersHelper implements IOrdersHelper {
     }
 
     @Override
-    public List<OrderView> getAllUserOrders(String email) {
-        return orderMapper.toViews(orderRepository.getAllUserOrders(email));
+    public List<OrderPreview> getAllAdminOrders() {
+        return orderPreviewMapper.toViews(orderRepository.findAll());
+    }
+
+    @Override
+    public List<OrderPreview> getAllUserOrders(String email) {
+        return orderPreviewMapper.toViews(orderRepository.getAllUserOrders(email));
     }
 
     @Override
