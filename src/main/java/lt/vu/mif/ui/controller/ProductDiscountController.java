@@ -33,6 +33,8 @@ public class ProductDiscountController {
     private BigDecimal discountAsPrice;
     //BigDecimal type for validation purposes
     private BigDecimal discountAsPercent;
+    //Can't set LocalDateTime fields with jsf, so using Strings
+    //(a nicer way would have been to use jsf custom converter)
     private String startDate;
     private String startTime;
     private String endDate;
@@ -72,6 +74,7 @@ public class ProductDiscountController {
     }
 
     public void addDiscount() {
+        //Couldn't access product in validation class, so have to do it here
         if (discountAsPrice != null && discountAsPrice.compareTo(productView.getPrice()) == 1) {
             errorMessage = "Nuolaidos kaina negali būti didesnė už įprastą produkto kainą";
             return;
@@ -93,6 +96,18 @@ public class ProductDiscountController {
         isSuccess = true;
 
         return;
+    }
+
+    public void removeDiscount() {
+        discountAsPrice = null;
+        discountAsPercent = null;
+        startDate = "";
+        startTime = "";
+        endDate = "";
+        endTime = "";
+
+        productView.setDiscount(null);
+        productHelper.update(productView);
     }
 
 }
