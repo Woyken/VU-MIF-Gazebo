@@ -10,7 +10,9 @@ import lt.vu.mif.model.user.User;
 import lt.vu.mif.model.user.UserTokenTuple;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
 import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
+import lt.vu.mif.ui.mappers.implementations.AdminUserMapper;
 import lt.vu.mif.ui.mappers.implementations.UserMapper;
+import lt.vu.mif.ui.view.AdminUserView;
 import lt.vu.mif.ui.view.UserView;
 import lt.vu.mif.utils.interfaces.ITokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +36,18 @@ public class UserHelper implements IUserHelper {
     private IEmailProvider emailProvider;
     @Autowired
     private ITokenGenerator tokenGenerator;
+    @Autowired
+    private AdminUserMapper adminUserMapper;
 
 
     public UserView get(Long id) {
         User user = userRepository.get(id);
         return user == null ? null : userMapper.toView(user);
+    }
+
+    public AdminUserView getAdminView(Long id) {
+        User user = userRepository.get(id);
+        return user == null ? null : adminUserMapper.toView(user);
     }
 
     @Override
@@ -100,7 +109,7 @@ public class UserHelper implements IUserHelper {
     }
 
     @Override
-    public List<UserView> getAllUsers() {
-        return userMapper.toViews(userRepository.findAll());
+    public List<AdminUserView> getAllUsers() {
+        return adminUserMapper.toViews(userRepository.findAll());
     }
 }
