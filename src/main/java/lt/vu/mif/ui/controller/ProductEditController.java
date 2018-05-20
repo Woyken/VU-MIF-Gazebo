@@ -1,6 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -11,7 +10,6 @@ import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.model.product.Category;
-import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.view.ImageInMemoryStreamer;
 import lt.vu.mif.ui.view.ImageView;
@@ -47,7 +45,7 @@ public class ProductEditController {
         try {
             productView = productHelper.getProductViewFromNavigationQuery();
             isProductFound = true;
-        } catch (Exception x) {
+        } catch (IllegalArgumentException x) {
             productView = new ProductView();
             isProductFound = false;
         }
@@ -82,5 +80,10 @@ public class ProductEditController {
     public void removeImage(ImageView imageView) {
         productView.getImages().remove(imageView);
         newImages.remove(imageView);
+    }
+
+    public void removeDiscount() {
+        productView.setDiscount(null);
+        productHelper.update(productView);
     }
 }

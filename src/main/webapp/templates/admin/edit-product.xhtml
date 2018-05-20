@@ -99,11 +99,12 @@
                     <!-- [Button] Remove discount if one exists -->
                     <h:panelGroup rendered="#{productEditController.productView.discount != null}">
                         <div class="columns small-3 small-offset-6 medium-1 medium-offset-0">
-                            <a
+                            <h:commandLink
                                     class="button expanded red"
-                                    href="">
+                                    action="#{productEditController.removeDiscount}">
                                 <i class="fi-x" />
-                            </a>
+                                <f:ajax render="@form"/>
+                            </h:commandLink>
                         </div>
                     </h:panelGroup>
                 </div> <!-- End of Discount -->
