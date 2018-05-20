@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.view.ImageInMemoryStreamer;
@@ -33,6 +34,9 @@ public class ProductEditController {
     private boolean showSuccessMessage;
     private boolean isProductFound;
 
+    // TODO: Remove this when product uses real categories
+    private Category category;
+
     private List<ImageView> newImages = new ArrayList<>();
 
     public void onPageLoad() {
@@ -47,6 +51,10 @@ public class ProductEditController {
             productView = new ProductView();
             isProductFound = false;
         }
+
+        // TODO: Remove this when product uses real categories
+        category = new Category();
+        category.setName("UI Test ONLY");
 
         showSuccessMessage = false;
     }
