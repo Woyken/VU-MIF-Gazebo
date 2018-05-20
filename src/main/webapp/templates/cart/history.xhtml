@@ -62,7 +62,7 @@
 
                     <!-- Product quantity. -->
                     <div class="small-12 medium-2 columns">
-                        <p:outputLabel styleClass="large-text" value="TODO vnt."/>
+                        <p:outputLabel styleClass="large-text" value="#{product.quantity} vnt."/>
                     </div>
 
                     <!-- Price of the product. -->
@@ -112,7 +112,7 @@
             <div id="shopping-list-total" class="row align-right">
                 <div class="columns">
                     <p:outputLabel styleClass="text-right larger-text"
-                                   value="Krepšelio vertė: TODO €"/>
+                                   value="Krepšelio vertė: #{orderDetailsController.orderView.totalSum} €"/>
                 </div>
             </div>
         </h:panelGroup>
