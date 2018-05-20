@@ -148,8 +148,11 @@
                     <!-- [Button] Remove discount -->
                     <div class="columns small-6 medium-4 medium-offset-4">
                         <h:commandButton
-                            class="button expanded red"
-                            value="Panaikinti nuolaidą" />
+                                class="button expanded red"
+                                value="Panaikinti nuolaidą"
+                                action="#{productDiscountController.removeDiscount}">
+                            <f:ajax render="@form"/>
+                        </h:commandButton>
                     </div>
 
                 </div>
