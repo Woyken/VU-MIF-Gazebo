@@ -82,23 +82,23 @@
                         </div>
                     </div>
 
-                    <!-- Product quantity. -->
+                    <!-- Product status. -->
                     <div class="small-12 medium-3 columns">
                         <p:outputLabel styleClass="large-text" value="#{order.status.name}"/>
                     </div>
 
-                    <!-- Price of the product. -->
+                    <!-- Cart price sum. -->
                     <div class="small-12 medium-2 columns">
                         <p:outputLabel styleClass="shopping-cart-price large-text" value="20 €"/>
                     </div>
 
-                    <!-- [Button] Add to current cart -->
+                    <!-- [Button] See cart details -->
                     <div class="small-2 columns hide-for-small-only">
                         <a href="../../admin-details-order.xhtml?orderId=#{order.id}" class="button expanded primary">
                             Peržiūrėti
                         </a>
                     </div>
-                    <!-- [Mobile][Button] Add to current cart -->
+                    <!-- [Mobile][Button] See cart details -->
                     <div class="small-12 columns hide-for-medium">
                         <a href="../../cart-history.xhtml?orderId=#{order.id}" class="button expanded primary">
                             Peržiūrėti
@@ -115,27 +115,27 @@
                     <ul class="pagination text-center">
                         <li class="pagination-previous">
                             <h:commandLink value="Atgal"
-                                           disabled="#{userDetailsController.pagingIndex eq 0 and userDetailsController.paging.activePage eq 0}">
+                                           disabled="#{userDetailsController.paging.activePage eq 0}">
                                 <f:ajax execute="@form" listener="#{userDetailsController.previous}"
                                         render="productList paging-form"/>
                             </h:commandLink>
                         </li>
                         <ui:repeat value="#{userDetailsController.paging.totalPages}" var="page"
-                                   varStatus="status" size="#{userDetailsController.paging.minValue}">
+                                   varStatus="status">
                             <li>
                                 <h:commandLink
-                                        rendered="#{(status.index + 1 + userDetailsController.pagingIndex) le userDetailsController.page.totalPages}"
-                                        value="#{status.index + 1 + userDetailsController.pagingIndex}"
-                                        styleClass="#{status.index + userDetailsController.pagingIndex eq userDetailsController.paging.activePage ? 'current' : ''}">
+                                        rendered="#{userDetailsController.paging.isPageNumberShown(status.index)}"
+                                        value="#{status.index + 1}"
+                                        styleClass="#{status.index eq userDetailsController.paging.activePage ? 'current' : ''}">
                                     <f:ajax execute="@form"
-                                            listener="#{userDetailsController.search(status.index + userDetailsController.pagingIndex)}"
+                                            listener="#{userDetailsController.search(status.index)}"
                                             render="productList paging-form"/>
                                 </h:commandLink>
                             </li>
                         </ui:repeat>
                         <li class="pagination-next">
                             <h:commandLink value="Pirmyn"
-                                           disabled="#{userDetailsController.paging.activePage + userDetailsController.paging.index + 1 eq userDetailsController.page.totalPages}">
+                                           disabled="#{userDetailsController.paging.activePage + 1 eq userDetailsController.page.totalPages}">
                                 <f:ajax execute="@form" listener="#{userDetailsController.next}"
                                         render="productList paging-form"/>
                             </h:commandLink>
