@@ -17,13 +17,13 @@
                 <ui:repeat value="#{ordersController.orders}" var="order">
                     <div class="columns medium-3 small-6 admin-order-box">
                         <p>
-                            Pirkėjo paštas: <b>#{order.user.email}</b>
+                            Pirkėjo paštas: <b>#{order.userEmail}</b>
                         </p>
                         <p>
                             Užsakymo būsena: <b>#{order.status.name}</b>
                         </p>
                         <p>
-                            Užsakymo kaina: <b>#{order.user.ordersSum}</b>
+                            Užsakymo kaina: <b>#{order.totalSum}</b>
                         </p>
 
                         <div class="small-8 small-offset-2 medium-12 medium-offset-0">
