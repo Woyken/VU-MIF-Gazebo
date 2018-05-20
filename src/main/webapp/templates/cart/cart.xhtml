@@ -84,7 +84,8 @@
                         <h:inputText class="half-width" value="#{productItem.amount}"
                                      pt:type="number"
                                      pt:min="1">
-                            <f:convertNumber integerOnly="true" type="number"/>
+                            <!--convertNumber produces a bug, where numbers above 1000 aren't rendered, fix unknown-->
+                            <!--<f:convertNumber integerOnly="true" type="number"/>-->
                             <f:validateLongRange minimum="1" />
                             <p:ajax event="change" update="@form" />
                         </h:inputText>
@@ -98,7 +99,9 @@
 
                     <!-- Remove item from cart -->
                     <div class="medium-1 columns hide-for-small-only">
-                        <h:commandLink class="button primary" value="&times;" pt:data-open="remove-item-from-cart-modal" action="#{cartController.selectForRemoval(productItem)}">
+                        <h:commandLink class="button primary red" value="&times;"
+                                       pt:data-open="remove-item-from-cart-modal"
+                                       action="#{cartController.selectForRemoval(productItem)}">
                             <p:ajax update="@form" />
                         </h:commandLink>
                     </div>
@@ -137,7 +140,7 @@
                     <!-- [Mobile][Button] Remove item from cart -->
                     <div class="small-10 small-offset-1 columns hide-for-medium">
                         <h:commandLink
-                                class="button primary expanded"
+                                class="button primary expanded red"
                                 value="Išimti prekę iš krepšelio"
                                 pt:data-open="remove-item-from-cart-modal"
                                 action="#{cartController.selectForRemoval(productItem)}">
@@ -166,13 +169,13 @@
                 <!-- [Button] Buy cart items -->
                 <div class="hide-for-small-only medium-3 medium-offset-6">
                     <!--When user is logged in-->
-                    <p:commandLink class="button orange expanded"
+                    <p:commandLink class="button success expanded"
                                    value="Pirkti prekes"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and userService.isLoggedIn()}"
                                    action="#{cartController.buyProducts}"
                     />
                     <!--When user is not logged in-->
-                    <p:commandLink class="button orange expanded"
+                    <p:commandLink class="button success expanded"
                                    value="Pirkti prekes"
                                    action="#{cartController.buyWithoutLogin}"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
