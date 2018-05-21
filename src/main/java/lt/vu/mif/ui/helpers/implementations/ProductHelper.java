@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import javax.faces.context.FacesContext;
-import javax.transaction.Transactional;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.excel.ExcelProduct;
 import lt.vu.mif.excel.ProductExcelReader;
@@ -25,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Component
