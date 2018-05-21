@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.product.Product_;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
@@ -25,6 +24,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 @Transactional

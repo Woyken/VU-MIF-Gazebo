@@ -6,7 +6,9 @@ import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.helpers.interfaces.IPriceResolver;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Component
 public class PriceResolver implements IPriceResolver {
 

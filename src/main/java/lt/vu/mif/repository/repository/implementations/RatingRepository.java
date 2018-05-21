@@ -2,13 +2,13 @@ package lt.vu.mif.repository.repository.implementations;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import lt.vu.mif.model.order.Rating;
 import lt.vu.mif.repository.repository.interfaces.IRatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Repository
