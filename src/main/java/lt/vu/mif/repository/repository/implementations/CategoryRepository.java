@@ -1,5 +1,6 @@
 package lt.vu.mif.repository.repository.implementations;
 
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -48,5 +49,17 @@ public class CategoryRepository extends SimpleJpaRepository<Category, Long> impl
         criteria.where(builder.equal(root.get(Category_.name), name));
 
         return PersistenceUtils.uniqueResult(entityManager.createQuery(criteria));
+    }
+
+    @Override
+    public void update(Category entity) {
+        entityManager.merge(entity);
+    }
+
+    @Override
+    public void updateAll(List<Category> entities) {
+        for (Category entity : entities) {
+            entityManager.merge(entity);
+        }
     }
 }

@@ -134,6 +134,8 @@ public class DataGenerator {
         kitchen.setParentCategory(furniture);
 
         categoryRepository.save(furniture);
+        categoryRepository.save(kitchen);
+        categoryRepository.save(bedroom);
         return furniture;
     }
 
@@ -151,6 +153,8 @@ public class DataGenerator {
         tennis.setParentCategory(sport);
 
         categoryRepository.save(sport);
+        categoryRepository.save(basketball);
+        categoryRepository.save(tennis);
         return sport;
     }
 
