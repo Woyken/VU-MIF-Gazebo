@@ -11,7 +11,6 @@ import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.view.CategoryView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 @Getter
 @Setter
@@ -75,9 +74,6 @@ public class ProductCategoryController {
         isCreationSuccess = true;
     }
 
-    //Transactional is mandatory here!!! Otherwise changes are not saved (they seem saved while in
-    //the page, but leaving page and coming back - changes are gone)
-    @Transactional
     public void saveChanges() {
         eraseAllMessages();
 
