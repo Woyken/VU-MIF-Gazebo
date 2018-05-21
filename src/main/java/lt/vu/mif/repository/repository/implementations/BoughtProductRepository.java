@@ -13,7 +13,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Repository
 public class BoughtProductRepository extends SimpleJpaRepository<OrderProduct, Long> implements
     IBoughtProductRepository {

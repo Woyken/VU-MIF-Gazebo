@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderProduct;
@@ -24,6 +23,7 @@ import lt.vu.mif.ui.view.OrderView;
 import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Component
