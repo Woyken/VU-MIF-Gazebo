@@ -37,4 +37,10 @@ public class CategoryHelper implements ICategoryHelper {
         Category entity = categoryMapper.toEntity(view);
         categoryRepository.save(entity);
     }
+
+    @Override
+    public void update(CategoryView view) {
+        Category entity = categoryMapper.toEntity(view);
+        categoryRepository.update(entity);
+    }
 }

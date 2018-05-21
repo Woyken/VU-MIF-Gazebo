@@ -1,5 +1,8 @@
 package lt.vu.mif.ui.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -8,6 +11,7 @@ import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.view.CategoryView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 @Getter
 @Setter
@@ -18,26 +22,38 @@ public class ProductCategoryController {
     ICategoryHelper categoryHelper;
 
     private String newCategory;
+    private List<CategoryView> categories;
+    private List<CategoryView> categoriesWithEmpty;
+    private CategoryView selectedCategory;
+    private CategoryView parentCategory;
+    private CategoryView emptyCategory;
 
     private Boolean isCreationSuccess;
     private String creationErrorMessage;
-
-    private boolean addCategoryEnabled = false;
-    private boolean isProductFound;
-    private String currentCategory = "";
-    private String newAttribute = "";
+    private Boolean isSavingSuccess;
+    private String savingErrorMessage;
 
     public void onPageLoad() {
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
+
+        emptyCategory = new CategoryView();
+        emptyCategory.setName("");
+        updateCategories();
     }
 
-    public void toggleAddCategory() {
-        addCategoryEnabled = !addCategoryEnabled;
+    private void updateCategories() {
+        categories = categoryHelper.findAll();
+        Collections.sort(categories);
+        categoriesWithEmpty = new ArrayList<>(categories);
+        categoriesWithEmpty.add(0, emptyCategory);
+    }
+
+    public void categoryChange() {
+        parentCategory = selectedCategory.getParentCategory();
     }
 
     public void createNewCategory() {
-        isCreationSuccess = false;
-        creationErrorMessage = "";
+        eraseAllMessages();
 
         if (newCategory.isEmpty()) {
             creationErrorMessage = "Įveskite kategorijos pavadinimą";
@@ -52,25 +68,63 @@ public class ProductCategoryController {
         CategoryView category = new CategoryView();
         category.setName(newCategory);
         categoryHelper.save(category);
+
+        updateCategories();
+
         newCategory = "";
         isCreationSuccess = true;
     }
 
-    public void discardNewCategory() {
-        currentCategory = newCategory = "";
-        toggleAddCategory();
+    //Transactional is mandatory here!!! Otherwise changes are not saved (they seem saved while in
+    //the page, but leaving page and coming back - changes are gone)
+    @Transactional
+    public void saveChanges() {
+        eraseAllMessages();
+
+        if (selectedCategory == null) {
+            savingErrorMessage = "Nepasirinkote kategorijos";
+            return;
+        }
+
+        if (selectedCategory.equals(parentCategory)) {
+            savingErrorMessage = "Negalima kategorijos priskirti sau pačiai kaip tėvinės";
+            return;
+        }
+
+        if (parentCategory != null && isCategoryLoop(selectedCategory, parentCategory) == true) {
+            savingErrorMessage = "Pasirinkta tėvinė kategorija yra tarp keičiamos kategorijos vaikų";
+            return;
+        }
+
+        selectedCategory.setParentCategory(parentCategory);
+        categoryHelper.update(selectedCategory);
+
+        updateCategories();
+
+        isSavingSuccess = true;
     }
 
-    public void createNewAttribute() {
-        String test = newAttribute;
-        newAttribute = "";
+    private void eraseAllMessages() {
+        isCreationSuccess = false;
+        creationErrorMessage = "";
+        isSavingSuccess = false;
+        savingErrorMessage = "";
     }
 
-    public void attachParentCategory() { int a = 5; }
-    public void attachCategoryToProduct() { int a = 5; }
+    //Checks if new parent assignment would make a category loop
+    private boolean isCategoryLoop(CategoryView selected, CategoryView potentialParent) {
+        CategoryView parentsParent = potentialParent.getParentCategory();
 
-    public void removeAttribute(int attributeId) {
-        int a = 5;
+        if (parentsParent == null) {
+            return false;
+        }
+
+        if (parentsParent.equals(selected)) {
+            return true;
+        }
+
+        return isCategoryLoop(selected, parentsParent);
     }
-    public void saveChanges() { int a = 5; }
+
+
 }
