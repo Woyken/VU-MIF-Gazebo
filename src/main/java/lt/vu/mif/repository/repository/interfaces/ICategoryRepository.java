@@ -11,4 +11,8 @@ public interface ICategoryRepository {
     Category get(Long id);
 
     Category getCategoryByName(String name);
+
+    void update(Category entity);
+
+    void updateAll(List<Category> products);
 }

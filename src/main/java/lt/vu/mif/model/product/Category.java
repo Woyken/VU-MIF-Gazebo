@@ -33,7 +33,8 @@ public class Category {
     @Column(name = "NAME", nullable = false, unique = true)
     private String name;
 
-    @ManyToOne(cascade = ALL)
+    //TODO this had cascading, but because I couldn't manage to save parentCategory with it, I removed it
+    @ManyToOne
     @JoinColumn(name = "PARENT_CATEGORY_ID")
     private Category parentCategory;
 

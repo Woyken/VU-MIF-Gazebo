@@ -16,9 +16,8 @@
 
 
     <div class="section">
-        <h:form>
-
             <!-- New category -->
+        <h:form id="addCategoryForm">
             <div class="row align-middle">
 
                 <div class="columns small-12 medium-3">
@@ -35,12 +34,12 @@
                             class="button success"
                             value="✓"
                             action="#{productCategoryController.createNewCategory}">
-                        <f:ajax execute="@form" render="@form"/>
+                        <f:ajax execute="@form" render="@form saveCategoryForm"/>
                     </h:commandButton>
                 </div>
             </div>
 
-            <!-- Error/Success Message -->
+            <!-- Creation Error/Success Message -->
             <div class="row-align-middle text-center">
                 <div class="columns">
                     <div class="mar-bot-5">
@@ -52,24 +51,27 @@
                     </div>
                 </div>
             </div>
+        </h:form>
 
-            <!-- Assign a category to a product -->
+        <!-- Choose category -->
+        <h:form id="saveCategoryForm">
             <div class="row align-middle margin-top-3">
                 <div class="columns small-12 medium-3">
                     <h5 class="font-bold">Kategorija</h5>
                 </div>
 
                 <div class="columns small-10 medium-8">
-                    <select>
-                        <option value="0"
-                                selected="selected">#{productCategoryController.currentCategory}</option>
-                        <option value="1">Sportiniai</option>
-                        <option value="2">Pramoginiai</option>
-                        <option value="3">Pokylių</option>
-                    </select>
+                    <h:selectOneMenu value="#{productCategoryController.selectedCategory}"
+                                     converter="omnifaces.SelectItemsConverter"
+                                     hideNoSelectionOption="true">
+                        <f:selectItem value="#{null}" itemLabel="Pasirinkite kategoriją:"
+                                      noSelectionOption="true"/>
+                        <f:selectItems value="#{productCategoryController.categories}"/>
+                        <f:ajax render="@form"
+                                listener="#{productCategoryController.categoryChange}"/>
+                    </h:selectOneMenu>
                 </div>
             </div>
-
 
 
             <!-- Assign a parent category to the selected category -->
@@ -79,15 +81,18 @@
                 </div>
 
                 <div class="columns small-10 medium-8">
-                    <select>
-                        <option value="0" selected="selected">#{productCategoryController.currentCategory}</option>
-                        <option value="1">Sportiniai</option>
-                        <option value="2">Pramoginiai</option>
-                        <option value="3">Pokylių</option>
-                    </select>
+                    <h:selectOneMenu value="#{productCategoryController.parentCategory}"
+                                     disabled="#{empty productCategoryController.selectedCategory}"
+                                     converter="omnifaces.SelectItemsConverter">
+                        <!--The usual way here would be to add a selectItem with null value to represent
+                        empty choice. The problem was that when selecting choices from list the back
+                        end value wouldn't update. Thus the dirty fix with two almost identical lists,
+                        except this one has a pseudo empty category in it.-->
+                        <f:selectItems value="#{productCategoryController.categoriesWithEmpty}"/>
+                        <f:ajax render="@form"/>
+                    </h:selectOneMenu>
                 </div>
             </div>
-
 
             <!-- Attributes -->
             <div class="row">
@@ -104,19 +109,16 @@
                             <h:commandButton
                                 class="label warning"
                                 value="✖ Nike" >
-                                <f:ajax listener="#{productCategoryController.removeAttribute(1)}" />
                             </h:commandButton>
 
                             <h:commandButton
                                 class="label warning"
                                 value="✖ 36" >
-                                <f:ajax listener="#{productCategoryController.removeAttribute(2)}" />
                             </h:commandButton>
 
                             <h:commandButton
                                 class="label warning"
                                 value="✖ Red" >
-                                <f:ajax listener="#{productCategoryController.removeAttribute(3)}" />
                             </h:commandButton>
 
                         </div>
@@ -133,21 +135,32 @@
                 </div>
 
                 <div class="columns small-10 medium-8">
-                    <h:inputText value="#{productCategoryController.newAttribute}" />
+                    <h:inputText/>
                 </div>
 
-                <!-- [Button] Submit new category -->
+                <!-- [Button] Save category -->
                 <div class="columns small-2 medium-1">
                     <h:commandButton
                             class="button success"
-                            value="✓"
-                            action="#{productCategoryController.createNewAttribute}">
-                        <f:ajax execute="@form" render="@form" />
+                            value="✓">
+                        <f:ajax render="@form addCategoryForm"/>
                     </h:commandButton>
                 </div>
 
             </div>
 
+            <!-- Saving Error/Success Message -->
+            <div class="row-align-middle text-center">
+                <div class="columns">
+                    <div class="mar-bot-5">
+                        <h:outputText class="alert-text-large"
+                                      value="#{productCategoryController.savingErrorMessage}"/>
+                        <h:outputText rendered="#{productCategoryController.isSavingSuccess}"
+                                      class="success-text-large"
+                                      value="Kategorija sėkmingai išsaugota"/>
+                    </div>
+                </div>
+            </div>
 
             <!-- Buttons -->
             <div class="row align-middle section">
@@ -158,29 +171,18 @@
                             class="button expanded success"
                             value="Išsaugoti"
                             action="#{productCategoryController.saveChanges}">
-                        <f:ajax execute="@form" />
+                        <f:ajax render="@form"/>
                     </h:commandButton>
                 </div>
 
                 <!-- [Button] Cancel -->
                 <div class="columns small-6 medium-4 medium-offset-4">
-                    <!-- If we came here from edit-product.xhtml - send them back there -->
-                    <h:panelGroup rendered="#{productCategoryController.productFound}">
-                        <a
-                                class="button expanded red"
-                                href="../../../admin-edit-product.xhtml?productId=#{productDiscountController.productView.id}" >
-                            Atšaukti
-                        </a>
-                    </h:panelGroup>
-
                     <!-- If we came from main.xhtml - send them back there -->
-                    <h:panelGroup rendered="#{!productCategoryController.productFound}">
-                        <a
+                    <a
                             class="button expanded red"
-                            href="../../../admin-edit-product.xhtml" >
-                            Atšaukti
-                        </a>
-                    </h:panelGroup>
+                            href="../../../admin-edit-product.xhtml">
+                        Grįžti
+                    </a>
                 </div>
 
             </div>
