@@ -1,6 +1,6 @@
 (function() {
     // Turn on Foundation
-    $(document).foundation();
+    // $(document).foundation();
 
     const selectorRateExperienceModal = '#rate-shopping-experience-modal';
     const selectorRatingStars = '.rating-stars';
