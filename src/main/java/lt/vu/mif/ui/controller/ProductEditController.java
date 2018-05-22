@@ -9,8 +9,9 @@ import javax.inject.Named;
 import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.mif.model.product.Category;
+import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.ImageInMemoryStreamer;
 import lt.vu.mif.ui.view.ImageView;
 import lt.vu.mif.ui.view.ProductView;
@@ -25,6 +26,8 @@ public class ProductEditController {
 
     @Autowired
     private IProductHelper productHelper;
+    @Autowired
+    private ICategoryHelper categoryHelper;
 
     private ImageInMemoryStreamer imageInMemoryStreamer = new ImageInMemoryStreamer();
     private ProductView productView;
@@ -32,8 +35,8 @@ public class ProductEditController {
     private boolean showSuccessMessage;
     private boolean isProductFound;
 
-    // TODO: Remove this when product uses real categories
-    private Category category;
+    private List<CategoryView> categories;
+    private CategoryView emptyCategory = new CategoryView();
 
     private List<ImageView> newImages = new ArrayList<>();
 
@@ -50,9 +53,11 @@ public class ProductEditController {
             isProductFound = false;
         }
 
-        // TODO: Remove this when product uses real categories
-        category = new Category();
-        category.setName("UI Test ONLY");
+        categories = categoryHelper.findAll();
+        //Omnifaces converter throws null pointer exception if I add an empty selectOneMenu item, so I have
+        //to do it this way
+        emptyCategory.setName("");
+        categories.add(0, emptyCategory);
 
         showSuccessMessage = false;
     }

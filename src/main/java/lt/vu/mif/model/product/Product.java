@@ -51,7 +51,7 @@ public class Product {
     private LocalDateTime creationDate;
 
     @ManyToOne(cascade = MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ID", nullable = false)
+    @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

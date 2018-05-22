@@ -13,7 +13,7 @@
             </h:commandLink>
             <h:panelGroup rendered="#{category.childCount gt 0}">
                 <ul class="menu vertical nested">
-                    <ui:include src="category.xhtml">
+                    <ui:include src="categoryMenu.xhtml">
                         <ui:param name="parent" value="#{category}"/>
                     </ui:include>
                 </ul>
