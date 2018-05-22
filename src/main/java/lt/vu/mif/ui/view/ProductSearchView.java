@@ -1,18 +1,18 @@
-package lt.vu.mif.utils.search;
+package lt.vu.mif.ui.view;
 
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.mif.model.product.Category;
 
 @Getter
 @Setter
-public class ProductSearch {
+public class ProductSearchView {
+
     private String title;
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
-    private List<Category> categories;
+    private List<CategoryView> categories;
     private boolean includeDeleted = false;
 
     public void reset() {

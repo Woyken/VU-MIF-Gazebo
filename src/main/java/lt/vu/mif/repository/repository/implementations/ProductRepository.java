@@ -111,6 +111,11 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
                 .add(builder.lessThanOrEqualTo(root.get(Product_.price), search.getMaxPrice()));
         }
 
+        if (!CollectionUtils.isEmpty(search.getCategories())) {
+            //TODO is this good??
+            predicates.add(root.get(Product_.category).in(search.getCategories()));
+        }
+
         if (!search.isIncludeDeleted()) {
             predicates
                     .add(builder.isFalse(root.get(Product_.deleted)));
