@@ -7,8 +7,8 @@ import java.util.concurrent.CompletableFuture;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.view.BoughtProductView;
 import lt.vu.mif.ui.view.CartProductView;
+import lt.vu.mif.ui.view.ProductSearchView;
 import lt.vu.mif.ui.view.ProductView;
-import lt.vu.mif.utils.search.ProductSearch;
 import org.springframework.data.domain.Page;
 
 public interface IProductHelper {
@@ -19,7 +19,7 @@ public interface IProductHelper {
 
     CompletableFuture<Void> importProducts(InputStream inputStream);
 
-    Page<ProductView> getProductsPage(int activePage, int pageSize, ProductSearch search);
+    Page<ProductView> getProductsPage(int activePage, int pageSize, ProductSearchView search);
 
     void deleteById(Long id);
 

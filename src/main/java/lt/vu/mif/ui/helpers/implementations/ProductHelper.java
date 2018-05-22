@@ -15,8 +15,10 @@ import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.mappers.implementations.BoughtProductMapper;
 import lt.vu.mif.ui.mappers.implementations.ProductMapper;
+import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.BoughtProductView;
 import lt.vu.mif.ui.view.CartProductView;
+import lt.vu.mif.ui.view.ProductSearchView;
 import lt.vu.mif.ui.view.ProductView;
 import lt.vu.mif.utils.interfaces.IProductParser;
 import lt.vu.mif.utils.search.ProductSearch;
@@ -34,6 +36,8 @@ public class ProductHelper implements IProductHelper {
     private ProductMapper productMapper;
     @Autowired
     private BoughtProductMapper boughtProductMapper;
+    @Autowired
+    private IMapper<ProductSearch, ProductSearchView> productSearchMapper;
     @Autowired
     private IProductRepository productRepository;
     @Autowired
@@ -85,8 +89,10 @@ public class ProductHelper implements IProductHelper {
     }
 
     @Override
-    public Page<ProductView> getProductsPage(int activePage, int pageSize, ProductSearch search) {
-        return productRepository.getProductsPage(search, activePage, pageSize)
+    public Page<ProductView> getProductsPage(int activePage, int pageSize,
+        ProductSearchView search) {
+        return productRepository
+            .getProductsPage(productSearchMapper.toEntity(search), activePage, pageSize)
             .map(productMapper::toView);
     }
 
