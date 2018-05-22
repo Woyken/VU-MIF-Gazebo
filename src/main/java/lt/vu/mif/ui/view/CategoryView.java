@@ -1,5 +1,6 @@
 package lt.vu.mif.ui.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,17 @@ public class CategoryView implements Comparable<CategoryView> {
     private String name;
     private CategoryView parentCategory;
     private List<String> attributes;
+
+    public CategoryView() {
+    }
+
+    public CategoryView(CategoryView other) {
+        this.id = other.id;
+        this.name = other.name;
+        this.attributes = new ArrayList<String>(other.attributes);
+        this.parentCategory = other.getParentCategory() == null ? null :
+            new CategoryView(other.parentCategory);
+    }
 
     @Override
     public int compareTo(CategoryView other) {

@@ -1,6 +1,7 @@
 package lt.vu.mif.model.product;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.FetchType.LAZY;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class Category {
     @Column(name = "ATTRIBUTE")
     private List<String> attributes = new ArrayList<>();
 
-    @OneToMany(fetch = LAZY, mappedBy = "category")
+    @OneToMany(cascade = MERGE, fetch = LAZY, mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 
     @ManyToOne(cascade = ALL, fetch = LAZY)

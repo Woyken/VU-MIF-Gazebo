@@ -1,5 +1,7 @@
 package lt.vu.mif.model.product;
 
+import static javax.persistence.CascadeType.MERGE;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ public class Product {
     @Column(name = "CREATION_DATE")
     private LocalDateTime creationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", nullable = false)
     private Category category;
 
