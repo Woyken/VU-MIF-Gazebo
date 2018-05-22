@@ -56,71 +56,13 @@
                     <ul class="categories-menu menu vertical nested is-active filter-price-menu">
                         <li>
                             <ul class="vertical menu accordion-menu" data-accordion-menu="" data-submenu-toggle="true">
-
-                                <!-- First category -->
-                                <li>
-                                    <a href="#">Sportinė</a>
-                                    <ul class="menu vertical nested">
-
-                                        <!-- First sub-category -->
-                                        <li>
-                                            <a href="#">Futbolo</a>
-                                            <ul class="menu vertical nested">
-
-                                                <!-- First sub-sub-category -->
-                                                <li>
-                                                    <a href="#">Lauko</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Dirbtinės dangos</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Salės</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <!-- Second sub-category -->
-                                        <li>
-                                            <a href="#">Krepšinio</a>
-                                            <ul class="menu vertical nested">
-
-                                                <!-- First sub-sub-category -->
-                                                <li>
-                                                    <a href="#">Salės</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <!-- Second category -->
-                                <li>
-                                    <a href="#">Laisvalaikio</a>
-                                    <ul class="menu vertical nested">
-
-                                        <!-- First sub-category -->
-                                        <li>
-                                            <a href="#">Vaikščiojimo</a>
-                                            <ul class="menu vertical nested">
-
-                                                <!-- First sub-sub-category -->
-                                                <li>
-                                                    <a href="#">Lauko</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Dirbtinės dangos</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Salės</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <!-- FILTER BY CATEGORIES -->
+                                <ui:include src="category.xhtml">
+                                    <ui:param name="parent" value="#{categoryTreeView.root}"/>
+                                </ui:include>
+                                <!-- END OF FILTER BY CATEGORIES -->
                             </ul>
                         </li>
-
                     </ul>
                 </div> <!-- END OF [Mobile] CATEGORY FILTER -->
 
@@ -162,108 +104,6 @@
                         </h:form>
                     </ul>
                 </div> <!-- END OF [Mobile] PRICE FILTER -->
-
-
-                <!-- [Mobile] CATEGORY FILTER -->
-                <div class="columns small-12 margin-top-2">
-                    <h5 class="text-center font-bold"> Kategorija </h5>
-
-                    <ul class="categories-menu menu vertical nested is-active">
-
-                        <li>
-                            <input id="category-checkbox-mobile1" type="checkbox"/>
-                            <label for="category-checkbox-mobile1">
-                                Category 1
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="category-checkbox-mobile2" type="checkbox"/>
-                            <label for="category-checkbox-mobile2">
-                                Category 2
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="category-checkbox-mobile3" type="checkbox"/>
-                            <label for="category-checkbox-mobile3">
-                                Category 3
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="category-checkbox-mobile4" type="checkbox"/>
-                            <label for="category-checkbox-mobile4">
-                                Category 4
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="category-checkbox-mobile5" type="checkbox"/>
-                            <label for="category-checkbox-mobile5">
-                                Category 5
-                            </label>
-                        </li>
-
-                    </ul>
-
-                    <!-- [Button][Mobile] Filter by categories -->
-                    <button type="button" class="button expanded margin-top-1" data-close="">
-                        Filtruoti
-                    </button>
-
-                </div> <!-- END OF [Mobile] CATEGORY FILTER -->
-
-
-                <!-- [Mobile] SUB-CATEGORY FILTER -->
-                <div class="columns small-12 margin-top-2">
-                    <h5 class="text-center font-bold"> Sub-kategorija </h5>
-
-                    <ul class="categories-menu menu vertical nested is-active">
-
-                        <li>
-                            <input id="sub-category-checkbox-mobile1" type="checkbox"/>
-                            <label for="sub-category-checkbox-mobile1">
-                                Sub-category 1
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="sub-category-checkbox-mobile2" type="checkbox"/>
-                            <label for="sub-category-checkbox-mobile2">
-                                Sub-category 2
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="sub-category-checkbox-mobile3" type="checkbox"/>
-                            <label for="sub-category-checkbox-mobile3">
-                                Sub-category 3
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="sub-category-checkbox-mobile4" type="checkbox"/>
-                            <label for="sub-category-checkbox-mobile4">
-                                Sub-category 4
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="sub-category-checkbox-mobile5" type="checkbox"/>
-                            <label for="sub-category-checkbox-mobile5">
-                                Sub-category 5
-                            </label>
-                        </li>
-
-                    </ul>
-
-                    <!-- [Button][Mobile] Filter by sub-categories -->
-                    <button type="button" class="button expanded margin-top-1" data-close="">
-                        Filtruoti
-                    </button>
-
-                </div> <!-- END OF [Mobile] SUB-CATEGORY FILTER -->
 
 
                 <!-- [Mobile] ATTRIBUTE FILTER -->
@@ -361,67 +201,9 @@
                     <ul id="filter-aside" class="vertical menu"  data-accordion-menu="" data-submenu-toggle="true">
 
                         <!-- FILTER BY CATEGORIES -->
-                        <!-- First category -->
-                        <li>
-                            <a href="#">Sportinė</a>
-                            <ul class="menu vertical nested">
-
-                                <!-- First sub-category -->
-                                <li>
-                                    <a href="#">Futbolo</a>
-                                    <ul class="menu vertical nested">
-
-                                        <!-- First sub-sub-category -->
-                                        <li>
-                                            <a href="#">Lauko</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Dirbtinės dangos</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Salės</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <!-- Second sub-category -->
-                                <li>
-                                    <a href="#">Krepšinio</a>
-                                    <ul class="menu vertical nested">
-
-                                        <!-- First sub-sub-category -->
-                                        <li>
-                                            <a href="#">Salės</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- Second category -->
-                        <li>
-                            <a href="#">Laisvalaikio</a>
-                            <ul class="menu vertical nested">
-
-                                <!-- First sub-category -->
-                                <li>
-                                    <a href="#">Vaikščiojimo</a>
-                                    <ul class="menu vertical nested">
-
-                                        <!-- First sub-sub-category -->
-                                        <li>
-                                            <a href="#">Lauko</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Dirbtinės dangos</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Salės</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                        <ui:include src="category.xhtml">
+                            <ui:param name="parent" value="#{categoryTreeView.root}"/>
+                        </ui:include>
                         <!-- END OF FILTER BY CATEGORIES -->
 
                         <!-- Filter by price -->
@@ -466,90 +248,6 @@
                                 </h:form>
                             </ul>
                         </li> <!-- End of filter by price -->
-
-
-                        <!-- Filter by categories -->
-                        <li class="margin-top-3">
-                            <h5 class="text-center font-bold "> Kategorija </h5>
-                            <ul class="menu vertical nested is-active">
-                                <li>
-                                    <input id="category-checkbox1" type="checkbox"/>
-                                    <label for="category-checkbox1">
-                                        Sportiniai
-                                    </label>
-                                </li>
-
-                                <li>
-                                    <input id="category-checkbox2" type="checkbox"/>
-                                    <label for="category-checkbox2">
-                                        Proginiai
-                                    </label>
-                                </li>
-
-                                <li>
-                                    <input id="category-checkbox3" type="checkbox"/>
-                                    <label for="category-checkbox3">
-                                        Laisvalaikio
-                                    </label>
-                                </li>
-
-                                <li>
-                                    <input id="category-checkbox4" type="checkbox"/>
-                                    <label for="category-checkbox4">
-                                        Šventėms
-                                    </label>
-                                </li>
-
-                                <!-- [Button] Filter by category -->
-                                <li>
-                                    <button type="button" class="button expanded margin-top-1">
-                                        Filtruoti
-                                    </button>
-                                </li>
-                            </ul>
-                        </li> <!-- End of filter by category -->
-
-
-                        <!-- Filter by sub-category -->
-                        <li class="margin-top-3">
-                            <h5 class="text-center font-bold "> Sub-kategorija </h5>
-                            <ul class="menu vertical nested is-active">
-                                <li>
-                                    <input id="sub-category-checkbox1" type="checkbox"/>
-                                    <label for="sub-category-checkbox1">
-                                        Sub-sportiniai
-                                    </label>
-                                </li>
-
-                                <li>
-                                    <input id="sub-category-checkbox2" type="checkbox"/>
-                                    <label for="sub-category-checkbox2">
-                                        Sub-proginiai
-                                    </label>
-                                </li>
-
-                                <li>
-                                    <input id="sub-category-checkbox3" type="checkbox"/>
-                                    <label for="sub-category-checkbox3">
-                                        Sub-laisvalaikio
-                                    </label>
-                                </li>
-
-                                <li>
-                                    <input id="sub-category-checkbox4" type="checkbox"/>
-                                    <label for="sub-category-checkbox4">
-                                        Sub-šventėms
-                                    </label>
-                                </li>
-
-                                <!-- [Button] Filter by sub-category -->
-                                <li>
-                                    <button type="button" class="button expanded margin-top-1">
-                                        Filtruoti
-                                    </button>
-                                </li>
-                            </ul>
-                        </li> <!-- End of filter by sub-category -->
 
 
                         <!-- Filter by attributes -->
