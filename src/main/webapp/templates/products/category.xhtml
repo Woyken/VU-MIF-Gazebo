@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <!--Recursively creates category menu-->
+    <c:forEach items="#{parent.children}" var="category">
+        <li>
+            <a href="#">#{category.data.name}</a>
+            <h:panelGroup rendered="#{category.childCount gt 0}">
+                <ul class="menu vertical nested">
+                    <ui:include src="category.xhtml">
+                        <ui:param name="parent" value="#{category}"/>
+                    </ui:include>
+                </ul>
+            </h:panelGroup>
+        </li>
+    </c:forEach>
+</ui:composition>
