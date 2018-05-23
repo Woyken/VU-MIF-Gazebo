@@ -91,8 +91,8 @@ public class DataGenerator {
     public void insertProducts() {
         List<Product> products = new ArrayList<>();
         List<Category> categories = new ArrayList<>();
-        categories.add(createSportCategory());
-        categories.add(createFurnitureCategory());
+        categories.addAll(createSportCategory());
+        categories.addAll(createFurnitureCategory());
 
         for (int i = 0; i < 15; i++) {
             addProducts(products, categories);
@@ -115,20 +115,20 @@ public class DataGenerator {
             product.getImages().add(getImage("static/images/products/shoe-4.jpg"));      
             product.setCreationDate(LocalDateTime.now());
             product.setCategory(categories.get(i % categories.size()));
-            product.setDiscount(i % 2 == 0 ? getDiscount() : null);
+            product.setDiscount(i % 7 == 0 ? getDiscount() : null);
             products.add(product);
         }
     }
 
-    private Category createFurnitureCategory() {
+    private List<Category> createFurnitureCategory() {
         Category furniture = new Category();
-        furniture.setName("furniture");
+        furniture.setName("Baldai");
 
         Category kitchen = new Category();
-        kitchen.setName("kitchen");
+        kitchen.setName("Virtuvės");
 
         Category bedroom = new Category();
-        bedroom.setName("bedroom");
+        bedroom.setName("Miegamojo");
 
         bedroom.setParentCategory(furniture);
         kitchen.setParentCategory(furniture);
@@ -136,18 +136,24 @@ public class DataGenerator {
         categoryRepository.save(furniture);
         categoryRepository.save(kitchen);
         categoryRepository.save(bedroom);
-        return furniture;
+
+        ArrayList<Category> categories = new ArrayList<Category>();
+        categories.add(furniture);
+        categories.add(kitchen);
+        categories.add(bedroom);
+        return categories;
     }
 
-    private Category createSportCategory() {
+    private List<Category> createSportCategory() {
         Category sport = new Category();
-        sport.setName("sport");
+        sport.setName("Sportas");
 
         Category basketball = new Category();
-        basketball.setName("basketball");
+        basketball.setName("Krepšinis");
 
         Category tennis = new Category();
-        tennis.setName("tennis");
+        tennis.setName("Tenisas");
+        tennis.setDiscount(getDiscount());
 
         basketball.setParentCategory(sport);
         tennis.setParentCategory(sport);
@@ -155,7 +161,12 @@ public class DataGenerator {
         categoryRepository.save(sport);
         categoryRepository.save(basketball);
         categoryRepository.save(tennis);
-        return sport;
+
+        ArrayList<Category> categories = new ArrayList<Category>();
+        categories.add(sport);
+        categories.add(basketball);
+        categories.add(tennis);
+        return categories;
     }
 
     private String getProductDescription(int index) {
