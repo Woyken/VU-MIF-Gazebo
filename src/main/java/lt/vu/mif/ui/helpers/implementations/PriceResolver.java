@@ -38,8 +38,7 @@ public class PriceResolver implements IPriceResolver {
         BigDecimal priceWithPercentage = null;
 
         if (discount.getAbsoluteDiscount() != null) {
-            priceWithAbsoluteDiscount = subtract(product.getPrice(),
-                discount.getAbsoluteDiscount());
+            priceWithAbsoluteDiscount = discount.getAbsoluteDiscount();
         }
 
         if (discount.getPercentageDiscount() != null) {
@@ -63,21 +62,14 @@ public class PriceResolver implements IPriceResolver {
             return null;
         }
 
-        BigDecimal priceWithAbsoluteDiscount = null;
         BigDecimal priceWithPercentage = null;
-
-        if (categoryDiscount.getAbsoluteDiscount() != null) {
-            priceWithAbsoluteDiscount = subtract(product.getPrice(),
-                categoryDiscount.getAbsoluteDiscount());
-        }
 
         if (categoryDiscount.getPercentageDiscount() != null) {
             priceWithPercentage = getPriceWithPercentages(product,
                 categoryDiscount.getPercentageDiscount());
         }
 
-        BigDecimal resolvedPrice = getGreaterPrice(priceWithAbsoluteDiscount, priceWithPercentage);
-        return resolvedPrice == null ? product.getPrice() : resolvedPrice;
+        return priceWithPercentage == null ? product.getPrice() : priceWithPercentage;
     }
 
     private BigDecimal getGreaterPrice(BigDecimal priceWithAbsoluteDiscount,
