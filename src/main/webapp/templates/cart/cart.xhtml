@@ -30,12 +30,20 @@
         <!-- SHOPPING CART ITEMS -->
         <h:form id="shopping-cart-items-form">
 
+            <h:panelGroup rendered="#{empty cartController.productsInCart}">
+                <div class="row">
+                    <h4 class="column text-center"> Jūsų prekių krepšelis šiuo metu yra tuščias</h4>
+                </div>
+            </h:panelGroup>
+
             <!-- Table heading -->
-            <div id="shopping-list-header" class="row section hide-for-small-only">
-                <div class="small-4 columns"> <h5>Prekė</h5>    </div>
-                <div class="small-4 columns"> <h5>Kiekis</h5>   </div>
-                <div class="small-4 columns"> <h5>Kaina</h5>    </div>
-            </div>
+            <h:panelGroup rendered="#{not empty cartController.productsInCart}">
+                <div id="shopping-list-header" class="row section hide-for-small-only">
+                    <div class="small-4 columns"> <h5>Prekė</h5>    </div>
+                    <div class="small-4 columns"> <h5>Kiekis</h5>   </div>
+                    <div class="small-4 columns"> <h5>Kaina</h5>    </div>
+                </div>
+            </h:panelGroup>
 
             <div id="shopping-list-body" class="row align-middle">
                 <ui:repeat value="#{cartController.productsInCart}" var="productItem" varStatus="loop">
