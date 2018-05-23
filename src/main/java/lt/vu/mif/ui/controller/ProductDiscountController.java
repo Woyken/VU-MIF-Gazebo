@@ -1,9 +1,6 @@
 package lt.vu.mif.ui.controller;
 
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -12,7 +9,6 @@ import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.view.DiscountView;
 import lt.vu.mif.ui.view.ProductView;
-import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Named
@@ -24,21 +20,12 @@ public class ProductDiscountController {
     @Autowired
     private IProductHelper productHelper;
     private ProductView productView;
+    private DiscountView discountView;
 
     private Boolean isProductFound;
     private Boolean isSuccess;
 
     private String errorMessage;
-
-    private BigDecimal discountAsPrice;
-    //BigDecimal type for validation purposes
-    private BigDecimal discountAsPercent;
-    //Can't set LocalDateTime fields with jsf, so using Strings
-    //(a nicer way would have been to use jsf custom converter)
-    private String startDate;
-    private String startTime;
-    private String endDate;
-    private String endTime;
 
     public void onPageLoad() {
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
@@ -56,39 +43,17 @@ public class ProductDiscountController {
             return;
         }
 
-        if (productView.getDiscount() == null) {
-            return;
-        }
-
-        discountAsPrice = productView.getDiscount().getAbsoluteDiscount();
-        if (productView.getDiscount().getPercentageDiscount() != null) {
-            discountAsPercent = new BigDecimal(productView.getDiscount().getPercentageDiscount());
-        }
-        startDate = productView.getDiscount().getFrom()
-            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        endDate = productView.getDiscount().getTo()
-            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        startTime = productView.getDiscount().getFrom()
-            .format(DateTimeFormatter.ofPattern("HH:mm"));
-        endTime = productView.getDiscount().getTo().format(DateTimeFormatter.ofPattern("HH:mm"));
+        discountView = productView.getDiscount() == null ? new DiscountView() :
+            productView.getDiscount();
     }
 
     public void addDiscount() {
         //Couldn't access product in validation class, so have to do it here
-        if (discountAsPrice != null && discountAsPrice.compareTo(productView.getPrice()) == 1) {
+        if (discountView.getAbsoluteDiscount() != null &&
+            discountView.getAbsoluteDiscount().compareTo(productView.getPrice()) == 1) {
             errorMessage = "Nuolaidos kaina negali būti didesnė už įprastą produkto kainą";
             return;
         }
-
-        DiscountView discountView = new DiscountView();
-        discountView.setAbsoluteDiscount(discountAsPrice);
-        if (discountAsPercent != null) {
-            discountView.setPercentageDiscount(discountAsPercent.longValue());
-        }
-        discountView.setFrom(LocalDateTime.parse(startDate + " " + startTime,
-            DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
-        discountView.setTo(LocalDateTime.parse(endDate + " " + endTime,
-            DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
 
         productView.setDiscount(discountView);
         productHelper.update(productView);
@@ -99,13 +64,7 @@ public class ProductDiscountController {
     }
 
     public void removeDiscount() {
-        discountAsPrice = null;
-        discountAsPercent = null;
-        startDate = "";
-        startTime = "";
-        endDate = "";
-        endTime = "";
-
+        discountView = new DiscountView();
         productView.setDiscount(null);
         productHelper.update(productView);
     }

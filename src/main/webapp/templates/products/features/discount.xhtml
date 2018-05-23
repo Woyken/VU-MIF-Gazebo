@@ -35,7 +35,7 @@
                                     pt:type="number"
                                     pt:min="0"
                                     pt:placeholder="49.99"
-                                    value="#{productDiscountController.discountAsPrice}"
+                                    value="#{productDiscountController.discountView.absoluteDiscount}"
                                     binding="#{discountPrice}"/>
                         </div>
                     </div>
@@ -49,11 +49,15 @@
 
                     <div class="columns medium-9 small-12">
                         <h:inputText
-                                pt:type="number"
-                                pt:min="0"
+                                id="percentInput"
                                 pt:placeholder="50"
-                                value="#{productDiscountController.discountAsPercent}"
-                                binding="#{discountPercentage}"/>
+                                pt:type="number"
+                                value="#{productDiscountController.discountView.percentageDiscount}"
+                                binding="#{discountPercentage}">
+                            <f:convertNumber integerOnly="true" type="number"/>
+                            <f:validateLongRange minimum="0" maximum="100"/>
+                            <p:ajax event="change" update="percentInput"/>
+                        </h:inputText>
                     </div>
                 </div>
 
@@ -86,9 +90,9 @@
 
                     <div class="columns medium-2 small-12">
                         <h:inputText pt:type="date"
-                                     value="#{productDiscountController.startDate}"
+                                     value="#{productDiscountController.discountView.startDate}"
                                      binding="#{startDate}"/>
-                        <h:inputText value="#{productDiscountController.startTime}"
+                        <h:inputText value="#{productDiscountController.discountView.startTime}"
                                      binding="#{startTime}"
                                      pt:placeholder="08:00"/>
                     </div>
@@ -101,9 +105,9 @@
 
                     <div class="columns medium-2 small-12">
                         <h:inputText pt:type="date"
-                                     value="#{productDiscountController.endDate}"
+                                     value="#{productDiscountController.discountView.endDate}"
                                      binding="#{endDate}"/>
-                        <h:inputText value="#{productDiscountController.endTime}"
+                        <h:inputText value="#{productDiscountController.discountView.endTime}"
                                      binding="#{endTime}"
                                      pt:placeholder="12:30"/>
                     </div>

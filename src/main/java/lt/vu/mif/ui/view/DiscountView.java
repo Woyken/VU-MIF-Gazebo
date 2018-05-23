@@ -1,7 +1,6 @@
 package lt.vu.mif.ui.view;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +13,10 @@ public class DiscountView {
     private Long id;
     private Long percentageDiscount;
     private BigDecimal absoluteDiscount;
-    private LocalDateTime from;
-    private LocalDateTime to;
+    private String startDate;
+    private String startTime;
+    private String endDate;
+    private String endTime;
 
     public DiscountView() {
     }
@@ -24,7 +25,9 @@ public class DiscountView {
         this.id = other.id;
         this.percentageDiscount = other.percentageDiscount;
         this.absoluteDiscount = other.absoluteDiscount;
-        this.from = other.from;
-        this.to = other.to;
+        this.startDate = other.startDate;
+        this.startTime = other.startTime;
+        this.endDate = other.endDate;
+        this.endTime = other.endTime;
     }
 }

@@ -1,11 +1,14 @@
 package lt.vu.mif.ui.mappers.implementations;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.DiscountView;
+import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -23,8 +26,10 @@ public class DiscountMapper implements IMapper<Discount, DiscountView> {
         discount.setId(view.getId());
         discount.setPercentageDiscount(view.getPercentageDiscount());
         discount.setAbsoluteDiscount(view.getAbsoluteDiscount());
-        discount.setFrom(view.getFrom());
-        discount.setTo(view.getTo());
+        discount.setFrom(LocalDateTime.parse(view.getStartDate() + " " + view.getStartTime(),
+            DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
+        discount.setTo(LocalDateTime.parse(view.getEndDate() + " " + view.getEndTime(),
+            DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
 
         return discount;
     }
@@ -40,8 +45,11 @@ public class DiscountMapper implements IMapper<Discount, DiscountView> {
         view.setId(entity.getId());
         view.setPercentageDiscount(entity.getPercentageDiscount());
         view.setAbsoluteDiscount(entity.getAbsoluteDiscount());
-        view.setFrom(entity.getFrom());
-        view.setTo(entity.getTo());
+        view.setStartDate(entity.getFrom().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        view.setEndDate(entity.getTo().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        view.setStartTime(entity.getFrom().format(DateTimeFormatter.ofPattern("HH:mm")));
+        view.setEndTime(entity.getTo().format(DateTimeFormatter.ofPattern("HH:mm")));
+
 
         return view;
     }
