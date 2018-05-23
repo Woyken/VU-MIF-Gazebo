@@ -83,7 +83,9 @@
                     <div class="row">
                         <div class="columns">
                             <h:commandButton class="button success expanded" action="#{userRegistrationController.saveUser}" value="REGISTRUOTIS" update="message"/>
-                            <h:outputLabel value="#{userRegistrationController.message}" id="message"/>
+                            <h:outputLabel value="#{userRegistrationController.message}"
+                                           class="success-text text-center"
+                                           id="message"/>
                         </div>
                     </div>
                 </h:form>

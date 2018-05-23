@@ -38,7 +38,9 @@
                 </div>
             </div>
             <div class="row column text-center">
-                <h:outputLabel id="importMsg" value="#{productImportController.message}"/>
+                <h:outputLabel id="importMsg"
+                               class=" #{productImportController.message == 'Importavimas sėkmingai atliktas.' ? 'success-text' : 'alert-text'}"
+                               value="#{productImportController.message}"/>
             </div>
         </h:form>
     </div>

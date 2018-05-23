@@ -138,17 +138,20 @@
                         </h:commandLink>
                     </div>
 
-
-
                 </ui:repeat>
             </div>
             <!-- END OF SHOPPING CART ITEMS -->
 
             <!-- TOTAL SUM -->
-            <div class="row section ">
-                <h4 class="column medium-9 small-11 shopping-cart-price text-right">Viso: #{cartController.sum} €</h4>
-                <h4 class="column medium-3 small-1 shopping-cart-price text-right"> </h4>
-            </div>
+            <h:panelGroup rendered="#{not empty cartController.productsInCart}">
+                <div class="row section ">
+                    <!--<p:outputLabel class="column medium-9 small-11" -->
+                                   <!--styleClass="text-right larger-text"-->
+                                   <!--value="Krepšelio vertė: #{orderDetailsController.orderView.totalSum} €"/>-->
+                    <h4 class="column medium-9 small-11 larger-text text-right"> </h4>
+                    <h4 class="column medium-3 small-1 larger-text text-right"> Viso: #{cartController.sum} € </h4>
+                </div>
+            </h:panelGroup>
 
             <!-- BOTTOM BUTTONS -->
             <div class="row section">

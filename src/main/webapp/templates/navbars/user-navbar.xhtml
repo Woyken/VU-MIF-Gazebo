@@ -182,7 +182,9 @@
                             <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="passwordSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="passwordSuccessMessage"/>
+                            <h:outputLabel value="#{passwordChangeController.successMessage}"
+                                           class="success-text"
+                                           id="passwordSuccessMessage"/>
                         </div>
                     </div>
                 </div>
