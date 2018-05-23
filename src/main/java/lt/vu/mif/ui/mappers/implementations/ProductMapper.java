@@ -61,8 +61,7 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         view.setDiscount(discountMapper.toView(entity.getDiscount()));
         view.setCategory(categoryMapper.toView(entity.getCategory()));
         view.setImages(imageMapper.toViews(entity.getImages()));
-        view.setNewPrice(entity.getDiscount() == null ? null :
-            priceResolver.resolvePriceWithDiscount(entity));
+        view.setNewPrice(priceResolver.resolvePriceWithDiscount(entity));
 
         return view;
     }
