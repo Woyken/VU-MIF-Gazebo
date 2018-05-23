@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <!-- Apply price to what -->
+                <!-- Choose category -->
                 <h:panelGroup rendered="#{not productDiscountController.isProductFound}">
                     <div class="row align-middle">
                         <div class="columns medium-3 small-12">
@@ -69,12 +69,15 @@
                         </div>
 
                         <div class="columns medium-9 small-12">
-                            <select>
-                                <!-- TODO: Iterate through all of the categories here -->
-                                <option value="categoryId1"> Sportiniai</option>
-                                <option value="categoryId2"> Pokylio</option>
-                                <option value="all"> Visoms prekėms</option>
-                            </select>
+                            <h:selectOneMenu value="#{productDiscountController.selectedCategory}"
+                                             converter="omnifaces.SelectItemsConverter"
+                                             hideNoSelectionOption="true">
+                                <f:selectItem value="#{null}" itemLabel="Pasirinkite kategoriją:"
+                                              noSelectionOption="true"/>
+                                <f:selectItems value="#{productDiscountController.categories}"/>
+                                <f:ajax render="@form"
+                                        listener="#{productDiscountController.categoryChange}"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
                 </h:panelGroup>

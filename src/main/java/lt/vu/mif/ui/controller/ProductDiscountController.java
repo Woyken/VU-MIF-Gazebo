@@ -1,12 +1,15 @@
 package lt.vu.mif.ui.controller;
 
 
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.DiscountView;
 import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +22,13 @@ public class ProductDiscountController {
 
     @Autowired
     private IProductHelper productHelper;
+    @Autowired
+    private ICategoryHelper categoryHelper;
+
     private ProductView productView;
     private DiscountView discountView;
+    private CategoryView selectedCategory;
+    private List<CategoryView> categories;
 
     private Boolean isProductFound;
     private Boolean isSuccess;
@@ -34,20 +42,37 @@ public class ProductDiscountController {
 
         try {
             productView = productHelper.getProductViewFromNavigationQuery();
+            discountView = productView.getDiscount() == null ? new DiscountView() :
+                productView.getDiscount();
             isProductFound = true;
         } catch (IllegalArgumentException x) {
             // If navigation query doesn't have a valid product ID - it means we want to
             // create a discount either for a category or for all of the products
-            productView = new ProductView();
+            categories = categoryHelper.findAll();
             isProductFound = false;
-            return;
         }
 
-        discountView = productView.getDiscount() == null ? new DiscountView() :
-            productView.getDiscount();
+    }
+
+    public void categoryChange() {
+        discountView = selectedCategory.getDiscount();
     }
 
     public void addDiscount() {
+        if (isProductFound) {
+            addDiscountToProduct();
+        }
+    }
+
+    public void removeDiscount() {
+        discountView = new DiscountView();
+
+        if (isProductFound) {
+            removeDiscountFromProduct();
+        }
+    }
+
+    private void addDiscountToProduct() {
         //Couldn't access product in validation class, so have to do it here
         if (discountView.getAbsoluteDiscount() != null &&
             discountView.getAbsoluteDiscount().compareTo(productView.getPrice()) == 1) {
@@ -63,8 +88,7 @@ public class ProductDiscountController {
         return;
     }
 
-    public void removeDiscount() {
-        discountView = new DiscountView();
+    private void removeDiscountFromProduct() {
         productView.setDiscount(null);
         productHelper.update(productView);
     }
