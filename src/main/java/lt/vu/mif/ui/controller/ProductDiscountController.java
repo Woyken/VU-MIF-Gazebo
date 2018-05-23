@@ -64,9 +64,9 @@ public class ProductDiscountController {
     public void addDiscount() {
         if (isProductFound) {
             addDiscountToProduct();
+        } else {
+            addDiscountToCategory();
         }
-
-        addDiscountToCategory();
     }
 
     public void removeDiscount() {
@@ -74,9 +74,9 @@ public class ProductDiscountController {
 
         if (isProductFound) {
             removeDiscountFromProduct();
+        } else {
+            removeDiscountFromCategory();
         }
-
-        removeDiscountFromCategory();
     }
 
     private void addDiscountToProduct() {
