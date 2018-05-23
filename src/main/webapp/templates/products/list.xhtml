@@ -177,10 +177,15 @@
         </div>
 
         <div class="columns small-12 medium-3 padding-top-1">
-            <select>
-                <option> Brangiausi aukščiau </option>
-                <option> Pigiausi aukščiau </option>
-            </select>
+            <h:form>
+                <h:selectOneMenu value="#{productController.productSearch.sortBy}">
+                    <f:selectItem itemLabel="Naujausi aukščiau" itemValue="CREATE_DATE"/>
+                    <f:selectItem itemLabel="Brangiausi aukščiau" itemValue="PRICE_DESCENDING"/>
+                    <f:selectItem itemLabel="Pigiausi aukščiau" itemValue="PRICE_ASCENDING"/>
+
+                    <p:ajax listener="#{productController.search}"/>
+                </h:selectOneMenu>
+            </h:form>
         </div>
     </div> <!-- END OF SORTING -->
 
