@@ -20,7 +20,7 @@ public class PriceResolver implements IPriceResolver {
         BigDecimal priceWithProductDiscount = resolvePriceWithProductDiscount(product);
 
         if (priceWithCategoryDiscount != null) {
-            return priceWithCategoryDiscount.compareTo(priceWithProductDiscount) > 0
+            return priceWithCategoryDiscount.compareTo(priceWithProductDiscount) < 0
                 ? priceWithCategoryDiscount : priceWithProductDiscount;
         }
 
