@@ -1,6 +1,7 @@
 package lt.vu.mif.ui.controller;
 
 
+import java.util.Collections;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -49,19 +50,23 @@ public class ProductDiscountController {
             // If navigation query doesn't have a valid product ID - it means we want to
             // create a discount either for a category or for all of the products
             categories = categoryHelper.findAll();
+            Collections.sort(categories);
             isProductFound = false;
         }
 
     }
 
     public void categoryChange() {
-        discountView = selectedCategory.getDiscount();
+        discountView = selectedCategory.getDiscount() == null ? new DiscountView() :
+            selectedCategory.getDiscount();
     }
 
     public void addDiscount() {
         if (isProductFound) {
             addDiscountToProduct();
         }
+
+        addDiscountToCategory();
     }
 
     public void removeDiscount() {
@@ -70,6 +75,8 @@ public class ProductDiscountController {
         if (isProductFound) {
             removeDiscountFromProduct();
         }
+
+        removeDiscountFromCategory();
     }
 
     private void addDiscountToProduct() {
@@ -88,9 +95,23 @@ public class ProductDiscountController {
         return;
     }
 
+    private void addDiscountToCategory() {
+        selectedCategory.setDiscount(discountView);
+        categoryHelper.update(selectedCategory);
+
+        isSuccess = true;
+
+        return;
+    }
+
     private void removeDiscountFromProduct() {
         productView.setDiscount(null);
         productHelper.update(productView);
+    }
+
+    private void removeDiscountFromCategory() {
+        selectedCategory.setDiscount(null);
+        categoryHelper.update(selectedCategory);
     }
 
 }
