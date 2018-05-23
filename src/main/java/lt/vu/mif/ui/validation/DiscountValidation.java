@@ -27,7 +27,7 @@ public class DiscountValidation implements Validator {
             .getValue();
         //Can't get string from number field, so have to use BigDecimal, because need to validate if
         //user entered a whole number
-        BigDecimal discountPercentage = (BigDecimal) ((UIInput) uiComponent.getAttributes()
+        Long discountPercentage = (Long) ((UIInput) uiComponent.getAttributes()
             .get("discountPercentage"))
             .getValue();
         String startDate = (String) ((UIInput) uiComponent.getAttributes().get("startDate"))
@@ -60,11 +60,6 @@ public class DiscountValidation implements Validator {
                     new FacesMessage("Nauja kaina turi būti teigiamas skaičius"));
             }
         } else {
-            if (ValidationUtils.getNumberOfDecimalPlaces(discountPercentage) > 0) {
-                throw new ValidatorException(
-                    new FacesMessage("Nuolaida procentais turi būti sveikas skaičius"));
-            }
-
             if (discountPercentage.intValue() < 0) {
                 throw new ValidatorException(
                     new FacesMessage("Nuolaida procentais turi būti teigiamas skaičius"));

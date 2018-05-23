@@ -1,18 +1,18 @@
 package lt.vu.mif.ui.controller;
 
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.DiscountView;
 import lt.vu.mif.ui.view.ProductView;
-import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Named
@@ -23,22 +23,18 @@ public class ProductDiscountController {
 
     @Autowired
     private IProductHelper productHelper;
+    @Autowired
+    private ICategoryHelper categoryHelper;
+
     private ProductView productView;
+    private DiscountView discountView;
+    private CategoryView selectedCategory;
+    private List<CategoryView> categories;
 
     private Boolean isProductFound;
     private Boolean isSuccess;
 
     private String errorMessage;
-
-    private BigDecimal discountAsPrice;
-    //BigDecimal type for validation purposes
-    private BigDecimal discountAsPercent;
-    //Can't set LocalDateTime fields with jsf, so using Strings
-    //(a nicer way would have been to use jsf custom converter)
-    private String startDate;
-    private String startTime;
-    private String endDate;
-    private String endTime;
 
     public void onPageLoad() {
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
@@ -47,48 +43,49 @@ public class ProductDiscountController {
 
         try {
             productView = productHelper.getProductViewFromNavigationQuery();
+            discountView = productView.getDiscount() == null ? new DiscountView() :
+                productView.getDiscount();
             isProductFound = true;
         } catch (IllegalArgumentException x) {
             // If navigation query doesn't have a valid product ID - it means we want to
             // create a discount either for a category or for all of the products
-            productView = new ProductView();
+            categories = categoryHelper.findAll();
+            Collections.sort(categories);
             isProductFound = false;
-            return;
         }
 
-        if (productView.getDiscount() == null) {
-            return;
-        }
+    }
 
-        discountAsPrice = productView.getDiscount().getAbsoluteDiscount();
-        if (productView.getDiscount().getPercentageDiscount() != null) {
-            discountAsPercent = new BigDecimal(productView.getDiscount().getPercentageDiscount());
-        }
-        startDate = productView.getDiscount().getFrom()
-            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        endDate = productView.getDiscount().getTo()
-            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        startTime = productView.getDiscount().getFrom()
-            .format(DateTimeFormatter.ofPattern("HH:mm"));
-        endTime = productView.getDiscount().getTo().format(DateTimeFormatter.ofPattern("HH:mm"));
+    public void categoryChange() {
+        discountView = selectedCategory.getDiscount() == null ? new DiscountView() :
+            selectedCategory.getDiscount();
     }
 
     public void addDiscount() {
+        if (isProductFound) {
+            addDiscountToProduct();
+        } else {
+            addDiscountToCategory();
+        }
+    }
+
+    public void removeDiscount() {
+        discountView = new DiscountView();
+
+        if (isProductFound) {
+            removeDiscountFromProduct();
+        } else {
+            removeDiscountFromCategory();
+        }
+    }
+
+    private void addDiscountToProduct() {
         //Couldn't access product in validation class, so have to do it here
-        if (discountAsPrice != null && discountAsPrice.compareTo(productView.getPrice()) == 1) {
+        if (discountView.getAbsoluteDiscount() != null &&
+            discountView.getAbsoluteDiscount().compareTo(productView.getPrice()) == 1) {
             errorMessage = "Nuolaidos kaina negali būti didesnė už įprastą produkto kainą";
             return;
         }
-
-        DiscountView discountView = new DiscountView();
-        discountView.setAbsoluteDiscount(discountAsPrice);
-        if (discountAsPercent != null) {
-            discountView.setPercentageDiscount(discountAsPercent.longValue());
-        }
-        discountView.setFrom(LocalDateTime.parse(startDate + " " + startTime,
-            DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
-        discountView.setTo(LocalDateTime.parse(endDate + " " + endTime,
-            DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
 
         productView.setDiscount(discountView);
         productHelper.update(productView);
@@ -98,16 +95,23 @@ public class ProductDiscountController {
         return;
     }
 
-    public void removeDiscount() {
-        discountAsPrice = null;
-        discountAsPercent = null;
-        startDate = "";
-        startTime = "";
-        endDate = "";
-        endTime = "";
+    private void addDiscountToCategory() {
+        selectedCategory.setDiscount(discountView);
+        categoryHelper.update(selectedCategory);
 
+        isSuccess = true;
+
+        return;
+    }
+
+    private void removeDiscountFromProduct() {
         productView.setDiscount(null);
         productHelper.update(productView);
+    }
+
+    private void removeDiscountFromCategory() {
+        selectedCategory.setDiscount(null);
+        categoryHelper.update(selectedCategory);
     }
 
 }

@@ -319,12 +319,12 @@
 
                         <!-- IF THE PRODUCT IS NOT ON SALE - SHOW THIS -->
                         <!--Product price -->
-                        <h:panelGroup rendered="#{empty productItem.newPrice}">
+                        <h:panelGroup rendered="#{productItem.price eq productItem.newPrice}">
                             <p class="product-price">€ #{productItem.price}</p>
                         </h:panelGroup>
 
                         <!-- IF THE PRODUCT IS ON SALE - SHOW THIS -->
-                        <h:panelGroup rendered="#{not empty productItem.newPrice}">
+                        <h:panelGroup rendered="#{not (productItem.price eq productItem.newPrice)}">
                             <div class="hide-for-small-only mar-bot-1">
                                 <!-- Product price -->
                                 <p class="product-price-new">€ #{productItem.newPrice}</p>

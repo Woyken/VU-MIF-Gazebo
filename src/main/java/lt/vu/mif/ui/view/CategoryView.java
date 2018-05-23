@@ -12,6 +12,7 @@ public class CategoryView implements Comparable<CategoryView> {
     private Long id;
     private String name;
     private CategoryView parentCategory;
+    private DiscountView discount;
     private List<String> attributes;
 
     public CategoryView() {
@@ -23,6 +24,8 @@ public class CategoryView implements Comparable<CategoryView> {
         this.attributes = new ArrayList<String>(other.attributes);
         this.parentCategory = other.getParentCategory() == null ? null :
             new CategoryView(other.parentCategory);
+        this.discount = other.getDiscount() == null ? null :
+            new DiscountView(other.getDiscount());
     }
 
     @Override

@@ -4,9 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.CategoryView;
+import lt.vu.mif.ui.view.DiscountView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -14,6 +16,8 @@ import org.springframework.util.CollectionUtils;
 @Component
 public class CategoryMapper implements IMapper<Category, CategoryView> {
 
+    @Autowired
+    private IMapper<Discount, DiscountView> discountMapper;
     @Autowired
     private ICategoryRepository categoryRepository;
 
@@ -31,6 +35,7 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
         }
         entity.setName(view.getName());
         entity.setAttributes(view.getAttributes());
+        entity.setDiscount(discountMapper.toEntity(view.getDiscount()));
 
         return entity;
     }
@@ -56,7 +61,7 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
         view.setName(entity.getName());
         view.setParentCategory(toView(entity.getParentCategory()));
         view.setAttributes(entity.getAttributes());
-
+        view.setDiscount(discountMapper.toView(entity.getDiscount()));
 
         return view;
     }
