@@ -116,42 +116,12 @@
                         <h5 class="font-bold">Kategorija</h5>
                     </div>
 
-                    <div class="columns medium-7 small-12">
-                        <!-- Category was found -->
-                        <!-- TODO: Change this and others to 'productEditController.productView.category' -->
-                        <h:panelGroup rendered="#{productEditController.category != null}">
-                            <h:outputText
-                                    class="font-bold font-italic success-text-large"
-                                    value="#{productEditController.category.name}"  />
-                        </h:panelGroup>
-
-                        <!-- Category was not found -->
-                        <h:panelGroup rendered="#{productEditController.category == null}">
-                            <h:outputText
-                                    styleClass="font-bold font-italic alert-text-large"
-                                    value="NEPRITAIKYTA"/>
-                        </h:panelGroup>
+                    <div class="columns medium-9 small-12">
+                        <h:selectOneMenu value="#{productEditController.productView.category}"
+                                         converter="omnifaces.SelectItemsConverter">
+                            <f:selectItems value="#{productEditController.categories}"/>
+                        </h:selectOneMenu>
                     </div>
-
-                    <!-- [Button] Edit category -->
-                    <div class="columns small-3 medium-1">
-                        <a
-                                class="button expanded primary"
-                                href="../../admin-product-category.xhtml?productId=#{productEditController.productView.id}">
-                            <i class="fi-pencil" />
-                        </a>
-                    </div>
-
-                    <!-- [Button] Remove discount if one exists -->
-                    <h:panelGroup rendered="#{productEditController.category != null}">
-                        <div class="columns small-3 small-offset-6 medium-1 medium-offset-0">
-                            <a
-                                    class="button expanded red"
-                                    href="">
-                                <i class="fi-x" />
-                            </a>
-                        </div>
-                    </h:panelGroup>
                 </div> <!-- End of Category -->
 
                 <!-- Description -->

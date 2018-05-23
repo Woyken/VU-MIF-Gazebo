@@ -8,6 +8,7 @@ import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.helpers.interfaces.IPriceResolver;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
+import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,8 @@ public class ProductMapper implements IMapper<Product, ProductView> {
     private ImageMapper imageMapper;
     @Autowired
     private DiscountMapper discountMapper;
+    @Autowired
+    private IMapper<Category, CategoryView> categoryMapper;
     @Autowired
     private IPriceResolver priceResolver;
 
@@ -36,12 +39,9 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         product.setSku(view.getSku());
         product.setTitle(view.getTitle());
         product.setDiscount(discountMapper.toEntity(view.getDiscount()));
+        product.setCategory(categoryMapper.toEntity(view.getCategory()));
         product.setImages(imageMapper.toEntities(view.getImages()));
         product.setCreationDate(LocalDateTime.now());
-
-        //TODO: change this when category view will be created.
-        //This is temporary solution because category field is not nullable
-        product.setCategory(new Category("DEFAULT"));
 
         return product;
     }
@@ -59,6 +59,7 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         view.setSku(entity.getSku());
         view.setTitle(entity.getTitle());
         view.setDiscount(discountMapper.toView(entity.getDiscount()));
+        view.setCategory(categoryMapper.toView(entity.getCategory()));
         view.setImages(imageMapper.toViews(entity.getImages()));
         view.setNewPrice(entity.getDiscount() == null ? null :
             priceResolver.resolvePriceWithDiscount(entity));

@@ -26,9 +26,8 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
         Category entity = new Category();
 
         entity.setId(view.getId());
-        //TODO looks not right
         if (view.getParentCategory() != null) {
-            entity.setParentCategory(categoryRepository.get(view.getParentCategory().getId()));
+            entity.setParentCategory(toEntity(view.getParentCategory()));
         }
         entity.setName(view.getName());
         entity.setAttributes(view.getAttributes());

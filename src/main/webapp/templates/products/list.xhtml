@@ -57,7 +57,7 @@
                         <li>
                             <ul class="vertical menu accordion-menu" data-accordion-menu="" data-submenu-toggle="true">
                                 <!-- FILTER BY CATEGORIES -->
-                                <ui:include src="category.xhtml">
+                                <ui:include src="categoryMenu.xhtml">
                                     <ui:param name="parent" value="#{categoryTreeView.root}"/>
                                 </ui:include>
                                 <!-- END OF FILTER BY CATEGORIES -->
@@ -201,7 +201,7 @@
                     <ul id="filter-aside" class="vertical menu"  data-accordion-menu="" data-submenu-toggle="true">
 
                         <!-- FILTER BY CATEGORIES -->
-                        <ui:include src="category.xhtml">
+                        <ui:include src="categoryMenu.xhtml">
                             <ui:param name="parent" value="#{categoryTreeView.root}"/>
                         </ui:include>
                         <!-- END OF FILTER BY CATEGORIES -->
