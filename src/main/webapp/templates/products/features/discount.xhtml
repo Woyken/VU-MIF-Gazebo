@@ -9,7 +9,11 @@
     <!-- PAGE TITLE. -->
     <div class="row column text-center section">
         <h1 class="section-title">
-            <p:outputLabel styleClass="large-text" value="Pridėti prekės nuolaidą"/>
+            <p:outputLabel styleClass="large-text" value="Pridėti prekės nuolaidą"
+                           rendered="#{productDiscountController.isProductFound}"/>
+            <p:outputLabel styleClass="large-text" value="Pridėti kategorijos nuolaidą"
+                           rendered="#{not productDiscountController.isProductFound}"/>
+
         </h1>
     </div> <!-- END OF PAGE TITLE. -->
 
@@ -20,20 +24,22 @@
             <h:form id="discountForm" style="display: contents;">
 
                 <!-- Sale as concrete price -->
-                <div class="row align-middle">
-                    <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
-                    </div>
+                <h:panelGroup rendered="#{productDiscountController.isProductFound}">
+                    <div class="row align-middle">
+                        <div class="columns medium-3 small-12">
+                            <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
+                        </div>
 
-                    <div class="columns medium-9 small-12">
-                        <h:inputText
-                                pt:type="number"
-                                pt:min="0"
-                                pt:placeholder="49.99"
-                                value="#{productDiscountController.discountAsPrice}"
-                                binding="#{discountPrice}"/>
+                        <div class="columns medium-9 small-12">
+                            <h:inputText
+                                    pt:type="number"
+                                    pt:min="0"
+                                    pt:placeholder="49.99"
+                                    value="#{productDiscountController.discountAsPrice}"
+                                    binding="#{discountPrice}"/>
+                        </div>
                     </div>
-                </div>
+                </h:panelGroup>
 
                 <!-- Sale as % -->
                 <div class="row align-middle">
