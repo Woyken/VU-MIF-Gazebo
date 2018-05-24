@@ -13,6 +13,7 @@ import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
+import lt.vu.mif.ui.helpers.interfaces.IImageHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.ImageInMemoryStreamer;
@@ -32,6 +33,8 @@ public class ProductEditController {
     private IProductHelper productHelper;
     @Autowired
     private ICategoryHelper categoryHelper;
+    @Autowired
+    private IImageHelper imageHelper;
 
     private ImageInMemoryStreamer imageInMemoryStreamer = new ImageInMemoryStreamer();
     private ProductView productView;
@@ -79,7 +82,7 @@ public class ProductEditController {
         productView.getImages().addAll(newImages);
 
         if(newImages.size()==0){
-            productView.getImages().add(getDefaultImage());
+            productView.getImages().add(imageHelper.getDefaultImage());
         }
 
         productHelper.update(productView);
@@ -99,19 +102,5 @@ public class ProductEditController {
     public void removeDiscount() {
         productView.setDiscount(null);
         productHelper.update(productView);
-    }
-
-    private ImageView getDefaultImage() {
-        ImageView image = null;
-        try {
-            File file = new ClassPathResource("static/images/products/default.jpg").getFile();
-            byte[] content = Files.readAllBytes(file.toPath());
-            image = new ImageView();
-            image.setBytes(content);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return image;
     }
 }
