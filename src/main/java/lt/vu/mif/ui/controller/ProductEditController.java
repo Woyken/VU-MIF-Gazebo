@@ -1,5 +1,8 @@
 package lt.vu.mif.ui.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -17,6 +20,7 @@ import lt.vu.mif.ui.view.ImageView;
 import lt.vu.mif.ui.view.ProductView;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 
 @Getter
 @Setter
@@ -73,6 +77,11 @@ public class ProductEditController {
 
     public void saveChanges() {
         productView.getImages().addAll(newImages);
+
+        if(newImages.size()==0){
+            productView.getImages().add(getDefaultImage());
+        }
+
         productHelper.update(productView);
         showSuccessMessage = true;
         // NOTE: YOU MUST UPDATE PRODUCT VIEW INFORMATION
@@ -90,5 +99,19 @@ public class ProductEditController {
     public void removeDiscount() {
         productView.setDiscount(null);
         productHelper.update(productView);
+    }
+
+    private ImageView getDefaultImage() {
+        ImageView image = null;
+        try {
+            File file = new ClassPathResource("static/images/products/default.jpg").getFile();
+            byte[] content = Files.readAllBytes(file.toPath());
+            image = new ImageView();
+            image.setBytes(content);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return image;
     }
 }
