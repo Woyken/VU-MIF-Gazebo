@@ -1,5 +1,8 @@
 package lt.vu.mif.ui.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,6 +13,7 @@ import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
+import lt.vu.mif.ui.helpers.interfaces.IImageHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.ImageInMemoryStreamer;
@@ -17,6 +21,7 @@ import lt.vu.mif.ui.view.ImageView;
 import lt.vu.mif.ui.view.ProductView;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 
 @Getter
 @Setter
@@ -28,6 +33,8 @@ public class ProductEditController {
     private IProductHelper productHelper;
     @Autowired
     private ICategoryHelper categoryHelper;
+    @Autowired
+    private IImageHelper imageHelper;
 
     private ImageInMemoryStreamer imageInMemoryStreamer = new ImageInMemoryStreamer();
     private ProductView productView;
@@ -73,6 +80,11 @@ public class ProductEditController {
 
     public void saveChanges() {
         productView.getImages().addAll(newImages);
+
+        if(newImages.size()==0){
+            productView.getImages().add(imageHelper.getDefaultImage());
+        }
+
         productHelper.update(productView);
         showSuccessMessage = true;
         // NOTE: YOU MUST UPDATE PRODUCT VIEW INFORMATION
