@@ -16,6 +16,7 @@ import lt.vu.mif.model.product.Product_;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.utils.PersistenceUtils;
 import lt.vu.mif.utils.search.ProductSearch;
+import lt.vu.mif.utils.search.ProductSortEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -90,8 +91,8 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
         return entityManager.createQuery(criteria).getResultList();
     }
 
-    private List<Predicate> buildSearchPredicates(ProductSearch search, Root<Product> root,
-        CriteriaBuilder builder) {
+    private List<Predicate> buildSearchPredicates(ProductSearch search, Root<Product> root, CriteriaBuilder builder) {
+
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.isFalse(root.get(Product_.deleted)));
 
@@ -124,12 +125,16 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
         return predicates;
     }
 
-    public Page<Product> getProductsPage(ProductSearch productSearch, int activePage,
-        int pageSize) {
+    public Page<Product> getProductsPage(ProductSearch productSearch, int activePage, int pageSize) {
         PageRequest pageRequest = PageRequest.of(activePage, pageSize);
 
         Specification<Product> specification = (root, criteriaQuery, criteriaBuilder) -> {
-            criteriaQuery.orderBy(criteriaBuilder.desc(root.get(Product_.creationDate)));
+            if(productSearch.getSortBy()== ProductSortEnum.CREATE_DATE)
+                criteriaQuery.orderBy(criteriaBuilder.desc(root.get(Product_.creationDate)));
+            else if(productSearch.getSortBy()== ProductSortEnum.PRICE_DESCENDING)
+                criteriaQuery.orderBy(criteriaBuilder.desc(root.get(Product_.price)));
+            else if(productSearch.getSortBy()== ProductSortEnum.PRICE_ASCENDING)
+                criteriaQuery.orderBy(criteriaBuilder.asc(root.get(Product_.price)));
             return criteriaBuilder.and(PersistenceUtils.toArray(buildSearchPredicates(productSearch, root, criteriaBuilder)));
         };
 

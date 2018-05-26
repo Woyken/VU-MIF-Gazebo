@@ -14,6 +14,7 @@ public class ProductSearch {
     private BigDecimal maxPrice;
     private List<Category> categories;
     private boolean includeDeleted = false;
+    private ProductSortEnum sortBy = ProductSortEnum.CREATE_DATE;
 
     public void reset() {
         title = null;
@@ -21,5 +22,6 @@ public class ProductSearch {
         maxPrice = null;
         categories = null;
         includeDeleted = false;
+        sortBy = ProductSortEnum.CREATE_DATE;
     }
 }
