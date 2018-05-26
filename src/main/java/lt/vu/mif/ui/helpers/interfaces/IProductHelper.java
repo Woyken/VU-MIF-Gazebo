@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import lt.vu.mif.excel.ImportResult;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.view.BoughtProductView;
 import lt.vu.mif.ui.view.CartItemView;
@@ -19,7 +20,7 @@ public interface IProductHelper {
 
     ProductView getProduct(Long productId);
 
-    CompletableFuture<Void> importProducts(InputStream inputStream);
+    CompletableFuture<ImportResult> importProducts(InputStream inputStream);
 
     @Transactional
     CartView setCurrentUserCart(CartView cart);
