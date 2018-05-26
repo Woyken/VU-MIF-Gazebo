@@ -21,6 +21,7 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
         Authentication authentication) throws ServletException, IOException {
+        cartController.onSuccessfulLogin();
 
         if (cartController.getRedirectAfterLogin()) {
             cartController.setRedirectAfterLogin(false);

@@ -9,15 +9,21 @@ import javax.faces.context.FacesContext;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.excel.ExcelProduct;
 import lt.vu.mif.excel.ProductExcelReader;
+import lt.vu.mif.model.product.Cart;
 import lt.vu.mif.model.product.Product;
+import lt.vu.mif.model.user.User;
+import lt.vu.mif.repository.repository.implementations.CartRepository;
 import lt.vu.mif.repository.repository.interfaces.IBoughtProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.mappers.implementations.BoughtProductMapper;
+import lt.vu.mif.ui.mappers.implementations.CartMapper;
 import lt.vu.mif.ui.mappers.implementations.ProductMapper;
+import lt.vu.mif.ui.mappers.implementations.UserMapper;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.BoughtProductView;
-import lt.vu.mif.ui.view.CartProductView;
+import lt.vu.mif.ui.view.CartItemView;
+import lt.vu.mif.ui.view.CartView;
 import lt.vu.mif.ui.view.ProductSearchView;
 import lt.vu.mif.ui.view.ProductView;
 import lt.vu.mif.utils.interfaces.IProductParser;
@@ -48,6 +54,12 @@ public class ProductHelper implements IProductHelper {
     private IBoughtProductRepository boughtProductRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CartRepository cartRepository;
+    @Autowired
+    private CartMapper cartMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public void update(ProductView view) {
@@ -84,8 +96,53 @@ public class ProductHelper implements IProductHelper {
     }
 
     @Override
-    public CartProductView getCartProductView(Long productId) {
-        return new CartProductView(productMapper.toView(productRepository.get(productId)));
+    public CartItemView getCartProductView(Long productId) {
+        return new CartItemView(productMapper.toView(productRepository.get(productId)));
+    }
+
+    @Override
+    public CartView getCurrentUserCart() {
+        User loggedInUser = userService.getLoggedUser();
+        if (null == loggedInUser) {
+            return null;
+        }
+
+        Cart usersCart = cartRepository.getByUserId(loggedInUser.getId());
+        if (null == usersCart) {
+            return null;
+        }
+
+        return cartMapper.toView(usersCart);
+    }
+
+    @Override
+    @Transactional
+    public CartView setCurrentUserCart(CartView cart) {
+        User loggedInUser = userService.getLoggedUser();
+        if (null == loggedInUser) {
+            return null;
+        }
+        Cart existingCartEntity = cartRepository.getByUserId(loggedInUser.getId());
+        if (null != existingCartEntity) {
+            cart.setId(existingCartEntity.getId());
+        }
+
+        cart.setUser(userMapper.toView(loggedInUser));
+        Cart cartEntity = cartMapper.toEntity(cart);
+        cartEntity = cartRepository.update(cartEntity);
+        return cartMapper.toView(cartEntity);
+    }
+
+    @Override
+    @Transactional
+    public void currentUserClearCart() {
+        User loggedInUser = userService.getLoggedUser();
+        if (null == loggedInUser) {
+            return;
+        }
+
+        Cart usersCart = cartRepository.getByUserId(loggedInUser.getId());
+        cartRepository.delete(usersCart);
     }
 
     @Override
@@ -123,7 +180,8 @@ public class ProductHelper implements IProductHelper {
 
         for (BoughtProductView productView : productViews) {
             if (productView.getPrice() != null) {
-                totalSum = totalSum.add(productView.getPrice().multiply(new BigDecimal(productView.getQuantity())));
+                totalSum = totalSum.add(
+                    productView.getPrice().multiply(new BigDecimal(productView.getQuantity())));
             }
         }
 
@@ -133,10 +191,10 @@ public class ProductHelper implements IProductHelper {
     @Override
     public ProductView getProductViewFromNavigationQuery() {
         String productId = FacesContext
-                            .getCurrentInstance()
-                            .getExternalContext()
-                            .getRequestParameterMap()
-                            .get("productId");
+            .getCurrentInstance()
+            .getExternalContext()
+            .getRequestParameterMap()
+            .get("productId");
 
         // No ID in query
         if (StringUtils.isBlank(productId)) {

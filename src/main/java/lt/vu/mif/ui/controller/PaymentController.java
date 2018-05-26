@@ -89,7 +89,7 @@ public class PaymentController {
         }
 
         ordersHelper.saveNewOrder(orderView, cartController.getProductsInCart());
-        cartController.getProductsInCart().clear();
+        cartController.clear();
 
         sessionManager.setAttribute(Constants.SHOW_DIALOG_SESSION_PARAMETER, false);
 

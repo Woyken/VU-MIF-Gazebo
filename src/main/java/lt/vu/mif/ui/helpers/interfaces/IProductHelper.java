@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.view.BoughtProductView;
-import lt.vu.mif.ui.view.CartProductView;
+import lt.vu.mif.ui.view.CartItemView;
+import lt.vu.mif.ui.view.CartView;
 import lt.vu.mif.ui.view.ProductSearchView;
 import lt.vu.mif.ui.view.ProductView;
 import org.springframework.data.domain.Page;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface IProductHelper {
 
@@ -19,6 +21,12 @@ public interface IProductHelper {
 
     CompletableFuture<Void> importProducts(InputStream inputStream);
 
+    @Transactional
+    CartView setCurrentUserCart(CartView cart);
+
+    @Transactional
+    void currentUserClearCart();
+
     Page<ProductView> getProductsPage(int activePage, int pageSize, ProductSearchView search);
 
     void deleteById(Long id);
@@ -27,7 +35,9 @@ public interface IProductHelper {
 
     void saveAll(List<Product> productList);
 
-    CartProductView getCartProductView(Long productId);
+    CartItemView getCartProductView(Long productId);
+
+    CartView getCurrentUserCart();
 
     Page<BoughtProductView> getBoughtProductsPage(int activePage, int pageSize, Long userId);
 
