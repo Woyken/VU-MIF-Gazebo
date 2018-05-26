@@ -17,7 +17,7 @@ import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
 import lt.vu.mif.ui.mappers.implementations.OrderMapper;
 import lt.vu.mif.ui.mappers.implementations.OrderPreviewMapper;
 import lt.vu.mif.ui.view.AdminOrderPreview;
-import lt.vu.mif.ui.view.CartProductView;
+import lt.vu.mif.ui.view.CartItemView;
 import lt.vu.mif.ui.view.OrderPreview;
 import lt.vu.mif.ui.view.OrderView;
 import lt.vu.mif.ui.view.ProductView;
@@ -67,14 +67,14 @@ public class OrdersHelper implements IOrdersHelper {
     }
 
     @Override
-    public void saveNewOrder(OrderView orderView, List<CartProductView> cartProductViews) {
+    public void saveNewOrder(OrderView orderView, List<CartItemView> cartItemViews) {
         User loggedUser = userService.getLoggedUser();
 
         Order order = new Order();
         order.setCreationDate(LocalDateTime.now());
         order.setStatus(OrderStatus.ACCEPTED);
         order.setUser(loggedUser);
-        order.setProducts(getOrderProducts(order, cartProductViews));
+        order.setProducts(getOrderProducts(order, cartItemViews));
         orderRepository.save(order);
 
         userRepository.update(loggedUser);
@@ -87,7 +87,7 @@ public class OrdersHelper implements IOrdersHelper {
         orderRepository.update(order);
     }
 
-    private List<OrderProduct> getOrderProducts(Order order, List<CartProductView> productViews) {
+    private List<OrderProduct> getOrderProducts(Order order, List<CartItemView> productViews) {
         List<Product> products = productRepository.get(
             productViews.stream().map(ProductView::getId).collect(Collectors
                 .toList()));

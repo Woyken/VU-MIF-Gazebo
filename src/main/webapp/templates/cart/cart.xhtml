@@ -85,7 +85,8 @@
                             <!--convertNumber produces a bug, where numbers above 1000 aren't rendered, fix unknown-->
                             <!--<f:convertNumber integerOnly="true" type="number"/>-->
                             <f:validateLongRange minimum="1" />
-                            <p:ajax event="change" update="@form" />
+                            <p:ajax listener="#{cartController.onItemAmountChange}" event="change"
+                                    update="@form"/>
                         </h:inputText>
                     </div>
 
