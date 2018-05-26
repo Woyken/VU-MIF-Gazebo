@@ -21,6 +21,7 @@ public class ProductView {
     private DiscountView discount;
     private CategoryView category;
     private List<ImageView> images = new ArrayList<>();
+    private Integer version;
 
     public ProductView() {
     }

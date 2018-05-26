@@ -585,3 +585,7 @@ legend {
 .display-contents {
     display: contents;
 }
+
+.red {
+	color: red;
+}

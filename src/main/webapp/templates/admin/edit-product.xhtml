@@ -199,36 +199,125 @@
                     </div>
                 </div>
 
+                <h:panelGroup rendered="#{productEditController.conflictingProductView ne null}">
+                    <div class="row column text-center section">
+                        <h5 class="red">Redaguojamo produkto versija nesutampa su naujausia produkto versija. Naujausios produkto versijos duomenys: </h5>
+                    </div>
+                    <section class="red">
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">SKU</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputText value="#{productEditController.conflictingProductView.sku}" disabled="true"
+                                             styleClass="red"/>
+                            </div>
+                        </div>
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Pavadinimas</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputText value="#{productEditController.conflictingProductView.title}" disabled="true"
+                                             styleClass="red"/>
+                            </div>
+                        </div>
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Kaina</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputText value="#{productEditController.conflictingProductView.price}" disabled="true"
+                                             styleClass="red"/>
+                            </div>
+                        </div>
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Kategorija</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputText value="#{productEditController.conflictingProductView.category.name}" disabled="true"
+                                             styleClass="red" />
+                            </div>
+                        </div>
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Aprašymas</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputTextarea value="#{productEditController.conflictingProductView.description}"
+                                                 rows="4" disabled="true" styleClass="red"/>
+                            </div>
+                        </div>
+                        <!-- Images -->
+                        <div class="row">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Nuotrauka(-os)</h5>
+                            </div>
+                            <div class="columns small-12 medium-9">
+                                <div class="row">
+                                    <ui:repeat value="#{productEditController.conflictingProductView.images}" var="image">
+                                        <div class="columns small-12 medium-3">
+                                            <div class="box-for-buttons-on-image">
+                                                <p:graphicImage value="#{imageStreamer.image}" class="thumbnail">
+                                                    <f:param name="id" value="#{image.id}"/>
+                                                </p:graphicImage>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                        </div> <!-- End of images -->
+                    <div class="row align-middle">
+                        <div class="columns small-8 medium-6">
+                            <h:commandButton
+                                    class="button success expanded"
+                                    value="Atnaujinti duomenis"
+                                    action="#{productEditController.updateProductView}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
+                        </div>
+                        <div class="columns small-6 medium-6">
+                            <h:commandButton
+                                    class="button success expanded"
+                                    value="Išsaugoti (pakeitimai bus užrašyti ant viršaus)"
+                                    action="#{productEditController.overrideProductView}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                    </section>
+                </h:panelGroup>
 
-                <div class="row align-middle section">
+                <h:panelGroup rendered="#{productEditController.conflictingProductView eq null}">
+                    <div class="row align-middle section">
 
-                    <!-- [Button] Save changes -->
-                    <div class="columns small-6 medium-4">
-                        <h:commandButton
-                                class="button success expanded"
-                                value="#{productEditController.productFound ? 'Išsaugoti pakeitimus' : 'Pridėti'}"
-                                action="#{productEditController.saveChanges}">
-                            <f:ajax execute="@form" render="@form"/>
-                        </h:commandButton>
+                        <!-- [Button] Save changes -->
+                        <div class="columns small-6 small-6">
+                            <h:commandButton
+                                    class="button success expanded"
+                                    value="#{productEditController.productFound ? 'Išsaugoti pakeitimus' : 'Pridėti'}"
+                                    action="#{productEditController.saveChanges}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
+                        </div>
 
-                        <div class="text-center">
-                            <p:outputLabel
+                        <!-- [Button] Cancel -->
+                        <div class="columns small-6 small-6">
+                            <a
+                                    class="button expanded red"
+                                    href="../../main.xhtml" >
+                                Atšaukti
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p:outputLabel
                                 rendered="#{productEditController.showSuccessMessage}"
                                 class="success-text"
                                 value="#{productEditController.productFound ? 'Produkto duomenys sėkmingai atnaujinti' : 'Prekė sėkmingai pridėta'}"/>
-                        </div>
                     </div>
-
-                    <!-- [Button] Cancel -->
-                    <div class="columns small-6 medium-4 medium-offset-4">
-                        <a
-                            class="button expanded red"
-                            href="../../main.xhtml" >
-                            Atšaukti
-                        </a>
-                    </div>
-
-                </div>
+                </h:panelGroup>
             </div>
         </h:form>
         <!-- END OF EDIT PRODUCT -->

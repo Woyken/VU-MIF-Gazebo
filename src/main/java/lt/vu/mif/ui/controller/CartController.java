@@ -116,6 +116,10 @@ public class CartController implements Serializable {
             saveUserCart();
             return;
         }
-        productsInCart = productHelper.getCurrentUserCart().getItems();
+
+        CartView currentUserCart = productHelper.getCurrentUserCart();
+        if (currentUserCart != null) {
+            productsInCart = currentUserCart.getItems();
+        }
     }
 }

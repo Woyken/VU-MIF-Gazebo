@@ -1,8 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,7 +18,7 @@ import lt.vu.mif.ui.view.ImageView;
 import lt.vu.mif.ui.view.ProductView;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.dao.OptimisticLockingFailureException;
 
 @Getter
 @Setter
@@ -46,6 +43,7 @@ public class ProductEditController {
     private CategoryView emptyCategory = new CategoryView();
 
     private List<ImageView> newImages = new ArrayList<>();
+    private ProductView conflictingProductView;
 
     public void onPageLoad() {
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
@@ -54,6 +52,7 @@ public class ProductEditController {
         // it means we want to add a new product
         try {
             productView = productHelper.getProductViewFromNavigationQuery();
+            conflictingProductView = null;
             isProductFound = true;
         } catch (IllegalArgumentException x) {
             productView = new ProductView();
@@ -81,15 +80,21 @@ public class ProductEditController {
     public void saveChanges() {
         productView.getImages().addAll(newImages);
 
-        if(newImages.size()==0){
+        if(newImages.isEmpty() && productView.getImages().isEmpty()) {
             productView.getImages().add(imageHelper.getDefaultImage());
         }
 
-        productHelper.update(productView);
-        showSuccessMessage = true;
-        // NOTE: YOU MUST UPDATE PRODUCT VIEW INFORMATION
-        // (OR AT LEAST IT'S IMAGES BECAUSE IMAGE IS FETCHED BY ID AND IMAGE ID IS CHANGED WHEN SAVED TO DB)
-        productView = productHelper.getProduct(productView.getId());
+        try {
+            productHelper.update(productView);
+            showSuccessMessage = true;
+            clearData();
+        } catch (OptimisticLockingFailureException ex) {
+            ex.printStackTrace();
+            conflictingProductView = productHelper.getProduct(productView.getId());
+        }
+    }
+
+    private void clearData() {
         newImages.clear();
         imageInMemoryStreamer.getImagesInMemory().clear();
     }
@@ -102,5 +107,16 @@ public class ProductEditController {
     public void removeDiscount() {
         productView.setDiscount(null);
         productHelper.update(productView);
+    }
+
+    public void updateProductView() {
+        productView = productHelper.getProduct(productView.getId());
+        conflictingProductView = null;
+    }
+
+    public void overrideProductView() {
+        productView.setVersion(conflictingProductView.getVersion());
+        saveChanges();
+        conflictingProductView = null;
     }
 }
