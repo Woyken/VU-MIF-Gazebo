@@ -22,5 +22,6 @@ public class ProductSearch {
         maxPrice = null;
         categories = null;
         includeDeleted = false;
+        sortBy = ProductSortEnum.CREATE_DATE;
     }
 }

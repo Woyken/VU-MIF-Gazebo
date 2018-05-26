@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.utils.search.ProductSortEnum;
 
 @Getter
 @Setter
@@ -14,6 +15,7 @@ public class ProductSearchView {
     private BigDecimal maxPrice;
     private List<CategoryView> categories;
     private boolean includeDeleted = false;
+    private ProductSortEnum sortBy;
 
     public void reset() {
         title = null;
@@ -21,5 +23,6 @@ public class ProductSearchView {
         maxPrice = null;
         categories = null;
         includeDeleted = false;
+        sortBy = ProductSortEnum.CREATE_DATE;
     }
 }

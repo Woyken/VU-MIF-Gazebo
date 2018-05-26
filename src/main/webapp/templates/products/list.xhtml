@@ -183,7 +183,7 @@
                     <f:selectItem itemLabel="Brangiausi aukščiau" itemValue="PRICE_DESCENDING"/>
                     <f:selectItem itemLabel="Pigiausi aukščiau" itemValue="PRICE_ASCENDING"/>
 
-                    <p:ajax listener="#{productController.search}"/>
+                    <f:ajax listener="#{productController.search()}" render="productList"/>
                 </h:selectOneMenu>
             </h:form>
         </div>

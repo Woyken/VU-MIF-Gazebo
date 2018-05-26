@@ -89,8 +89,7 @@ public class ProductHelper implements IProductHelper {
     }
 
     @Override
-    public Page<ProductView> getProductsPage(int activePage, int pageSize,
-        ProductSearchView search) {
+    public Page<ProductView> getProductsPage(int activePage, int pageSize, ProductSearchView search) {
         return productRepository
             .getProductsPage(productSearchMapper.toEntity(search), activePage, pageSize)
             .map(productMapper::toView);

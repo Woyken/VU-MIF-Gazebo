@@ -27,6 +27,7 @@ public class ProductSearchMapper implements IMapper<ProductSearch, ProductSearch
         entity.setMaxPrice(view.getMaxPrice());
         entity.setCategories(categoryMapper.toEntities(view.getCategories()));
         entity.setIncludeDeleted(view.isIncludeDeleted());
+        entity.setSortBy(view.getSortBy());
 
         return entity;
     }
