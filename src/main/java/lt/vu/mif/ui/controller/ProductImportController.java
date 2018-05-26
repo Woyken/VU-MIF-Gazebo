@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 import lombok.Getter;
@@ -23,6 +24,13 @@ public class ProductImportController implements Serializable {
     private Part uploadedFile;
     private String message;
 
+    public void onPageLoad() {
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
+            return;
+        }
+        message = null;
+    }
+
     public void importProducts() {
         try {
             if (null == uploadedFile) {
@@ -31,8 +39,12 @@ public class ProductImportController implements Serializable {
             }
             if (uploadedFile.getInputStream() != null) {
                 message = "Importavimas vykdomas.";
-                productHelper.importProducts(uploadedFile.getInputStream()).get();
-                message = "Importavimas sėkmingai atliktas.";
+                String errorMessage = productHelper.importProducts(uploadedFile.getInputStream()).get().getMessage();
+                if (errorMessage == null) {
+                    message = "Importavimas sėkmingai atliktas.";
+                } else {
+                    message = errorMessage;
+                }
             }
         } catch (ExecutionException | InterruptedException | IOException ex) {
             ex.printStackTrace();

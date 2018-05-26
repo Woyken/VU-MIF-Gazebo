@@ -7,7 +7,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import javax.faces.context.FacesContext;
 import lt.vu.mif.authentication.UserService;
-import lt.vu.mif.excel.ExcelProduct;
+import lt.vu.mif.excel.ImportResult;
 import lt.vu.mif.excel.ProductExcelReader;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.IBoughtProductRepository;
@@ -108,13 +108,16 @@ public class ProductHelper implements IProductHelper {
     }
 
     @Override
-    public CompletableFuture<Void> importProducts(InputStream inputStream) {
-        CompletionStage<List<ExcelProduct>> productPromise = productExcelReader
+    public CompletableFuture<ImportResult> importProducts(InputStream inputStream) {
+        CompletionStage<ImportResult> productPromise = productExcelReader
             .readFile(inputStream);
-        return productPromise.thenAccept((List<ExcelProduct> products) -> {
-            List<Product> productsToSave = productParser.parseProducts(products);
+
+        productPromise.thenAccept(importResult ->  {
+            List<Product> productsToSave = productParser.parseProducts(importResult);
             saveAll(productsToSave);
-        }).toCompletableFuture();
+        });
+
+        return productPromise.toCompletableFuture();
     }
 
     @Override
