@@ -56,6 +56,18 @@
             <p class="text-justify">#{productDetailsController.productView.description}</p>
 
             <h:form>
+                <!-- Category -->
+                <div class="row middle">
+                    <div class="small-3 columns">
+                        <label for="product-category" class="font-bold">Kategorija:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <h:outputText id="product-category" value="#{productDetailsController.productView.category.name}"/>
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+
                 <!-- Quantity -->
                 <div class="row">
                     <div class="small-3 columns">
