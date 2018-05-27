@@ -52,7 +52,7 @@ public class PriceResolverTest {
         product.setDiscount(discount);
 
         Assertions
-            .assertEquals(getPriceWithAbsoluteDiscount(product, discount.getAbsoluteDiscount()),
+            .assertEquals(discount.getAbsoluteDiscount(),
                 priceResolver.resolvePriceWithDiscount(product));
     }
 
@@ -62,20 +62,14 @@ public class PriceResolverTest {
         Category category = new Category("DEFAULT");
 
         Discount categoryDiscount = getDefaultDiscount();
-        categoryDiscount.setPercentageDiscount(1L);
-        categoryDiscount.setAbsoluteDiscount(new BigDecimal("0.01"));
+        categoryDiscount.setPercentageDiscount(90L);
+        //categoryDiscount.setAbsoluteDiscount(new BigDecimal("0.01"));
         category.setDiscount(categoryDiscount);
 
         product.setCategory(category);
 
-        Discount discount = getDefaultDiscount();
-        discount.setAbsoluteDiscount(new BigDecimal(1));
-        discount.setPercentageDiscount(90L);
-
-        product.setDiscount(discount);
-
         Assertions.assertEquals(
-            getPriceWithAbsoluteDiscount(product, categoryDiscount.getAbsoluteDiscount()),
+            getPriceWithPercentages(product, categoryDiscount.getPercentageDiscount()),
             priceResolver.resolvePriceWithDiscount(product));
 
     }
@@ -93,7 +87,7 @@ public class PriceResolverTest {
         product.setDiscount(discount);
 
         Assertions
-            .assertEquals(getPriceWithAbsoluteDiscount(product, discount.getAbsoluteDiscount()),
+            .assertEquals(discount.getAbsoluteDiscount(),
                 priceResolver.resolvePriceWithDiscount(product));
 
         discount.setAbsoluteDiscount(new BigDecimal(8));
@@ -124,9 +118,5 @@ public class PriceResolverTest {
 
     private BigDecimal getPriceWithPercentages(Product product, Long value) {
         return product.getPrice().multiply(new BigDecimal(100 - value)).divide(new BigDecimal(100));
-    }
-
-    private BigDecimal getPriceWithAbsoluteDiscount(Product product, BigDecimal value) {
-        return product.getPrice().subtract(value);
     }
 }

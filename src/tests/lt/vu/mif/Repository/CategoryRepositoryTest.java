@@ -3,9 +3,11 @@ package lt.vu.mif.Repository;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.transaction.Transactional;
-import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.Product;
+import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -22,7 +24,15 @@ public class CategoryRepositoryTest {
 
     @Autowired
     private IProductRepository productRepository;
+    @Autowired
+    private ICategoryRepository categoryRepository;
 
+    private Category defaultCategory;
+
+    @Before
+    public void init() {
+        defaultCategory = createDefaultCategory();
+    }
 
     @Test
     public void insertProductsWithCategoryTest() {
@@ -31,18 +41,18 @@ public class CategoryRepositoryTest {
         newProduct.setDescription("Description 1");
         newProduct.setPrice(new BigDecimal(10L));
         newProduct.setSku("sku1");
-        newProduct.setCategory(getDefaultCategory());
+        newProduct.setCategory(defaultCategory);
         productRepository.save(newProduct);
 
         List<Product> createdProducts = productRepository.findAll();
 
         for (Product product : createdProducts) {
             Assertions
-                .assertEquals(getDefaultCategory().getName(), product.getCategory().getName());
+                .assertEquals(defaultCategory.getName(), product.getCategory().getName());
         }
     }
 
-    private Category getDefaultCategory() {
+    private Category createDefaultCategory() {
         Category parentCategory = new Category();
         parentCategory.setName("furniture");
 
@@ -53,6 +63,9 @@ public class CategoryRepositoryTest {
         subcategory.setName("kitchen");
 
         subcategory.setParentCategory(parentCategory);
+
+        categoryRepository.save(parentCategory);
+        categoryRepository.save(subcategory);
 
         return parentCategory;
     }
