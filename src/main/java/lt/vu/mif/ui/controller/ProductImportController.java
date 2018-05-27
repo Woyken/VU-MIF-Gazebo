@@ -39,7 +39,8 @@ public class ProductImportController implements Serializable {
             }
             if (uploadedFile.getInputStream() != null) {
                 message = "Importavimas vykdomas.";
-                String errorMessage = productHelper.importProducts(uploadedFile.getInputStream()).get().getMessage();
+                String errorMessage = productHelper.importProducts(uploadedFile.getInputStream())
+                    .get().getMessage();
                 if (errorMessage == null) {
                     message = "Importavimas sėkmingai atliktas.";
                 } else {

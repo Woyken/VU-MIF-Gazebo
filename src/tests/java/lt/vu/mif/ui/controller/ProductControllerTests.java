@@ -6,7 +6,6 @@ import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
-import lt.vu.mif.ui.controller.ProductController;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.junit.Before;
 import org.junit.Test;

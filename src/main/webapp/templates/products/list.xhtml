@@ -28,7 +28,7 @@
                 <div class="input-group">
                     <h:inputText id="searchInput" class="input-group-field"
                                  value="#{productController.productSearch.title}"
-                                 pt:placeholder="įveskite prekės pavadinimą" />
+                                 pt:placeholder="įveskite prekės pavadinimą"/>
                     <div class="input-group-button">
                         <h:commandButton class="button" value="Ieškoti">
                             <f:ajax execute="searchInput"
@@ -55,7 +55,8 @@
 
                     <ul class="categories-menu menu vertical nested is-active filter-price-menu">
                         <li>
-                            <ul class="vertical menu accordion-menu" data-accordion-menu="" data-submenu-toggle="true">
+                            <ul class="vertical menu accordion-menu" data-accordion-menu=""
+                                data-submenu-toggle="true">
                                 <!-- FILTER BY CATEGORIES -->
                                 <ui:include src="categoryMenu.xhtml">
                                     <ui:param name="parent" value="#{categoryTreeView.root}"/>
@@ -76,20 +77,20 @@
                             <li>
                                 <span class="input-group-label">Nuo</span>
                                 <h:inputText class="input-group-field"
-                                    pt:type="number"
-                                    pt:min="0"
-                                    pt:placeholder="10"
-                                    value="#{productController.minPrice}"/>
+                                             pt:type="number"
+                                             pt:min="0"
+                                             pt:placeholder="10"
+                                             value="#{productController.minPrice}"/>
                             </li>
 
                             <!--Maximum price input-->
                             <li class="margin-top-1">
                                 <span class="input-group-label">Iki</span>
                                 <h:inputText class="input-group-field"
-                                    pt:type="number"
-                                    pt:min="0"
-                                    pt:placeholder="59"
-                                    value="#{productController.maxPrice}"/>
+                                             pt:type="number"
+                                             pt:min="0"
+                                             pt:placeholder="59"
+                                             value="#{productController.maxPrice}"/>
                             </li>
 
                             <!-- [Mobile][Button] Filter by price -->
@@ -203,7 +204,8 @@
                         Visos kategorijos
                     </h5>
 
-                    <ul id="filter-aside" class="vertical menu"  data-accordion-menu="" data-submenu-toggle="true">
+                    <ul id="filter-aside" class="vertical menu" data-accordion-menu=""
+                        data-submenu-toggle="true">
 
                         <!-- FILTER BY CATEGORIES -->
                         <ui:include src="categoryMenu.xhtml">
@@ -222,10 +224,10 @@
                                         <div class="input-group">
                                             <span class="input-group-label">Nuo</span>
                                             <h:inputText class="input-group-field"
-                                                 pt:type="number"
-                                                 pt:min="0"
-                                                 pt:placeholder="9"
-                                                 value="#{productController.minPrice}"/>
+                                                         pt:type="number"
+                                                         pt:min="0"
+                                                         pt:placeholder="9"
+                                                         value="#{productController.minPrice}"/>
                                         </div>
                                     </li>
 
@@ -234,10 +236,10 @@
                                         <div class="input-group">
                                             <span class="input-group-label">Iki</span>
                                             <h:inputText class="input-group-field"
-                                                 pt:type="number"
-                                                 pt:min="0"
-                                                 pt:placeholder="59"
-                                                 value="#{productController.maxPrice}"/>
+                                                         pt:type="number"
+                                                         pt:min="0"
+                                                         pt:placeholder="59"
+                                                         value="#{productController.maxPrice}"/>
                                         </div>
                                     </li>
 

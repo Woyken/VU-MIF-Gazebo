@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     // Variables for notification
     const notifSuccessMessage = "Pridėta!";
@@ -11,12 +11,11 @@
         wasInitRun = true;
     }
 
-
     function init() {
 
         // Create style for the bigger version of notification
         $.notify.addStyle('big', {
-            html:   `<div>
+            html: `<div>
                         <div class="notifyjs-bootstrap-base notifyjs-bootstrap-success" >
                             <p class="text-center margin-0">
                                 <span data-notify-text />
@@ -34,12 +33,12 @@
     }
 
     // When added to cart in list
-    $('.js-add-to-cart').on('click', function() {
+    $('.js-add-to-cart').on('click', function () {
         $(this).notify(notifSuccessMessage);
     });
 
     // When added to cart in details page
-    $('.js-add-to-cart-details').on('click', function(e) {
+    $('.js-add-to-cart-details').on('click', function (e) {
         // Get the button bellow which we will show the notification
         const $submitButton = $($(this).closest('input')[0]);
 
@@ -56,9 +55,12 @@
 
         // Change the notifications position according to the button
         const topGap = 5; // Gap between notification and button
-        const notificationPosition = {left: left, top: top + buttonHeight + topGap};
+        const notificationPosition = {
+            left: left,
+            top: top + buttonHeight + topGap
+        };
         $('.notifyjs-container')
-            .offset(notificationPosition)   // change position
-            .width(buttonWidth);            // change width
+        .offset(notificationPosition)   // change position
+        .width(buttonWidth);            // change width
     });
 })();

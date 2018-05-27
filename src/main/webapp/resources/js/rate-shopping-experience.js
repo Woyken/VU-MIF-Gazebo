@@ -24,8 +24,8 @@
 
     $(selectorStar).on('mouseover', function(e) {
        const starNumber = $(e.target).attr(attributeStarValue);
-       unmarkAllStars(e.target.parentElement);
-       markStarsAsSelected(e.target.parentElement, starNumber);
+        unmarkAllStars(e.target.parentElement);
+        markStarsAsSelected(e.target.parentElement, starNumber);
     });
 
     $(selectorStar).on('click', function(e) {
@@ -37,10 +37,12 @@
 
     $(selectorRatingStars).on('mouseleave', function(e) {
         unmarkAllStars(e.target.parentElement);
-        if (e.target.parentElement.currentlySelectedStars === undefined || e.target.parentElement.currentlySelectedStars === 0) {
+        if (e.target.parentElement.currentlySelectedStars === undefined
+            || e.target.parentElement.currentlySelectedStars === 0) {
             return;
         }
-        markStarsAsSelected(e.target.parentElement, e.target.parentElement.currentlySelectedStars);
+        markStarsAsSelected(e.target.parentElement,
+            e.target.parentElement.currentlySelectedStars);
     });
 
 

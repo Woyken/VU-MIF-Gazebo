@@ -78,7 +78,8 @@ public class ProductController implements Serializable {
     }
 
     public void search() {
-        productsPage = productHelper.getProductsPage(paging.getActivePage(), paging.getPageSize(), productSearch);
+        productsPage = productHelper
+            .getProductsPage(paging.getActivePage(), paging.getPageSize(), productSearch);
         paging.setTotalPages(productsPage.getTotalPages());
     }
 

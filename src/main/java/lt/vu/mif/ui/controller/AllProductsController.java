@@ -1,5 +1,7 @@
 package lt.vu.mif.ui.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
@@ -7,16 +9,14 @@ import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Named
 @ViewScoped
 public class AllProductsController {
     @Autowired
     private IProductHelper productHelper;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private boolean multipleDeleteEnabled = false;
 
     @Setter
