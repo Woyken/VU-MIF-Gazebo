@@ -1,8 +1,38 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
 
-<h1>Atsiprašome, bet jūs neturite reikiamų teisių pasiekti šį puslapį.</h1>
+<h:head>
+    <title>Turime problemą!</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-</body>
+    <h:outputStylesheet name="/css/vendor/foundation.css" />
+    <h:outputStylesheet name="/css/vendor/foundation-icons.css" />
+    <h:outputStylesheet name="/css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</h:head>
+<h:body>
+
+    <div class="body-wrapper">
+        <!-- NAVIGATION BAR -->
+        <ui:include src="./templates/navbars/_container.xhtml" />
+
+        <!-- 403 ACCESS DENIED -->
+        <ui:include src="templates/errors/403-access-denied.xhtml" />
+    </div>
+
+    <!-- FOOTER -->
+    <ui:include src="./templates/footers/footer.xhtml" />
+
+
+    <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
+    <h:outputScript name="js/vendor/foundation.js"/>
+    <h:outputScript name="js/foundation-app.js"/>
+    <h:outputScript name="js/vendor/what-input.js"/>
+
+</h:body>
 </html>
