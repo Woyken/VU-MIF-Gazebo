@@ -72,8 +72,7 @@ public class UserHelper implements IUserHelper {
     }
 
     public void changeCurrentUserPassword(String newPassword) {
-        userRepository.changeUserPassword(userService.getLoggedUserEmail(),
-            passwordEncoder.encode(newPassword));
+        userRepository.changeUserPassword(userService.getLoggedUserEmail(), passwordEncoder.encode(newPassword));
     }
 
     public boolean checkIfUserExists(String userEmail) {

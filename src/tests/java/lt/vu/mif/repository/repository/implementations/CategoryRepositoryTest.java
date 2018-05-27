@@ -1,4 +1,4 @@
-package lt.vu.mif.repository.repository.implementations;
+package lt.vu.mif.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;

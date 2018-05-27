@@ -17,7 +17,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "DISCOUNT")
 public class Discount {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")

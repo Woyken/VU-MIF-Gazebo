@@ -42,7 +42,7 @@
         <div class="small-12 medium-6 large-5 columns">
 
             <!-- SKU code for ADMIN -->
-            <h:form rendered="#{userService.getLoggedUser().getRole() == 'ADMIN'}">
+            <h:form rendered="#{userService.getLoggedUser().getRole() == 'ADMIN'}" >
                 <h5 class="font-bold text-center">
                     SKU -- #{productDetailsController.productView.sku}
                 </h5>
@@ -62,8 +62,7 @@
                         <label for="product-category" class="font-bold">Kategorija:</label>
                     </div>
                     <div class="small-9 columns">
-                        <h:outputText id="product-category"
-                                      value="#{productDetailsController.productView.category.name}"/>
+                        <h:outputText id="product-category" value="#{productDetailsController.productView.category.name}"/>
                     </div>
                     <br/>
                     <br/>
@@ -135,10 +134,8 @@
                 </div>
 
                 <!-- Add to cart -->
-                <h:commandButton
-                        class="button large hollow expanded primary-inverted js-add-to-cart-details"
-                        value="PRIDĖTI Į KREPŠELĮ"
-                        rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}">
+                <h:commandButton class="button large hollow expanded primary-inverted js-add-to-cart-details"
+                                 value="PRIDĖTI Į KREPŠELĮ" rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}">
                     <f:actionListener
                             binding="#{cartController.addProductToCart(productDetailsController.productView.id, amount.value)}"/>
                     <f:actionListener
@@ -148,7 +145,7 @@
 
                 <p:outputLabel rendered="#{productDetailsController.showSuccessMessage}"
                                value="Prekė pridėta į krepšelį"
-                               class="success-text-large text-center"/>
+                               class="success-text-large text-center" />
             </h:form>
 
             <!-- [Button][Admin] Edit product -->

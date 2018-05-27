@@ -146,8 +146,7 @@ public class ProductHelper implements IProductHelper {
     }
 
     @Override
-    public Page<ProductView> getProductsPage(int activePage, int pageSize,
-        ProductSearchView search) {
+    public Page<ProductView> getProductsPage(int activePage, int pageSize, ProductSearchView search) {
         return productRepository
             .getProductsPage(productSearchMapper.toEntity(search), activePage, pageSize)
             .map(productMapper::toView);
@@ -169,7 +168,7 @@ public class ProductHelper implements IProductHelper {
         CompletionStage<ImportResult> productPromise = productExcelReader
             .readFile(inputStream);
 
-        productPromise.thenAccept(importResult -> {
+        productPromise.thenAccept(importResult ->  {
             List<Product> productsToSave = productParser.parseProducts(importResult);
             saveAll(productsToSave);
         });

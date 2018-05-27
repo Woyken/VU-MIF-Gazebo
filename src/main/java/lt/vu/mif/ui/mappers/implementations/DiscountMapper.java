@@ -50,6 +50,7 @@ public class DiscountMapper implements IMapper<Discount, DiscountView> {
         view.setStartTime(entity.getFrom().format(DateTimeFormatter.ofPattern("HH:mm")));
         view.setEndTime(entity.getTo().format(DateTimeFormatter.ofPattern("HH:mm")));
 
+
         return view;
     }
 

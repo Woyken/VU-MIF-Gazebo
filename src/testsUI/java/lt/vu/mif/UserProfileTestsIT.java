@@ -55,15 +55,14 @@ public class UserProfileTestsIT {
         driver.findElement(By.id("username")).sendKeys(username);
         driver.findElement(By.id("password")).sendKeys(password);
         //Click login
-        driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/div/div/div/div[4]/div/input"))
-            .click();
+        driver.findElement(By.xpath("/html/body/form/div/div/div/div[4]/div/input")).click();
     }
 
     @Test
     public void registration_success() {
         Actions action = new Actions(driver);
         //Load main page
-        Assertions.assertTrue(driver.getTitle().equals("Internetinė parduotuvė Gazebo.lt"));
+        Assertions.assertTrue(driver.getTitle().equals("Home"));
 
         //Navigate to register
         WebElement dropDown = driver.findElement(By.linkText("Paskyra"));
@@ -83,13 +82,16 @@ public class UserProfileTestsIT {
         driver
             .findElement(By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[5]/div/input"))
             .click();
-        Assertions.assertTrue(driver.findElement(By.id("j_idt11:message")).getText()
+        Assertions.assertTrue(driver.findElement(By.id("j_idt9:message")).getText()
             .contains("thisisemail@email.com sėkmingai sukurtas"));
+
+        //TODO: Currently there's no way to navigate back. For now just directly move back.
+        driver.get("http://localhost:" + localServerPort + "/");
 
         //Do login
         loginFromCurrentWindow(driver, "thisisemail@email.com", "Q!w2erty");
         //Check if in main page
-        Assertions.assertTrue(driver.getTitle().equals("Internetinė parduotuvė Gazebo.lt"));
+        Assertions.assertTrue(driver.getTitle().equals("Home"));
         Assertions.assertTrue(driver.getCurrentUrl().contains("/main.xhtml"));
     }
 
@@ -142,17 +144,13 @@ public class UserProfileTestsIT {
         Assertions.assertEquals(currentEmail, driver
             .findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[1]/div/label/input"))
             .getAttribute("value"));
-        //Enter new email and password
-        String newEmail = "mynewemail@email.com";
+        String newEmail = "myNewEmail@email.com";
         driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[2]/div/label/input"))
             .sendKeys(newEmail);
         driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[3]/div/label/input"))
             .sendKeys(newEmail);
         driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[4]/div/label/input"))
             .sendKeys(currentPassword);
-        //Click change email button.
-        driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[6]/div/input"))
-            .click();
         //Wait for ajax to finish
         WebElement resultLabel = new WebDriverWait(driver, 3).until(ExpectedConditions
             .visibilityOfElementLocated(

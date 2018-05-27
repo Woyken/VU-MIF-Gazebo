@@ -82,14 +82,12 @@ html {
 .button.red:hover {
 	background-color: #D32F2F;
 }
-
 .button.blue {
-    color: white;
-    background-color: #00BCD4;
+	color: white;
+	background-color: #00BCD4;
 }
-
 .button.blue:hover {
-    background-color: #03A9F4;
+	background-color: #03A9F4;
 }
 
 .button.success {
@@ -227,11 +225,10 @@ body {
     margin: 0;
     padding: 0;
 }
-
 #filter-aside {
     padding-right: 5%;
     height: 70vh;
-    overflow: auto;
+	overflow: auto;
 }
 
 /* Shopping cart */
@@ -492,15 +489,15 @@ label.input-label {
 }
 
 .success-text {
-    color: #4CAF50;
-    font-size: 12px;
-    font-weight: bold;
+	color: #4CAF50;
+	font-size: 12px;
+	font-weight: bold;
 }
 
 .success-text-large {
-    color: #4CAF50;
-    font-size: 20px;
-    font-weight: bold;
+	color: #4CAF50;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .large-text {
@@ -560,12 +557,10 @@ legend {
 .no-top-mar { 	/* no top margin */
 	margin-top: 0;
 }
-
 .mar-top-5 {
-    margin-top: 5%;
+	margin-top: 5%;
 }
-
-.mar-bot-1 { /* margin bottom 1rem */
+.mar-bot-1 {    /* margin bottom 1rem */
     margin-bottom: 1rem;
 }
 .mar-bot-5 {	/* margin bottom 5% */
@@ -592,5 +587,5 @@ legend {
 }
 
 .red {
-    color: red;
+	color: red;
 }

@@ -65,36 +65,34 @@
 
                     <div class="columns medium-7 small-12">
                         <!-- Discount was found -->
-                        <h:panelGroup
-                                rendered="#{productEditController.productView.discount != null}">
+                        <h:panelGroup rendered="#{productEditController.productView.discount != null}">
                             <!-- Discount as percentage -->
                             <h:outputText
                                     class="font-bold font-italic success-text-large"
                                     value="Pritaikyta #{productEditController.productView.discount.percentageDiscount}% nuolaida"
-                                    rendered="#{productEditController.productView.discount.percentageDiscount != null}"/>
+                                    rendered="#{productEditController.productView.discount.percentageDiscount != null}" />
 
                             <!-- Discount as absolute price -->
                             <h:outputText
                                     class="font-bold font-italic success-text-large"
                                     value="Naujoji kaina su nuolaida: #{productEditController.productView.discount.absoluteDiscount}€"
-                                    rendered="#{productEditController.productView.discount.absoluteDiscount != null}"/>
+                                    rendered="#{productEditController.productView.discount.absoluteDiscount != null}" />
                         </h:panelGroup>
 
                         <!-- Discount was not found -->
-                        <h:panelGroup
-                                rendered="#{productEditController.productView.discount == null}">
+                        <h:panelGroup rendered="#{productEditController.productView.discount == null}">
                             <h:outputText
-                                    styleClass="font-bold font-italic alert-text-large"
-                                    value="NEPRITAIKYTA"/>
+                                styleClass="font-bold font-italic alert-text-large"
+                                value="NEPRITAIKYTA"/>
                         </h:panelGroup>
                     </div>
 
                     <!-- [Button] Edit discount -->
                     <div class="columns small-3 medium-1">
                         <a
-                                class="button expanded primary"
-                                href="../../admin-product-discount.xhtml?productId=#{productEditController.productView.id}">
-                            <i class="fi-pencil"/>
+                            class="button expanded primary"
+                            href="../../admin-product-discount.xhtml?productId=#{productEditController.productView.id}">
+                            <i class="fi-pencil" />
                         </a>
                     </div>
 
@@ -104,7 +102,7 @@
                             <h:commandLink
                                     class="button expanded red"
                                     action="#{productEditController.removeDiscount}">
-                                <i class="fi-x"/>
+                                <i class="fi-x" />
                                 <f:ajax render="@form"/>
                             </h:commandLink>
                         </div>
@@ -145,18 +143,15 @@
 
                     <div class="columns small-12 medium-9">
                         <div class="row">
-                            <ui:repeat value="#{productEditController.productView.images}"
-                                       var="image">
+                            <ui:repeat value="#{productEditController.productView.images}" var="image">
                                 <div class="columns small-12 medium-3">
                                     <div class="box-for-buttons-on-image">
-                                        <p:graphicImage value="#{imageStreamer.image}"
-                                                        class="thumbnail">
+                                        <p:graphicImage value="#{imageStreamer.image}" class="thumbnail">
                                             <f:param name="id" value="#{image.id}"/>
                                         </p:graphicImage>
                                         <h:commandLink class="button red">
-                                            <f:ajax execute="@form" render="@form"
-                                                    listener="#{productEditController.removeImage(image)}"/>
-                                            <i class="fi-x"/>
+                                            <f:ajax execute="@form" render="@form" listener="#{productEditController.removeImage(image)}"/>
+                                            <i class="fi-x" />
                                         </h:commandLink>
                                     </div>
                                 </div>
@@ -166,15 +161,12 @@
                             <ui:repeat value="#{productEditController.newImages}" var="image">
                                 <div class="columns small-12 medium-3">
                                     <div class="box-for-buttons-on-image">
-                                        <p:graphicImage
-                                                value="#{productEditController.imageInMemoryStreamer.image}"
-                                                class="thumbnail">
+                                        <p:graphicImage value="#{productEditController.imageInMemoryStreamer.image}" class="thumbnail">
                                             <f:param name="id" value="#{image.id}"/>
                                         </p:graphicImage>
                                         <h:commandLink class="button red">
-                                            <f:ajax execute="@form" render="@form"
-                                                    listener="#{productEditController.removeImage(image)}"/>
-                                            <i class="fi-x"/>
+                                            <f:ajax execute="@form" render="@form" listener="#{productEditController.removeImage(image)}"/>
+                                            <i class="fi-x" />
                                         </h:commandLink>
                                     </div>
                                 </div>
@@ -182,11 +174,8 @@
 
                             <div class="columns medium-3 small-12">
                                 Pridėti prekės nuotrauką
-                                <h:inputFile value="#{productEditController.uploadedFile}"
-                                             mode="simple" skinSimple="true"
-                                             styleClass="button hollow">
-                                    <f:ajax listener="#{productEditController.handleUploadedFile}"
-                                            execute="@form" render="@form"/>
+                                <h:inputFile value="#{productEditController.uploadedFile}" mode="simple" skinSimple="true" styleClass="button hollow">
+                                    <f:ajax listener="#{productEditController.handleUploadedFile}" execute="@form" render="@form"/>
                                 </h:inputFile>
                             </div>
                         </div>
@@ -220,10 +209,8 @@
                                 <h5 class="font-bold">SKU</h5>
                             </div>
                             <div class="columns medium-9 small-12">
-                                <h:inputText
-                                        value="#{productEditController.conflictingProductView.sku}"
-                                        disabled="true"
-                                        styleClass="red"/>
+                                <h:inputText value="#{productEditController.conflictingProductView.sku}" disabled="true"
+                                             styleClass="red"/>
                             </div>
                         </div>
                         <div class="row align-middle">
@@ -231,10 +218,8 @@
                                 <h5 class="font-bold">Pavadinimas</h5>
                             </div>
                             <div class="columns medium-9 small-12">
-                                <h:inputText
-                                        value="#{productEditController.conflictingProductView.title}"
-                                        disabled="true"
-                                        styleClass="red"/>
+                                <h:inputText value="#{productEditController.conflictingProductView.title}" disabled="true"
+                                             styleClass="red"/>
                             </div>
                         </div>
                         <div class="row align-middle">
@@ -242,10 +227,8 @@
                                 <h5 class="font-bold">Kaina</h5>
                             </div>
                             <div class="columns medium-9 small-12">
-                                <h:inputText
-                                        value="#{productEditController.conflictingProductView.price}"
-                                        disabled="true"
-                                        styleClass="red"/>
+                                <h:inputText value="#{productEditController.conflictingProductView.price}" disabled="true"
+                                             styleClass="red"/>
                             </div>
                         </div>
                         <div class="row align-middle">
@@ -253,10 +236,8 @@
                                 <h5 class="font-bold">Kategorija</h5>
                             </div>
                             <div class="columns medium-9 small-12">
-                                <h:inputText
-                                        value="#{productEditController.conflictingProductView.category.name}"
-                                        disabled="true"
-                                        styleClass="red"/>
+                                <h:inputText value="#{productEditController.conflictingProductView.category.name}" disabled="true"
+                                             styleClass="red" />
                             </div>
                         </div>
                         <div class="row align-middle">
@@ -264,9 +245,8 @@
                                 <h5 class="font-bold">Aprašymas</h5>
                             </div>
                             <div class="columns medium-9 small-12">
-                                <h:inputTextarea
-                                        value="#{productEditController.conflictingProductView.description}"
-                                        rows="4" disabled="true" styleClass="red"/>
+                                <h:inputTextarea value="#{productEditController.conflictingProductView.description}"
+                                                 rows="4" disabled="true" styleClass="red"/>
                             </div>
                         </div>
                         <!-- Images -->
@@ -276,13 +256,10 @@
                             </div>
                             <div class="columns small-12 medium-9">
                                 <div class="row">
-                                    <ui:repeat
-                                            value="#{productEditController.conflictingProductView.images}"
-                                            var="image">
+                                    <ui:repeat value="#{productEditController.conflictingProductView.images}" var="image">
                                         <div class="columns small-12 medium-3">
                                             <div class="box-for-buttons-on-image">
-                                                <p:graphicImage value="#{imageStreamer.image}"
-                                                                class="thumbnail">
+                                                <p:graphicImage value="#{imageStreamer.image}" class="thumbnail">
                                                     <f:param name="id" value="#{image.id}"/>
                                                 </p:graphicImage>
                                             </div>
@@ -291,24 +268,24 @@
                                 </div>
                             </div>
                         </div> <!-- End of images -->
-                        <div class="row align-middle">
-                            <div class="columns small-8 medium-6">
-                                <h:commandButton
-                                        class="button success expanded"
-                                        value="Atnaujinti duomenis"
-                                        action="#{productEditController.updateProductView}">
-                                    <f:ajax execute="@form" render="@form"/>
-                                </h:commandButton>
+                    <div class="row align-middle">
+                        <div class="columns small-8 medium-6">
+                            <h:commandButton
+                                    class="button success expanded"
+                                    value="Atnaujinti duomenis"
+                                    action="#{productEditController.updateProductView}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
                         </div>
-                            <div class="columns small-6 medium-6">
-                                <h:commandButton
-                                        class="button success expanded"
-                                        value="Išsaugoti (pakeitimai bus užrašyti ant viršaus)"
-                                        action="#{productEditController.overrideProductView}">
-                                    <f:ajax execute="@form" render="@form"/>
-                                </h:commandButton>
-                            </div>
+                        <div class="columns small-6 medium-6">
+                            <h:commandButton
+                                    class="button success expanded"
+                                    value="Išsaugoti (pakeitimai bus užrašyti ant viršaus)"
+                                    action="#{productEditController.overrideProductView}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
                         </div>
+                    </div>
                     </section>
                 </h:panelGroup>
 
@@ -329,7 +306,7 @@
                         <div class="columns small-6 small-6">
                             <a
                                     class="button expanded red"
-                                    href="../../main.xhtml">
+                                    href="../../main.xhtml" >
                                 Atšaukti
                             </a>
                         </div>

@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RatingView {
-
     private Long orderId;
     private Long value;
     private String comment;
