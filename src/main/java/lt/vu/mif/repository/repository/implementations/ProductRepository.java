@@ -11,12 +11,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.product.Product_;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.utils.PersistenceUtils;
 import lt.vu.mif.utils.search.ProductSearch;
+import lt.vu.mif.utils.search.ProductSortEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +25,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 @Transactional
@@ -39,6 +40,17 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     public ProductRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport.getEntityInformation(Product.class, entityManager),
             entityManager);
+    }
+
+    @Override
+    public void update(Product entity) {
+        entityManager.merge(entity);
+    }
+
+    public void updateAll(List<Product> products) {
+        for (Product product : products) {
+            entityManager.merge(product);
+        }
     }
 
     public void deleteAll(List<Long> productIds) {
@@ -69,15 +81,20 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
         CriteriaQuery<Product> criteria = builder.createQuery(Product.class);
         Root<Product> root = criteria.from(Product.class);
 
-        criteria.where(root.get(Product_.id).in(ids));
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(root.get(Product_.id).in(ids));
+        predicates.add(builder.isFalse(root.get(Product_.deleted)));
+
+        criteria.where(PersistenceUtils.toArray(predicates));
         criteria.select(root);
 
         return entityManager.createQuery(criteria).getResultList();
     }
 
-    private List<Predicate> buildSearchPredicates(ProductSearch search, Root<Product> root,
-        CriteriaBuilder builder) {
+    private List<Predicate> buildSearchPredicates(ProductSearch search, Root<Product> root, CriteriaBuilder builder) {
+
         List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.isFalse(root.get(Product_.deleted)));
 
         if (StringUtils.isNotBlank(search.getTitle())) {
             predicates.add(builder
@@ -95,16 +112,31 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
                 .add(builder.lessThanOrEqualTo(root.get(Product_.price), search.getMaxPrice()));
         }
 
+        if (!CollectionUtils.isEmpty(search.getCategories())) {
+            //TODO is this good??
+            predicates.add(root.get(Product_.category).in(search.getCategories()));
+        }
+
+        if (!search.isIncludeDeleted()) {
+            predicates
+                    .add(builder.isFalse(root.get(Product_.deleted)));
+        }
+
         return predicates;
     }
 
-    public Page<Product> getProductsPage(ProductSearch productSearch, int activePage,
-        int pageSize) {
+    public Page<Product> getProductsPage(ProductSearch productSearch, int activePage, int pageSize) {
         PageRequest pageRequest = PageRequest.of(activePage, pageSize);
 
-        Specification<Product> specification = (root, criteriaQuery, criteriaBuilder) ->
-            criteriaBuilder.and(PersistenceUtils
-                .toArray(buildSearchPredicates(productSearch, root, criteriaBuilder)));
+        Specification<Product> specification = (root, criteriaQuery, criteriaBuilder) -> {
+            if(productSearch.getSortBy()== ProductSortEnum.CREATE_DATE)
+                criteriaQuery.orderBy(criteriaBuilder.desc(root.get(Product_.creationDate)));
+            else if(productSearch.getSortBy()== ProductSortEnum.PRICE_DESCENDING)
+                criteriaQuery.orderBy(criteriaBuilder.desc(root.get(Product_.price)));
+            else if(productSearch.getSortBy()== ProductSortEnum.PRICE_ASCENDING)
+                criteriaQuery.orderBy(criteriaBuilder.asc(root.get(Product_.price)));
+            return criteriaBuilder.and(PersistenceUtils.toArray(buildSearchPredicates(productSearch, root, criteriaBuilder)));
+        };
 
         return findAll(specification, pageRequest);
     }

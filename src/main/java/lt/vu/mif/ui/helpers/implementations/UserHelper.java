@@ -10,13 +10,17 @@ import lt.vu.mif.model.user.User;
 import lt.vu.mif.model.user.UserTokenTuple;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
 import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
+import lt.vu.mif.ui.mappers.implementations.AdminUserMapper;
 import lt.vu.mif.ui.mappers.implementations.UserMapper;
+import lt.vu.mif.ui.view.AdminUserView;
 import lt.vu.mif.ui.view.UserView;
 import lt.vu.mif.utils.interfaces.ITokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Component
 public class UserHelper implements IUserHelper {
 
@@ -34,11 +38,18 @@ public class UserHelper implements IUserHelper {
     private IEmailProvider emailProvider;
     @Autowired
     private ITokenGenerator tokenGenerator;
+    @Autowired
+    private AdminUserMapper adminUserMapper;
 
 
     public UserView get(Long id) {
         User user = userRepository.get(id);
         return user == null ? null : userMapper.toView(user);
+    }
+
+    public AdminUserView getAdminView(Long id) {
+        User user = userRepository.get(id);
+        return user == null ? null : adminUserMapper.toView(user);
     }
 
     @Override
@@ -61,14 +72,14 @@ public class UserHelper implements IUserHelper {
     }
 
     public void changeCurrentUserPassword(String newPassword) {
-        userRepository.changeUserPassword(userService.getLoggedUserEmail(), newPassword);
+        userRepository.changeUserPassword(userService.getLoggedUserEmail(), passwordEncoder.encode(newPassword));
     }
 
     public boolean checkIfUserExists(String userEmail) {
         return userRepository.checkIfUserExists(userEmail);
     }
 
-    public void updateUserToken(String userEmail) {
+    public void remindPassword(String userEmail) {
         User user = userRepository.getUserByEmail(userEmail);
         user.setTokenCreationDate(LocalDateTime.now());
 
@@ -96,13 +107,11 @@ public class UserHelper implements IUserHelper {
     //TODO: apgalvoti, ar emailo siuntimas turi vykti kitoje transakcijoje, ar ne
     private void sendEmail(String email, String token) {
         String emailContent = emailContentGenerator.createPasswordRemindEmailBody(token);
-
-        updateUserToken(email);
         emailProvider.sendSimpleMailTo(email, "Slaptažodžio pakeitimas", emailContent);
     }
 
     @Override
-    public List<UserView> getAllUsers() {
-        return userMapper.toViews(userRepository.findAll());
+    public List<AdminUserView> getAllUsers() {
+        return adminUserMapper.toViews(userRepository.findAll());
     }
 }

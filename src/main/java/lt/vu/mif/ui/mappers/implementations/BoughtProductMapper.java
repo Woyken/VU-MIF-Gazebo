@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import lt.vu.mif.model.order.OrderProduct;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.BoughtProductView;
+import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -36,14 +37,14 @@ public class BoughtProductMapper implements IMapper<OrderProduct, BoughtProductV
         }
 
         BoughtProductView view = new BoughtProductView();
-
+        view.setId(entity.getProduct().getId());
         //TODO: fetch only one product from DB, not all
         view.setImage(imageMapper.toView(entity.getProduct().getImages().get(0)));
         view.setDate(entity.getOrder().getCreationDate()
-            .format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm")));
+            .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
         view.setQuantity(entity.getQuantity());
         view.setPrice(
-            entity.getProduct().getPrice().multiply(new BigDecimal(entity.getQuantity())));
+            entity.getPrice().multiply(new BigDecimal(entity.getQuantity())));
         view.setTitle(entity.getProduct().getTitle());
         view.setProductId(entity.getProduct().getId());
 

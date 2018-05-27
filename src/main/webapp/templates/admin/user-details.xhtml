@@ -10,7 +10,12 @@
 
     <div id="details-user-window">
 
-        <div class="row section">
+        <!-- USER INFO TITLE -->
+        <div class="row column text-center section">
+            <h1 class="section-title">Pirkėjo Informacija</h1>
+        </div> <!-- END OF USER INFO TITLE -->
+
+        <div class="row section" id="info">
             <div class="columns small-6">
                 <p class="user-email-box">
                     <b>
@@ -21,103 +26,130 @@
                         Average price or cart
                         Total price of all carts     -->
                 <p>
-                    Užsakymai: 54
+                    Užsakymai: #{userDetailsController.user.ordersCount}
                     <br/>
-                    Vidutinė suma: 19€
+                    Vidutinė suma #{userDetailsController.user.averagePrice} €
                     <br/>
-                    Bendra suma: 769€
+                    Bendra suma:  #{userDetailsController.user.ordersSum} €
                 </p>
+                <h:form id="my-form">
+                    <div class="small-8 medium-5 large-4">
+                        <h:commandButton class="button expanded" value="#{userDetailsController.user.blocked ? 'Atblokuoti' : 'Blokuoti'}"
+                                         styleClass="button expanded #{userDetailsController.user.blocked ? 'green' : 'orange'}"
+                                         disabled="#{userDetailsController.user.role == 'ADMIN' ? 'true' : 'false'}"
+                                         action="#{userDetailsController.blockUser}">
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
+                    </div>
+                </h:form>
             </div>
         </div>
 
-        <div id="shopping-list-header" class="row section hide-for-small-only">
-            <div class="columns small-5"> <h5>Prekė</h5>    </div>
-            <div class="columns small-3"> <h5>Data</h5>     </div>
-            <div class="columns small-2"> <h5>Kiekis</h5>   </div>
-            <div class="columns small-2"> <h5>Kaina</h5>    </div>
-        </div>
+        <h:panelGroup rendered="#{!empty ordersController.userOrders}">
 
-        <div id="shopping-list-body" class="row align-middle">
-            <h:panelGroup id="productList" style="display:contents">
-                <ui:repeat value="#{userDetailsController.page.content}" var="product">
-                    <!-- PRODUCT LINE -->
-                    <div class="small-12 medium-5 columns">
+            <!-- USER ORDERS LIST TITLE -->
+            <div class="row column text-center section">
+                <h3 class="section-title">Pirkėjo užsakymai</h3>
+            </div> <!-- END OF USER ORDERS LIST TITLE -->
+
+            <!-- ORDERS HISTORY -->
+            <div id="shopping-list-header" class="row section hide-for-small-only">
+                <div class="columns small-2"><h5>Užsakymo Nr.</h5></div>
+                <div class="columns small-3"><h5>Data</h5></div>
+                <div class="columns small-3"><h5>Užsakymo būsena</h5></div>
+                <div class="columns small-2"><h5>Krepšelio kaina</h5></div>
+            </div>
+
+            <div id="shopping-list-body" class="row align-middle">
+                <ui:repeat value="#{ordersController.userOrders}" var="order">
+                    <!-- Order number -->
+                    <div class="small-12 medium-2 columns">
                         <div class="row align-middle align-top">
-
-                            <!-- Product image. -->
-                            <div class="small-12 medium-6 columns align-right">
-                                <a href="../../product-details.xhtml?productId=#{product.productId}">
-                                    <p:graphicImage class="thumbnail" value="#{imageStreamer.image}">
-                                        <f:param name="id" value="#{product.image.id}"/>
-                                    </p:graphicImage>
-                                </a>
-                            </div>
-
-                            <!-- Product name. -->
-                            <div class="small-12 medium-6 columns">
-                                <a href="../../product-details.xhtml?productId=#{product.productId}">
-                                    <h5>GZ Air Force v4</h5>
-                                    <h:outputLabel value="#{product.title}"/>
-                                </a>
-                            </div>
+                            <p:outputLabel styleClass="large-text" value="#{order.id}"/>
                         </div>
                     </div>
 
                     <!-- Date bought. -->
                     <div class="medium-3 columns hide-for-small-only">
                         <div class="row column">
-                            <h:outputText value="#{product.date}"/>
+                            <p:outputLabel styleClass="large-text" value="#{order.creationDate}"/>
+                        </div>
+                    </div>
+                    <!-- [Mobile] Date bought -->
+                    <div class="small-12 columns hide-for-medium">
+                        <div class="row column">
+                            <p:outputLabel styleClass="large-text" value="#{order.creationDate}"/>
                         </div>
                     </div>
 
                     <!-- Product quantity. -->
-                    <div class="small-12 medium-2 columns">
-                        <p:outputLabel value="#{product.quantity}"/>
+                    <div class="small-12 medium-3 columns">
+                        <p:outputLabel styleClass="large-text" value="#{order.status.name}"/>
                     </div>
 
                     <!-- Price of the product. -->
                     <div class="small-12 medium-2 columns">
-                        <p:outputLabel value="#{product.price}"/>
+                        <p:outputLabel styleClass="shopping-cart-price large-text" value="#{order.totalSum} €"/>
+                    </div>
+
+                    <!-- [Button] Add to current cart -->
+                    <div class="small-2 columns hide-for-small-only">
+                        <a href="../../admin-details-order.xhtml?orderId=#{order.id}" class="button expanded primary">
+                            Peržiūrėti
+                        </a>
+                    </div>
+                    <!-- [Mobile][Button] Add to current cart -->
+                    <div class="small-12 columns hide-for-medium">
+                        <a href="../../cart-history.xhtml?orderId=#{order.id}" class="button expanded primary">
+                            Peržiūrėti
+                        </a>
                     </div>
                 </ui:repeat>
-            </h:panelGroup>
-        </div> <!-- END OF SHOPPING LIST BODY -->
+            </div> <!-- END OF SHOPPING HISTORY -->
 
-        <!--PAGING-->
-        <h:form id="paging-form">
-            <nav aria-label="Pagination">
-                <ul class="pagination text-center">
-                    <li class="pagination-previous">
-                        <h:commandLink value="Atgal"
-                                       disabled="#{userDetailsController.pagingIndex eq 0 and userDetailsController.paging.activePage eq 0}">
-                            <f:ajax execute="@form" listener="#{userDetailsController.previous}"
-                                    render="productList paging-form"/>
-                        </h:commandLink>
-                    </li>
-                    <ui:repeat value="#{userDetailsController.paging.totalPages}" var="page"
-                               varStatus="status" size="#{userDetailsController.paging.minValue}">
-                        <li>
-                            <h:commandLink
-                                    rendered="#{(status.index + 1 + userDetailsController.pagingIndex) le userDetailsController.page.totalPages}"
-                                    value="#{status.index + 1 + userDetailsController.pagingIndex}"
-                                    styleClass="#{status.index + userDetailsController.pagingIndex eq userDetailsController.paging.activePage ? 'current' : ''}">
-                                <f:ajax execute="@form"
-                                        listener="#{userDetailsController.search(status.index + userDetailsController.pagingIndex)}"
+            <br/><br/>
+
+            <!--PAGING-->
+            <h:form id="paging-form">
+                <nav aria-label="Pagination">
+                    <ul class="pagination text-center">
+                        <li class="pagination-previous">
+                            <h:commandLink value="Atgal"
+                                           disabled="#{userDetailsController.pagingIndex eq 0 and userDetailsController.paging.activePage eq 0}">
+                                <f:ajax execute="@form" listener="#{userDetailsController.previous}"
                                         render="productList paging-form"/>
                             </h:commandLink>
                         </li>
-                    </ui:repeat>
-                    <li class="pagination-next">
-                        <h:commandLink value="Pirmyn"
-                                       disabled="#{userDetailsController.paging.activePage + userDetailsController.paging.index + 1 eq userDetailsController.page.totalPages}">
-                            <f:ajax execute="@form" listener="#{userDetailsController.next}"
-                                    render="productList paging-form"/>
-                        </h:commandLink>
-                    </li>
-                </ul>
-            </nav>
-        </h:form>
-        <!--PAGING-->
+                        <ui:repeat value="#{userDetailsController.paging.totalPages}" var="page"
+                                   varStatus="status" size="#{userDetailsController.paging.minValue}">
+                            <li>
+                                <h:commandLink
+                                        rendered="#{(status.index + 1 + userDetailsController.pagingIndex) le userDetailsController.page.totalPages}"
+                                        value="#{status.index + 1 + userDetailsController.pagingIndex}"
+                                        styleClass="#{status.index + userDetailsController.pagingIndex eq userDetailsController.paging.activePage ? 'current' : ''}">
+                                    <f:ajax execute="@form"
+                                            listener="#{userDetailsController.search(status.index + userDetailsController.pagingIndex)}"
+                                            render="productList paging-form"/>
+                                </h:commandLink>
+                            </li>
+                        </ui:repeat>
+                        <li class="pagination-next">
+                            <h:commandLink value="Pirmyn"
+                                           disabled="#{userDetailsController.paging.activePage + userDetailsController.paging.index + 1 eq userDetailsController.page.totalPages}">
+                                <f:ajax execute="@form" listener="#{userDetailsController.next}"
+                                        render="productList paging-form"/>
+                            </h:commandLink>
+                        </li>
+                    </ul>
+                </nav>
+            </h:form>
+            <!--PAGING-->
+
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{empty ordersController.userOrders and userDetailsController.user.role != 'ADMIN'}">
+            <p:outputLabel styleClass="text-center" value="Šis pirkėjas dar nei karto neapsipirko"/>
+        </h:panelGroup>
 
     </div> <!-- END OF WINDOW -->
 

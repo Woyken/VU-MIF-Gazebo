@@ -9,13 +9,15 @@ import lt.vu.mif.payment.PaymentResponse;
 import lt.vu.mif.payment.PaymentService;
 import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
 import lt.vu.mif.ui.view.OrderView;
+import lt.vu.mif.utils.SessionManager;
+import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
 
 @Named
-@RequestScope
 @Getter
 @Setter
+@RequestScope
 public class PaymentController {
 
     @Autowired
@@ -24,6 +26,8 @@ public class PaymentController {
     private IOrdersHelper ordersHelper;
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private SessionManager sessionManager;
 
     private OrderView orderView = new OrderView();
 
@@ -56,16 +60,16 @@ public class PaymentController {
         if (error != null) {
             switch (error) {
                 case "OutOfFunds":
-                    message = "Jūsų kortelėje nepakanka pinigų";
+                    message = "Jūsų kortelėje nepakanka pinigų.";
                     return;
                 case "CardExpired":
-                    message = "Jūsų kortelė nebegalioja";
+                    message = "Jūsų kortelė nebegalioja.";
                     return;
                 case "ValidationError":
-                    message = "Neteisingi kortelės duomenys";
+                    message = "Neteisingi kortelės duomenys.";
                     return;
                 default:
-                    message = "Apmokėjimo servisas grąžino klaidą: \"" + error + "\"";
+                    message = "Atsiprašome, įvyko nenumatyta klaida.";
             }
         }
 
@@ -85,7 +89,10 @@ public class PaymentController {
         }
 
         ordersHelper.saveNewOrder(orderView, cartController.getProductsInCart());
-        cartController.getProductsInCart().clear();
+        cartController.clear();
+
+        sessionManager.setAttribute(Constants.SHOW_DIALOG_SESSION_PARAMETER, false);
+
         return "main?faces-redirect=true";
     }
 }

@@ -1,0 +1,194 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+>
+
+    <!-- PAGE TITLE. -->
+    <div class="row column text-center section">
+        <h1 class="section-title">
+            <p:outputLabel styleClass="large-text" value="Prekės kategorija ir požymiai"/>
+        </h1>
+    </div> <!-- END OF PAGE TITLE. -->
+
+
+
+    <div class="section">
+            <!-- New category -->
+        <h:form id="addCategoryForm">
+            <div class="row align-middle">
+
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Pridėti naują kategoriją</h5>
+                </div>
+
+                <div class="columns small-10 medium-8">
+                    <h:inputText value="#{productCategoryController.newCategory}"/>
+                </div>
+
+                <!-- [Button] Submit new category -->
+                <div class="columns small-2 medium-1">
+                    <h:commandButton
+                            class="button success"
+                            value="✓"
+                            action="#{productCategoryController.createNewCategory}">
+                        <f:ajax execute="@form" render="@form saveCategoryForm"/>
+                    </h:commandButton>
+                </div>
+            </div>
+
+            <!-- Creation Error/Success Message -->
+            <div class="row-align-middle text-center">
+                <div class="columns">
+                    <div class="mar-bot-5">
+                        <h:outputText class="alert-text-large"
+                                      value="#{productCategoryController.creationErrorMessage}"/>
+                        <h:outputText rendered="#{productCategoryController.isCreationSuccess}"
+                                      class="success-text-large"
+                                      value="Kategorija sėkmingai pridėta"/>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+        <!-- Choose category -->
+        <h:form id="saveCategoryForm">
+            <div class="row align-middle margin-top-3">
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Kategorija</h5>
+                </div>
+
+                <div class="columns small-10 medium-8">
+                    <h:selectOneMenu value="#{productCategoryController.selectedCategory}"
+                                     converter="omnifaces.SelectItemsConverter"
+                                     hideNoSelectionOption="true">
+                        <f:selectItem value="#{null}" itemLabel="Pasirinkite kategoriją:"
+                                      noSelectionOption="true"/>
+                        <f:selectItems value="#{productCategoryController.categories}"/>
+                        <f:ajax render="@form"
+                                listener="#{productCategoryController.categoryChange}"/>
+                    </h:selectOneMenu>
+                </div>
+            </div>
+
+
+            <!-- Assign a parent category to the selected category -->
+            <div class="row align-middle">
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Tėvinė kategorija</h5>
+                </div>
+
+                <div class="columns small-10 medium-8">
+                    <h:selectOneMenu value="#{productCategoryController.parentCategory}"
+                                     disabled="#{empty productCategoryController.selectedCategory}"
+                                     converter="omnifaces.SelectItemsConverter">
+                        <!--The usual way here would be to add a selectItem with null value to represent
+                        empty choice. The problem was that when selecting choices from list the back
+                        end value wouldn't update. Thus the dirty fix with two almost identical lists,
+                        except this one has a pseudo empty category in it.-->
+                        <f:selectItems value="#{productCategoryController.categoriesWithEmpty}"/>
+                        <f:ajax render="@form"/>
+                    </h:selectOneMenu>
+                </div>
+            </div>
+
+            <!-- Attributes -->
+            <div class="row">
+
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Kategorijos požymiai</h5>
+                </div>
+
+                <!-- Current attributes -->
+                <div class="columns small-12 medium-9">
+                    <div class="row">
+                        <div class="columns small-12 medium-3">
+
+                            <h:commandButton
+                                class="label warning"
+                                value="✖ Nike" >
+                            </h:commandButton>
+
+                            <h:commandButton
+                                class="label warning"
+                                value="✖ 36" >
+                            </h:commandButton>
+
+                            <h:commandButton
+                                class="label warning"
+                                value="✖ Red" >
+                            </h:commandButton>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Add new attribute -->
+            <div class="row">
+
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Pridėti požymį kategorijai</h5>
+                </div>
+
+                <div class="columns small-10 medium-8">
+                    <h:inputText/>
+                </div>
+
+                <!-- [Button] Save category -->
+                <div class="columns small-2 medium-1">
+                    <h:commandButton
+                            class="button success"
+                            value="✓">
+                        <f:ajax render="@form addCategoryForm"/>
+                    </h:commandButton>
+                </div>
+
+            </div>
+
+            <!-- Saving Error/Success Message -->
+            <div class="row-align-middle text-center">
+                <div class="columns">
+                    <div class="mar-bot-5">
+                        <h:outputText class="alert-text-large"
+                                      value="#{productCategoryController.savingErrorMessage}"/>
+                        <h:outputText rendered="#{productCategoryController.isSavingSuccess}"
+                                      class="success-text-large"
+                                      value="Kategorija sėkmingai išsaugota"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row align-middle section">
+
+                <!-- [Button] Save changes -->
+                <div class="columns small-6 medium-4">
+                    <h:commandButton
+                            class="button expanded success"
+                            value="Išsaugoti"
+                            action="#{productCategoryController.saveChanges}">
+                        <f:ajax render="@form"/>
+                    </h:commandButton>
+                </div>
+
+                <!-- [Button] Cancel -->
+                <div class="columns small-6 medium-4 medium-offset-4">
+                    <!-- If we came from main.xhtml - send them back there -->
+                    <a
+                            class="button expanded red"
+                            href="../../../admin-edit-product.xhtml">
+                        Grįžti
+                    </a>
+                </div>
+
+            </div>
+
+        </h:form>
+
+    </div>
+
+</ui:composition>

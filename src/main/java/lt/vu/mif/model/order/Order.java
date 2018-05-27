@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,9 +43,12 @@ public class Order {
     @Enumerated(value = EnumType.STRING)
     private OrderStatus status;
 
-    @Column(name = "RATING")
-    private Long rating;
-
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> products = new ArrayList<>();
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Rating rating;
+
+    @Column(name = "IS_RATED")
+    private boolean rated;
 }

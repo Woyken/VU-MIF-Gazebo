@@ -1,6 +1,9 @@
 package lt.vu.mif.model.product;
 
+import static javax.persistence.CascadeType.MERGE;
+
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -10,7 +13,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,6 +48,17 @@ public class Product {
     @Column(name = "IS_DELETED")
     private boolean deleted;
 
-    @Column(name = "NEWPRICE")
-    private BigDecimal newPrice;
+    @Column(name = "CREATION_DATE")
+    private LocalDateTime creationDate;
+
+    @ManyToOne(cascade = MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID")
+    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "DISCOUNT_ID")
+    private Discount discount;
+
+    @Version
+    private Integer version;
 }

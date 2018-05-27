@@ -7,10 +7,11 @@
 <f:metadata>
     <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
     <f:event type="preRenderView" listener="#{userDetailsController.onPageLoad}"/>
+    <f:event type="preRenderView" listener="#{ordersController.onPageLoadUser(userDetailsController.user.email)}"/>
 </f:metadata>
 
 <h:head>
-    <title>Home</title>
+    <title>Pirkėjo informacija</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 

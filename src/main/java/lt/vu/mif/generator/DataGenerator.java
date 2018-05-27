@@ -10,10 +10,14 @@ import java.util.List;
 import java.util.UUID;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderStatus;
+import lt.vu.mif.model.order.Rating;
+import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.user.Role;
 import lt.vu.mif.model.user.User;
+import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
@@ -31,6 +35,8 @@ public class DataGenerator {
     private IOrderRepository orderRepository;
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private ICategoryRepository categoryRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -84,15 +90,18 @@ public class DataGenerator {
 
     public void insertProducts() {
         List<Product> products = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
+        categories.addAll(createSportCategory());
+        categories.addAll(createFurnitureCategory());
 
         for (int i = 0; i < 15; i++) {
-            addProducts(products);
+            addProducts(products, categories);
         }
 
         productRepository.saveAll(products);
     }
 
-    private void addProducts(List<Product> products) {
+    private void addProducts(List<Product> products, List<Category> categories) {
         for (int i = 1; i <= 9; i++) {
             Product product = new Product();
             product.setDescription(getProductDescription(i));
@@ -103,9 +112,61 @@ public class DataGenerator {
             product.getImages().add(getImage("static/images/products/shoe-1.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-2.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-3.jpg"));
-            product.getImages().add(getImage("static/images/products/shoe-4.jpg"));
+            product.getImages().add(getImage("static/images/products/shoe-4.jpg"));      
+            product.setCreationDate(LocalDateTime.now());
+            product.setCategory(categories.get(i % categories.size()));
+            product.setDiscount(i % 7 == 0 ? getDiscount() : null);
             products.add(product);
         }
+    }
+
+    private List<Category> createFurnitureCategory() {
+        Category furniture = new Category();
+        furniture.setName("Baldai");
+
+        Category kitchen = new Category();
+        kitchen.setName("Virtuvės");
+
+        Category bedroom = new Category();
+        bedroom.setName("Miegamojo");
+
+        bedroom.setParentCategory(furniture);
+        kitchen.setParentCategory(furniture);
+
+        categoryRepository.save(furniture);
+        categoryRepository.save(kitchen);
+        categoryRepository.save(bedroom);
+
+        ArrayList<Category> categories = new ArrayList<Category>();
+        categories.add(furniture);
+        categories.add(kitchen);
+        categories.add(bedroom);
+        return categories;
+    }
+
+    private List<Category> createSportCategory() {
+        Category sport = new Category();
+        sport.setName("Sportas");
+
+        Category basketball = new Category();
+        basketball.setName("Krepšinis");
+
+        Category tennis = new Category();
+        tennis.setName("Tenisas");
+        tennis.setDiscount(getDiscount());
+
+        basketball.setParentCategory(sport);
+        tennis.setParentCategory(sport);
+
+        categoryRepository.save(sport);
+        categoryRepository.save(basketball);
+        categoryRepository.save(tennis);
+
+        ArrayList<Category> categories = new ArrayList<Category>();
+        categories.add(sport);
+        categories.add(basketball);
+        categories.add(tennis);
+        return categories;
     }
 
     private String getProductDescription(int index) {
@@ -148,24 +209,40 @@ public class DataGenerator {
         return image;
     }
 
+    private Discount getDiscount() {
+        Discount discount = new Discount();
+        discount.setPercentageDiscount(50L);
+        discount.setFrom(LocalDateTime.now());
+        discount.setTo(LocalDateTime.now().plusDays(1L));
+
+        return discount;
+    }
+
     public void insertOrders() {
+        for (int i = 1; i <= 10; i++) {
+            insertOrder(1);
+        }
+    }
+
+    public void insertOrder(int counter) {
         List<Order> orders = new ArrayList<>();
 
-        for (int i = 0; i < 15; i++) {
-            addOrders(orders);
-        }
+        Order order = new Order();
+        order.setRating(getRating());
+        order.setCreationDate(LocalDateTime.now());
+        order.setStatus(OrderStatus.ACCEPTED);
+        order.setUser(userRepository.getUserByEmail("user" + counter + "@gmail.com"));
+        order.setRated(true);
+        orders.add(order);
 
         orderRepository.saveAll(orders);
     }
 
-    private void addOrders(List<Order> orders) {
-        for (int i = 1; i <= 9; i++) {
-            Order order = new Order();
-            order.setRating(5L);
-            order.setCreationDate(LocalDateTime.now());
-            order.setStatus(OrderStatus.ACCEPTED);
-            order.setUser(generateSimpleUser());
-            orders.add(order);
-        }
+    private Rating getRating() {
+        Rating rating = new Rating();
+        rating.setDate(LocalDateTime.now());
+        rating.setComment("Order comment");
+        rating.setValue(3L);
+        return rating;
     }
 }

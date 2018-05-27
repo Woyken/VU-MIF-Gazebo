@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
 <f:metadata>
     <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
 </f:metadata>
 
 <h:head>
-    <title>Home</title>
+    <title>Prisijungti</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -17,72 +18,18 @@
     <h:outputStylesheet name="/css/styles.css" />
 </h:head>
 <h:body>
-    <!-- LOGIN FORM -->
-    <h:form prependId="false">
-        <div id="login-window">
 
-            <div class="row section">
-                <div class="columns small-10 small-offset-1 medium-6 medium-offset-3 large-4 large-offset-4">
-                    <h4 class="form-title text-center">
-                        Prisijungimas
-                    </h4>
-                    <br />
+    <div class="body-wrapper">
+        <ui:include src="./templates/navbars/_container.xhtml" />
+        <ui:include src="./templates/auth/login.xhtml" />
+    </div>
 
-                    <div class="row">
-                        <div class="columns">
-                            <label class="input-label">El. paštas
-                                <i class="fi-torso" />
-                                <h:inputText id="username"/>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="columns">
-                            <label class="input-label">Slaptažodis
-                                <span><i class="fi-lock" /></span>
-                                <h:inputSecret id="password"/>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="columns">
-                            <div class="mar-bot-5">
-                                <h:outputLabel
-                                    value="Neteisingi prisijungimo duomenys!"
-                                    rendered="${!empty param['error']}"
-                                    class="alert-text"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="columns">
-                            <h:commandButton class="button success expanded" value="PRISIJUNGTI"/>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="columns small-10 small-offset-1 small-collapse">
-                            <p class="text-right">
-                                <a class="link" href="password-remind.xhtml">Pamiršote slaptažodį?</a>
-                            </p>
-                        </div>
-                    </div>
+    <ui:include src="./templates/footers/footer.xhtml" />
 
-                    <hr class="no-top-mar"/>
-
-                    <div class="row">
-                        <div class="columns">
-                            <a href="register.xhtml" id="login-form-register" class="button primary expanded">REGISTRUOTIS</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </h:form>
-    <!-- END OF LOGIN FORM -->
 
     <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
     <h:outputScript name="js/vendor/foundation.js"/>
-    <!--<h:outputScript name="js/foundation-app.js"/>-->
+    <h:outputScript name="js/foundation-app.js"/>
     <h:outputScript name="js/vendor/what-input.js"/>
 
 </h:body>

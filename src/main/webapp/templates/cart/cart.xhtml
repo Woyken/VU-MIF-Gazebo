@@ -14,7 +14,7 @@
         <!-- [Button] GO TO CART HISTORY -->
         <div class="row section">
             <div class="columns small-12 medium-6 medium-offset-3">
-                <a href="../../cart-history.xhtml" class="button expanded hollow primary-inverted">
+                <a href="../../cart-orders.xhtml" class="button expanded hollow primary-inverted">
                     Peržiūrėti anksčiau pirktas prekes
                 </a>
             </div>
@@ -30,22 +30,20 @@
         <!-- SHOPPING CART ITEMS -->
         <h:form id="shopping-cart-items-form">
 
+            <h:panelGroup rendered="#{empty cartController.productsInCart}">
+                <div class="row">
+                    <h4 class="column text-center"> Jūsų prekių krepšelis šiuo metu yra tuščias</h4>
+                </div>
+            </h:panelGroup>
+
             <!-- Table heading -->
-            <div id="shopping-list-header" class="row section hide-for-small-only">
-                <div class="small-4 columns"> <h5>Prekė</h5>    </div>
-                <div class="small-4 columns"> <h5>Kiekis</h5>   </div>
-                <div class="small-4 columns"> <h5>Kaina</h5>    </div>
-
-                <!-- Total sum -->
-                <div id="shopping-list-price-sum" class="columns shopping-cart-price">Viso: #{cartController.sum} €</div>
-            </div>
-
-
-            <!-- [Mobile] Total sum -->
-            <div class="row section">
-                <div id="" class="columns shopping-cart-price hide-for-medium">Viso: #{cartController.sum} €</div>
-            </div>
-
+            <h:panelGroup rendered="#{not empty cartController.productsInCart}">
+                <div id="shopping-list-header" class="row section hide-for-small-only">
+                    <div class="small-4 columns"> <h5>Prekė</h5>    </div>
+                    <div class="small-4 columns"> <h5>Kiekis</h5>   </div>
+                    <div class="small-4 columns"> <h5>Kaina</h5>    </div>
+                </div>
+            </h:panelGroup>
 
             <div id="shopping-list-body" class="row align-middle">
                 <ui:repeat value="#{cartController.productsInCart}" var="productItem" varStatus="loop">
@@ -81,21 +79,28 @@
 
                     <!-- Product quantity. -->
                     <div class="medium-4 columns hide-for-small-only">
-                        <h:inputText class="half-width" value="#{productItem.amount}">
-                            <f:convertNumber integerOnly="true" type="number"/>
+                        <h:inputText class="half-width" value="#{productItem.amount}"
+                                     pt:type="number"
+                                     pt:min="1">
+                            <!--convertNumber produces a bug, where numbers above 1000 aren't rendered, fix unknown-->
+                            <!--<f:convertNumber integerOnly="true" type="number"/>-->
                             <f:validateLongRange minimum="1" />
-                            <p:ajax event="change" update="@form" />
+                            <p:ajax listener="#{cartController.onItemAmountChange}" event="change"
+                                    update="@form"/>
                         </h:inputText>
                     </div>
 
                     <!-- Price of the product. -->
                     <div class="medium-3 columns hide-for-small-only">
-                        <h5 class="shopping-cart-price">#{productItem.price * productItem.amount} €</h5>
+                        <h5 class="shopping-cart-price">#{empty productItem.newPrice ?
+                                productItem.price * productItem.amount : productItem.newPrice * productItem.amount} €</h5>
                     </div>
 
                     <!-- Remove item from cart -->
                     <div class="medium-1 columns hide-for-small-only">
-                        <h:commandLink class="button primary" value="&times;" pt:data-open="remove-item-from-cart-modal" action="#{cartController.selectForRemoval(productItem)}">
+                        <h:commandLink class="button primary red" value="&times;"
+                                       pt:data-open="remove-item-from-cart-modal"
+                                       action="#{cartController.selectForRemoval(productItem)}">
                             <p:ajax update="@form" />
                         </h:commandLink>
                     </div>
@@ -107,7 +112,8 @@
                                 <p class="font-bold">Kiekis:</p>
                             </div>
                             <div class="columns small-7">
-                                <h:inputText class="" value="#{productItem.amount}">
+                                <h:inputText class="" value="#{productItem.amount}" pt:type="number"
+                                             pt:min="1">
                                     <f:convertNumber integerOnly="true" type="number"/>
                                     <f:validateLongRange minimum="1" />
                                     <p:ajax event="change" update="@form" />
@@ -123,7 +129,9 @@
                                 <p class="font-bold">Kaina:</p>
                             </div>
                             <div class="columns small-7">
-                                <h5 class="shopping-cart-price">#{productItem.price * productItem.amount} €</h5>
+                                <h5 class="shopping-cart-price">#{empty productItem.newPrice ?
+                                        productItem.price * productItem.amount :
+                                        productItem.newPrice * productItem.amount} €</h5>
                             </div>
                         </div>
                     </div>
@@ -131,7 +139,7 @@
                     <!-- [Mobile][Button] Remove item from cart -->
                     <div class="small-10 small-offset-1 columns hide-for-medium">
                         <h:commandLink
-                                class="button primary expanded"
+                                class="button primary expanded red"
                                 value="Išimti prekę iš krepšelio"
                                 pt:data-open="remove-item-from-cart-modal"
                                 action="#{cartController.selectForRemoval(productItem)}">
@@ -139,13 +147,17 @@
                         </h:commandLink>
                     </div>
 
-
-
                 </ui:repeat>
             </div>
-
             <!-- END OF SHOPPING CART ITEMS -->
 
+            <!-- TOTAL SUM -->
+            <h:panelGroup rendered="#{not empty cartController.productsInCart}">
+                <div class="row section ">
+                    <h4 class="column medium-9 small-11 larger-text text-right"> </h4>
+                    <h4 class="column medium-3 small-1 larger-text text-right"> Viso: #{cartController.sum} € </h4>
+                </div>
+            </h:panelGroup>
 
             <!-- BOTTOM BUTTONS -->
             <div class="row section">
@@ -160,15 +172,15 @@
                 <!-- [Button] Buy cart items -->
                 <div class="hide-for-small-only medium-3 medium-offset-6">
                     <!--When user is logged in-->
-                    <p:commandLink class="button orange expanded"
+                    <p:commandLink class="button success expanded"
                                    value="Pirkti prekes"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and userService.isLoggedIn()}"
                                    action="#{cartController.buyProducts}"
                     />
                     <!--When user is not logged in-->
-                    <p:commandLink class="button orange expanded"
+                    <p:commandLink class="button success expanded"
                                    value="Pirkti prekes"
-                                   action="/login.xhtml"
+                                   action="#{cartController.buyWithoutLogin}"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
                 </div>
 
@@ -184,7 +196,7 @@
                     <!--When user is not logged in-->
                     <p:commandLink class="button orange expanded"
                                    value="Pirkti prekes"
-                                   action="/login.xhtml"
+                                   action="#{cartController.buyWithoutLogin}"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
                 </div>
                     

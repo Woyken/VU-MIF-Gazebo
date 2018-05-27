@@ -7,9 +7,12 @@
 <f:metadata>
     <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
 </f:metadata>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{ratingController.onPageLoad}"/>
+</f:metadata>
 
 <h:head>
-    <title>Home</title>
+    <title>Internetinė parduotuvė Gazebo.lt</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -39,7 +42,10 @@
     <h:outputScript name="js/vendor/foundation.js"/>
     <h:outputScript name="js/foundation-app.js"/>
     <h:outputScript name="js/vendor/what-input.js"/>
+    <h:outputScript name="js/vendor/notify.min.js" />
+    <h:outputScript name="js/add-to-cart-notification.js" />
     <h:outputScript name="js/rate-shopping-experience.js" />
+    <!--<h:outputScript name="js/aside-filter.js" />-->
 
 </h:body>
 </html>

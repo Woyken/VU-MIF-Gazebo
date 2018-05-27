@@ -10,10 +10,10 @@
 
         <!-- PAGE TITLE -->
         <div class="row column text-center section">
-            <h1 class="section-title">Pirkimo istorija</h1>
+            <h1 class="section-title">Užsakymo istorija</h1>
         </div> <!-- END OF PAGE TITLE -->
 
-        <h:panelGroup rendered="#{!empty userProductHistoryController.products.content}">
+        <h:panelGroup rendered="#{not empty orderDetailsController.orderView.products}">
             <!-- SHOPPING HISTORY -->
             <div id="shopping-list-header" class="row section hide-for-small-only">
                 <div class="columns small-5"><h5>Prekė</h5></div>
@@ -23,14 +23,14 @@
             </div>
 
             <div id="shopping-list-body" class="row align-middle">
-                <ui:repeat value="#{userProductHistoryController.products.content}" var="product">
+                <ui:repeat value="#{orderDetailsController.orderView.products}" var="product">
                     <!-- Product image and name -->
                     <div class="small-12 medium-5 columns">
                         <div class="row align-middle align-top">
 
                             <!-- Image -->
                             <div class="small-12 medium-6 columns align-right">
-                                <a href="../../product-details.xhtml?productId=#{product.productId}">
+                                <a href="../../product-details.xhtml?productId=#{product.id}">
                                     <p:graphicImage class="thumbnail"
                                                     value="#{imageStreamer.image}">
                                         <f:param name="id" value="#{product.image.id}"/>
@@ -50,13 +50,13 @@
                     <!-- Date bought. -->
                     <div class="medium-2 columns hide-for-small-only">
                         <div class="row column">
-                            <p:outputLabel styleClass="large-text" value="#{product.date}"/>
+                            <p:outputLabel styleClass="large-text" value="#{orderDetailsController.orderView.creationDate}"/>
                         </div>
                     </div>
                     <!-- [Mobile] Date bought -->
                     <div class="small-12 columns hide-for-medium">
                         <div class="row column">
-                            <p:outputLabel styleClass="large-text" value="#{product.date}"/>
+                            <p:outputLabel styleClass="large-text" value="#{orderDetailsController.orderView.creationDate}"/>
                         </div>
                     </div>
 
@@ -72,11 +72,11 @@
 
                     <!-- [Button] Add to current cart -->
                     <div class="small-1 columns hide-for-small-only">
-                        <h:form>
+                        <h:form rendered="#{userService.getLoggedUser().getRole() != 'ADMIN'}">
                             <h:commandButton class="button expanded primary"
                                              value="+"
                                              pt:data-open="inform-user-about-adding-to-cart-modal"
-                                             actionListener="#{cartController.addProductToCart(product.productId)}">
+                                             actionListener="#{cartController.addProductToCart(product.id)}">
                                 <f:ajax execute="@form" render="@none"/>
                             </h:commandButton>
                         </h:form>
@@ -111,16 +111,12 @@
 
             <div id="shopping-list-total" class="row align-right">
                 <div class="columns">
-                    <p:outputLabel rendered="#{userProductHistoryController.totalSum ne null}"
-                                   styleClass="text-right larger-text"
-                                   value="Krepšelio vertė: #{userProductHistoryController.totalSum} €"/>
+                    <p:outputLabel styleClass="text-right larger-text"
+                                   value="Krepšelio vertė: #{orderDetailsController.orderView.totalSum} €"/>
                 </div>
             </div>
         </h:panelGroup>
 
-        <h:panelGroup rendered="#{empty userProductHistoryController.products.content}">
-            <p:outputLabel styleClass="text-center" value="Jūs dar nei karto neapsipirkote"/>
-        </h:panelGroup>
     </div>
 
     <!-- INFORM USER ABOUT ADDING TO CART MODAL -->

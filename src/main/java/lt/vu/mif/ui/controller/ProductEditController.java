@@ -1,63 +1,122 @@
 package lt.vu.mif.ui.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
+import lt.vu.mif.ui.helpers.interfaces.IImageHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.view.CategoryView;
+import lt.vu.mif.ui.view.ImageInMemoryStreamer;
+import lt.vu.mif.ui.view.ImageView;
 import lt.vu.mif.ui.view.ProductView;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.dao.OptimisticLockingFailureException;
 
 @Getter
 @Setter
-@Named
 @ViewScoped
+@Named
 public class ProductEditController {
+
     @Autowired
     private IProductHelper productHelper;
+    @Autowired
+    private ICategoryHelper categoryHelper;
+    @Autowired
+    private IImageHelper imageHelper;
 
+    private ImageInMemoryStreamer imageInMemoryStreamer = new ImageInMemoryStreamer();
     private ProductView productView;
+    private Part uploadedFile;
+    private boolean showSuccessMessage;
+    private boolean isProductFound;
+
+    private List<CategoryView> categories;
+    private CategoryView emptyCategory = new CategoryView();
+
+    private List<ImageView> newImages = new ArrayList<>();
+    private ProductView conflictingProductView;
 
     public void onPageLoad() {
-        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
-            return;
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
+
+        // If a product with passed in ID is not found -
+        // it means we want to add a new product
+        try {
+            productView = productHelper.getProductViewFromNavigationQuery();
+            conflictingProductView = null;
+            isProductFound = true;
+        } catch (IllegalArgumentException x) {
+            productView = new ProductView();
+            isProductFound = false;
         }
 
-        String productId = FacesContext.getCurrentInstance().getExternalContext()
-            .getRequestParameterMap().get("productId");
-        if (StringUtils.isBlank(productId)) {
-            throw new IllegalArgumentException("Invalid request parameter");
-        }
+        categories = categoryHelper.findAll();
+        //Omnifaces converter throws null pointer exception if I add an empty selectOneMenu item, so I have
+        //to do it this way
+        emptyCategory.setName("");
+        categories.add(0, emptyCategory);
 
-        productView = productHelper.getProduct(Long.valueOf(productId));
+        showSuccessMessage = false;
+    }
 
-        if (productView == null) {
-            throw new IllegalStateException("Product" + "with ID=" + productId + "not found");
-        }
+    public void handleUploadedFile() throws Exception {
+        ImageView imageView = new ImageView();
+        imageView.setId(ThreadLocalRandom.current().nextLong(Long.MIN_VALUE, 0));
+        imageView.setBytes(IOUtils.toByteArray(uploadedFile.getInputStream()));
+
+        imageInMemoryStreamer.addImage(imageView.getId(), uploadedFile.getInputStream());
+        newImages.add(imageView);
     }
 
     public void saveChanges() {
-//        Product product = new Product();
-//        List<Image> images = new ArrayList<Image>();
-//        List<ImageView> viewImages = productView.getImages();
-//        for (int i = 0; i < viewImages.size(); i++)
-//        {
-//            ImageView current = viewImages.get(i);
-//            Image img = new Image();
-//            img.setId(current.getId());
-//            img.setContent(current.getContent());
-//            images.add(img);
-//        }
-//
-//        product.setId(productView.getId());
-//        product.setSku(productView.getSku());
-//        product.setTitle(productView.getTitle());
-//        product.setPrice(productView.getPrice());
-//        product.setDescription(productView.getDescription());
-//        product.setImages(viewImages);
-//        productRepository.save(product);
+        productView.getImages().addAll(newImages);
+
+        if(newImages.isEmpty() && productView.getImages().isEmpty()) {
+            productView.getImages().add(imageHelper.getDefaultImage());
+        }
+
+        try {
+            productHelper.update(productView);
+            showSuccessMessage = true;
+            clearData();
+        } catch (OptimisticLockingFailureException ex) {
+            ex.printStackTrace();
+            conflictingProductView = productHelper.getProduct(productView.getId());
+        }
+    }
+
+    private void clearData() {
+        newImages.clear();
+        imageInMemoryStreamer.getImagesInMemory().clear();
+    }
+
+    public void removeImage(ImageView imageView) {
+        productView.getImages().remove(imageView);
+        newImages.remove(imageView);
+    }
+
+    public void removeDiscount() {
+        productView.setDiscount(null);
+        productHelper.update(productView);
+    }
+
+    public void updateProductView() {
+        productView = productHelper.getProduct(productView.getId());
+        conflictingProductView = null;
+    }
+
+    public void overrideProductView() {
+        productView.setVersion(conflictingProductView.getVersion());
+        saveChanges();
+        conflictingProductView = null;
     }
 }

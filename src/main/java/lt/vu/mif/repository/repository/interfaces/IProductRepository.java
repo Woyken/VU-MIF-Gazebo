@@ -17,9 +17,13 @@ public interface IProductRepository {
 
     void deleteById(Long id);
 
+    void deleteAll(List<Long> productIds);
+
     <S extends Product> S save(S entity);
 
     <S extends Product> List<S> saveAll(Iterable<S> entities);
 
-    void deleteAll(List<Long> productIds);
+    void update(Product entity);
+
+    void updateAll(List<Product> products);
 }

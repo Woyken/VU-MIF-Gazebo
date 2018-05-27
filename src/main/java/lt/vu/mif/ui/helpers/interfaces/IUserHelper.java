@@ -2,6 +2,7 @@ package lt.vu.mif.ui.helpers.interfaces;
 
 import java.util.List;
 import lt.vu.mif.model.user.UserTokenTuple;
+import lt.vu.mif.ui.view.AdminUserView;
 import lt.vu.mif.ui.view.UserView;
 
 public interface IUserHelper {
@@ -12,7 +13,7 @@ public interface IUserHelper {
 
     boolean checkIfUserExists(String userEmail);
 
-    void updateUserToken(String userEmail);
+    void remindPassword(String userEmail);
 
     UserTokenTuple getTokenCreationDate(String token);
 
@@ -20,9 +21,11 @@ public interface IUserHelper {
 
     void saveNewUser(String password, String email);
 
-    List<UserView> getAllUsers();
+    List<AdminUserView> getAllUsers();
 
     void blockUser(Long userId, boolean isBlocked);
 
     UserView get(Long id);
+
+    AdminUserView getAdminView(Long id);
 }

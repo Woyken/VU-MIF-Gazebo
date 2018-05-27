@@ -25,6 +25,14 @@
 
 
 /* --- --- --- Foundation overrides. */
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 .top-bar {
     background-color: white;
 }
@@ -73,6 +81,13 @@
 }
 .button.red:hover {
 	background-color: #D32F2F;
+}
+.button.blue {
+	color: white;
+	background-color: #00BCD4;
+}
+.button.blue:hover {
+	background-color: #03A9F4;
 }
 
 .button.success {
@@ -203,6 +218,18 @@ ul.menu.submenu.is-dropdown-submenu > li.is-submenu-item.is-dropdown-submenu-ite
 
 /* --- --- --- Our styles. */
 
+html,
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+#filter-aside {
+    padding-right: 5%;
+    height: 70vh;
+	overflow: auto;
+}
 
 /* Shopping cart */
 #shopping-list-header {
@@ -461,6 +488,18 @@ label.input-label {
 	font-weight: bold;
 }
 
+.success-text {
+	color: #4CAF50;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.success-text-large {
+	color: #4CAF50;
+	font-size: 20px;
+	font-weight: bold;
+}
+
 .large-text {
 	font-size: larger;
 }
@@ -518,6 +557,12 @@ legend {
 .no-top-mar { 	/* no top margin */
 	margin-top: 0;
 }
+.mar-top-5 {
+	margin-top: 5%;
+}
+.mar-bot-1 {    /* margin bottom 1rem */
+    margin-bottom: 1rem;
+}
 .mar-bot-5 {	/* margin bottom 5% */
 	margin-bottom: 5%;
 }
@@ -539,4 +584,8 @@ legend {
 }
 .display-contents {
     display: contents;
+}
+
+.red {
+	color: red;
 }

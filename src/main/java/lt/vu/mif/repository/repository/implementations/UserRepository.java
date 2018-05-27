@@ -10,7 +10,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import lt.vu.mif.model.user.User;
 import lt.vu.mif.model.user.UserTokenTuple;
 import lt.vu.mif.model.user.User_;
@@ -20,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Repository
@@ -58,8 +58,9 @@ public class UserRepository extends SimpleJpaRepository<User, Long> implements I
         CriteriaUpdate<User> criteria = builder.createCriteriaUpdate(User.class);
         Root<User> root = criteria.from(User.class);
 
-        criteria.where(builder.equal(root.get(User_.password), password));
-        criteria.set(root.get(User_.email), password);
+        criteria.where(builder.equal(root.get(User_.email), userEmail));
+        criteria.set(root.get(User_.password), password);
+
         entityManager.createQuery(criteria).executeUpdate();
     }
 

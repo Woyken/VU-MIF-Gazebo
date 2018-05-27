@@ -7,6 +7,7 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
+import lt.vu.mif.ui.view.AdminUserView;
 import lt.vu.mif.ui.view.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
@@ -19,7 +20,7 @@ public class UsersController {
     @Autowired
     private IUserHelper userHelper;
 
-    private List<UserView> users = new ArrayList<>();
+    private List<AdminUserView> users = new ArrayList<>();
 
     public void onPageLoad() {
         users = userHelper.getAllUsers();

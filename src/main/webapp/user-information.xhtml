@@ -6,7 +6,7 @@
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-    <title>Profile</title>
+    <title>Mano profilis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <h:outputStylesheet name="/css/vendor/foundation.css" />
@@ -32,8 +32,8 @@
             <!-- USER INFORMATION -->
             <div class="row">
                 <div class="columns">
-                    <h:outputLabel for="email" value="Jūsų el. paštas:"/>
-                    <h:outputText value="#{emailChangeController.loggedUserEmail}" id="email"/>
+                    <h:outputLabel for="email" class="larger-text" value="Jūsų el. paštas:"/>
+                    <h:outputText class="larger-text" value="#{userService.getLoggedUserEmail()}" id="email"/>
                 </div>
             </div>
             <!-- END OF USER INFORMATION -->
@@ -42,8 +42,8 @@
             <div class="row section">
 
                 <!-- [Button] Cart history -->
-                <div class="hide-for-small-only columns medium-3">
-                    <a href="../../cart-history.xhtml" class="button expanded hollow primary-inverted">
+                <div class="hide-for-small-only columns medium-4">
+                    <a href="../../cart-orders.xhtml" class="button expanded hollow primary-inverted">
                         Pirkimo istorija</a>
                 </div>
                 <!-- [Button][Mobile] Return to list -->
@@ -53,7 +53,7 @@
                 </div>
 
                 <!-- [Button] Change Email -->
-                <div class="hide-for-small-only columns medium-3">
+                <div class="hide-for-small-only columns medium-4">
                     <a href="#" data-open="change-email-modal" class="button expanded hollow primary-inverted">
                         Keisti el. paštą</a>
                 </div>
@@ -64,7 +64,7 @@
                 </div>
 
                 <!-- [Button] Change Password -->
-                <div class="hide-for-small-only columns medium-3">
+                <div class="hide-for-small-only columns medium-4">
                     <a href="#" data-open="change-password-modal" class="button expanded hollow primary-inverted">
                         Keisti slaptažodį</a>
                 </div>

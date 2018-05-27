@@ -28,7 +28,7 @@
                 <div class="input-group">
                     <h:inputText id="searchInput" class="input-group-field"
                                  value="#{productController.productSearch.title}"
-                                 placeholder="Atraskite save"/>
+                                 pt:placeholder="įveskite prekės pavadinimą" />
                     <div class="input-group-button">
                         <h:commandButton class="button" value="Ieškoti">
                             <f:ajax execute="searchInput"
@@ -47,8 +47,27 @@
         <div class="off-canvas-wrapper">
             <div id="product-filter-canvas" class="off-canvas position-left" data-off-canvas="">
 
-                <!-- [Mobile] PRICE FILTER -->
+                <!-- [Mobile] CATEGORY FILTER -->
                 <div class="columns small-12 margin-top-1">
+                    <h5 class="text-center font-bold">
+                        Visos prekių kategorijos
+                    </h5>
+
+                    <ul class="categories-menu menu vertical nested is-active filter-price-menu">
+                        <li>
+                            <ul class="vertical menu accordion-menu" data-accordion-menu="" data-submenu-toggle="true">
+                                <!-- FILTER BY CATEGORIES -->
+                                <ui:include src="categoryMenu.xhtml">
+                                    <ui:param name="parent" value="#{categoryTreeView.root}"/>
+                                </ui:include>
+                                <!-- END OF FILTER BY CATEGORIES -->
+                            </ul>
+                        </li>
+                    </ul>
+                </div> <!-- END OF [Mobile] CATEGORY FILTER -->
+
+                <!-- [Mobile] PRICE FILTER -->
+                <div class="columns small-12 margin-top-2">
                     <h5 class="text-center font-bold">Kaina</h5>
 
                     <ul class="categories-menu menu vertical nested is-active filter-price-menu">
@@ -87,61 +106,60 @@
                 </div> <!-- END OF [Mobile] PRICE FILTER -->
 
 
-                <!-- [Mobile] CATEGORY FILTER -->
+                <!-- [Mobile] ATTRIBUTE FILTER -->
                 <div class="columns small-12 margin-top-2">
-                    <h5 class="text-center font-bold"> Kategorija </h5>
+                    <h5 class="text-center font-bold"> Požymiai </h5>
 
                     <ul class="categories-menu menu vertical nested is-active">
 
                         <li>
-                            <input id="category-checkbox-mobile1" type="checkbox"/>
-                            <label for="category-checkbox-mobile1">
-                                Category 1
+                            <input id="attribute-checkbox-mobile1" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile1">
+                                Attribute 1
                             </label>
                         </li>
 
                         <li>
-                            <input id="category-checkbox-mobile2" type="checkbox"/>
-                            <label for="category-checkbox-mobile2">
-                                Category 2
+                            <input id="attribute-checkbox-mobile2" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile2">
+                                Attribute 2
                             </label>
                         </li>
 
                         <li>
-                            <input id="category-checkbox-mobile3" type="checkbox"/>
-                            <label for="category-checkbox-mobile3">
-                                Category 3
+                            <input id="attribute-checkbox-mobile3" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile3">
+                                Attribute 3
                             </label>
                         </li>
 
                         <li>
-                            <input id="category-checkbox-mobile4" type="checkbox"/>
-                            <label for="category-checkbox-mobile4">
-                                Category 4
+                            <input id="attribute-checkbox-mobile4" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile4">
+                                Attribute 4
                             </label>
                         </li>
 
                         <li>
-                            <input id="category-checkbox-mobile5" type="checkbox"/>
-                            <label for="category-checkbox-mobile5">
-                                Category 5
+                            <input id="attribute-checkbox-mobile5" type="checkbox"/>
+                            <label for="attribute-checkbox-mobile5">
+                                Attribute 5
                             </label>
                         </li>
 
                     </ul>
 
-                    <!-- [Button][Mobile] Filter by categories -->
-                    <button type="button" class="button expanded" data-close="">
+                    <!-- [Button][Mobile] Filter by attribute -->
+                    <button type="button" class="button expanded margin-top-1" data-close="">
                         Filtruoti
                     </button>
 
-                </div> <!-- END OF [Mobile] CATEGORY FILTER -->
-
+                </div> <!-- END OF [Mobile] ATTRIBUTE FILTER -->
 
             </div>
         </div>
 
-        <!-- [Mobile][Button] Filter by category -->
+        <!-- [Mobile][Button] Show off-canvas filter -->
         <div class="columns small-12">
             <button type="button" class="button expanded" data-toggle="product-filter-canvas">
                 Filtruoti prekes
@@ -151,21 +169,50 @@
     </div><!-- END OF [MOBILE] OFF-CANVAS PRODUCT FILTER -->
 
 
+    <!-- SORTING -->
+    <div class="row align-middle margin-bottom-0">
+
+        <div class="columns small-12 medium-3 medium-offset-4 shrink">
+            <span class="font-bold"> Rikiuoti pagal </span>
+        </div>
+
+        <div class="columns small-12 medium-3 padding-top-1">
+            <h:form>
+                <h:selectOneMenu value="#{productController.productSearch.sortBy}">
+                    <f:selectItem itemLabel="Naujausi aukščiau" itemValue="CREATE_DATE"/>
+                    <f:selectItem itemLabel="Brangiausi aukščiau" itemValue="PRICE_DESCENDING"/>
+                    <f:selectItem itemLabel="Pigiausi aukščiau" itemValue="PRICE_ASCENDING"/>
+
+                    <f:ajax listener="#{productController.search()}" render="productList"/>
+                </h:selectOneMenu>
+            </h:form>
+        </div>
+    </div> <!-- END OF SORTING -->
+
 
     <!-- MAIN SECTION -->
     <div class="row expanded">
 
 
-        <!-- FILTERING. -->
+        <!-- FILTERING -->
         <aside class="product-filters medium-3 large-2 columns hide-for-small-only">
             <div data-sticky-container="">
-                <div class="sticky" data-sticky="" data-top-anchor="search">
+                <div class="sticky" data-sticky="" data-top-anchor="search" data-margin-top="5">
                     <br/>
-                    <ul class="vertical menu margin-top-3" data-accordion-menu="">
+                    <h5 class="text-center font-bold">
+                        Visos kategorijos
+                    </h5>
 
+                    <ul id="filter-aside" class="vertical menu"  data-accordion-menu="" data-submenu-toggle="true">
+
+                        <!-- FILTER BY CATEGORIES -->
+                        <ui:include src="categoryMenu.xhtml">
+                            <ui:param name="parent" value="#{categoryTreeView.root}"/>
+                        </ui:include>
+                        <!-- END OF FILTER BY CATEGORIES -->
 
                         <!-- Filter by price -->
-                        <li class="product-filters-tab margin-top-1">
+                        <li class="product-filters-tab margin-top-3">
                             <h5 class="text-center font-bold "> Kaina </h5>
                             <ul class="categories-menu menu vertical nested is-active">
                                 <h:form>
@@ -194,7 +241,7 @@
                                         </div>
                                     </li>
 
-                                    <!--Confirm button-->
+                                    <!-- [Button] Filter by price -->
                                     <li>
                                         <h:commandButton class="button expanded" value="Filtruoti">
                                             <f:ajax execute="@form"
@@ -205,48 +252,49 @@
 
                                 </h:form>
                             </ul>
-                        </li>
+                        </li> <!-- End of filter by price -->
 
 
-                        <!-- Filter by categories -->
-                        <li class="margin-top-2">
-                            <h5 class="text-center font-bold "> Kategorija </h5>
+                        <!-- Filter by attributes -->
+                        <li class="margin-top-3">
+                            <h5 class="text-center font-bold "> Požymiai </h5>
                             <ul class="menu vertical nested is-active">
                                 <li>
-                                    <input id="category-checkbox1" type="checkbox"/>
-                                    <label for="category-checkbox1">
-                                        Sportiniai
+                                    <input id="attribute-checkbox1" type="checkbox"/>
+                                    <label for="attribute-checkbox1">
+                                        Atributas 1
                                     </label>
                                 </li>
 
                                 <li>
-                                    <input id="category-checkbox2" type="checkbox"/>
-                                    <label for="category-checkbox2">
-                                        Proginiai
+                                    <input id="attribute-checkbox2" type="checkbox"/>
+                                    <label for="attribute-checkbox2">
+                                        Atributas 2
                                     </label>
                                 </li>
 
                                 <li>
-                                    <input id="category-checkbox3" type="checkbox"/>
-                                    <label for="category-checkbox3">
-                                        Laisvalaikio
+                                    <input id="attribute-checkbox3" type="checkbox"/>
+                                    <label for="attribute-checkbox3">
+                                        Atributas 3
                                     </label>
                                 </li>
 
                                 <li>
-                                    <input id="category-checkbox4" type="checkbox"/>
-                                    <label for="category-checkbox4">
-                                        Šventėms
+                                    <input id="attribute-checkbox4" type="checkbox"/>
+                                    <label for="attribute-checkbox4">
+                                        Atributas 4
                                     </label>
                                 </li>
 
+                                <!-- [Button] Filter by attributes -->
                                 <li>
-                                    <button type="button" class="button expanded">
+                                    <button type="button" class="button expanded margin-top-1">
                                         Filtruoti
                                     </button>
                                 </li>
                             </ul>
-                        </li>
+                        </li> <!-- End of filter by attributes -->
 
                     </ul>
                 </div>
@@ -273,41 +321,46 @@
                         <!-- Product name -->
                         <h5 class="product-name bor-bot">#{productItem.title}</h5>
 
+                        <!-- Product categories -->
+                        <h6 class="product-category text-center">Kategorija: #{productItem.category.name} </h6>
 
                         <!-- IF THE PRODUCT IS NOT ON SALE - SHOW THIS -->
-                        <!--&lt;!&ndash; Product price &ndash;&gt;-->
-                        <!--<p class="product-price">€ #{productItem.price}</p>-->
+                        <!--Product price -->
+                        <h:panelGroup rendered="#{productItem.price eq productItem.newPrice}">
+                            <p class="product-price">€ #{productItem.price}</p>
+                        </h:panelGroup>
 
                         <!-- IF THE PRODUCT IS ON SALE - SHOW THIS -->
-                        <div class="hide-for-small-only">
-                            <!-- Product price -->
-                            <p class="product-price-new">€ #{productItem.price}</p>
+                        <h:panelGroup rendered="#{not (productItem.price eq productItem.newPrice)}">
+                            <div class="hide-for-small-only mar-bot-1">
+                                <!-- Product price -->
+                                <p class="product-price-new">€ #{productItem.newPrice}</p>
 
-                            <!-- Product old price -->
-                            <span class="product-price-old strike mar-bot-10">€ 59,99</span>
-                        </div>
+                                <!-- Product old price -->
+                                <span class="product-price-old strike mar-bot-10">€ #{productItem.price}</span>
+                            </div>
 
-                        <!-- [Mobile] -->
-                        <div class="hide-for-medium">
-                            <div class="row align-center">
-                                <div class="columns small-8 small-offset-2 expanded">
-                                    <!-- Product old price -->
-                                    <p class="product-price-mb-old strike mar-bot-5">€ 59,99</p>
-                                </div>
+                            <!-- [Mobile] -->
+                            <div class="hide-for-medium">
+                                <div class="row align-center">
+                                    <div class="columns small-8 small-offset-2 expanded">
+                                        <!-- Product old price -->
+                                        <p class="product-price-mb-old strike mar-bot-5">€ #{productItem.newPrice}</p>
+                                    </div>
 
-                                <div class="columns small-12">
-                                    <!-- Product price -->
-                                    <p class="product-price-mb">€ #{productItem.price}</p>
+                                    <div class="columns small-12">
+                                        <!-- Product price -->
+                                        <p class="product-price-mb">€ #{productItem.price}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div> <!-- END OF PRODUCT ON SALE -->
+                        </h:panelGroup><!-- END OF PRODUCT ON SALE -->
 
 
                         <!-- [Button] To cart -->
-                        <h:form>
-                            <h:commandButton class="button expanded primary"
+                        <h:form rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}">
+                            <h:commandButton class="button expanded primary js-add-to-cart"
                                              value="PRIDĖTI Į KREPŠELĮ"
-                                             pt:data-open="inform-user-about-adding-to-cart-modal"
                                              actionListener="#{cartController.addProductToCart(productItem.id)}">
                                 <f:ajax execute="@form" render="@none"/>
                             </h:commandButton>
@@ -349,27 +402,27 @@
                     <ul class="pagination text-center">
                         <li class="pagination-previous">
                             <h:commandLink value="Atgal"
-                                           disabled="#{productController.pagingIndex eq 0 and productController.paging.activePage eq 0}">
+                                           disabled="#{productController.paging.activePage eq 0}">
                                 <f:ajax execute="@form" listener="#{productController.previous}"
                                         render="productList paging-form"/>
                             </h:commandLink>
                         </li>
                         <ui:repeat value="#{productController.paging.totalPages}" var="page"
-                                   varStatus="status" size="#{productController.paging.minValue}">
+                                   varStatus="status">
                             <li>
                                 <h:commandLink
-                                        rendered="#{(status.index + 1 + productController.pagingIndex) le productController.productsPage.totalPages}"
-                                        value="#{status.index + 1 + productController.pagingIndex}"
-                                        styleClass="#{status.index + productController.pagingIndex eq productController.paging.activePage ? 'current' : ''}">
+                                        rendered="#{productController.paging.isPageNumberShown(status.index)}"
+                                        value="#{status.index + 1}"
+                                        styleClass="#{status.index eq productController.paging.activePage ? 'current' : ''}">
                                     <f:ajax execute="@form"
-                                            listener="#{productController.searchProducts(status.index + productController.pagingIndex)}"
+                                            listener="#{productController.searchProducts(status.index)}"
                                             render="productList paging-form"/>
                                 </h:commandLink>
                             </li>
                         </ui:repeat>
                         <li class="pagination-next">
                             <h:commandLink value="Pirmyn"
-                                           disabled="#{productController.paging.activePage + productController.paging.index + 1 eq productController.productsPage.totalPages}">
+                                           disabled="#{productController.paging.activePage + 1 eq productController.productsPage.totalPages}">
                                 <f:ajax execute="@form" listener="#{productController.next}"
                                         render="productList paging-form"/>
                             </h:commandLink>
@@ -380,28 +433,6 @@
         </div>
     </div> <!-- END OF PAGINATION -->
 
-
-
-    <!-- INFORM USER ABOUT ADDING TO CART MODAL -->
-    <div id="inform-user-about-adding-to-cart-modal"
-         class="reveal"
-         data-reveal=""
-         data-overlay="false"
-         data-animation-in="fade-in fast">
-        <div class="row">
-            <div class="columns small-8 small-offset-2">
-                <h4 class="form-title text-center">
-                    Prekė pridėta prie jūsų krepšelio
-                </h4>
-                <br/>
-                <div class="row">
-                    <div class="columns small-12">
-                        <a class="button orange expanded" data-close="">Supratau</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- END OF INFORM USER ABOUT ADDING TO CART MODAL -->
 
 
 </ui:composition>

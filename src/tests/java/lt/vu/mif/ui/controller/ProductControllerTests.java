@@ -2,8 +2,11 @@ package lt.vu.mif.ui.controller;
 
 import java.math.BigDecimal;
 import javax.transaction.Transactional;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
+import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
+import lt.vu.mif.ui.controller.ProductController;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +26,8 @@ public class ProductControllerTests {
     @Autowired
     private IProductRepository productRepository;
     @Autowired
+    private ICategoryRepository categoryRepository;
+    @Autowired
     private IProductHelper productHelper;
 
     private ProductController productController;
@@ -33,11 +38,16 @@ public class ProductControllerTests {
         productController = new ProductController();
         productController.setProductHelper(productHelper);
 
+        Category category = new Category();
+        category.setName("someCategory");
+        categoryRepository.save(category);
+
         Product product = new Product();
         product.setTitle("Very long title");
         product.setDescription("Description 1");
         product.setPrice(new BigDecimal(10L));
         product.setSku("sku1");
+        product.setCategory(category);
         productRepository.save(product);
 
         product = new Product();
@@ -45,6 +55,7 @@ public class ProductControllerTests {
         product.setDescription("Description 2");
         product.setPrice(new BigDecimal(20L));
         product.setSku("sku2");
+        product.setCategory(category);
         productRepository.save(product);
     }
 

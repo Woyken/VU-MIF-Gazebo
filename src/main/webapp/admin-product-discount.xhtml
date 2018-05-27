@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
-<f:metadata>
-    <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
-</f:metadata>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:define name="metadata">
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{productDiscountController.onPageLoad}"/>
+    </f:metadata>
+</ui:define>
 
 <h:head>
-    <title>Home</title>
+    <title>Pridėti nuolaidą</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -20,14 +21,10 @@
 <h:body>
 
     <div class="body-wrapper">
-        <!-- NAVIGATION BAR -->
         <ui:include src="./templates/navbars/_container.xhtml" />
-
-        <!-- ADD PRODUCT -->
-        <ui:include src="./templates/admin/add-product.xhtml" />
+        <ui:include src="./templates/products/features/discount.xhtml"/>
     </div>
 
-    <!-- FOOTER -->
     <ui:include src="./templates/footers/footer.xhtml" />
 
     <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
