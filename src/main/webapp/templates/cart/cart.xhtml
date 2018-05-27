@@ -39,9 +39,9 @@
             <!-- Table heading -->
             <h:panelGroup rendered="#{not empty cartController.productsInCart}">
                 <div id="shopping-list-header" class="row section hide-for-small-only">
-                    <div class="small-4 columns"> <h5>Prekė</h5>    </div>
-                    <div class="small-4 columns"> <h5>Kiekis</h5>   </div>
-                    <div class="small-4 columns"> <h5>Kaina</h5>    </div>
+                    <div class="small-4 columns"><h5>Prekė</h5></div>
+                    <div class="small-4 columns"><h5>Kiekis</h5></div>
+                    <div class="small-4 columns"><h5>Kaina</h5></div>
                 </div>
             </h:panelGroup>
 
@@ -154,7 +154,7 @@
             <!-- TOTAL SUM -->
             <h:panelGroup rendered="#{not empty cartController.productsInCart}">
                 <div class="row section ">
-                    <h4 class="column medium-9 small-11 larger-text text-right"> </h4>
+                    <h4 class="column medium-9 small-11 larger-text text-right"></h4>
                     <h4 class="column medium-3 small-1 larger-text text-right"> Viso: #{cartController.sum} € </h4>
                 </div>
             </h:panelGroup>

@@ -50,18 +50,21 @@
 
                     <!-- Price of the product. -->
                     <div class="small-12 medium-2 columns">
-                        <p:outputLabel styleClass="shopping-cart-price large-text" value="#{order.totalSum} €"/>
+                        <p:outputLabel styleClass="shopping-cart-price large-text"
+                                       value="#{order.totalSum} €"/>
                     </div>
 
                     <!-- [Button] Add to current cart -->
                     <div class="small-2 columns hide-for-small-only">
-                        <a href="../../cart-history.xhtml?orderId=#{order.id}" class="button expanded primary">
+                        <a href="../../cart-history.xhtml?orderId=#{order.id}"
+                           class="button expanded primary">
                             Peržiūrėti
                         </a>
                     </div>
                     <!-- [Mobile][Button] Add to current cart -->
                     <div class="small-12 columns hide-for-medium">
-                        <a href="../../cart-history.xhtml?orderId=#{order.id}" class="button expanded primary">
+                        <a href="../../cart-history.xhtml?orderId=#{order.id}"
+                           class="button expanded primary">
                             Peržiūrėti
                         </a>
                     </div>

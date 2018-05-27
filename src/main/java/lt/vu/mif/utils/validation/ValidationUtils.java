@@ -15,9 +15,8 @@ public class ValidationUtils {
     private final String CVS_REGEX = "^\\d{3}$";
     private final String PRICE_REGEX = "[0-9]+([,.][0-9]{1,2})?";
     private final String AMOUNT_REGEX = "^[1-9]\\d*$";
-    private final String TIME_REGEX = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
-
     public final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm";
+    private final String TIME_REGEX = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
 
     public static int getNumberOfDecimalPlaces(BigDecimal bigDecimal) {
         String string = bigDecimal.stripTrailingZeros().toPlainString();

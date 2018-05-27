@@ -15,7 +15,8 @@ public class AllProductsController {
     @Autowired
     private IProductHelper productHelper;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private boolean multipleDeleteEnabled = false;
 
     @Setter
