@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -57,4 +58,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "DISCOUNT_ID")
     private Discount discount;
+
+    @Version
+    private Integer version;
 }

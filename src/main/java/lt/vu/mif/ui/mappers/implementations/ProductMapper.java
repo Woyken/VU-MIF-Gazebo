@@ -42,6 +42,7 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         product.setCategory(categoryMapper.toEntity(view.getCategory()));
         product.setImages(imageMapper.toEntities(view.getImages()));
         product.setCreationDate(LocalDateTime.now());
+        product.setVersion(view.getVersion());
 
         return product;
     }
@@ -62,6 +63,7 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         view.setCategory(categoryMapper.toView(entity.getCategory()));
         view.setImages(imageMapper.toViews(entity.getImages()));
         view.setNewPrice(priceResolver.resolvePriceWithDiscount(entity));
+        view.setVersion(entity.getVersion());
 
         return view;
     }
