@@ -57,7 +57,9 @@ public class PriceResolver implements IPriceResolver {
             return null;
         }
 
-        Discount categoryDiscount = productCategory.getDiscount();
+        Discount categoryDiscount = getBiggestCategoryDiscount(productCategory);
+
+        productCategory.getDiscount();
         if (categoryDiscount == null || !categoryDiscount.isDiscountValid()) {
             return null;
         }
@@ -70,6 +72,25 @@ public class PriceResolver implements IPriceResolver {
         }
 
         return priceWithPercentage == null ? product.getPrice() : priceWithPercentage;
+    }
+
+    private Discount getBiggestCategoryDiscount(Category category) {
+        Discount discount = category.getDiscount();
+        Category parentCategory = category.getParentCategory();
+        Discount parentDiscount = null;
+
+        if (parentCategory != null) {
+            parentDiscount = parentCategory.getDiscount();
+        }
+
+        if (discount == null || !discount.isDiscountValid()) {
+            return parentDiscount;
+        } else if (parentDiscount == null) {
+            return discount;
+        } else {
+            return discount.getPercentageDiscount() > parentDiscount.getPercentageDiscount() ?
+                discount : parentDiscount;
+        }
     }
 
     private BigDecimal getGreaterPrice(BigDecimal priceWithAbsoluteDiscount,
