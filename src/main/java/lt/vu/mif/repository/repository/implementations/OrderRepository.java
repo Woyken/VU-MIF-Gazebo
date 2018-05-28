@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lt.vu.mif.model.order.Order;
+import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.model.order.Order_;
 import lt.vu.mif.model.user.User_;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
@@ -81,6 +82,7 @@ public class OrderRepository extends SimpleJpaRepository<Order, Long> implements
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.isFalse(root.get(Order_.rated)));
         predicates.add(builder.equal(root.join(Order_.user).get(User_.email), currentUserEmail));
+        predicates.add(builder.equal(root.get(Order_.status), OrderStatus.DELIVERED));
 
         criteria.where(PersistenceUtils.toArray(predicates));
 
