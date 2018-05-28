@@ -28,8 +28,6 @@ public class CategoryTreeView implements Serializable {
 
     @PostConstruct
     public void init() {
-        root = new DefaultTreeNode(null, null);
-
         List<CategoryView> categories = categoryHelper.findAll();
         Collections.sort(categories);
         Map<CategoryView, TreeNode> categoryMap = new HashMap<CategoryView, TreeNode>();
@@ -49,7 +47,8 @@ public class CategoryTreeView implements Serializable {
     private void setNode(Map<CategoryView, TreeNode> categoryMap, CategoryView current) {
         //Reached the top node
         if (current.getParentCategory() == null) {
-            categoryMap.replace(current, new DefaultTreeNode(current, root));
+            root = new DefaultTreeNode(current, null);
+            categoryMap.replace(current, root);
             return;
         }
 
