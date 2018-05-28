@@ -21,7 +21,6 @@ import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
-import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -173,7 +172,7 @@ public class MockDataGenerator {
     }
 
     private Category getRootCategory() {
-        return categoryRepository.getCategoryByName(Constants.ROOT_CATEGORY_NAME);
+        return categoryRepository.getRootCategory();
     }
 
     private String getProductDescription(int index) {

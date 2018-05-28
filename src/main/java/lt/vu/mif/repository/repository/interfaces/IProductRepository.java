@@ -1,6 +1,7 @@
 package lt.vu.mif.repository.repository.interfaces;
 
 import java.util.List;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.utils.search.ProductSearch;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,8 @@ public interface IProductRepository {
     List<Product> get(List<Long> ids);
 
     List<Product> findAll();
+
+    public List<Product> getAllByCategory(Category category);
 
     Page<Product> getProductsPage(ProductSearch productSearch, int activePage, int pageSize);
 

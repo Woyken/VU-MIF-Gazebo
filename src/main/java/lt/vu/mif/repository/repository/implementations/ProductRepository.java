@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.product.Product_;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
@@ -98,6 +100,19 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
         predicates.add(builder.isFalse(root.get(Product_.deleted)));
 
         criteria.where(PersistenceUtils.toArray(predicates));
+        criteria.select(root);
+
+        return entityManager.createQuery(criteria).getResultList();
+    }
+
+    public List<Product> getAllByCategory(Category category) {
+        Objects.requireNonNull(category);
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Product> criteria = builder.createQuery(Product.class);
+        Root<Product> root = criteria.from(Product.class);
+
+        criteria.where(builder.equal(root.get(Product_.category), category));
         criteria.select(root);
 
         return entityManager.createQuery(criteria).getResultList();
