@@ -255,8 +255,6 @@ public class ProductExcelReader {
             return result;
         }
 
-        skuCode = UUID.randomUUID().toString();
-
         if (productRepository.checkIfProductExists(skuCode)) {
             result.setMessage("Produktas su SKU kodu: " + skuCode  + " jau egzistuoja sistemoje. Eilutė " + rowNo);
             return result;
