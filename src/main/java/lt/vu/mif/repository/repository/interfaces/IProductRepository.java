@@ -26,4 +26,6 @@ public interface IProductRepository {
     void update(Product entity);
 
     void updateAll(List<Product> products);
+
+    boolean checkIfProductExists(String skuCode);
 }

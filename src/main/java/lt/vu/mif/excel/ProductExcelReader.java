@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
+import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.utils.implementations.ImageDownloader;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -38,6 +39,8 @@ public class ProductExcelReader {
     private ICategoryRepository categoryRepository;
     @Autowired
     private ImageDownloader imageDownloader;
+    @Autowired
+    private IProductRepository productRepository;
 
     public ProductExcelReader() {
         headers.add("Product Name");
@@ -234,6 +237,11 @@ public class ProductExcelReader {
         String skuCode = (String) rowValues.get(4);
         if (StringUtils.isBlank(skuCode)) {
             result.setMessage("Nenurodytas SKU kodas. Eilutė: " + rowNo);
+            return result;
+        }
+
+        if (productRepository.checkIfProductExists(skuCode)) {
+            result.setMessage("Produktas su SKU kodu: " + skuCode  + " jau egzistuoja sistemoje. Eilutė " + rowNo);
             return result;
         }
 
