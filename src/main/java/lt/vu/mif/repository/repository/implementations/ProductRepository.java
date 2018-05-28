@@ -36,6 +36,18 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
+    public boolean checkIfProductExists(String skuCode) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+        Root<Product> root = criteria.from(Product.class);
+
+        criteria.where(builder.equal(root.get(Product_.sku), skuCode));
+        criteria.select(builder.count(root.get(Product_.id)));
+
+        return entityManager.createQuery(criteria).getSingleResult() > 0;
+    }
+
     @Autowired
     public ProductRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport.getEntityInformation(Product.class, entityManager),
