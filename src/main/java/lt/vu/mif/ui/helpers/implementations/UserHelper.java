@@ -115,4 +115,12 @@ public class UserHelper implements IUserHelper {
     public List<AdminUserView> getAllUsers() {
         return adminUserMapper.toViews(userRepository.findAll());
     }
+
+    public UserView getLoggedInUser() {
+        return userMapper.toView(userService.getLoggedUser());
+    }
+
+    public boolean isLoggedIn() {
+        return userService.isLoggedIn();
+    }
 }

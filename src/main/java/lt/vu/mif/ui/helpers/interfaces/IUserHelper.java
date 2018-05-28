@@ -28,4 +28,8 @@ public interface IUserHelper {
     UserView get(Long id);
 
     AdminUserView getAdminView(Long id);
+
+    UserView getLoggedInUser();
+
+    boolean isLoggedIn();
 }

@@ -360,7 +360,7 @@
 
 
                         <!-- [Button] To cart -->
-                        <h:form rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}">
+                        <h:form rendered="#{not authenticationController.isLoggedIn() or (authenticationController.isLoggedIn() and authenticationController.getLoggedInUser().getRole() == 'USER')}">
                             <h:commandButton class="button expanded primary js-add-to-cart"
                                              value="PRIDĖTI Į KREPŠELĮ"
                                              actionListener="#{cartController.addProductToCart(productItem.id)}">
@@ -370,11 +370,11 @@
 
                         <!-- [Button][Admin] Edit product -->
                         <c:choose>
-                            <c:when test="#{userService.isLoggedIn()}">
+                            <c:when test="#{authenticationController.isLoggedIn()}">
                                 <c:choose>
 
                                     <!-- Admin logged in -->
-                                    <c:when test="#{userService.getLoggedUser().getRole() == 'ADMIN'}">
+                                    <c:when test="#{authenticationController.getLoggedInUser().getRole() == 'ADMIN'}">
                                         <a href="../../admin-edit-product.xhtml?productId=#{productItem.id}"
                                            class="button expanded">
                                             Redaguoti prekę
