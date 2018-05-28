@@ -32,7 +32,8 @@ public class CategoryView implements Comparable<CategoryView> {
 
     @Override
     public int compareTo(CategoryView other) {
-        return this.nameWithParents.compareToIgnoreCase(other.nameWithParents);
+        return other == null ? 1 : this.nameWithParents == null ? -1 :
+            this.nameWithParents.compareToIgnoreCase(other.nameWithParents);
     }
 
     @Override
