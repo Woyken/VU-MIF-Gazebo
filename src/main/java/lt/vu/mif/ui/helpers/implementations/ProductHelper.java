@@ -3,8 +3,10 @@ package lt.vu.mif.ui.helpers.implementations;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.stream.Collectors;
 import javax.faces.context.FacesContext;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.excel.ImportResult;
@@ -128,8 +130,22 @@ public class ProductHelper implements IProductHelper {
         }
 
         cart.setUser(userMapper.toView(loggedInUser));
+        List<Product> products = productRepository
+            .get(cart.getItems().stream().map(ProductView::getId).collect(
+                Collectors.toList()));
         Cart cartEntity = cartMapper.toEntity(cart);
-        cartEntity = cartRepository.update(cartEntity);
+        Cart finalCartEntity = cartEntity;
+        cartEntity.getItems().forEach(cartItem -> {
+            Optional<Product> t = products.stream()
+                .filter(product -> product.getId().equals(cartItem.getProduct().getId()))
+                .findFirst();
+            if (t.isPresent()) {
+                cartItem.setProduct(t.get());
+            } else {
+                finalCartEntity.getItems().remove(cartItem);
+            }
+        });
+        cartEntity = cartRepository.update(finalCartEntity);
         return cartMapper.toView(cartEntity);
     }
 
