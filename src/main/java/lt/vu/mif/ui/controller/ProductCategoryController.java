@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Named
 @ViewScoped
 public class ProductCategoryController {
+
     @Autowired
     ICategoryHelper categoryHelper;
 
@@ -33,7 +34,9 @@ public class ProductCategoryController {
     private String savingErrorMessage;
 
     public void onPageLoad() {
-        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
+            return;
+        }
 
         emptyCategory = new CategoryView();
         emptyCategory.setName("");

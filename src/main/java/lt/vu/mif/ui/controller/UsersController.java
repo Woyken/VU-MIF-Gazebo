@@ -10,7 +10,6 @@ import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
 import lt.vu.mif.ui.view.AdminUserView;
 import lt.vu.mif.ui.view.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.annotation.RequestScope;
 
 @Getter
 @Setter

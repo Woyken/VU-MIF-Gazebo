@@ -46,7 +46,9 @@ public class ProductEditController {
     private ProductView conflictingProductView;
 
     public void onPageLoad() {
-        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
+            return;
+        }
 
         // If a product with passed in ID is not found -
         // it means we want to add a new product
@@ -80,7 +82,7 @@ public class ProductEditController {
     public void saveChanges() {
         productView.getImages().addAll(newImages);
 
-        if(newImages.isEmpty() && productView.getImages().isEmpty()) {
+        if (newImages.isEmpty() && productView.getImages().isEmpty()) {
             productView.getImages().add(imageHelper.getDefaultImage());
         }
 

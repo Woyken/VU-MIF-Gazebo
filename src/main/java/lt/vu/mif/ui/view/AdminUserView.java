@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AdminUserView extends UserView {
+
     private long ordersCount;
     private BigDecimal averagePrice;
     private BigDecimal ordersSum;
