@@ -1,6 +1,5 @@
 package lt.vu.mif.excel;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -14,8 +13,6 @@ import lt.vu.mif.model.product.Category;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.utils.implementations.ImageDownloader;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
@@ -29,26 +26,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 @Component
-public class ProductExcelReader {
-
-    private static final Log LOG = LogFactory.getLog(ProductExcelReader.class);
-    private static List<String> headers = new ArrayList<>();
+public class ProductExcelReader extends ProductExcelComponent {
 
     @Autowired
     private ICategoryRepository categoryRepository;
     @Autowired
     private ImageDownloader imageDownloader;
-
-    public ProductExcelReader() {
-        headers.add("Product Name");
-        headers.add("Title");
-        headers.add("Price");
-        headers.add("Image");
-        headers.add("SKU Code");
-        headers.add("Description");
-        headers.add("Category");
-        headers.add("Properties");
-    }
 
     public CompletionStage<ImportResult> readFile(InputStream inputStream) {
         return CompletableFuture.supplyAsync(() -> readFileSync(inputStream));
@@ -120,12 +103,9 @@ public class ProductExcelReader {
                 }
                 rowValues.clear();
             }
-        } catch (FileNotFoundException ex) {
-            LOG.error("File not found", ex);
         } catch (IOException ex) {
-            LOG.error("Unexpected error occurred", ex);
+            ex.printStackTrace();
         }
-
         return importResult;
     }
 
@@ -176,12 +156,22 @@ public class ProductExcelReader {
         Row row = sheet.getRow(0);
 
         for (Cell cell : row) {
-            if (!headers.contains(cell.getStringCellValue()) && StringUtils
+            if (!contains(cell.getStringCellValue()) && StringUtils
                 .isNotBlank(cell.getStringCellValue())) {
                 return "Neteisinga failo struktūra";
             }
+
         }
         return null;
+    }
+
+    private boolean contains(String value) {
+        for (String header : headers) {
+            if (header.equals(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private ParsedProductResult parseProduct(List<Object> rowValues, Row row) {
@@ -265,7 +255,8 @@ public class ProductExcelReader {
             }
         }
 
-        product.setTitle(productName);
+        product.setName(productName);
+        product.setTitle(title);
         product.setPrice(price);
         product.setImageBytes(imageBytes);
         product.setSkuCode(skuCode);

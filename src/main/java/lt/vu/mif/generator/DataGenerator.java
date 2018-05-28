@@ -107,12 +107,13 @@ public class DataGenerator {
             product.setDescription(getProductDescription(i));
             product.setPrice(new BigDecimal(i * 5));
             product.setTitle(getProductTitle(i));
+            product.setName("TEST NAME");
             product.setSku(UUID.randomUUID().toString());
             product.getImages().add(getImage("static/images/products/shoe-" + i + ".jpg"));
             product.getImages().add(getImage("static/images/products/shoe-1.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-2.jpg"));
             product.getImages().add(getImage("static/images/products/shoe-3.jpg"));
-            product.getImages().add(getImage("static/images/products/shoe-4.jpg"));      
+            product.getImages().add(getImage("static/images/products/shoe-4.jpg"));
             product.setCreationDate(LocalDateTime.now());
             product.setCategory(categories.get(i % categories.size()));
             product.setDiscount(i % 7 == 0 ? getDiscount() : null);
