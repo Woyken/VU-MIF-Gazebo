@@ -14,4 +14,6 @@ public interface ICategoryHelper {
     void save(CategoryView view);
 
     void update(CategoryView view);
+
+    void delete(CategoryView view);
 }

@@ -68,8 +68,19 @@
                         <f:selectItem value="#{null}" itemLabel="Pasirinkite kategoriją:"
                                       noSelectionOption="true"/>
                         <f:selectItems value="#{productCategoryController.categories}"/>
-                        <f:ajax render="@form addCategoryForm"/>
+                        <f:ajax render="@form"/>
                     </h:selectOneMenu>
+                </div>
+
+                <!-- [Button] Delete category -->
+                <div class="columns small-2 medium-1">
+                    <h:commandButton
+                            class="button red"
+                            value="✘"
+                            action="#{productCategoryController.deleteCategory}"
+                            disabled="#{empty productCategoryController.selectedCategory}">
+                        <f:ajax render="@form"/>
+                    </h:commandButton>
                 </div>
             </div>
 
@@ -148,8 +159,7 @@
                 <div class="columns small-6 medium-4">
                     <h:commandButton
                             class="button expanded success"
-                            value="Išsaugoti"
-                            action="#{productCategoryController.saveChanges}">
+                            value="Išsaugoti">
                         <f:ajax render="@form"/>
                     </h:commandButton>
                 </div>

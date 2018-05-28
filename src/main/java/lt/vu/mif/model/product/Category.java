@@ -34,7 +34,6 @@ public class Category {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    //TODO this had cascading, but because I couldn't manage to save parentCategory with it, I removed it
     @ManyToOne
     @JoinColumn(name = "PARENT_CATEGORY_ID")
     private Category parentCategory;
@@ -44,7 +43,6 @@ public class Category {
     @Column(name = "ATTRIBUTE")
     private List<String> attributes = new ArrayList<>();
 
-    //TODO this is not used as far as I know
     @OneToMany(cascade = MERGE, fetch = LAZY, mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 

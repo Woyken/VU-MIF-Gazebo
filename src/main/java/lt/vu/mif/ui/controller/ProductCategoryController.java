@@ -68,6 +68,32 @@ public class ProductCategoryController {
         isCreationSuccess = true;
     }
 
+    public void deleteCategory() {
+        eraseAllMessages();
+
+        if (selectedCategory.getParentCategory() == null) {
+            savingErrorMessage = "Negalima ištrinti šakninės kategorijos";
+            return;
+        }
+
+        deleteCategory(selectedCategory);
+        updateCategories();
+        //Should always be at least 1 category
+        selectedCategory = categories.get(0);
+    }
+
+    //Inefficient, but optimization unimportant right now
+    private void deleteCategory(CategoryView category) {
+        //Delete all children
+        for (CategoryView c : categories) {
+            if (category.equals(c.getParentCategory())) {
+                deleteCategory(c);
+            }
+        }
+
+        categoryHelper.delete(category);
+    }
+
     private void eraseAllMessages() {
         isCreationSuccess = false;
         creationErrorMessage = "";

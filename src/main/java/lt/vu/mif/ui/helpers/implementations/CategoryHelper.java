@@ -2,7 +2,9 @@ package lt.vu.mif.ui.helpers.implementations;
 
 import java.util.List;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
+import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.CategoryView;
@@ -16,6 +18,8 @@ public class CategoryHelper implements ICategoryHelper {
 
     @Autowired
     private ICategoryRepository categoryRepository;
+    @Autowired
+    private IProductRepository productRepository;
     @Autowired
     private IMapper<Category, CategoryView> categoryMapper;
 
@@ -44,5 +48,19 @@ public class CategoryHelper implements ICategoryHelper {
     public void update(CategoryView view) {
         Category entity = categoryMapper.toEntity(view);
         categoryRepository.update(entity);
+    }
+
+    @Override
+    public void delete(CategoryView view) {
+        Category entity = categoryMapper.toEntity(view);
+        Category root = categoryRepository.getRootCategory();
+
+        List<Product> products = productRepository.getAllByCategory(entity);
+        for (Product p : products) {
+            p.setCategory(root);
+        }
+        productRepository.saveAll(entity.getProducts());
+
+        categoryRepository.delete(categoryRepository.update(entity));
     }
 }
