@@ -14,6 +14,7 @@ public class AuthenticationController {
     private IUserHelper userHelper;
 
     private UserView loggedInUser;
+    private Boolean isLoggedIn;
 
     public UserView getLoggedInUser() {
         if (null != loggedInUser) {
@@ -21,7 +22,11 @@ public class AuthenticationController {
         }
         return loggedInUser = userHelper.getLoggedInUser();
     }
+
     public boolean isLoggedIn() {
-        return userHelper.isLoggedIn();
+        if (null != isLoggedIn) {
+            return isLoggedIn;
+        }
+        return isLoggedIn = userHelper.isLoggedIn();
     }
 }
