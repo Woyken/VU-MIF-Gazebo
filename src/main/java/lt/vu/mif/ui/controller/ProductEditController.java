@@ -75,6 +75,14 @@ public class ProductEditController {
     }
 
     public void saveChanges() {
+        //Remove discount if it is smaller than new price
+        if (productView.getDiscount() != null &&
+            productView.getDiscount().getAbsoluteDiscount() != null &&
+            productView.getPrice().compareTo(productView.getDiscount().getAbsoluteDiscount())
+                == -1) {
+            productView.setDiscount(null);
+        }
+
         productView.getImages().addAll(newImages);
 
         if (newImages.isEmpty() && productView.getImages().isEmpty()) {
