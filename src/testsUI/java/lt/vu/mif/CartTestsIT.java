@@ -1,6 +1,6 @@
 package lt.vu.mif;
 
-import lt.vu.mif.generator.DataGenerator;
+import lt.vu.mif.generator.MockDataGenerator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class CartTestsIT {
     int localServerPort;
 
     @Autowired
-    DataGenerator dataGenerator;
+    MockDataGenerator mockDataGenerator;
 
     private WebDriver driver;
 
@@ -32,7 +32,7 @@ public class CartTestsIT {
     public void before() {
         driver = new FirefoxDriver();
         if (!TestPreparation.getSetuped("dataGenerator.insertProducts")) {
-            dataGenerator.insertProducts();
+            mockDataGenerator.insertProducts();
             TestPreparation.setSetuped("dataGenerator.insertProducts");
         }
         driver.get("http://localhost:" + localServerPort + "/");
