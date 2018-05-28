@@ -24,7 +24,8 @@
                 </div>
 
                 <div class="columns small-10 medium-8">
-                    <h:inputText value="#{productCategoryController.newCategory}"/>
+                    <h:inputText value="#{productCategoryController.newCategory}"
+                                 disabled="#{empty productCategoryController.selectedCategory}"/>
                 </div>
 
                 <!-- [Button] Submit new category -->
@@ -32,7 +33,8 @@
                     <h:commandButton
                             class="button success"
                             value="✓"
-                            action="#{productCategoryController.createNewCategory}">
+                            action="#{productCategoryController.createNewCategory}"
+                            disabled="#{empty productCategoryController.selectedCategory}">
                         <f:ajax execute="@form" render="@form saveCategoryForm"/>
                     </h:commandButton>
                 </div>
@@ -66,29 +68,7 @@
                         <f:selectItem value="#{null}" itemLabel="Pasirinkite kategoriją:"
                                       noSelectionOption="true"/>
                         <f:selectItems value="#{productCategoryController.categories}"/>
-                        <f:ajax render="@form"
-                                listener="#{productCategoryController.categoryChange}"/>
-                    </h:selectOneMenu>
-                </div>
-            </div>
-
-
-            <!-- Assign a parent category to the selected category -->
-            <div class="row align-middle">
-                <div class="columns small-12 medium-3">
-                    <h5 class="font-bold">Tėvinė kategorija</h5>
-                </div>
-
-                <div class="columns small-10 medium-8">
-                    <h:selectOneMenu value="#{productCategoryController.parentCategory}"
-                                     disabled="#{empty productCategoryController.selectedCategory}"
-                                     converter="omnifaces.SelectItemsConverter">
-                        <!--The usual way here would be to add a selectItem with null value to represent
-                        empty choice. The problem was that when selecting choices from list the back
-                        end value wouldn't update. Thus the dirty fix with two almost identical lists,
-                        except this one has a pseudo empty category in it.-->
-                        <f:selectItems value="#{productCategoryController.categoriesWithEmpty}"/>
-                        <f:ajax render="@form"/>
+                        <f:ajax render="@form addCategoryForm"/>
                     </h:selectOneMenu>
                 </div>
             </div>

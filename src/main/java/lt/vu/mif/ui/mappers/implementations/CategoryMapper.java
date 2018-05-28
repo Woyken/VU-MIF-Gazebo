@@ -63,6 +63,17 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
         view.setAttributes(entity.getAttributes());
         view.setDiscount(discountMapper.toView(entity.getDiscount()));
 
+        //Only root category will not have a parent
+        if (view.getParentCategory() != null) {
+            view.setNameWithParents(
+                view.getParentCategory().getNameWithParents() + "/" + view.getName());
+        } else {
+            //Name with parents can't be null, because in category page drop down menu when chosen
+            //controller would get null instead of this category
+            view.setNameWithParents("/");
+        }
+
+
         return view;
     }
 
