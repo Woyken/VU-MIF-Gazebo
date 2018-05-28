@@ -1,5 +1,6 @@
 package lt.vu.mif.excel;
 
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,12 +9,13 @@ import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
-import lt.vu.mif.utils.implementations.ImageDownloader;
+import lt.vu.mif.utils.interfaces.IImageReader;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,7 +40,7 @@ public class ProductExcelReader {
     @Autowired
     private ICategoryRepository categoryRepository;
     @Autowired
-    private ImageDownloader imageDownloader;
+    private IImageReader imageReader;
     @Autowired
     private IProductRepository productRepository;
 
@@ -220,18 +222,31 @@ public class ProductExcelReader {
             return result;
         }
 
-        String imageLink = (String) rowValues.get(3);
+        String imageLink = ((String) rowValues.get(3));
         if (StringUtils.isBlank(imageLink)) {
             result.setMessage("Nuotraukos nuoroda negali būti tuščia. Eilutė: " + rowNo);
             return result;
         }
 
-        byte[] imageBytes = null;
-        try {
-            imageBytes = imageDownloader.downloadImage(imageLink);
-        } catch (IOException ex) {
-            result.setMessage("Neteisinga nuotraukos nuoroda. Eilutė:" + rowNo);
-            return result;
+        String[] imageLinks = imageLink.split("[\\n\\r\\s]+");
+        List<byte[]> imagesBytes = new ArrayList<>();
+
+        for (String link : imageLinks) {
+            try {
+                byte[] bytes;
+
+                if (link.startsWith("http")) {
+                    bytes = imageReader.downloadImage(link);
+                } else {
+                   bytes = imageReader.readImageFromFile(link);
+                }
+
+                imagesBytes.add(bytes);
+
+            } catch (IOException ex) {
+                result.setMessage("Neteisinga nuotraukos nuoroda. Eilutė:" + rowNo);
+                return result;
+            }
         }
 
         String skuCode = (String) rowValues.get(4);
@@ -239,6 +254,8 @@ public class ProductExcelReader {
             result.setMessage("Nenurodytas SKU kodas. Eilutė: " + rowNo);
             return result;
         }
+
+        skuCode = UUID.randomUUID().toString();
 
         if (productRepository.checkIfProductExists(skuCode)) {
             result.setMessage("Produktas su SKU kodu: " + skuCode  + " jau egzistuoja sistemoje. Eilutė " + rowNo);
@@ -262,6 +279,7 @@ public class ProductExcelReader {
             .getCategoryByName(categories[categories.length - 1]);
         if (latestCategory == null) {
             result.setMessage("Nurodyta neegzistuojanti kategorija. Eilutė: " + rowNo);
+            return result;
         } else {
             Category temp = latestCategory;
             for (int i = categories.length - 1; i >= 0; i--) {
@@ -275,7 +293,7 @@ public class ProductExcelReader {
 
         product.setTitle(productName);
         product.setPrice(price);
-        product.setImageBytes(imageBytes);
+        product.setImagesBytes(imagesBytes);
         product.setSkuCode(skuCode);
         product.setDescription(description);
         product.setCategory(latestCategory);
