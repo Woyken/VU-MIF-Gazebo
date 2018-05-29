@@ -176,7 +176,6 @@ public class ProductHelper implements IProductHelper {
         return productPromise.toCompletableFuture();
     }
 
-
     @Override
     public BigDecimal getProductsSum(List<BoughtProductView> productViews) {
         BigDecimal totalSum = new BigDecimal(0L);
