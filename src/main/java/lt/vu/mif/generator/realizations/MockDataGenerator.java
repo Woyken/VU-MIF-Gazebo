@@ -1,4 +1,4 @@
-package lt.vu.mif.generator;
+package lt.vu.mif.generator.realizations;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import lt.vu.mif.generator.interfaces.IDataGenerator;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.model.order.Rating;
@@ -28,7 +29,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MockDataGenerator {
+public class MockDataGenerator implements IDataGenerator {
 
     @Autowired
     private IProductRepository productRepository;
@@ -40,8 +41,22 @@ public class MockDataGenerator {
     private ICategoryRepository categoryRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private CategoryInserter categoryInserter;
 
-    public void insertUsers() {
+    @Override
+    public void generateData() {
+        insertUsers();
+        insertProducts();
+        insertOrders();
+        insertCategory();
+    }
+
+    private void insertCategory() {
+        categoryInserter.insertRootCategory();
+    }
+
+    private void insertUsers() {
         List<User> users = new ArrayList<>();
 
         for (int i = 1; i <= 20; i++) {
@@ -80,16 +95,7 @@ public class MockDataGenerator {
         return users;
     }
 
-    private User generateSimpleUser() {
-        User user = new User();
-        user.setPassword("user");
-        user.setEmail("user");
-        user.setRole(Role.USER);
-
-        return user;
-    }
-
-    public void insertProducts() {
+    private void insertProducts() {
         List<Product> products = new ArrayList<>();
         List<Category> categories = new ArrayList<>();
         categories.addAll(createSportCategory());
@@ -229,13 +235,13 @@ public class MockDataGenerator {
         return discount;
     }
 
-    public void insertOrders() {
+    private void insertOrders() {
         for (int i = 1; i <= 10; i++) {
             insertOrder(1);
         }
     }
 
-    public void insertOrder(int counter) {
+    private void insertOrder(int counter) {
         List<Order> orders = new ArrayList<>();
 
         Order order = new Order();
