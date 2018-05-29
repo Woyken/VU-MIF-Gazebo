@@ -1,8 +1,10 @@
 package lt.vu.mif.ui.view;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 import javax.inject.Named;
@@ -12,7 +14,8 @@ import org.primefaces.model.StreamedContent;
 
 @Named
 @Getter
-public class ImageInMemoryStreamer {
+@SessionScoped
+public class ImageInMemoryStreamer implements Serializable {
 
     private Map<Long, InputStream> imagesInMemory = new HashMap<>();
 

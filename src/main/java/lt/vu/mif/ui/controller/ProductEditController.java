@@ -35,8 +35,9 @@ public class ProductEditController {
     private ICategoryHelper categoryHelper;
     @Autowired
     private IImageHelper imageHelper;
+    @Autowired
+    private ImageInMemoryStreamer imageInMemoryStreamer;
 
-    private ImageInMemoryStreamer imageInMemoryStreamer = new ImageInMemoryStreamer();
     private ProductView productView;
     private Part uploadedFile;
     private boolean showSuccessMessage;
