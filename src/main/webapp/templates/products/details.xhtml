@@ -141,14 +141,9 @@
                         rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}">
                     <f:actionListener
                             binding="#{cartController.addProductToCart(productDetailsController.productView.id, amount.value)}"/>
-                    <f:actionListener
-                            binding="#{productDetailsController.setShowSuccessMessage(true)}"/>
-                    <f:ajax execute="@form" render="@form"/>
+                    <f:ajax execute="@form"/>
                 </h:commandButton>
 
-                <p:outputLabel rendered="#{productDetailsController.showSuccessMessage}"
-                               value="Prekė pridėta į krepšelį"
-                               class="success-text-large text-center"/>
             </h:form>
 
             <!-- [Button][Admin] Edit product -->
