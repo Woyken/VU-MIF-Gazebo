@@ -1,15 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+    xsi:schemaLocation="
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
+    <context:property-placeholder location="classpath:email.properties" />
     <context:component-scan base-package="lt.vu.mif"/>
 
+    <!--Strategy pattern examples-->
     <bean id="dataGenerator" class="lt.vu.mif.generator.realizations.MockDataGenerator"/>
     <bean id="errorLogger" class="lt.vu.mif.error.ConsoleErrorLogger"/>
+
+
+    <!--Decorator configuration example-->
+    <bean id="defaultEmailGenerator" class="lt.vu.mif.email.implementations.DefaultEmailContentGenerator"/>
+
+    <bean id="emailFooterGenerator" class="lt.vu.mif.email.implementations.EmailFooterGenerator">
+        <property name="emailContentGenerator" ref="defaultEmailGenerator"/>
+        <property name="footerText" value="${email.footerText}"/>
+    </bean>
+
+    <bean id="emailContentGenerator" class="lt.vu.mif.email.implementations.EmailHeaderDecorator">
+        <property name="emailContentGenerator" ref="emailFooterGenerator"/>
+        <property name="headerText" value="${email.headerText}"/>
+    </bean>
 
 </beans>
