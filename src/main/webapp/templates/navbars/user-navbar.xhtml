@@ -282,10 +282,11 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.changeEmail}" update="emailSuccessMessage">
+                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.changeEmail}" update="emailSuccessMessage emailErrorMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <h:outputLabel class="success-text" value="#{emailChangeController.successMessage}" id="emailSuccessMessage"/>
+                            <h:outputLabel class="success-text" value="#{emailChangeController.successMessage}" id="emailSuccessMessage" rendered="#{not empty emailChangeController.successMessage}"/>
+                            <h:outputLabel class="alert-text" value="#{emailChangeController.errorMessage}" id="emailErrorMessage" rendered="#{not empty emailChangeController.errorMessage}"/>
                         </div>
                     </div>
                 </h:form>

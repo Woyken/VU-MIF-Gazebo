@@ -28,11 +28,14 @@ public class EmailChangeController {
     private String loggedUserEmail;
     private String newEmail;
     private String successMessage;
+    private String errorMessage;
 
     public void changeEmail() {
+        errorMessage = "";
+        successMessage = "";
         boolean alreadyExists = userHelper.checkIfUserExists(newEmail);
         if(alreadyExists) {
-            successMessage = "Toks El. paštas jau užimtas!";
+            errorMessage = "Toks El. paštas jau užimtas!";
             return;
         }
         userHelper.updateUserEmail(userService.getLoggedUserEmail(), newEmail);
