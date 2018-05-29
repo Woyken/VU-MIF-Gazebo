@@ -94,7 +94,7 @@ public class ProductExcelReader extends ProductExcelComponent {
                     }
                 });
 
-                if (newProduct) {
+                if (newProduct && !rowValues.isEmpty()) {
                     product = parseProduct(rowValues, currentRow);
                     if (product.getMessage() != null) {
                         importResult.setMessage(product.getMessage());
@@ -215,7 +215,7 @@ public class ProductExcelReader extends ProductExcelComponent {
             return result;
         }
 
-        String[] imageLinks = imageLink.split("[\\n\\r\\s]+");
+        String[] imageLinks = imageLink.split("[\\n\\r]+");
         List<byte[]> imagesBytes = new ArrayList<>();
 
         for (String link : imageLinks) {
