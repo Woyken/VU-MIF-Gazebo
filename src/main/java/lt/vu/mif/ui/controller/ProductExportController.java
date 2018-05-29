@@ -7,12 +7,14 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.excel.ExportResult;
 import lt.vu.mif.repository.repository.implementations.ProductRepository;
 import lt.vu.mif.ui.helpers.interfaces.IProductExportHelper;
 import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Logged
 @Setter
 @Getter
 @ViewScoped

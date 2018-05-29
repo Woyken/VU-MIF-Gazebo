@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Category_;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
@@ -17,6 +18,7 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Logged
 @Transactional
 @Repository
 public class CategoryRepository extends SimpleJpaRepository<Category, Long> implements

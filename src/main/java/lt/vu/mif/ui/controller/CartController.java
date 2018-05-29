@@ -7,12 +7,14 @@ import java.util.List;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.view.CartItemView;
 import lt.vu.mif.ui.view.CartView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 
+@Logged
 @Named
 @Getter
 @Setter

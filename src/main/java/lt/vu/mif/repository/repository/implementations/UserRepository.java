@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.user.User;
 import lt.vu.mif.model.user.UserTokenTuple;
 import lt.vu.mif.model.user.User_;
@@ -21,6 +22,7 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Logged
 @Transactional
 @Repository
 public class UserRepository extends SimpleJpaRepository<User, Long> implements IUserRepository {

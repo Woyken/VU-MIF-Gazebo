@@ -3,12 +3,14 @@ package lt.vu.mif.ui.controller;
 import java.math.BigDecimal;
 import javax.inject.Named;
 import lombok.Getter;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.paging.Paging;
 import lt.vu.mif.ui.view.BoughtProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
+@Logged
 @Named
 @Getter
 public class UserProductHistoryController {
