@@ -1,10 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -13,6 +8,12 @@ import lt.vu.mif.repository.repository.implementations.ProductRepository;
 import lt.vu.mif.ui.helpers.interfaces.IProductExportHelper;
 import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Logged
 @Setter
@@ -45,7 +46,7 @@ public class ProductExportController {
 
     public void exportSelected(List<Long> ids) throws InterruptedException, ExecutionException {
         ExportResult result = productExportHelper
-            .exportSelectedProducts(ids).get();
+                .exportSelectedProducts(ids).get();
 
         setDataAfterExport(result);
     }

@@ -1,5 +1,10 @@
 package lt.vu.mif.utils.zip;
 
+import lt.vu.mif.model.product.Image;
+import lt.vu.mif.utils.constants.Constants;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,10 +13,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-import lt.vu.mif.model.product.Image;
-import lt.vu.mif.utils.constants.Constants;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Transactional
@@ -21,7 +22,7 @@ public class ZipUtils {
         byte[] bytes = null;
 
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream(); ZipOutputStream zos = new ZipOutputStream(
-            baos)) {
+                baos)) {
 
             addImages(images, zos);
             addExcelFile(zos);
@@ -36,18 +37,18 @@ public class ZipUtils {
     }
 
     private void addImages(List<Image> images, ZipOutputStream zos)
-        throws IOException {
+            throws IOException {
         for (Image image : images) {
             ZipEntry entry = new ZipEntry(
-                Constants.IMAGES_FOLDER + Constants.IMAGE_PREFIX + image.getId()
-                    + Constants.IMAGE_TYPE);
+                    Constants.IMAGES_FOLDER + Constants.IMAGE_PREFIX + image.getId()
+                            + Constants.IMAGE_TYPE);
             zos.putNextEntry(entry);
             zos.write(image.getContent());
         }
     }
 
     private void addExcelFile(ZipOutputStream zos)
-        throws IOException {
+            throws IOException {
         Path path = Paths.get(Constants.EXCEL_FILE_PATH);
         byte[] data = Files.readAllBytes(path);
 

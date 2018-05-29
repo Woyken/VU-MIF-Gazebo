@@ -1,11 +1,12 @@
 package lt.vu.mif.excel;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.model.product.Category;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter

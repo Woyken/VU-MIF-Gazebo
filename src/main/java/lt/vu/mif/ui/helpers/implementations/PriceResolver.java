@@ -1,12 +1,13 @@
 package lt.vu.mif.ui.helpers.implementations;
 
-import java.math.BigDecimal;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.helpers.interfaces.IPriceResolver;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 
 @Transactional
 @Component
@@ -21,7 +22,7 @@ public class PriceResolver implements IPriceResolver {
 
         if (priceWithCategoryDiscount != null) {
             return priceWithCategoryDiscount.compareTo(priceWithProductDiscount) < 0
-                ? priceWithCategoryDiscount : priceWithProductDiscount;
+                    ? priceWithCategoryDiscount : priceWithProductDiscount;
         }
 
         return priceWithProductDiscount;
@@ -43,7 +44,7 @@ public class PriceResolver implements IPriceResolver {
 
         if (discount.getPercentageDiscount() != null) {
             priceWithPercentage = getPriceWithPercentages(product,
-                discount.getPercentageDiscount());
+                    discount.getPercentageDiscount());
         }
 
         BigDecimal resolvedPrice = getGreaterPrice(priceWithAbsoluteDiscount, priceWithPercentage);
@@ -68,7 +69,7 @@ public class PriceResolver implements IPriceResolver {
 
         if (categoryDiscount.getPercentageDiscount() != null) {
             priceWithPercentage = getPriceWithPercentages(product,
-                categoryDiscount.getPercentageDiscount());
+                    categoryDiscount.getPercentageDiscount());
         }
 
         return priceWithPercentage == null ? product.getPrice() : priceWithPercentage;
@@ -89,15 +90,15 @@ public class PriceResolver implements IPriceResolver {
             return discount;
         } else {
             return discount.getPercentageDiscount() > parentDiscount.getPercentageDiscount() ?
-                discount : parentDiscount;
+                    discount : parentDiscount;
         }
     }
 
     private BigDecimal getGreaterPrice(BigDecimal priceWithAbsoluteDiscount,
-        BigDecimal priceWithPercentage) {
+                                       BigDecimal priceWithPercentage) {
         if (priceWithAbsoluteDiscount != null && priceWithPercentage != null) {
             return priceWithAbsoluteDiscount.compareTo(priceWithPercentage) > 0
-                ? priceWithAbsoluteDiscount : priceWithPercentage;
+                    ? priceWithAbsoluteDiscount : priceWithPercentage;
         } else if (priceWithAbsoluteDiscount != null) {
             return priceWithAbsoluteDiscount;
         } else if (priceWithPercentage != null) {
@@ -109,7 +110,7 @@ public class PriceResolver implements IPriceResolver {
 
     private BigDecimal getPriceWithPercentages(Product product, Long value) {
         return product.getPrice().multiply(new BigDecimal(ONE_HUNDRED - value))
-            .divide(new BigDecimal(ONE_HUNDRED));
+                .divide(new BigDecimal(ONE_HUNDRED));
     }
 
     private BigDecimal subtract(BigDecimal bigDecimal, BigDecimal value) {

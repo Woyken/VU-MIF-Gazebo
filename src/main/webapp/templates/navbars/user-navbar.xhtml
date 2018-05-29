@@ -53,11 +53,11 @@
                         <!-- Account settings dropdown -->
                         <li class="has-submenu is-dropdown-submenu-parent is-right-arrow opens-right" role="menuitem">
                             <a>Paskyra</a>
-                            <ul class="menu vertical" role="menu" data-submenu="" >
+                            <ul class="menu vertical" role="menu" data-submenu="">
 
                                 <!-- View account information -->
                                 <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
-                                    <a href="../../user-information.xhtml" >
+                                    <a href="../../user-information.xhtml">
                                         <i class="fi-info"/>
                                         Mano informacija</a>
                                 </li>
@@ -88,7 +88,6 @@
             </div>
         </div>
     </div> <!-- END OF NAVIGATION BAR -->
-
 
 
     <!-- CHANGE PASSWORD MODAL. -->
@@ -179,7 +178,9 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="passwordSuccessMessage">
+                            <h:commandButton class="button success expanded" value="Keisti slaptažodį"
+                                             action="#{passwordChangeController.changePassword}"
+                                             update="passwordSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
                             <h:outputLabel value="#{passwordChangeController.successMessage}"
@@ -282,10 +283,12 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.changeEmail}" update="emailSuccessMessage">
+                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą"
+                                             action="#{emailChangeController.changeEmail}" update="emailSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <h:outputLabel value="#{emailChangeController.successMessage}" id="emailSuccessMessage"/>
+                            <h:outputLabel class="success-text" value="#{emailChangeController.successMessage}"
+                                           id="emailSuccessMessage"/>
                         </div>
                     </div>
                 </h:form>

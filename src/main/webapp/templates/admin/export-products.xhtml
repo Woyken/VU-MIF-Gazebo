@@ -52,9 +52,11 @@
                 </c:choose>
             </div>
             <div class="hide-for-small-only columns medium-4">
-                <p:commandButton value="Atsisiųsti failą" ajax="false" rendered="#{productExportController.message ne null}"
-                                 onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s" styleClass="button expanded blue">
-                    <p:fileDownload value="#{productExportController.file}" />
+                <p:commandButton value="Atsisiųsti failą" ajax="false"
+                                 rendered="#{productExportController.message ne null}"
+                                 onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s"
+                                 styleClass="button expanded blue">
+                    <p:fileDownload value="#{productExportController.file}"/>
                 </p:commandButton>
             </div>
         </div>

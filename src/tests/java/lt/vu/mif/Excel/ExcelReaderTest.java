@@ -1,7 +1,5 @@
 package lt.vu.mif.Excel;
 
-import java.io.File;
-import java.io.FileInputStream;
 import lt.vu.mif.excel.ImportResult;
 import lt.vu.mif.excel.ProductExcelReader;
 import lt.vu.mif.model.product.Category;
@@ -14,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ResourceUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -77,7 +78,7 @@ public class ExcelReaderTest {
     public void testExcelRead() throws Exception {
         File fileReadFrom = ResourceUtils.getFile(this.getClass().getResource(FILE_NAME));
         ImportResult productList = productExcelReader
-            .readFileSync(new FileInputStream(fileReadFrom));
+                .readFileSync(new FileInputStream(fileReadFrom));
 
         if (productList.getMessage() != null) {
             throw new IllegalStateException(productList.getMessage());

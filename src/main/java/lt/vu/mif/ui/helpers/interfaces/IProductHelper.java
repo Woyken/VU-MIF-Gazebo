@@ -1,18 +1,15 @@
 package lt.vu.mif.ui.helpers.interfaces;
 
+import lt.vu.mif.excel.ImportResult;
+import lt.vu.mif.model.product.Product;
+import lt.vu.mif.ui.view.*;
+import org.springframework.data.domain.Page;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import lt.vu.mif.excel.ImportResult;
-import lt.vu.mif.model.product.Product;
-import lt.vu.mif.ui.view.BoughtProductView;
-import lt.vu.mif.ui.view.CartItemView;
-import lt.vu.mif.ui.view.CartView;
-import lt.vu.mif.ui.view.ProductSearchView;
-import lt.vu.mif.ui.view.ProductView;
-import org.springframework.data.domain.Page;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface IProductHelper {
 

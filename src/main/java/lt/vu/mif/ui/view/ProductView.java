@@ -1,11 +1,12 @@
 package lt.vu.mif.ui.view;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.inject.Named;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Named;
-import lombok.Getter;
-import lombok.Setter;
 
 @Named
 @Getter

@@ -56,7 +56,7 @@ public class UserProfileTestsIT {
         driver.findElement(By.id("password")).sendKeys(password);
         //Click login
         driver.findElement(By.xpath("/html/body/div[1]/div[2]/form/div/div/div/div[4]/div/input"))
-            .click();
+                .click();
     }
 
     @Test
@@ -71,20 +71,20 @@ public class UserProfileTestsIT {
         driver.findElement(By.linkText("Registruotis")).click();
         //In register page enter credentials
         driver.findElement(
-            By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[1]/div/label/input"))
-            .sendKeys("thisisemail@email.com");
+                By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[1]/div/label/input"))
+                .sendKeys("thisisemail@email.com");
         driver.findElement(
-            By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[2]/div[1]/label/input"))
-            .sendKeys("Q!w2erty");
+                By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[2]/div[1]/label/input"))
+                .sendKeys("Q!w2erty");
         driver.findElement(
-            By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[3]/div/label/input"))
-            .sendKeys("Q!w2erty");
+                By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[3]/div/label/input"))
+                .sendKeys("Q!w2erty");
         //Click register
         driver
-            .findElement(By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[5]/div/input"))
-            .click();
+                .findElement(By.xpath("//*[@id=\"registration-window\"]/div/div/form/div[5]/div/input"))
+                .click();
         Assertions.assertTrue(driver.findElement(By.id("j_idt11:message")).getText()
-            .contains("thisisemail@email.com sėkmingai sukurtas"));
+                .contains("thisisemail@email.com sėkmingai sukurtas"));
 
         //Do login
         loginFromCurrentWindow(driver, "thisisemail@email.com", "Q!w2erty");
@@ -105,16 +105,16 @@ public class UserProfileTestsIT {
         driver.findElement(By.linkText("Keisti slaptažodį")).click();
         //enter credentials
         driver.findElement(By.xpath("/html/body/div[3]/div/form/div/div/div[1]/div/label/input"))
-            .sendKeys("user");
+                .sendKeys("user");
         driver.findElement(By.xpath("/html/body/div[3]/div/form/div/div/div[2]/div[1]/label/input"))
-            .sendKeys("Q!w2ertyNew");
+                .sendKeys("Q!w2ertyNew");
         driver.findElement(By.xpath("/html/body/div[3]/div/form/div/div/div[3]/div/label/input"))
-            .sendKeys("Q!w2ertyNew");
+                .sendKeys("Q!w2ertyNew");
         driver.findElement(By.xpath("/html/body/div[3]/div/form/div/div/div[5]/div/input")).click();
         //check changed message
         WebElement resultLabel = new WebDriverWait(driver, 3).until(ExpectedConditions
-            .visibilityOfElementLocated(
-                By.xpath("/html/body/div[3]/div/form/div/div/div[5]/div/label")));
+                .visibilityOfElementLocated(
+                        By.xpath("/html/body/div[3]/div/form/div/div/div[5]/div/label")));
         Assertions.assertEquals("Slaptažodis sėkmingai pakeistas", resultLabel.getText());
         //Close change password modular
         driver.findElement(By.xpath("/html/body/div[3]/div/form/button")).click();
@@ -140,23 +140,23 @@ public class UserProfileTestsIT {
         driver.findElement(By.linkText("Keisti el. paštą")).click();
         //Current email correct?
         Assertions.assertEquals(currentEmail, driver
-            .findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[1]/div/label/input"))
-            .getAttribute("value"));
+                .findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[1]/div/label/input"))
+                .getAttribute("value"));
         //Enter new email and password
         String newEmail = "mynewemail@email.com";
         driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[2]/div/label/input"))
-            .sendKeys(newEmail);
+                .sendKeys(newEmail);
         driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[3]/div/label/input"))
-            .sendKeys(newEmail);
+                .sendKeys(newEmail);
         driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[4]/div/label/input"))
-            .sendKeys(currentPassword);
+                .sendKeys(currentPassword);
         //Click change email button.
         driver.findElement(By.xpath("/html/body/div[4]/div/div/div/form/div[6]/div/input"))
-            .click();
+                .click();
         //Wait for ajax to finish
         WebElement resultLabel = new WebDriverWait(driver, 3).until(ExpectedConditions
-            .visibilityOfElementLocated(
-                By.xpath("/html/body/div[4]/div/div/div/form/div[6]/div/label")));
+                .visibilityOfElementLocated(
+                        By.xpath("/html/body/div[4]/div/div/div/form/div[6]/div/label")));
         //check message
         Assertions.assertEquals("El. paštas sėkmingai pakeistas", resultLabel.getText());
         //Close modal

@@ -1,8 +1,5 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderProduct;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
@@ -10,6 +7,10 @@ import lt.vu.mif.ui.view.OrderView;
 import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderMapper implements IMapper<Order, OrderView> {
@@ -34,13 +35,13 @@ public class OrderMapper implements IMapper<Order, OrderView> {
         OrderView view = new OrderView();
 
         view.setCreationDate(entity.getCreationDate()
-            .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
+                .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
         view.setId(entity.getId());
         view.setStatus(entity.getStatus());
         view.setUser(userMapper.toView(entity.getUser()));
         view.setProducts(productMapper.toViews(
-            entity.getProducts().stream().map(OrderProduct::getProduct)
-                .collect(Collectors.toList())));
+                entity.getProducts().stream().map(OrderProduct::getProduct)
+                        .collect(Collectors.toList())));
 
         return view;
     }

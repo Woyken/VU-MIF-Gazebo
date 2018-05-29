@@ -1,11 +1,12 @@
 package lt.vu.mif.ui.controller;
 
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
 import lt.vu.mif.ui.view.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 @Logged
 @Named

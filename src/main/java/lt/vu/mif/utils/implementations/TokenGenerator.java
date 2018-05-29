@@ -1,8 +1,9 @@
 package lt.vu.mif.utils.implementations;
 
-import java.util.UUID;
 import lt.vu.mif.utils.interfaces.ITokenGenerator;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 public class TokenGenerator implements ITokenGenerator {

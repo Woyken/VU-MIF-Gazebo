@@ -1,6 +1,5 @@
 package lt.vu.mif.ui.helpers.implementations;
 
-import java.util.List;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
@@ -11,6 +10,8 @@ import lt.vu.mif.ui.view.CategoryView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Transactional
 @Component

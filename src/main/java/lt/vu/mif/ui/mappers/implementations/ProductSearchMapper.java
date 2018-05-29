@@ -1,6 +1,5 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import java.util.List;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.CategoryView;
@@ -8,6 +7,8 @@ import lt.vu.mif.ui.view.ProductSearchView;
 import lt.vu.mif.utils.search.ProductSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ProductSearchMapper implements IMapper<ProductSearch, ProductSearchView> {

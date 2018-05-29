@@ -1,10 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -15,6 +10,12 @@ import lt.vu.mif.ui.view.RatingView;
 import lt.vu.mif.utils.SessionManager;
 import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.List;
 
 @Logged
 @Named
@@ -39,9 +40,9 @@ public class RatingController {
         }
 
         Object sessionAttribute = sessionManager
-            .getAttribute(Constants.SHOW_DIALOG_SESSION_PARAMETER);
+                .getAttribute(Constants.SHOW_DIALOG_SESSION_PARAMETER);
         if ((sessionAttribute != null && !Boolean.valueOf(sessionAttribute.toString()))
-            || !userService.isLoggedIn()) {
+                || !userService.isLoggedIn()) {
             return;
         }
 

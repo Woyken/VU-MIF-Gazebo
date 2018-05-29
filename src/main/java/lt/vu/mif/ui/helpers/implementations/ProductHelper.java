@@ -1,13 +1,5 @@
 package lt.vu.mif.ui.helpers.implementations;
 
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.stream.Collectors;
-import javax.faces.context.FacesContext;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.excel.ImportResult;
 import lt.vu.mif.excel.ProductExcelReader;
@@ -23,11 +15,7 @@ import lt.vu.mif.ui.mappers.implementations.CartMapper;
 import lt.vu.mif.ui.mappers.implementations.ProductMapper;
 import lt.vu.mif.ui.mappers.implementations.UserMapper;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
-import lt.vu.mif.ui.view.BoughtProductView;
-import lt.vu.mif.ui.view.CartItemView;
-import lt.vu.mif.ui.view.CartView;
-import lt.vu.mif.ui.view.ProductSearchView;
-import lt.vu.mif.ui.view.ProductView;
+import lt.vu.mif.ui.view.*;
 import lt.vu.mif.utils.interfaces.IProductParser;
 import lt.vu.mif.utils.search.ProductSearch;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +23,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.faces.context.FacesContext;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+import java.util.stream.Collectors;
 
 @Transactional
 @Component
@@ -71,9 +68,9 @@ public class ProductHelper implements IProductHelper {
 
     @Override
     public Page<BoughtProductView> getBoughtProductsPage(int activePage, int pageSize,
-        Long userId) {
+                                                         Long userId) {
         return boughtProductRepository.getBoughtProductsPage(activePage, pageSize, userId)
-            .map(boughtProductMapper::toView);
+                .map(boughtProductMapper::toView);
     }
 
     @Override
@@ -131,14 +128,14 @@ public class ProductHelper implements IProductHelper {
 
         cart.setUser(userMapper.toView(loggedInUser));
         List<Product> products = productRepository
-            .get(cart.getItems().stream().map(ProductView::getId).collect(
-                Collectors.toList()));
+                .get(cart.getItems().stream().map(ProductView::getId).collect(
+                        Collectors.toList()));
         Cart cartEntity = cartMapper.toEntity(cart);
         Cart finalCartEntity = cartEntity;
         cartEntity.getItems().forEach(cartItem -> {
             Optional<Product> t = products.stream()
-                .filter(product -> product.getId().equals(cartItem.getProduct().getId()))
-                .findFirst();
+                    .filter(product -> product.getId().equals(cartItem.getProduct().getId()))
+                    .findFirst();
             if (t.isPresent()) {
                 cartItem.setProduct(t.get());
             } else {
@@ -163,10 +160,10 @@ public class ProductHelper implements IProductHelper {
 
     @Override
     public Page<ProductView> getProductsPage(int activePage, int pageSize,
-        ProductSearchView search) {
+                                             ProductSearchView search) {
         return productRepository
-            .getProductsPage(productSearchMapper.toEntity(search), activePage, pageSize)
-            .map(productMapper::toView);
+                .getProductsPage(productSearchMapper.toEntity(search), activePage, pageSize)
+                .map(productMapper::toView);
     }
 
     @Override
@@ -183,7 +180,7 @@ public class ProductHelper implements IProductHelper {
     @Override
     public CompletableFuture<ImportResult> importProducts(InputStream inputStream) {
         CompletionStage<ImportResult> productPromise = productExcelReader
-            .readFile(inputStream);
+                .readFile(inputStream);
 
         productPromise.thenAccept(importResult -> {
             List<Product> productsToSave = productParser.parseProducts(importResult);
@@ -200,7 +197,7 @@ public class ProductHelper implements IProductHelper {
         for (BoughtProductView productView : productViews) {
             if (productView.getPrice() != null) {
                 totalSum = totalSum.add(
-                    productView.getPrice().multiply(new BigDecimal(productView.getQuantity())));
+                        productView.getPrice().multiply(new BigDecimal(productView.getQuantity())));
             }
         }
 
@@ -210,10 +207,10 @@ public class ProductHelper implements IProductHelper {
     @Override
     public ProductView getProductViewFromNavigationQuery() {
         String productId = FacesContext
-            .getCurrentInstance()
-            .getExternalContext()
-            .getRequestParameterMap()
-            .get("productId");
+                .getCurrentInstance()
+                .getExternalContext()
+                .getRequestParameterMap()
+                .get("productId");
 
         // No ID in query
         if (StringUtils.isBlank(productId)) {

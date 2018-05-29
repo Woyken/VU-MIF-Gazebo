@@ -1,5 +1,17 @@
 package lt.vu.mif.excel;
 
+import lt.vu.mif.model.product.Category;
+import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
+import lt.vu.mif.repository.repository.interfaces.IProductRepository;
+import lt.vu.mif.utils.interfaces.IImageReader;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -9,22 +21,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
-import lt.vu.mif.model.product.Category;
-import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
-import lt.vu.mif.repository.repository.interfaces.IProductRepository;
-import lt.vu.mif.utils.interfaces.IImageReader;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 @Component
 public class ProductExcelReader extends ProductExcelComponent {
@@ -67,7 +63,7 @@ public class ProductExcelReader extends ProductExcelComponent {
 
                 boolean newProduct;
                 if (newProductAddress != null && currentRow.getRowNum() == newProductAddress
-                    .getFirstRow()) {
+                        .getFirstRow()) {
                     newProduct = true;
                     newProductAddress = getAndRemove(productsAddresses, newProductAddress, sheet);
                 } else {
@@ -76,7 +72,7 @@ public class ProductExcelReader extends ProductExcelComponent {
 
                 currentRow.forEach(currentCell -> {
                     FormulaEvaluator formulaEvaluator = workbook.getCreationHelper()
-                        .createFormulaEvaluator();
+                            .createFormulaEvaluator();
                     CellValue cellValue = formulaEvaluator.evaluate(currentCell);
                     if (cellValue == null) {
                         rowValues.add(null);
@@ -128,7 +124,7 @@ public class ProductExcelReader extends ProductExcelComponent {
     }
 
     private CellRangeAddress getAndRemove(List<CellRangeAddress> addresses,
-        CellRangeAddress oldProductAddress, Sheet sheet) {
+                                          CellRangeAddress oldProductAddress, Sheet sheet) {
         if (CollectionUtils.isEmpty(addresses)) {
             if (oldProductAddress.getLastRow() < sheet.getLastRowNum()) {
                 return createOneRow(oldProductAddress);
@@ -139,7 +135,7 @@ public class ProductExcelReader extends ProductExcelComponent {
         CellRangeAddress result = addresses.get(addresses.size() - 1);
 
         if (oldProductAddress != null && oldProductAddress.getLastRow() + 1 != result
-            .getFirstRow()) {
+                .getFirstRow()) {
             return createOneRow(oldProductAddress);
         }
 
@@ -160,7 +156,7 @@ public class ProductExcelReader extends ProductExcelComponent {
 
         for (Cell cell : row) {
             if (!contains(cell.getStringCellValue()) && StringUtils
-                .isNotBlank(cell.getStringCellValue())) {
+                    .isNotBlank(cell.getStringCellValue())) {
                 return "Neteisinga failo struktūra";
             }
         }
@@ -197,8 +193,8 @@ public class ProductExcelReader extends ProductExcelComponent {
         BigDecimal price;
         try {
             price = new BigDecimal(
-                Double.valueOf((String.valueOf(rowValues.get(2))).replace(",", ".")),
-                MathContext.DECIMAL64);
+                    Double.valueOf((String.valueOf(rowValues.get(2))).replace(",", ".")),
+                    MathContext.DECIMAL64);
         } catch (NumberFormatException ex) {
             result.setMessage("Nurodyta netinkama kaina. Eilutė: " + rowNo);
             return result;
@@ -225,7 +221,7 @@ public class ProductExcelReader extends ProductExcelComponent {
                 if (link.startsWith("http")) {
                     bytes = imageReader.downloadImage(link);
                 } else {
-                   bytes = imageReader.readImageFromFile(link);
+                    bytes = imageReader.readImageFromFile(link);
                 }
 
                 imagesBytes.add(bytes);
@@ -243,7 +239,7 @@ public class ProductExcelReader extends ProductExcelComponent {
         }
 
         if (productRepository.checkIfProductExists(skuCode)) {
-            result.setMessage("Produktas su SKU kodu: " + skuCode  + " jau egzistuoja sistemoje. Eilutė " + rowNo);
+            result.setMessage("Produktas su SKU kodu: " + skuCode + " jau egzistuoja sistemoje. Eilutė " + rowNo);
             return result;
         }
 
@@ -261,7 +257,7 @@ public class ProductExcelReader extends ProductExcelComponent {
 
         String[] categories = category.split("\\/");
         Category latestCategory = categoryRepository
-            .getCategoryByName(categories[categories.length - 1]);
+                .getCategoryByName(categories[categories.length - 1]);
         if (latestCategory == null) {
             result.setMessage("Nurodyta neegzistuojanti kategorija. Eilutė: " + rowNo);
             return result;

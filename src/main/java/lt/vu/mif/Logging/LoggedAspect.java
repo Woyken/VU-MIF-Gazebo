@@ -1,9 +1,5 @@
 package lt.vu.mif.Logging;
 
-import java.time.Instant;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,6 +10,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Aspect
@@ -39,13 +40,13 @@ public class LoggedAspect {
 
     private void logMethod(JoinPoint joinPoint) {
         log.info("At: " + Instant.now() + " " + joinPoint.getTarget().getClass().getName() + "."
-            + joinPoint.getSignature().getName() + " was called.");
+                + joinPoint.getSignature().getName() + " was called.");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (null != authentication) {
             String username = authentication.getName();
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             List<String> authsList = authorities.stream().map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+                    .collect(Collectors.toList());
             log.info("User: athorities - " + String.join("|", authsList) + ", email - " + username);
         } else {
             log.info("User: null");

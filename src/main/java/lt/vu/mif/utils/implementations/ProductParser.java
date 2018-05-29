@@ -1,13 +1,14 @@
 package lt.vu.mif.utils.implementations;
 
-import java.util.ArrayList;
-import java.util.List;
 import lt.vu.mif.excel.ExcelProduct;
 import lt.vu.mif.excel.ImportResult;
 import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.utils.interfaces.IProductParser;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ProductParser implements IProductParser {

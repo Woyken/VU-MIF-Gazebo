@@ -1,8 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -11,6 +8,10 @@ import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
 import lt.vu.mif.ui.view.AdminOrderPreview;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 @Logged
 @Getter
@@ -30,7 +31,7 @@ public class OrderDetailsController {
         }
 
         String orderId = FacesContext.getCurrentInstance().getExternalContext()
-            .getRequestParameterMap().get("orderId");
+                .getRequestParameterMap().get("orderId");
         if (StringUtils.isBlank(orderId)) {
             throw new IllegalArgumentException("Invalid request parameter");
         }

@@ -1,13 +1,5 @@
 package lt.vu.mif.generator;
 
-import java.io.File;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.model.order.Rating;
@@ -25,6 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.io.File;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 public class MockDataGenerator {
@@ -178,20 +179,20 @@ public class MockDataGenerator {
     private String getProductDescription(int index) {
         if (index % 2 == 0) {
             return
-                "Šie vyriški batai iš Gallus kolekcijos garantuoja patogumą ir elegantiškumą tuo pat metu. Juoda, kokybiška oda kartu su klasikiniu batų modeliu daro batus solidžius. "
-                    + "Su jais puikiai atrodysite ne tik kasdien, bet ir norėdami pasipuošti. ";
+                    "Šie vyriški batai iš Gallus kolekcijos garantuoja patogumą ir elegantiškumą tuo pat metu. Juoda, kokybiška oda kartu su klasikiniu batų modeliu daro batus solidžius. "
+                            + "Su jais puikiai atrodysite ne tik kasdien, bet ir norėdami pasipuošti. ";
         } else if (index % 3 == 0) {
             return
-                "Šie vyriški batais yra vienas stilingiausių ir elegantiškiausių pusbačių modelių Gazebo parduotuvėse. Ruda jų spalva kartu su mėlynu varstymu puikiai derės ne tik prie klasikinių "
-                    + "džinsų, bet net ir prie kostiuminių kelnių norint pasipuošti. Tad galite neabejoti, jog su šiais batais atrodysite tikrai pribloškiamai bet kokia proga. ";
+                    "Šie vyriški batais yra vienas stilingiausių ir elegantiškiausių pusbačių modelių Gazebo parduotuvėse. Ruda jų spalva kartu su mėlynu varstymu puikiai derės ne tik prie klasikinių "
+                            + "džinsų, bet net ir prie kostiuminių kelnių norint pasipuošti. Tad galite neabejoti, jog su šiais batais atrodysite tikrai pribloškiamai bet kokia proga. ";
         } else if (index % 5 == 0) {
             return
-                "Šie vyriški Venice kolekcijos batai yra vienas geriausių pasirinkimų ieškant elegantiškų, tačiau itin patogių batų. Klasikinis batų modelis kartu su varstymu priekyje suteikia "
-                    + "solidumo ir stilingumo. O storesnis batų modelis daro pusbačius itin komfortiškais ir šiuolaikiškais.";
+                    "Šie vyriški Venice kolekcijos batai yra vienas geriausių pasirinkimų ieškant elegantiškų, tačiau itin patogių batų. Klasikinis batų modelis kartu su varstymu priekyje suteikia "
+                            + "solidumo ir stilingumo. O storesnis batų modelis daro pusbačius itin komfortiškais ir šiuolaikiškais.";
         }
         return
-            "Šie pusbačiai yra sukurti garantuoti Jūsų patogumą. Storesnis padas kartu su kilpiniu audiniu sukuria komfortišką ir unikalų modelį. O stilingumo ir išskirtinumo jam teikia "
-                + "mėlyna spalva kartu su baltos ir raudonos spalvų detalėmis. Šie pusbačiai puikiai tiks avėti kasdien kartu su tamsiomis kelnėmis ar klasikiniais mėlynais džinsais.";
+                "Šie pusbačiai yra sukurti garantuoti Jūsų patogumą. Storesnis padas kartu su kilpiniu audiniu sukuria komfortišką ir unikalų modelį. O stilingumo ir išskirtinumo jam teikia "
+                        + "mėlyna spalva kartu su baltos ir raudonos spalvų detalėmis. Šie pusbačiai puikiai tiks avėti kasdien kartu su tamsiomis kelnėmis ar klasikiniais mėlynais džinsais.";
     }
 
     private String getProductTitle(int index) {

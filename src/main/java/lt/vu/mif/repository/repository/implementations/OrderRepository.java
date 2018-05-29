@@ -1,15 +1,5 @@
 package lt.vu.mif.repository.repository.implementations;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderStatus;
@@ -25,11 +15,22 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
 @Logged
 @Transactional
 @Repository
 public class OrderRepository extends SimpleJpaRepository<Order, Long> implements
-    IOrderRepository {
+        IOrderRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -37,7 +38,7 @@ public class OrderRepository extends SimpleJpaRepository<Order, Long> implements
     @Autowired
     public OrderRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport.getEntityInformation(Order.class, entityManager),
-            entityManager);
+                entityManager);
     }
 
     @Override
@@ -71,8 +72,8 @@ public class OrderRepository extends SimpleJpaRepository<Order, Long> implements
         Objects.requireNonNull(email);
 
         Specification<Order> specification = Specification.where(
-            (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .equal(root.get(Order_.user).get(User_.email), email));
+                (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
+                        .equal(root.get(Order_.user).get(User_.email), email));
         return findAll(specification);
     }
 

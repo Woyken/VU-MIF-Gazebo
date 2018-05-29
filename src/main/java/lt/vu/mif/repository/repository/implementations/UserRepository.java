@@ -1,15 +1,5 @@
 package lt.vu.mif.repository.repository.implementations;
 
-import java.time.LocalDateTime;
-import java.util.Objects;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Tuple;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Root;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.user.User;
 import lt.vu.mif.model.user.UserTokenTuple;
@@ -22,6 +12,13 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Tuple;
+import javax.persistence.criteria.*;
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 @Logged
 @Transactional
 @Repository
@@ -33,7 +30,7 @@ public class UserRepository extends SimpleJpaRepository<User, Long> implements I
     @Autowired
     public UserRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport.getEntityInformation(User.class, entityManager),
-            entityManager);
+                entityManager);
     }
 
     public User get(Long id) {
@@ -133,6 +130,6 @@ public class UserRepository extends SimpleJpaRepository<User, Long> implements I
 
         Tuple result = PersistenceUtils.uniqueResult(entityManager.createQuery(criteria));
         return result == null ? null
-            : new UserTokenTuple(result.get(email), result.get(creationDate), token);
+                : new UserTokenTuple(result.get(email), result.get(creationDate), token);
     }
 }

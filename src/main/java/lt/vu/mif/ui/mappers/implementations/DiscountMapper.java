@@ -1,16 +1,17 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
 import lt.vu.mif.ui.view.DiscountView;
 import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DiscountMapper implements IMapper<Discount, DiscountView> {
@@ -27,9 +28,9 @@ public class DiscountMapper implements IMapper<Discount, DiscountView> {
         discount.setPercentageDiscount(view.getPercentageDiscount());
         discount.setAbsoluteDiscount(view.getAbsoluteDiscount());
         discount.setFrom(LocalDateTime.parse(view.getStartDate() + " " + view.getStartTime(),
-            DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
+                DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
         discount.setTo(LocalDateTime.parse(view.getEndDate() + " " + view.getEndTime(),
-            DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
+                DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
 
         return discount;
     }

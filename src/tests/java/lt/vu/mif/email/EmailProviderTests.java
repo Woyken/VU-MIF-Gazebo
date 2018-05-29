@@ -1,11 +1,5 @@
 package lt.vu.mif.email;
 
-import java.io.IOException;
-import javax.mail.Address;
-import javax.mail.Message.RecipientType;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
 import lt.vu.mif.email.implementations.EmailProvider;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -14,6 +8,13 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.mail.Address;
+import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 
 @RunWith(SpringRunner.class)
 public class EmailProviderTests {

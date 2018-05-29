@@ -1,5 +1,10 @@
 package lt.vu.mif.ui.validation;
 
+import lt.vu.mif.repository.repository.interfaces.IUserRepository;
+import lt.vu.mif.utils.validation.ValidationUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -7,10 +12,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-import lt.vu.mif.repository.repository.interfaces.IUserRepository;
-import lt.vu.mif.utils.validation.ValidationUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Named
 @Component
@@ -21,13 +22,13 @@ public class UserRegistrationValidation implements Validator {
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o)
-        throws ValidatorException {
+            throws ValidatorException {
 
         String email = (String) ((UIInput) uiComponent.getAttributes().get("email")).getValue();
         String password = (String) ((UIInput) uiComponent.getAttributes().get("password"))
-            .getValue();
+                .getValue();
         String passwordRepeat = (String) ((UIInput) uiComponent.getAttributes()
-            .get("passwordRepeat")).getValue();
+                .get("passwordRepeat")).getValue();
 
         if (email.isEmpty() || password.isEmpty() || passwordRepeat.isEmpty()) {
             throw new ValidatorException(new FacesMessage("Užpildyti ne visi privalomi laukai"));
@@ -47,7 +48,7 @@ public class UserRegistrationValidation implements Validator {
 
         if (userRepository.checkIfUserExists(email)) {
             throw new ValidatorException(
-                new FacesMessage("Naudotojas su nurodytu el. pašto adresu jau egzistuoja"));
+                    new FacesMessage("Naudotojas su nurodytu el. pašto adresu jau egzistuoja"));
         }
     }
 }

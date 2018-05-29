@@ -1,11 +1,6 @@
 package lt.vu.mif.ui.controller;
 
 
-import java.util.Collections;
-import java.util.List;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -15,6 +10,12 @@ import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.DiscountView;
 import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.util.Collections;
+import java.util.List;
 
 @Logged
 @Named
@@ -46,7 +47,7 @@ public class ProductDiscountController {
         try {
             productView = productHelper.getProductViewFromNavigationQuery();
             discountView = productView.getDiscount() == null ? new DiscountView() :
-                productView.getDiscount();
+                    productView.getDiscount();
             isProductFound = true;
         } catch (IllegalArgumentException x) {
             // If navigation query doesn't have a valid product ID - it means we want to
@@ -60,7 +61,7 @@ public class ProductDiscountController {
 
     public void categoryChange() {
         discountView = selectedCategory.getDiscount() == null ? new DiscountView() :
-            selectedCategory.getDiscount();
+                selectedCategory.getDiscount();
     }
 
     public void addDiscount() {
@@ -84,7 +85,7 @@ public class ProductDiscountController {
     private void addDiscountToProduct() {
         //Couldn't access product in validation class, so have to do it here
         if (discountView.getAbsoluteDiscount() != null &&
-            discountView.getAbsoluteDiscount().compareTo(productView.getPrice()) == 1) {
+                discountView.getAbsoluteDiscount().compareTo(productView.getPrice()) == 1) {
             errorMessage = "Nuolaidos kaina negali būti didesnė už įprastą produkto kainą";
             return;
         }

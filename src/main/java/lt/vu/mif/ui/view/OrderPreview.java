@@ -1,12 +1,13 @@
 package lt.vu.mif.ui.view;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.model.order.OrderStatus;
+
+import javax.inject.Named;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named
 @Getter

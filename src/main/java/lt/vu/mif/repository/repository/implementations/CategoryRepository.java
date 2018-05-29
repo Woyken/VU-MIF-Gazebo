@@ -1,12 +1,5 @@
 package lt.vu.mif.repository.repository.implementations;
 
-import java.util.List;
-import java.util.Objects;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Category_;
@@ -18,11 +11,19 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+import java.util.Objects;
+
 @Logged
 @Transactional
 @Repository
 public class CategoryRepository extends SimpleJpaRepository<Category, Long> implements
-    ICategoryRepository {
+        ICategoryRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -30,8 +31,8 @@ public class CategoryRepository extends SimpleJpaRepository<Category, Long> impl
     @Autowired
     public CategoryRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport
-                .getEntityInformation(Category.class, entityManager),
-            entityManager);
+                        .getEntityInformation(Category.class, entityManager),
+                entityManager);
     }
 
     @Override

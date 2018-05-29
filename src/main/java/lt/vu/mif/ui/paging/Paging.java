@@ -33,7 +33,7 @@ public class Paging {
         } else {
             //When active page is in the middle like 3  4 [5] 6  7
             return number >= activePage - (PAGES_TO_SHOW / 2) &&
-                number <= activePage + (PAGES_TO_SHOW / 2);
+                    number <= activePage + (PAGES_TO_SHOW / 2);
         }
     }
 
@@ -48,12 +48,12 @@ public class Paging {
     }
 
     public void previous() {
-        if (activePage> 0) {
+        if (activePage > 0) {
             activePage--;
         }
 
         if (index > 0) {
-            index --;
+            index--;
         }
     }
 
