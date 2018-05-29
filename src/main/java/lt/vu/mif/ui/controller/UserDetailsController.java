@@ -5,6 +5,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.implementations.ProductHelper;
 import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
 import lt.vu.mif.ui.paging.Paging;
@@ -13,6 +14,7 @@ import lt.vu.mif.ui.view.BoughtProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
+@Logged
 @Named
 @Getter
 @Setter

@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IImageHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
@@ -21,6 +22,7 @@ import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 
+@Logged
 @Getter
 @Setter
 @ViewScoped

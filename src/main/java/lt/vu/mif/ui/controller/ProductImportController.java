@@ -9,9 +9,11 @@ import javax.inject.Named;
 import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Logged
 @Named
 @Getter
 @Setter

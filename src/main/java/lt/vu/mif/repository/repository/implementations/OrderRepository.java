@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.model.order.Order_;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+@Logged
 @Transactional
 @Repository
 public class OrderRepository extends SimpleJpaRepository<Order, Long> implements

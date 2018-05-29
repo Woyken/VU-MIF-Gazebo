@@ -5,6 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.payment.PaymentResponse;
 import lt.vu.mif.payment.PaymentService;
 import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
@@ -14,6 +15,7 @@ import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
 
+@Logged
 @Named
 @Getter
 @Setter

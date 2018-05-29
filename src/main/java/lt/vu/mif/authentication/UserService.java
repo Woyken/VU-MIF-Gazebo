@@ -33,8 +33,11 @@ public class UserService {
 
     public User getLoggedUser() {
         if (isLoggedIn()) {
-            return userRepository
-                .getUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (null == authentication) {
+                return null;
+            }
+            return userRepository.getUserByEmail(authentication.getName());
         }
         return null;
     }
