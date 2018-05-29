@@ -94,6 +94,7 @@ public class ProductEditController {
 
         try {
             productHelper.update(productView);
+            productView = productHelper.getProduct(productView.getId());
             showSuccessMessage = true;
             clearData();
         } catch (OptimisticLockingFailureException ex) {
