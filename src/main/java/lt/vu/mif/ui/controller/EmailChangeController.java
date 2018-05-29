@@ -30,6 +30,11 @@ public class EmailChangeController {
     private String successMessage;
 
     public void changeEmail() {
+        boolean alreadyExists = userHelper.checkIfUserExists(newEmail);
+        if(alreadyExists) {
+            successMessage = "Toks El. paštas jau užimtas!";
+            return;
+        }
         userHelper.updateUserEmail(userService.getLoggedUserEmail(), newEmail);
 
         // Update security context to hold new email with same authorities granted as before.
