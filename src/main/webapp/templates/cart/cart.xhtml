@@ -84,7 +84,7 @@
                                      pt:min="1">
                             <!--convertNumber produces a bug, where numbers above 1000 aren't rendered, fix unknown-->
                             <!--<f:convertNumber integerOnly="true" type="number"/>-->
-                            <f:validateLongRange minimum="1" />
+                            <f:validateLongRange minimum="1"/>
                             <p:ajax listener="#{cartController.onItemAmountChange}" event="change"
                                     update="@form"/>
                         </h:inputText>
@@ -101,7 +101,7 @@
                         <h:commandLink class="button primary red" value="&times;"
                                        pt:data-open="remove-item-from-cart-modal"
                                        action="#{cartController.selectForRemoval(productItem)}">
-                            <p:ajax update="@form" />
+                            <p:ajax update="@form"/>
                         </h:commandLink>
                     </div>
 
@@ -115,8 +115,8 @@
                                 <h:inputText class="" value="#{productItem.amount}" pt:type="number"
                                              pt:min="1">
                                     <f:convertNumber integerOnly="true" type="number"/>
-                                    <f:validateLongRange minimum="1" />
-                                    <p:ajax event="change" update="@form" />
+                                    <f:validateLongRange minimum="1"/>
+                                    <p:ajax event="change" update="@form"/>
                                 </h:inputText>
                             </div>
                         </div>
@@ -143,7 +143,7 @@
                                 value="Išimti prekę iš krepšelio"
                                 pt:data-open="remove-item-from-cart-modal"
                                 action="#{cartController.selectForRemoval(productItem)}">
-                            <p:ajax update="@form" />
+                            <p:ajax update="@form"/>
                         </h:commandLink>
                     </div>
 
@@ -165,9 +165,9 @@
                 <!-- [Button] Return to list -->
                 <div class="hide-for-small-only columns medium-3">
                     <a class="button primary expanded" href="../../main.xhtml">
-                        <i class="fi-arrow-left" />
+                        <i class="fi-arrow-left"/>
                         Atgal į katalogą</a>
-                </div>               
+                </div>
 
                 <!-- [Button] Buy cart items -->
                 <div class="hide-for-small-only medium-3 medium-offset-6">
@@ -199,11 +199,11 @@
                                    action="#{cartController.buyWithoutLogin}"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
                 </div>
-                    
+
                 <!-- [Button][Mobile] Return to list -->
                 <div class="hide-for-medium columns small-12">
                     <a class="button primary expanded" href="../../main.xhtml">
-                        <i class="fi-arrow-left" />
+                        <i class="fi-arrow-left"/>
                         Atgal į katalogą</a>
                 </div>
 
@@ -222,11 +222,12 @@
                     <h4 class="form-title text-center">
                         Pašalinti prekę iš krepšelio?
                     </h4>
-                    <br />
+                    <br/>
                     <div class="row">
                         <div class="columns small-6">
                             <h:form>
-                                <h:commandLink class="button primary expanded" pt:data-close="" value="Taip" action="#{cartController.removeSelectedProduct()}">
+                                <h:commandLink class="button primary expanded" pt:data-close="" value="Taip"
+                                               action="#{cartController.removeSelectedProduct()}">
                                     <p:ajax update=":shopping-cart-items-form"/>
                                 </h:commandLink>
                             </h:form>

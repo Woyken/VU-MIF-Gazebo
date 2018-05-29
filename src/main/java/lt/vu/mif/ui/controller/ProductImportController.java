@@ -1,17 +1,18 @@
 package lt.vu.mif.ui.controller;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.concurrent.ExecutionException;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import javax.servlet.http.Part;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 
 @Logged
 @Named
@@ -42,7 +43,7 @@ public class ProductImportController implements Serializable {
             if (uploadedFile.getInputStream() != null) {
                 message = "Importavimas vykdomas.";
                 String errorMessage = productHelper.importProducts(uploadedFile.getInputStream())
-                    .get().getMessage();
+                        .get().getMessage();
                 if (errorMessage == null) {
                     message = "Importavimas sėkmingai atliktas.";
                 } else {

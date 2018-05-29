@@ -1,6 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -9,6 +8,8 @@ import lt.vu.mif.ui.helpers.interfaces.IUserHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
+
+import javax.inject.Named;
 
 @Logged
 @Named

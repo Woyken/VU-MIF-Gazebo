@@ -1,8 +1,9 @@
 package lt.vu.mif.ui.view;
 
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.inject.Named;
 
 @Named
 @Getter

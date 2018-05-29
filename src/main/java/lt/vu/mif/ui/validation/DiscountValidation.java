@@ -1,9 +1,8 @@
 package lt.vu.mif.ui.validation;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import lt.vu.mif.utils.validation.ValidationUtils;
+import org.springframework.stereotype.Component;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -11,8 +10,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-import lt.vu.mif.utils.validation.ValidationUtils;
-import org.springframework.stereotype.Component;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 
 @Named
@@ -21,53 +22,53 @@ public class DiscountValidation implements Validator {
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o)
-        throws ValidatorException {
+            throws ValidatorException {
         BigDecimal discountPrice = (BigDecimal) ((UIInput) uiComponent.getAttributes()
-            .get("discountPrice"))
-            .getValue();
+                .get("discountPrice"))
+                .getValue();
         //Can't get string from number field, so have to use BigDecimal, because need to validate if
         //user entered a whole number
         Long discountPercentage = (Long) ((UIInput) uiComponent.getAttributes()
-            .get("discountPercentage"))
-            .getValue();
+                .get("discountPercentage"))
+                .getValue();
         String startDate = (String) ((UIInput) uiComponent.getAttributes().get("startDate"))
-            .getValue();
+                .getValue();
         String startTime = (String) ((UIInput) uiComponent.getAttributes().get("startTime"))
-            .getValue();
+                .getValue();
         String endDate = (String) ((UIInput) uiComponent.getAttributes().get("endDate"))
-            .getValue();
+                .getValue();
         String endTime = (String) ((UIInput) uiComponent.getAttributes().get("endTime"))
-            .getValue();
+                .getValue();
 
         if (discountPrice == null && discountPercentage == null || startDate.isEmpty() || endDate
-            .isEmpty() || startTime.isEmpty() || endTime.isEmpty()) {
+                .isEmpty() || startTime.isEmpty() || endTime.isEmpty()) {
             throw new ValidatorException(new FacesMessage("Užpildyti ne visi privalomi laukai"));
         }
 
         if (discountPrice != null && discountPercentage != null) {
             throw new ValidatorException(new FacesMessage
-                ("Negalima priskirti nuolaidos ir nauja kaina ir procentais"));
+                    ("Negalima priskirti nuolaidos ir nauja kaina ir procentais"));
         }
 
         if (discountPercentage == null) {
             if (ValidationUtils.getNumberOfDecimalPlaces(discountPrice) > 2) {
                 throw new ValidatorException(new FacesMessage
-                    ("Nuolaidos kainoje įvesta per daug skaičių po kablelio"));
+                        ("Nuolaidos kainoje įvesta per daug skaičių po kablelio"));
             }
 
             if (discountPrice.intValue() < 0) {
                 throw new ValidatorException(
-                    new FacesMessage("Nauja kaina turi būti teigiamas skaičius"));
+                        new FacesMessage("Nauja kaina turi būti teigiamas skaičius"));
             }
         } else {
             if (discountPercentage.intValue() < 0) {
                 throw new ValidatorException(
-                    new FacesMessage("Nuolaida procentais turi būti teigiamas skaičius"));
+                        new FacesMessage("Nuolaida procentais turi būti teigiamas skaičius"));
             }
 
             if (discountPercentage.intValue() > 100) {
                 throw new ValidatorException(
-                    new FacesMessage("Nuolaida procentais negali būti didesnė už 100"));
+                        new FacesMessage("Nuolaida procentais negali būti didesnė už 100"));
             }
         }
 
@@ -84,14 +85,14 @@ public class DiscountValidation implements Validator {
 
         try {
             startDateParsed = LocalDateTime.parse(startDate + " " + startTime,
-                DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT));
+                    DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT));
         } catch (DateTimeParseException e) {
             throw new ValidatorException(new FacesMessage("Neteisinga pradžios data"));
         }
 
         try {
             endDateParsed = LocalDateTime.parse(endDate + " " + endTime,
-                DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT));
+                    DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT));
         } catch (DateTimeParseException e) {
             throw new ValidatorException(new FacesMessage("Neteisinga pabaigos data"));
         }
@@ -102,7 +103,7 @@ public class DiscountValidation implements Validator {
 
         if (endDateParsed.isBefore(startDateParsed)) {
             throw new ValidatorException(
-                new FacesMessage("Nuolaida negali pasibaigti anksčiau, nei prasidėti"));
+                    new FacesMessage("Nuolaida negali pasibaigti anksčiau, nei prasidėti"));
         }
     }
 }

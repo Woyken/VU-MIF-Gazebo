@@ -1,7 +1,8 @@
 package lt.vu.mif.ui.helpers.interfaces;
 
-import java.util.List;
 import lt.vu.mif.ui.view.CategoryView;
+
+import java.util.List;
 
 public interface ICategoryHelper {
 

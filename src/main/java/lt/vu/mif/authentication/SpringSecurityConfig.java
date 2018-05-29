@@ -1,6 +1,5 @@
 package lt.vu.mif.authentication;
 
-import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.annotation.Resource;
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,38 +27,38 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable(); //temporary disabled to allow h2-console
 
         http.authorizeRequests()
-            .antMatchers("/payment.xhtml")
-            .access("hasAnyRole('USER', 'ADMIN')")
+                .antMatchers("/payment.xhtml")
+                .access("hasAnyRole('USER', 'ADMIN')")
 
-            .and()
-            .authorizeRequests()
-            .antMatchers("/user*")
-            .hasRole("USER")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/user*")
+                .hasRole("USER")
 
-            .and()
-            .authorizeRequests()
-            .antMatchers("/admin*")
-            .hasRole("ADMIN")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/admin*")
+                .hasRole("ADMIN")
 
-            .and()
-            .exceptionHandling()
-            .accessDeniedPage("/access-denied.xhtml")
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/access-denied.xhtml")
 
-            .and()
-            .formLogin()
-            .loginPage("/login.xhtml")
-            .successHandler(successHandler())
-            .failureUrl("/login.xhtml?error=true")
-            .permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login.xhtml")
+                .successHandler(successHandler())
+                .failureUrl("/login.xhtml?error=true")
+                .permitAll()
 
-            .and()
-            .logout()
-            .logoutSuccessUrl("/main.xhtml")
-            .invalidateHttpSession(true)
-            .deleteCookies("JSESSIONID")
-            .permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/main.xhtml")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
 
-            .and().csrf().disable();
+                .and().csrf().disable();
     }
 
     @Bean

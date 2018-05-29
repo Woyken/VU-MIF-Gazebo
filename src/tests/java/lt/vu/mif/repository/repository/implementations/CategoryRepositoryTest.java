@@ -1,8 +1,5 @@
 package lt.vu.mif.repository.repository.implementations;
 
-import java.math.BigDecimal;
-import java.util.List;
-import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
@@ -15,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Rollback
 @Transactional
@@ -48,7 +49,7 @@ public class CategoryRepositoryTest {
 
         for (Product product : createdProducts) {
             Assertions
-                .assertEquals(defaultCategory.getName(), product.getCategory().getName());
+                    .assertEquals(defaultCategory.getName(), product.getCategory().getName());
         }
     }
 

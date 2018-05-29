@@ -1,10 +1,5 @@
 package lt.vu.mif.payment;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,6 +11,8 @@ import org.primefaces.json.JSONException;
 import org.primefaces.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.io.*;
 
 @Service
 public class PaymentService {
@@ -29,8 +26,8 @@ public class PaymentService {
     private String serviceAccountPassword;
 
     public PaymentResponse MakePayment(int amount, String cardNumber, String holder,
-        int expirationYear,
-        int expirationMonth, String cvv) {
+                                       int expirationYear,
+                                       int expirationMonth, String cvv) {
         final String requestUrl = "payment";
         JSONObject requestBody = new JSONObject();
         try {
@@ -44,7 +41,7 @@ public class PaymentService {
         }
 
         String authorizationToken = Base64
-            .encodeBase64String((serviceAccountUsername + ":" + serviceAccountPassword).getBytes());
+                .encodeBase64String((serviceAccountUsername + ":" + serviceAccountPassword).getBytes());
 
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             HttpPost httpPost = new HttpPost(baseUrl + RESTApiVersion + requestUrl);

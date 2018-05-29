@@ -1,7 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.util.Collection;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -12,6 +10,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.annotation.RequestScope;
+
+import javax.inject.Named;
+import java.util.Collection;
 
 @Logged
 @Named
@@ -34,9 +35,9 @@ public class EmailChangeController {
 
         // Update security context to hold new email with same authorities granted as before.
         Collection<? extends GrantedAuthority> currentAuthorities =
-            SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+                SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         UsernamePasswordAuthenticationToken authentication =
-            new UsernamePasswordAuthenticationToken(newEmail, null, currentAuthorities);
+                new UsernamePasswordAuthenticationToken(newEmail, null, currentAuthorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         successMessage = "El. paštas sėkmingai pakeistas";

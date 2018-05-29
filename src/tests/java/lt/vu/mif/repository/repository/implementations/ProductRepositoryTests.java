@@ -1,9 +1,5 @@
 package lt.vu.mif.repository.repository.implementations;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.utils.search.ProductSearch;
 import org.junit.Test;
@@ -15,6 +11,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class ProductRepositoryTests {
@@ -24,9 +25,9 @@ public class ProductRepositoryTests {
 
     private boolean productsEqual(Product product1, Product product2) {
         return product1.getSku().equals(product2.getSku()) &&
-            product1.getPrice().equals(product2.getPrice()) &&
-            product1.getTitle().equals(product2.getTitle()) &&
-            product1.getDescription().equals(product2.getDescription());
+                product1.getPrice().equals(product2.getPrice()) &&
+                product1.getTitle().equals(product2.getTitle()) &&
+                product1.getDescription().equals(product2.getDescription());
     }
 
     private boolean checkProducts(List<Product> expected, List<Product> got) {
@@ -153,7 +154,7 @@ public class ProductRepositoryTests {
 
         ProductSearch productSearch = new ProductSearch();
         Page<Product> productsPage = productRepository
-            .getProductsPage(productSearch, 0, 1);
+                .getProductsPage(productSearch, 0, 1);
         Assertions.assertEquals(2, productsPage.getTotalPages());
         Assertions.assertEquals(2, productsPage.getTotalElements());
         Assertions.assertEquals(1, productsPage.getSize());

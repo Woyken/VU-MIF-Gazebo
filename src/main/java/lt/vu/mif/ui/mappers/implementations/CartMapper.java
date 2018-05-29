@@ -1,8 +1,5 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.model.product.Cart;
 import lt.vu.mif.model.product.CartItem;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
@@ -11,6 +8,10 @@ import lt.vu.mif.ui.view.CartView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component("cartMapper")
 public class CartMapper implements IMapper<Cart, CartView> {

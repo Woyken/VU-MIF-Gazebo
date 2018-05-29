@@ -47,31 +47,31 @@ public class CartTestsIT {
     public void addingProductsToCart_success() {
         //Add first product to cart
         driver
-            .findElement(By.xpath("/html/body/div[1]/div[7]/div/span/div[1]/div[1]/form/input[2]"))
-            .click();
+                .findElement(By.xpath("/html/body/div[1]/div[7]/div/span/div[1]/div[1]/form/input[2]"))
+                .click();
         //Go to cart
         driver.findElement(By.id("cart-button")).click();
         //Check cart item amount
         WebElement cartItemAmount = driver
-            .findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[2]/div[2]/input"));
+                .findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[2]/div[2]/input"));
         Assertions.assertEquals("1", cartItemAmount.getAttribute("value"));
 
         //Click remove from cart
         driver.findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[2]/div[4]/a"))
-            .click();
+                .click();
         //click Yes
         driver.findElement(By.xpath("/html/body/div[3]/div/div/div/div[1]/form/a")).click();
         // make sure item is gone.
         Assertions.assertEquals(0,
-            driver.findElement(By.id("shopping-cart-items-form")).findElements(By.tagName("img"))
-                .size());
+                driver.findElement(By.id("shopping-cart-items-form")).findElements(By.tagName("img"))
+                        .size());
         //back to catalog
         driver.findElement(By.linkText("Atgal į katalogą")).click();
         //open first item description
         driver.findElement(By.xpath("/html/body/div[1]/div[7]/div/span/div[1]/div[1]/a")).click();
         //set amount to 5
         WebElement inputAmount = driver
-            .findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/form/div[2]/div[2]/input"));
+                .findElement(By.xpath("/html/body/div[1]/div[3]/div[2]/form/div[2]/div[2]/input"));
         inputAmount.clear();
         inputAmount.sendKeys("5");
         //Click on add to cart
@@ -80,7 +80,7 @@ public class CartTestsIT {
         driver.findElement(By.id("cart-button")).click();
         //Check cart item amount
         cartItemAmount = driver
-            .findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[2]/div[2]/input"));
+                .findElement(By.xpath("//*[@id=\"shopping-cart-items-form\"]/div[2]/div[2]/input"));
         Assertions.assertEquals("5", cartItemAmount.getAttribute("value"));
     }
 }

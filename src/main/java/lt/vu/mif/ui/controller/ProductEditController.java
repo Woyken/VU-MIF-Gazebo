@@ -1,13 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -21,6 +13,15 @@ import lt.vu.mif.ui.view.ProductView;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
+
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import javax.servlet.http.Part;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Logged
 @Getter
@@ -80,9 +81,9 @@ public class ProductEditController {
     public void saveChanges() {
         //Remove discount if it is smaller than new price
         if (productView.getDiscount() != null &&
-            productView.getDiscount().getAbsoluteDiscount() != null &&
-            productView.getPrice().compareTo(productView.getDiscount().getAbsoluteDiscount())
-                == -1) {
+                productView.getDiscount().getAbsoluteDiscount() != null &&
+                productView.getPrice().compareTo(productView.getDiscount().getAbsoluteDiscount())
+                        == -1) {
             productView.setDiscount(null);
         }
 

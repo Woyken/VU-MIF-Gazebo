@@ -1,8 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -10,6 +7,10 @@ import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.view.ProductView;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 @Logged
 @Getter
@@ -30,7 +31,7 @@ public class ProductDetailsController {
         }
 
         String productId = FacesContext.getCurrentInstance().getExternalContext()
-            .getRequestParameterMap().get("productId");
+                .getRequestParameterMap().get("productId");
         if (StringUtils.isBlank(productId)) {
             throw new IllegalArgumentException("Invalid request parameter");
         }

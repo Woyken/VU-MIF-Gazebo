@@ -27,7 +27,7 @@ public class PaymentResponse {
                 status = PaymentStatus.Error;
                 try {
                     error = new PaymentError(responseBody.getString("error"),
-                        responseBody.getString("message"));
+                            responseBody.getString("message"));
                 } catch (JSONException ignored) {
                 }
                 break;

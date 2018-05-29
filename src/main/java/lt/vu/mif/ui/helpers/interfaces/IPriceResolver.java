@@ -1,7 +1,8 @@
 package lt.vu.mif.ui.helpers.interfaces;
 
-import java.math.BigDecimal;
 import lt.vu.mif.model.product.Product;
+
+import java.math.BigDecimal;
 
 public interface IPriceResolver {
 

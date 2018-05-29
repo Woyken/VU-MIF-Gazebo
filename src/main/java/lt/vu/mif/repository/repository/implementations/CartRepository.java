@@ -1,12 +1,5 @@
 package lt.vu.mif.repository.repository.implementations;
 
-import java.util.List;
-import java.util.Objects;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.product.Cart;
 import lt.vu.mif.model.product.Cart_;
@@ -19,6 +12,14 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
+import java.util.Objects;
+
 @Logged
 @Transactional
 @Repository
@@ -30,7 +31,7 @@ public class CartRepository extends SimpleJpaRepository<Cart, Long> implements I
     @Autowired
     public CartRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport.getEntityInformation(Cart.class, entityManager),
-            entityManager);
+                entityManager);
     }
 
     @Override

@@ -1,9 +1,5 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.ui.helpers.interfaces.IPriceResolver;
@@ -13,6 +9,11 @@ import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component("productMapper")
 public class ProductMapper implements IMapper<Product, ProductView> {

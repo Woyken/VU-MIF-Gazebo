@@ -1,9 +1,5 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import java.math.BigDecimal;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderProduct;
 import lt.vu.mif.model.user.User;
@@ -15,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderPreviewMapper implements IMapper<Order, OrderPreview> {
@@ -39,7 +40,7 @@ public class OrderPreviewMapper implements IMapper<Order, OrderPreview> {
         OrderPreview view = new OrderPreview();
 
         view.setCreationDate(entity.getCreationDate()
-            .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
+                .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
         view.setId(entity.getId());
         view.setStatus(entity.getStatus());
         User user = entity.getUser();
@@ -55,7 +56,7 @@ public class OrderPreviewMapper implements IMapper<Order, OrderPreview> {
         AdminOrderPreview view = new AdminOrderPreview();
 
         view.setCreationDate(entity.getCreationDate()
-            .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
+                .format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
         view.setId(entity.getId());
         view.setStatus(entity.getStatus());
         User user = entity.getUser();
@@ -85,7 +86,7 @@ public class OrderPreviewMapper implements IMapper<Order, OrderPreview> {
 
         for (OrderProduct orderProduct : products) {
             totalPrice = totalPrice
-                .add(orderProduct.getPrice().multiply(new BigDecimal(orderProduct.getQuantity())));
+                    .add(orderProduct.getPrice().multiply(new BigDecimal(orderProduct.getQuantity())));
         }
 
         return totalPrice;

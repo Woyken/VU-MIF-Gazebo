@@ -1,7 +1,5 @@
 package lt.vu.mif.ui.helpers.implementations;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.email.interfaces.IEmailContentGenerator;
 import lt.vu.mif.email.interfaces.IEmailProvider;
@@ -19,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Transactional
 @Component
@@ -73,7 +74,7 @@ public class UserHelper implements IUserHelper {
 
     public void changeCurrentUserPassword(String newPassword) {
         userRepository.changeUserPassword(userService.getLoggedUserEmail(),
-            passwordEncoder.encode(newPassword));
+                passwordEncoder.encode(newPassword));
     }
 
     public boolean checkIfUserExists(String userEmail) {

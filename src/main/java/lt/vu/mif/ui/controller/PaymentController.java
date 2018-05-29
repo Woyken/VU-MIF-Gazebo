@@ -1,8 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.io.IOException;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -14,6 +11,10 @@ import lt.vu.mif.utils.SessionManager;
 import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
+
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import java.io.IOException;
 
 @Logged
 @Named
@@ -56,7 +57,7 @@ public class PaymentController {
         }
 
         String error = FacesContext.getCurrentInstance().getExternalContext()
-            .getRequestParameterMap().get("error");
+                .getRequestParameterMap().get("error");
 
         //Could be null if user newly entered the page
         if (error != null) {
@@ -83,8 +84,8 @@ public class PaymentController {
         String cvs = cvsDesktop.isEmpty() ? cvsMobile : cvsDesktop;
 
         PaymentResponse response = paymentService
-            .MakePayment(cartController.getSum().movePointRight(2).intValueExact(), cardNumber,
-                name + " " + surname, Integer.parseInt(year) + 2000, Integer.parseInt(month), cvs);
+                .MakePayment(cartController.getSum().movePointRight(2).intValueExact(), cardNumber,
+                        name + " " + surname, Integer.parseInt(year) + 2000, Integer.parseInt(month), cvs);
 
         if (!response.isSuccess()) {
             return "payment?error=" + response.getError().error + "&faces-redirect=true";

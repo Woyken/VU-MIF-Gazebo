@@ -1,9 +1,5 @@
 package lt.vu.mif.ui.helpers.implementations;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderProduct;
@@ -16,14 +12,15 @@ import lt.vu.mif.repository.repository.interfaces.IUserRepository;
 import lt.vu.mif.ui.helpers.interfaces.IOrdersHelper;
 import lt.vu.mif.ui.mappers.implementations.OrderMapper;
 import lt.vu.mif.ui.mappers.implementations.OrderPreviewMapper;
-import lt.vu.mif.ui.view.AdminOrderPreview;
-import lt.vu.mif.ui.view.CartItemView;
-import lt.vu.mif.ui.view.OrderPreview;
-import lt.vu.mif.ui.view.OrderView;
-import lt.vu.mif.ui.view.ProductView;
+import lt.vu.mif.ui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @Component
@@ -89,17 +86,17 @@ public class OrdersHelper implements IOrdersHelper {
 
     private List<OrderProduct> getOrderProducts(Order order, List<CartItemView> productViews) {
         List<Product> products = productRepository.get(
-            productViews.stream().map(ProductView::getId).collect(Collectors
-                .toList()));
+                productViews.stream().map(ProductView::getId).collect(Collectors
+                        .toList()));
         List<OrderProduct> orderProducts = new ArrayList<>();
 
         for (Product product : products) {
             OrderProduct orderProduct = new OrderProduct();
             orderProduct.setProduct(product);
             orderProduct.setQuantity(productViews.stream()
-                .filter(t -> t.getId().equals(product.getId())).findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Cannot find product"))
-                .getAmount());
+                    .filter(t -> t.getId().equals(product.getId())).findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("Cannot find product"))
+                    .getAmount());
             orderProducts.add(orderProduct);
             orderProduct.setOrder(order);
             orderProduct.setPrice(product.getPrice());

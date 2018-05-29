@@ -1,10 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -13,6 +8,12 @@ import lt.vu.mif.ui.view.CartItemView;
 import lt.vu.mif.ui.view.CartView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
+
+import javax.inject.Named;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Logged
 @Named
@@ -52,7 +53,7 @@ public class CartController implements Serializable {
         BigDecimal totalSum = new BigDecimal(0);
         for (CartItemView product : getProductsInCart()) {
             BigDecimal productPrice = (product.getNewPrice() == null ?
-                product.getPrice() : product.getNewPrice());
+                    product.getPrice() : product.getNewPrice());
             BigDecimal oneSum = productPrice.multiply(new BigDecimal(product.getAmount()));
             totalSum = totalSum.add(oneSum);
         }

@@ -1,9 +1,10 @@
 package lt.vu.mif.ui.helpers.interfaces;
 
-import java.util.List;
 import lt.vu.mif.model.user.UserTokenTuple;
 import lt.vu.mif.ui.view.AdminUserView;
 import lt.vu.mif.ui.view.UserView;
+
+import java.util.List;
 
 public interface IUserHelper {
 

@@ -1,8 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -13,6 +10,10 @@ import lt.vu.mif.ui.view.AdminUserView;
 import lt.vu.mif.ui.view.BoughtProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 @Logged
 @Named
@@ -36,7 +37,7 @@ public class UserDetailsController {
         }
 
         String userId = FacesContext.getCurrentInstance().getExternalContext()
-            .getRequestParameterMap().get("userId");
+                .getRequestParameterMap().get("userId");
         user = userHelper.getAdminView(Long.valueOf(userId));
 
         paging.reset();
@@ -50,7 +51,7 @@ public class UserDetailsController {
 
     private void search() {
         page = productHelper
-            .getBoughtProductsPage(paging.getActivePage(), paging.getPageSize(), user.getId());
+                .getBoughtProductsPage(paging.getActivePage(), paging.getPageSize(), user.getId());
         paging.setTotalPages(page.getTotalPages());
     }
 

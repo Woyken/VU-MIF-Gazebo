@@ -1,8 +1,5 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
@@ -12,6 +9,10 @@ import lt.vu.mif.ui.view.DiscountView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CategoryMapper implements IMapper<Category, CategoryView> {
@@ -66,7 +67,7 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
         //Only root category will not have a parent
         if (view.getParentCategory() != null) {
             view.setNameWithParents(
-                view.getParentCategory().getNameWithParents() + "/" + view.getName());
+                    view.getParentCategory().getNameWithParents() + "/" + view.getName());
         } else {
             //Name with parents can't be null, because in category page drop down menu when chosen
             //controller would get null instead of this category

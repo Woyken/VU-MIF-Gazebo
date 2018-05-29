@@ -1,12 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -20,6 +13,14 @@ import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Logged
 @Named
@@ -81,7 +82,7 @@ public class ProductController implements Serializable {
 
     public void search() {
         productsPage = productHelper
-            .getProductsPage(paging.getActivePage(), paging.getPageSize(), productSearch);
+                .getProductsPage(paging.getActivePage(), paging.getPageSize(), productSearch);
         paging.setTotalPages(productsPage.getTotalPages());
     }
 
@@ -103,8 +104,8 @@ public class ProductController implements Serializable {
     public void searchProducts(int activePage) {
         paging.setActivePage(activePage);
         productsPage = productHelper
-            .getProductsPage(paging.getActivePage(), paging.getPageSize(), productSearch)
-            .map(ProductView::new);
+                .getProductsPage(paging.getActivePage(), paging.getPageSize(), productSearch)
+                .map(ProductView::new);
     }
 
     public int getPagingIndex() {

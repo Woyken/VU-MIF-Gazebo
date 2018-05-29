@@ -10,12 +10,12 @@
 
                 <!-- User logged in -->
                 <c:when test="#{userService.getLoggedUser().getRole() == 'USER'}">
-                    <ui:include src="./user-navbar.xhtml" />
+                    <ui:include src="./user-navbar.xhtml"/>
                 </c:when>
 
                 <!-- Admin logged in -->
                 <c:otherwise>
-                    <ui:include src="./admin-navbar.xhtml" />
+                    <ui:include src="./admin-navbar.xhtml"/>
                 </c:otherwise>
 
             </c:choose>
@@ -23,7 +23,7 @@
 
         <!-- Anonymous -->
         <c:otherwise>
-            <ui:include src="./anon-navbar.xhtml" />
+            <ui:include src="./anon-navbar.xhtml"/>
         </c:otherwise>
     </c:choose>
 

@@ -1,10 +1,5 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.model.order.Rating;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
@@ -13,6 +8,12 @@ import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class RatingMapper implements IMapper<Rating, RatingView> {
@@ -57,7 +58,7 @@ public class RatingMapper implements IMapper<Rating, RatingView> {
         view.setValue(entity.getValue());
         view.setOrderId(entity.getOrder().getId());
         view.setDate(
-            entity.getDate().format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
+                entity.getDate().format(DateTimeFormatter.ofPattern(ValidationUtils.DATETIME_FORMAT)));
 
         return view;
     }

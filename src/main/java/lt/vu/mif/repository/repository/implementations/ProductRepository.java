@@ -1,17 +1,5 @@
 package lt.vu.mif.repository.repository.implementations;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Product;
@@ -31,11 +19,16 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.*;
+import java.util.*;
+
 @Logged
 @Transactional
 @Repository
 public class ProductRepository extends SimpleJpaRepository<Product, Long> implements
-    IProductRepository {
+        IProductRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -55,7 +48,7 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     @Autowired
     public ProductRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport.getEntityInformation(Product.class, entityManager),
-            entityManager);
+                entityManager);
     }
 
     @Override
@@ -121,25 +114,25 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     }
 
     private List<Predicate> buildSearchPredicates(ProductSearch search, Root<Product> root,
-        CriteriaBuilder builder) {
+                                                  CriteriaBuilder builder) {
 
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.isFalse(root.get(Product_.deleted)));
 
         if (StringUtils.isNotBlank(search.getTitle())) {
             predicates.add(builder
-                .like(builder.lower(root.get(Product_.title)), "%" + search.getTitle().toLowerCase(
-                    Locale.getDefault()) + "%"));
+                    .like(builder.lower(root.get(Product_.title)), "%" + search.getTitle().toLowerCase(
+                            Locale.getDefault()) + "%"));
         }
 
         if (search.getMinPrice() != null) {
             predicates
-                .add(builder.greaterThanOrEqualTo(root.get(Product_.price), search.getMinPrice()));
+                    .add(builder.greaterThanOrEqualTo(root.get(Product_.price), search.getMinPrice()));
         }
 
         if (search.getMaxPrice() != null) {
             predicates
-                .add(builder.lessThanOrEqualTo(root.get(Product_.price), search.getMaxPrice()));
+                    .add(builder.lessThanOrEqualTo(root.get(Product_.price), search.getMaxPrice()));
         }
 
         if (!CollectionUtils.isEmpty(search.getCategories())) {
@@ -149,14 +142,14 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
 
         if (!search.isIncludeDeleted()) {
             predicates
-                .add(builder.isFalse(root.get(Product_.deleted)));
+                    .add(builder.isFalse(root.get(Product_.deleted)));
         }
 
         return predicates;
     }
 
     public Page<Product> getProductsPage(ProductSearch productSearch, int activePage,
-        int pageSize) {
+                                         int pageSize) {
         PageRequest pageRequest = PageRequest.of(activePage, pageSize);
 
         Specification<Product> specification = (root, criteriaQuery, criteriaBuilder) -> {
@@ -168,7 +161,7 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
                 criteriaQuery.orderBy(criteriaBuilder.asc(root.get(Product_.price)));
             }
             return criteriaBuilder.and(PersistenceUtils
-                .toArray(buildSearchPredicates(productSearch, root, criteriaBuilder)));
+                    .toArray(buildSearchPredicates(productSearch, root, criteriaBuilder)));
         };
 
         return findAll(specification, pageRequest);

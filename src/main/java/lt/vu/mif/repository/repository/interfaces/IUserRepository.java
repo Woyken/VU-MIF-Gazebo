@@ -1,8 +1,9 @@
 package lt.vu.mif.repository.repository.interfaces;
 
-import java.util.List;
 import lt.vu.mif.model.user.User;
 import lt.vu.mif.model.user.UserTokenTuple;
+
+import java.util.List;
 
 public interface IUserRepository {
 

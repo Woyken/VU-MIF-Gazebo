@@ -1,9 +1,5 @@
 package lt.vu.mif.ui.mappers.implementations;
 
-import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderProduct;
 import lt.vu.mif.model.user.User;
@@ -12,6 +8,11 @@ import lt.vu.mif.ui.view.AdminUserView;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class AdminUserMapper implements IMapper<User, AdminUserView> {
@@ -54,7 +55,7 @@ public class AdminUserMapper implements IMapper<User, AdminUserView> {
 
     private BigDecimal getAverageSum(long ordersCount, BigDecimal ordersSum) {
         return ordersCount == 0 ? BigDecimal.ZERO
-            : ordersSum.divide(new BigDecimal(ordersCount), 2);
+                : ordersSum.divide(new BigDecimal(ordersCount), 2);
     }
 
     private BigDecimal getUserOrdersSum(User user) {
@@ -69,7 +70,7 @@ public class AdminUserMapper implements IMapper<User, AdminUserView> {
         for (Order order : orders) {
             for (OrderProduct orderProduct : order.getProducts()) {
                 totalSum = totalSum.add(
-                    orderProduct.getPrice().multiply(new BigDecimal(orderProduct.getQuantity())));
+                        orderProduct.getPrice().multiply(new BigDecimal(orderProduct.getQuantity())));
             }
         }
 

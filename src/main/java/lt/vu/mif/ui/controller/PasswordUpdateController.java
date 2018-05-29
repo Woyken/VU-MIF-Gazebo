@@ -1,9 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
@@ -13,12 +9,17 @@ import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.RequestScope;
 
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 @Logged
 @Getter
 @Setter
 @Named
 @RequestScope
-public class PasswordUpdateController implements Serializable  {
+public class PasswordUpdateController implements Serializable {
     private static final String INVALID_LINK_MESSAGE = "Neteisinga nuoroda";
     private static final String LINK_EXPIRED_MESSAGE = "Nuorodos galiojimo laikas baigėsi";
     public static final int PASSWORD_LINK_EXPIRATION_TIME_IN_MINUTES = 5;
@@ -50,7 +51,7 @@ public class PasswordUpdateController implements Serializable  {
         }
 
         if (LocalDateTime.now().isAfter(
-            user.getCreationDate().plusMinutes(PASSWORD_LINK_EXPIRATION_TIME_IN_MINUTES))) {
+                user.getCreationDate().plusMinutes(PASSWORD_LINK_EXPIRATION_TIME_IN_MINUTES))) {
             message = LINK_EXPIRED_MESSAGE;
         }
     }

@@ -1,6 +1,5 @@
 package lt.vu.mif.repository.repository.implementations;
 
-import javax.persistence.EntityManager;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.order.OrderProduct;
 import lt.vu.mif.model.order.OrderProduct_;
@@ -16,23 +15,25 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+
 @Logged
 @Transactional
 @Repository
 public class BoughtProductRepository extends SimpleJpaRepository<OrderProduct, Long> implements
-    IBoughtProductRepository {
+        IBoughtProductRepository {
 
     @Autowired
     public BoughtProductRepository(EntityManager entityManager) {
         super(JpaEntityInformationSupport.getEntityInformation(OrderProduct.class, entityManager),
-            entityManager);
+                entityManager);
     }
 
     public Page<OrderProduct> getBoughtProductsPage(int activePage, int pageSize, Long userId) {
         PageRequest pageRequest = PageRequest.of(activePage, pageSize);
         Specification<OrderProduct> specification = Specification.where(
-            (root, criteriaQuery, builder) -> builder
-                .equal(root.get(OrderProduct_.order).get(Order_.user).get(User_.id), userId));
+                (root, criteriaQuery, builder) -> builder
+                        .equal(root.get(OrderProduct_.order).get(Order_.user).get(User_.id), userId));
 
         return findAll(specification, pageRequest);
     }

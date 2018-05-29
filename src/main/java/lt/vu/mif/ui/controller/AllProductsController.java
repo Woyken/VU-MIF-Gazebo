@@ -1,14 +1,15 @@
 package lt.vu.mif.ui.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.List;
 
 @Logged
 @Named
@@ -21,7 +22,8 @@ public class AllProductsController {
     @Setter
     private boolean multipleDeleteEnabled = false;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Long> productsToDeleteIds = new ArrayList<>();
 
 

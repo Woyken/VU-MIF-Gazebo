@@ -1,27 +1,23 @@
 package lt.vu.mif.excel;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.utils.constants.Constants;
 import lt.vu.mif.utils.zip.ZipUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 @Component
 public class ProductExcelWriter extends ProductExcelComponent {
@@ -106,7 +102,7 @@ public class ProductExcelWriter extends ProductExcelComponent {
 
         for (Image image : images) {
             imagesText.append(Constants.IMAGES_FOLDER).append(Constants.IMAGE_PREFIX)
-                .append(image.getId()).append(Constants.IMAGE_TYPE).append("\n");
+                    .append(image.getId()).append(Constants.IMAGE_TYPE).append("\n");
         }
 
         return removeLastCharacter(imagesText);
@@ -114,7 +110,7 @@ public class ProductExcelWriter extends ProductExcelComponent {
 
     private String removeLastCharacter(StringBuilder builder) {
         return StringUtils.isNotBlank(builder.toString()) ? builder
-            .substring(0, builder.length() - 1) : builder.toString();
+                .substring(0, builder.length() - 1) : builder.toString();
     }
 
     private synchronized String getCategoryText(Category category) {

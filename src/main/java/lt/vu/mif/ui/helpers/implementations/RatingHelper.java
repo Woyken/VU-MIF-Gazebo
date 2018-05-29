@@ -1,7 +1,5 @@
 package lt.vu.mif.ui.helpers.implementations;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import lt.vu.mif.authentication.UserService;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.Rating;
@@ -15,6 +13,9 @@ import lt.vu.mif.ui.view.RatingView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @Component
@@ -34,7 +35,7 @@ public class RatingHelper implements IRatingHelper {
     @Override
     public List<OrderView> getCurrentUserOrdersToRate() {
         return orderMapper
-            .toViews(orderRepository.getCurrentUserOrdersToRate(userService.getLoggedUserEmail()));
+                .toViews(orderRepository.getCurrentUserOrdersToRate(userService.getLoggedUserEmail()));
     }
 
     @Override
@@ -43,7 +44,7 @@ public class RatingHelper implements IRatingHelper {
         ratingRepository.saveAll(ratings);
 
         List<Order> orders = orderRepository.getOrders(
-            ratingViews.stream().map(RatingView::getOrderId).collect(Collectors.toList()));
+                ratingViews.stream().map(RatingView::getOrderId).collect(Collectors.toList()));
 
         orders.forEach(order -> order.setRated(true));
         orderRepository.updateAll(orders);

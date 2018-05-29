@@ -1,9 +1,10 @@
 package lt.vu.mif.ui.view;
 
-import java.math.BigDecimal;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.inject.Named;
+import java.math.BigDecimal;
 
 @Named
 @Getter

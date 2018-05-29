@@ -1,19 +1,20 @@
 package lt.vu.mif.ui.view;
 
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Named
 @ViewScoped
@@ -59,7 +60,7 @@ public class CategoryTreeView implements Serializable {
 
         //Assign the node (and set node's parent node)
         categoryMap.replace(current,
-            new DefaultTreeNode(current, categoryMap.get(current.getParentCategory())));
+                new DefaultTreeNode(current, categoryMap.get(current.getParentCategory())));
     }
 }
 

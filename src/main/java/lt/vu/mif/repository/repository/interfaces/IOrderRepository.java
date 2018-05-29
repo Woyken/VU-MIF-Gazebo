@@ -1,7 +1,8 @@
 package lt.vu.mif.repository.repository.interfaces;
 
-import java.util.List;
 import lt.vu.mif.model.order.Order;
+
+import java.util.List;
 
 public interface IOrderRepository {
 

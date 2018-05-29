@@ -1,7 +1,5 @@
 package lt.vu.mif.PriceResolver;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.model.product.Product;
@@ -13,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Rollback
 @SpringBootTest
@@ -27,7 +28,7 @@ public class PriceResolverTest {
     public void noDiscountTest() {
         Product product = getDefaultProduct();
         Assertions
-            .assertEquals(product.getPrice(), priceResolver.resolvePriceWithDiscount(product));
+                .assertEquals(product.getPrice(), priceResolver.resolvePriceWithDiscount(product));
     }
 
     @Test
@@ -39,7 +40,7 @@ public class PriceResolverTest {
         product.setDiscount(discount);
 
         Assertions.assertEquals(getPriceWithPercentages(product, discount.getPercentageDiscount()),
-            priceResolver.resolvePriceWithDiscount(product));
+                priceResolver.resolvePriceWithDiscount(product));
     }
 
     @Test
@@ -52,8 +53,8 @@ public class PriceResolverTest {
         product.setDiscount(discount);
 
         Assertions
-            .assertEquals(discount.getAbsoluteDiscount(),
-                priceResolver.resolvePriceWithDiscount(product));
+                .assertEquals(discount.getAbsoluteDiscount(),
+                        priceResolver.resolvePriceWithDiscount(product));
     }
 
     @Test
@@ -69,8 +70,8 @@ public class PriceResolverTest {
         product.setCategory(category);
 
         Assertions.assertEquals(
-            getPriceWithPercentages(product, categoryDiscount.getPercentageDiscount()),
-            priceResolver.resolvePriceWithDiscount(product));
+                getPriceWithPercentages(product, categoryDiscount.getPercentageDiscount()),
+                priceResolver.resolvePriceWithDiscount(product));
 
     }
 
@@ -87,14 +88,14 @@ public class PriceResolverTest {
         product.setDiscount(discount);
 
         Assertions
-            .assertEquals(discount.getAbsoluteDiscount(),
-                priceResolver.resolvePriceWithDiscount(product));
+                .assertEquals(discount.getAbsoluteDiscount(),
+                        priceResolver.resolvePriceWithDiscount(product));
 
         discount.setAbsoluteDiscount(new BigDecimal(8));
         discount.setPercentageDiscount(15L);
 
         Assertions.assertEquals(getPriceWithPercentages(product, discount.getPercentageDiscount()),
-            priceResolver.resolvePriceWithDiscount(product));
+                priceResolver.resolvePriceWithDiscount(product));
     }
 
 

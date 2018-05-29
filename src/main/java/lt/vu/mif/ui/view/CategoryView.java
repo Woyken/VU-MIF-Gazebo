@@ -1,9 +1,10 @@
 package lt.vu.mif.ui.view;
 
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,16 +25,16 @@ public class CategoryView implements Comparable<CategoryView> {
         this.name = other.name;
         this.attributes = new ArrayList<String>(other.attributes);
         this.parentCategory = other.getParentCategory() == null ? null :
-            new CategoryView(other.parentCategory);
+                new CategoryView(other.parentCategory);
         this.discount = other.getDiscount() == null ? null :
-            new DiscountView(other.getDiscount());
+                new DiscountView(other.getDiscount());
         this.nameWithParents = other.getNameWithParents();
     }
 
     @Override
     public int compareTo(CategoryView other) {
         return other == null ? 1 : this.nameWithParents == null ? -1 :
-            this.nameWithParents.compareToIgnoreCase(other.nameWithParents);
+                this.nameWithParents.compareToIgnoreCase(other.nameWithParents);
     }
 
     @Override

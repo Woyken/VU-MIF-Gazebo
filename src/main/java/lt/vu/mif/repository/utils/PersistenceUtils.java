@@ -1,11 +1,12 @@
 package lt.vu.mif.repository.utils;
 
-import java.util.List;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.Predicate;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.List;
 
 public class PersistenceUtils {
 
@@ -23,7 +24,7 @@ public class PersistenceUtils {
         if (result != null && !result.isEmpty()) {
             if (result.size() != 1) {
                 String message = String.format("Could not fetch unique result of type %1s",
-                    result.get(0).getClass().getName());
+                        result.get(0).getClass().getName());
                 LOG.error(message);
                 throw new NonUniqueResultException(message);
             } else {

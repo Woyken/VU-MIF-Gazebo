@@ -14,89 +14,89 @@
         <h1 class="section-title">Visos prekės</h1>
     </div> <!-- END OF PAGE TITLE -->
 
-        <!-- PRODUCT LIST -->
-        <div id="admin-all-products">
+    <!-- PRODUCT LIST -->
+    <div id="admin-all-products">
 
-            <div class="row section">
-                <div class="columns small-12 medium-3 medium-offset-9">
+        <div class="row section">
+            <div class="columns small-12 medium-3 medium-offset-9">
 
-                    <!-- [Button] Delete multiple products -->
-                    <!-- The only way I thought of without using any h:something commands -->
-                    <!-- Because pt:data-close fucks up and closes the modal after a second -->
-                    <h:form id="deleteButton">
-                        <c:choose>
-                            <c:when test="#{allProductsController.multipleDeleteEnabled}">
-                                <button
-                                        type="button"
-                                        class="button expanded red"
-                                        data-open="remove-product-modal">
-                                    Ištrinti pažymėtas prekes
-                                </button>
-                            </c:when>
+                <!-- [Button] Delete multiple products -->
+                <!-- The only way I thought of without using any h:something commands -->
+                <!-- Because pt:data-close fucks up and closes the modal after a second -->
+                <h:form id="deleteButton">
+                    <c:choose>
+                        <c:when test="#{allProductsController.multipleDeleteEnabled}">
+                            <button
+                                    type="button"
+                                    class="button expanded red"
+                                    data-open="remove-product-modal">
+                                Ištrinti pažymėtas prekes
+                            </button>
+                        </c:when>
 
-                            <c:otherwise>
-                                <!-- This one is disabled -->
-                                <button
-                                        type="button"
-                                        class="button expanded red"
-                                        data-open="remove-product-modal"
-                                        disabled="">
-                                    Ištrinti pažymėtas prekes
-                                </button>
-                            </c:otherwise>
-                        </c:choose>
-                    </h:form>
+                        <c:otherwise>
+                            <!-- This one is disabled -->
+                            <button
+                                    type="button"
+                                    class="button expanded red"
+                                    data-open="remove-product-modal"
+                                    disabled="">
+                                Ištrinti pažymėtas prekes
+                            </button>
+                        </c:otherwise>
+                    </c:choose>
+                </h:form>
 
-                </div>
             </div>
+        </div>
 
-            <div class="row section">
-                <h:panelGroup id="productList" style="display:contents">
-                    <ui:repeat value="#{productController.productsPage.content}" var="product">
+        <div class="row section">
+            <h:panelGroup id="productList" style="display:contents">
+                <ui:repeat value="#{productController.productsPage.content}" var="product">
 
-                        <div class="columns medium-3 small-6 admin-product-box">
-                            <div class="row align-middle">
-                                <div class="columns medium-9 small-8">
-                                    <!-- SKU code and name -->
-                                    <p>
-                                        <b>
-                                            #{product.sku}
-                                        </b>
-                                        <br/>
-                                        #{product.title}
-                                    </p>
-                                </div>
-
-                                <!-- [Checkbox] Select product to delete -->
-                                <div class="columns small-2">
-                                    <h:form>
-                                        <h:selectBooleanCheckbox>
-                                            <f:ajax
-                                                    listener="#{allProductsController.addProductToDelete(product.id)}"
-                                                    render="deleteButton"/>
-                                        </h:selectBooleanCheckbox>
-                                    </h:form>
-                                </div>
-
-                                <div class="columns small-2 expanded">
-                                </div>
+                    <div class="columns medium-3 small-6 admin-product-box">
+                        <div class="row align-middle">
+                            <div class="columns medium-9 small-8">
+                                <!-- SKU code and name -->
+                                <p>
+                                    <b>
+                                        #{product.sku}
+                                    </b>
+                                    <br/>
+                                    #{product.title}
+                                </p>
                             </div>
 
-                            <!-- [Button] Edit product -->
-                            <div class="row">
-                                <div class="columns medium-12">
-                                    <a href="../../admin-edit-product.xhtml?productId=#{product.id}"
-                                       class="button expanded">
-                                        <i class="fi-pencil"></i>
-                                    </a>
-                                </div>
+                            <!-- [Checkbox] Select product to delete -->
+                            <div class="columns small-2">
+                                <h:form>
+                                    <h:selectBooleanCheckbox>
+                                        <f:ajax
+                                                listener="#{allProductsController.addProductToDelete(product.id)}"
+                                                render="deleteButton"/>
+                                    </h:selectBooleanCheckbox>
+                                </h:form>
+                            </div>
+
+                            <div class="columns small-2 expanded">
                             </div>
                         </div>
 
-                    </ui:repeat>
-                </h:panelGroup>
-            </div>
+                        <!-- [Button] Edit product -->
+                        <div class="row">
+                            <div class="columns medium-12">
+                                <a href="../../admin-edit-product.xhtml?productId=#{product.id}"
+                                   class="button expanded">
+                                    <i class="fi-pencil"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </ui:repeat>
+            </h:panelGroup>
         </div>
+    </div>
 
     <!-- PAGINATION -->
     <div class="row section">

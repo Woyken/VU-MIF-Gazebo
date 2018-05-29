@@ -1,8 +1,9 @@
 package lt.vu.mif.utils.validation;
 
+import lombok.experimental.UtilityClass;
+
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
-import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class ValidationUtils {
@@ -48,7 +49,9 @@ public class ValidationUtils {
         return Pattern.matches(CVS_REGEX, cvs);
     }
 
-    public static boolean isPriceValid(String price) { return Pattern.matches(PRICE_REGEX, price); }
+    public static boolean isPriceValid(String price) {
+        return Pattern.matches(PRICE_REGEX, price);
+    }
 
     public static boolean isAmountValid(String amount) {
         return Pattern.matches(AMOUNT_REGEX, amount);
