@@ -94,7 +94,7 @@ public class ProductExcelReader extends ProductExcelComponent {
                     }
                 });
 
-                if (newProduct) {
+                if (newProduct && !rowValues.isEmpty()) {
                     product = parseProduct(rowValues, currentRow);
                     if (product.getMessage() != null) {
                         importResult.setMessage(product.getMessage());
