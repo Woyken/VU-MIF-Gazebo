@@ -15,6 +15,7 @@ import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IImageHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.view.CategoryView;
+import lt.vu.mif.ui.view.DiscountView;
 import lt.vu.mif.ui.view.ImageInMemoryStreamer;
 import lt.vu.mif.ui.view.ImageView;
 import lt.vu.mif.ui.view.ProductView;
@@ -24,7 +25,6 @@ import org.springframework.dao.OptimisticLockingFailureException;
 
 @Logged
 @Getter
-@Setter
 @ViewScoped
 @Named
 public class ProductEditController {
@@ -39,7 +39,13 @@ public class ProductEditController {
     private ImageInMemoryStreamer imageInMemoryStreamer;
 
     private ProductView productView;
+    private DiscountView discountView;
+
+    @Setter
     private Part uploadedFile;
+    @Setter
+    private boolean discount;
+
     private boolean showSuccessMessage;
     private boolean isProductFound;
 
@@ -57,6 +63,7 @@ public class ProductEditController {
         // it means we want to add a new product
         try {
             productView = productHelper.getProductViewFromNavigationQuery();
+            discountView = productView.getDiscount() == null ? new DiscountView() : productView.getDiscount();
             conflictingProductView = null;
             isProductFound = true;
         } catch (IllegalArgumentException x) {
@@ -64,7 +71,9 @@ public class ProductEditController {
             isProductFound = false;
         }
 
+        showSuccessMessage = false;
         categories = categoryHelper.findAll();
+        discount = productView.getDiscount() != null;
         Collections.sort(categories);
     }
 
@@ -78,6 +87,8 @@ public class ProductEditController {
     }
 
     public void saveChanges() {
+        productView.setDiscount(discount ? discountView : null);
+
         //Remove discount if it is smaller than new price
         if (productView.getDiscount() != null &&
             productView.getDiscount().getAbsoluteDiscount() != null &&
@@ -94,7 +105,7 @@ public class ProductEditController {
 
         try {
             productHelper.update(productView);
-            productView = productHelper.getProduct(productView.getId());
+            productView.setVersion(productHelper.getProductVersion(productView.getId()));
             showSuccessMessage = true;
             clearData();
         } catch (OptimisticLockingFailureException ex) {
@@ -127,5 +138,9 @@ public class ProductEditController {
         productView.setVersion(conflictingProductView.getVersion());
         saveChanges();
         conflictingProductView = null;
+    }
+
+    public void check(boolean selected) {
+        this.discount = !selected;
     }
 }

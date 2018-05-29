@@ -69,6 +69,10 @@ public class ProductHelper implements IProductHelper {
         productRepository.update(entity);
     }
 
+    public Integer getProductVersion(Long productId) {
+        return productRepository.getProductVersion(productId);
+    }
+
     @Override
     public Page<BoughtProductView> getBoughtProductsPage(int activePage, int pageSize,
         Long userId) {

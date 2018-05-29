@@ -49,4 +49,6 @@ public interface IProductHelper {
     ProductView getProductViewFromNavigationQuery();
 
     void update(ProductView view);
+
+    Integer getProductVersion(Long productId);
 }

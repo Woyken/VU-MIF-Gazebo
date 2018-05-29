@@ -41,6 +41,18 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     private EntityManager entityManager;
 
     @Override
+    public Integer getProductVersion(Long productId) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Integer> criteria = builder.createQuery(Integer.class);
+        Root<Product> root = criteria.from(Product.class);
+
+        criteria.where(builder.equal(root.get(Product_.id), productId));
+        criteria.select(root.get(Product_.version));
+
+        return PersistenceUtils.uniqueResult(entityManager.createQuery(criteria));
+    }
+
+    @Override
     public boolean checkIfProductExists(String skuCode) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
