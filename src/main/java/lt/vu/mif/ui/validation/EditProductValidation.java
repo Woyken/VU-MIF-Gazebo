@@ -8,12 +8,18 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
+
+import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.utils.validation.ValidationUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Named
 @Component
 public class EditProductValidation implements Validator {
+
+    @Autowired
+    private IProductRepository productRepository;
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o)
@@ -41,6 +47,11 @@ public class EditProductValidation implements Validator {
 
         if (price.signum() == -1) {
             throw new ValidatorException(new FacesMessage("Kaina negali būti neigiama"));
+        }
+
+        if (productRepository.checkIfProductExists(sku)) {
+            throw new ValidatorException(
+                    new FacesMessage("Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
         }
     }
 }
