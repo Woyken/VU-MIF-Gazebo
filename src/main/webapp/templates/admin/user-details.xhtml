@@ -34,7 +34,8 @@
                 </p>
                 <h:form id="my-form">
                     <div class="small-8 medium-5 large-4">
-                        <h:commandButton class="button expanded" value="#{userDetailsController.user.blocked ? 'Atblokuoti' : 'Blokuoti'}"
+                        <h:commandButton class="button expanded"
+                                         value="#{userDetailsController.user.blocked ? 'Atblokuoti' : 'Blokuoti'}"
                                          styleClass="button expanded #{userDetailsController.user.blocked ? 'green' : 'orange'}"
                                          disabled="#{userDetailsController.user.role == 'ADMIN' ? 'true' : 'false'}"
                                          action="#{userDetailsController.blockUser}">
@@ -89,18 +90,21 @@
 
                     <!-- Price of the product. -->
                     <div class="small-12 medium-2 columns">
-                        <p:outputLabel styleClass="shopping-cart-price large-text" value="#{order.totalSum} €"/>
+                        <p:outputLabel styleClass="shopping-cart-price large-text"
+                                       value="#{order.totalSum} €"/>
                     </div>
 
                     <!-- [Button] Add to current cart -->
                     <div class="small-2 columns hide-for-small-only">
-                        <a href="../../admin-details-order.xhtml?orderId=#{order.id}" class="button expanded primary">
+                        <a href="../../admin-details-order.xhtml?orderId=#{order.id}"
+                           class="button expanded primary">
                             Peržiūrėti
                         </a>
                     </div>
                     <!-- [Mobile][Button] Add to current cart -->
                     <div class="small-12 columns hide-for-medium">
-                        <a href="../../cart-history.xhtml?orderId=#{order.id}" class="button expanded primary">
+                        <a href="../../cart-history.xhtml?orderId=#{order.id}"
+                           class="button expanded primary">
                             Peržiūrėti
                         </a>
                     </div>
@@ -121,7 +125,8 @@
                             </h:commandLink>
                         </li>
                         <ui:repeat value="#{userDetailsController.paging.totalPages}" var="page"
-                                   varStatus="status" size="#{userDetailsController.paging.minValue}">
+                                   varStatus="status"
+                                   size="#{userDetailsController.paging.minValue}">
                             <li>
                                 <h:commandLink
                                         rendered="#{(status.index + 1 + userDetailsController.pagingIndex) le userDetailsController.page.totalPages}"
@@ -147,7 +152,8 @@
 
         </h:panelGroup>
 
-        <h:panelGroup rendered="#{empty ordersController.userOrders and userDetailsController.user.role != 'ADMIN'}">
+        <h:panelGroup
+                rendered="#{empty ordersController.userOrders and userDetailsController.user.role != 'ADMIN'}">
             <p:outputLabel styleClass="text-center" value="Šis pirkėjas dar nei karto neapsipirko"/>
         </h:panelGroup>
 

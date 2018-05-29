@@ -51,9 +51,20 @@ public class CategoryRepository extends SimpleJpaRepository<Category, Long> impl
         return PersistenceUtils.uniqueResult(entityManager.createQuery(criteria));
     }
 
+    public Category getRootCategory() {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Category> criteria = builder.createQuery(Category.class);
+        Root<Category> root = criteria.from(Category.class);
+
+        criteria.select(root);
+        criteria.where(builder.isNull(root.get(Category_.parentCategory)));
+
+        return PersistenceUtils.uniqueResult(entityManager.createQuery(criteria));
+    }
+
     @Override
-    public void update(Category entity) {
-        entityManager.merge(entity);
+    public Category update(Category entity) {
+        return entityManager.merge(entity);
     }
 
     @Override
@@ -61,5 +72,9 @@ public class CategoryRepository extends SimpleJpaRepository<Category, Long> impl
         for (Category entity : entities) {
             entityManager.merge(entity);
         }
+    }
+
+    public void delete(Category entity) {
+        entityManager.remove(entity);
     }
 }

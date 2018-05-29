@@ -21,7 +21,11 @@ public class ProductParser implements IProductParser {
             product.setTitle(excelProduct.getTitle());
             product.setDescription(excelProduct.getDescription());
             product.setPrice(excelProduct.getPrice());
-            product.getImages().add(new Image(excelProduct.getImageBytes()));
+
+            for (byte[] bytes : excelProduct.getImagesBytes()) {
+                product.getImages().add(new Image(bytes));
+            }
+
             result.add(product);
         }
         return result;

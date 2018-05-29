@@ -36,8 +36,10 @@ public class RatingController {
             return;
         }
 
-        Object sessionAttribute = sessionManager.getAttribute(Constants.SHOW_DIALOG_SESSION_PARAMETER);
-        if ((sessionAttribute != null && !Boolean.valueOf(sessionAttribute.toString())) || !userService.isLoggedIn()) {
+        Object sessionAttribute = sessionManager
+            .getAttribute(Constants.SHOW_DIALOG_SESSION_PARAMETER);
+        if ((sessionAttribute != null && !Boolean.valueOf(sessionAttribute.toString()))
+            || !userService.isLoggedIn()) {
             return;
         }
 

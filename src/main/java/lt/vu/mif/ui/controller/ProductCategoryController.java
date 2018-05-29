@@ -1,6 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.faces.context.FacesContext;
@@ -17,15 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Named
 @ViewScoped
 public class ProductCategoryController {
+
     @Autowired
     ICategoryHelper categoryHelper;
 
     private String newCategory;
     private List<CategoryView> categories;
-    private List<CategoryView> categoriesWithEmpty;
     private CategoryView selectedCategory;
-    private CategoryView parentCategory;
-    private CategoryView emptyCategory;
 
     private Boolean isCreationSuccess;
     private String creationErrorMessage;
@@ -33,22 +30,16 @@ public class ProductCategoryController {
     private String savingErrorMessage;
 
     public void onPageLoad() {
-        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
+            return;
+        }
 
-        emptyCategory = new CategoryView();
-        emptyCategory.setName("");
         updateCategories();
     }
 
     private void updateCategories() {
         categories = categoryHelper.findAll();
         Collections.sort(categories);
-        categoriesWithEmpty = new ArrayList<>(categories);
-        categoriesWithEmpty.add(0, emptyCategory);
-    }
-
-    public void categoryChange() {
-        parentCategory = selectedCategory.getParentCategory();
     }
 
     public void createNewCategory() {
@@ -59,13 +50,16 @@ public class ProductCategoryController {
             return;
         }
 
-        if (categoryHelper.getCategoryByName(newCategory) != null) {
-            creationErrorMessage = "Tokia kategorija jau egzistuoja";
-            return;
+        for (CategoryView c : categories) {
+            if (selectedCategory.equals(c.getParentCategory()) && newCategory.equals(c.getName())) {
+                creationErrorMessage = "Tokia kategorija jau egzistuoja";
+                return;
+            }
         }
 
         CategoryView category = new CategoryView();
         category.setName(newCategory);
+        category.setParentCategory(selectedCategory);
         categoryHelper.save(category);
 
         updateCategories();
@@ -74,30 +68,30 @@ public class ProductCategoryController {
         isCreationSuccess = true;
     }
 
-    public void saveChanges() {
+    public void deleteCategory() {
         eraseAllMessages();
 
-        if (selectedCategory == null) {
-            savingErrorMessage = "Nepasirinkote kategorijos";
+        if (selectedCategory.getParentCategory() == null) {
+            savingErrorMessage = "Negalima ištrinti šakninės kategorijos";
             return;
         }
 
-        if (selectedCategory.equals(parentCategory)) {
-            savingErrorMessage = "Negalima kategorijos priskirti sau pačiai kaip tėvinės";
-            return;
-        }
-
-        if (parentCategory != null && isCategoryLoop(selectedCategory, parentCategory) == true) {
-            savingErrorMessage = "Pasirinkta tėvinė kategorija yra tarp keičiamos kategorijos vaikų";
-            return;
-        }
-
-        selectedCategory.setParentCategory(parentCategory);
-        categoryHelper.update(selectedCategory);
-
+        deleteCategory(selectedCategory);
         updateCategories();
+        //Should always be at least 1 category
+        selectedCategory = categories.get(0);
+    }
 
-        isSavingSuccess = true;
+    //Inefficient, but optimization unimportant right now
+    private void deleteCategory(CategoryView category) {
+        //Delete all children
+        for (CategoryView c : categories) {
+            if (category.equals(c.getParentCategory())) {
+                deleteCategory(c);
+            }
+        }
+
+        categoryHelper.delete(category);
     }
 
     private void eraseAllMessages() {
@@ -106,21 +100,5 @@ public class ProductCategoryController {
         isSavingSuccess = false;
         savingErrorMessage = "";
     }
-
-    //Checks if new parent assignment would make a category loop
-    private boolean isCategoryLoop(CategoryView selected, CategoryView potentialParent) {
-        CategoryView parentsParent = potentialParent.getParentCategory();
-
-        if (parentsParent == null) {
-            return false;
-        }
-
-        if (parentsParent.equals(selected)) {
-            return true;
-        }
-
-        return isCategoryLoop(selected, parentsParent);
-    }
-
 
 }

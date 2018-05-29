@@ -104,11 +104,86 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.15</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.21.0</version>
+        </dependency>
     </dependencies>
-
+    <profiles>
+        <profile>
+            <id>platform-windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <platform>windows</platform>
+                <webdriver.gecko.driver.binary>geckodriver-windows-64bit.exe</webdriver.gecko.driver.binary>
+            </properties>
+        </profile>
+        <profile>
+            <id>platform-mac</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <platform>mac</platform>
+                <webdriver.gecko.driver.binary>geckodriver-mac-64bit</webdriver.gecko.driver.binary>
+            </properties>
+        </profile>
+        <profile>
+            <id>platform-linux</id>
+            <activation>
+                <os>
+                    <family>linux</family>
+                </os>
+            </activation>
+            <properties>
+                <platform>linux</platform>
+                <webdriver.gecko.driver.binary>geckodriver-linux-64bit</webdriver.gecko.driver.binary>
+            </properties>
+        </profile>
+    </profiles>
     <build>
-        <testSourceDirectory>src/tests</testSourceDirectory>
+        <testSourceDirectory>src/tests/java</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>src/tests/resources</directory>
+            </testResource>
+        </testResources>
         <plugins>
+            <plugin>
+                <groupId>com.github.webdriverextensions</groupId>
+                <artifactId>webdriverextensions-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-drivers</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <installationDirectory>${project.basedir}/drivers</installationDirectory>
+                    <drivers>
+                        <driver>
+                            <name>geckodriver</name>
+                        </driver>
+                    </drivers>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -130,7 +205,43 @@
                             </sources>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>add-UI-test-source-as-test-sources</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/testsUI/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>src/testsUI/java/**/*TestsIT.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <geb.build.reportsDir>${project.build.directory}/test-reports/geb</geb.build.reportsDir>
+                        <webdriver.gecko.driver>${project.basedir}/drivers/${webdriver.gecko.driver.binary}</webdriver.gecko.driver>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
         </plugins>
     </build>

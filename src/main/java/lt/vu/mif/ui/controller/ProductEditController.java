@@ -1,6 +1,7 @@
 package lt.vu.mif.ui.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.faces.context.FacesContext;
@@ -40,13 +41,14 @@ public class ProductEditController {
     private boolean isProductFound;
 
     private List<CategoryView> categories;
-    private CategoryView emptyCategory = new CategoryView();
 
     private List<ImageView> newImages = new ArrayList<>();
     private ProductView conflictingProductView;
 
     public void onPageLoad() {
-        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { return; }
+        if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
+            return;
+        }
 
         // If a product with passed in ID is not found -
         // it means we want to add a new product
@@ -60,12 +62,7 @@ public class ProductEditController {
         }
 
         categories = categoryHelper.findAll();
-        //Omnifaces converter throws null pointer exception if I add an empty selectOneMenu item, so I have
-        //to do it this way
-        emptyCategory.setName("");
-        categories.add(0, emptyCategory);
-
-        showSuccessMessage = false;
+        Collections.sort(categories);
     }
 
     public void handleUploadedFile() throws Exception {
@@ -78,9 +75,17 @@ public class ProductEditController {
     }
 
     public void saveChanges() {
+        //Remove discount if it is smaller than new price
+        if (productView.getDiscount() != null &&
+            productView.getDiscount().getAbsoluteDiscount() != null &&
+            productView.getPrice().compareTo(productView.getDiscount().getAbsoluteDiscount())
+                == -1) {
+            productView.setDiscount(null);
+        }
+
         productView.getImages().addAll(newImages);
 
-        if(newImages.isEmpty() && productView.getImages().isEmpty()) {
+        if (newImages.isEmpty() && productView.getImages().isEmpty()) {
             productView.getImages().add(imageHelper.getDefaultImage());
         }
 

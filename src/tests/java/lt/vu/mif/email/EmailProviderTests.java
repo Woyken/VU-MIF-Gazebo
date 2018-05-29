@@ -1,4 +1,4 @@
-package lt.vu.mif.Email;
+package lt.vu.mif.email;
 
 import java.io.IOException;
 import javax.mail.Address;

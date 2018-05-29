@@ -11,6 +11,7 @@ public class CategoryView implements Comparable<CategoryView> {
 
     private Long id;
     private String name;
+    private String nameWithParents;
     private CategoryView parentCategory;
     private DiscountView discount;
     private List<String> attributes;
@@ -26,16 +27,18 @@ public class CategoryView implements Comparable<CategoryView> {
             new CategoryView(other.parentCategory);
         this.discount = other.getDiscount() == null ? null :
             new DiscountView(other.getDiscount());
+        this.nameWithParents = other.getNameWithParents();
     }
 
     @Override
     public int compareTo(CategoryView other) {
-        return this.name.compareTo(other.name);
+        return other == null ? 1 : this.nameWithParents == null ? -1 :
+            this.nameWithParents.compareToIgnoreCase(other.nameWithParents);
     }
 
     @Override
     public String toString() {
-        return name;
+        return nameWithParents;
     }
 
     @Override
@@ -50,11 +53,11 @@ public class CategoryView implements Comparable<CategoryView> {
 
         final CategoryView other = (CategoryView) obj;
 
-        return this.name == other.name;
+        return this.id == other.id;
     }
 
     @Override
     public int hashCode() {
-        return this.name.hashCode();
+        return this.id.hashCode();
     }
 }

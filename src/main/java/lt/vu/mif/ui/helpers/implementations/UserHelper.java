@@ -72,7 +72,8 @@ public class UserHelper implements IUserHelper {
     }
 
     public void changeCurrentUserPassword(String newPassword) {
-        userRepository.changeUserPassword(userService.getLoggedUserEmail(), passwordEncoder.encode(newPassword));
+        userRepository.changeUserPassword(userService.getLoggedUserEmail(),
+            passwordEncoder.encode(newPassword));
     }
 
     public boolean checkIfUserExists(String userEmail) {
@@ -113,5 +114,13 @@ public class UserHelper implements IUserHelper {
     @Override
     public List<AdminUserView> getAllUsers() {
         return adminUserMapper.toViews(userRepository.findAll());
+    }
+
+    public UserView getLoggedInUser() {
+        return userMapper.toView(userService.getLoggedUser());
+    }
+
+    public boolean isLoggedIn() {
+        return userService.isLoggedIn();
     }
 }

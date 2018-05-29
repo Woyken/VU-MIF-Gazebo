@@ -17,15 +17,16 @@
                 <h4 class="form-title text-center">
                     Naujos paskyros kūrimas
                 </h4>
-                <br />
+                <br/>
                 <h:form>
 
                     <!--email-->
                     <div class="row">
                         <div class="columns">
                             <label class="input-label">El. paštas
-                                <i class="fi-torso" />
-                                <h:inputText binding="#{email}" value="#{userRegistrationController.email}"/>
+                                <i class="fi-torso"/>
+                                <h:inputText binding="#{email}"
+                                             value="#{userRegistrationController.email}"/>
                             </label>
                         </div>
                     </div>
@@ -34,8 +35,9 @@
                     <div class="row align-middle">
                         <div class="columns">
                             <label class="input-label">Slaptažodis
-                                <span><i class="fi-lock" /></span>
-                                <h:inputSecret binding="#{password}" value="#{userRegistrationController.password}"/>
+                                <span><i class="fi-lock"/></span>
+                                <h:inputSecret binding="#{password}"
+                                               value="#{userRegistrationController.password}"/>
                             </label>
                         </div>
                         <div class="columns shrink">
@@ -47,7 +49,7 @@
                                    - Bent viena didžioji raidė. &lt;/br/&gt;
                                    - Bent viena mažoji raidė. &lt;/br/&gt;
                                    - Bent vienas simbolis, kuris nebūtų raidė.">
-                                <i class="fi-info" />
+                                <i class="fi-info"/>
                         </span>
                         </div>
                     </div>
@@ -56,8 +58,9 @@
                     <div class="row">
                         <div class="columns">
                             <label class="input-label">Pakartokite slaptažodį
-                                <span><i class="fi-lock" /></span>
-                                <h:inputSecret binding="#{passwordRepeat}" value="#{userRegistrationController.passwordRepeat}"/>
+                                <span><i class="fi-lock"/></span>
+                                <h:inputSecret binding="#{passwordRepeat}"
+                                               value="#{userRegistrationController.passwordRepeat}"/>
                             </label>
                         </div>
                     </div>
@@ -82,7 +85,9 @@
                     <!--button-->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" action="#{userRegistrationController.saveUser}" value="REGISTRUOTIS" update="message"/>
+                            <h:commandButton class="button success expanded"
+                                             action="#{userRegistrationController.saveUser}"
+                                             value="REGISTRUOTIS" update="message"/>
                             <h:outputLabel value="#{userRegistrationController.message}"
                                            class="success-text text-center"
                                            id="message"/>

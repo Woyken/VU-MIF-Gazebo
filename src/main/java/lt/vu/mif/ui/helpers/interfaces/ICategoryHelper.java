@@ -4,6 +4,7 @@ import java.util.List;
 import lt.vu.mif.ui.view.CategoryView;
 
 public interface ICategoryHelper {
+
     List<CategoryView> findAll();
 
     CategoryView get(Long id);
@@ -13,4 +14,6 @@ public interface ICategoryHelper {
     void save(CategoryView view);
 
     void update(CategoryView view);
+
+    void delete(CategoryView view);
 }
