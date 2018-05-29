@@ -19,7 +19,7 @@ import org.springframework.util.ResourceUtils;
 @RunWith(SpringRunner.class)
 public class ExcelReaderTest {
 
-    private static final String FILE_NAME = "/products.xlsx";
+    private static final String FILE_NAME = "/tests_products.xlsx";
 
     @Autowired
     private ProductExcelReader productExcelReader;
