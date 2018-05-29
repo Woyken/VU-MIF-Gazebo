@@ -285,7 +285,7 @@
                             <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.changeEmail}" update="emailSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <h:outputLabel value="#{emailChangeController.successMessage}" id="emailSuccessMessage"/>
+                            <h:outputLabel class="success-text" value="#{emailChangeController.successMessage}" id="emailSuccessMessage"/>
                         </div>
                     </div>
                 </h:form>
