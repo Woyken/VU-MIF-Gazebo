@@ -36,6 +36,9 @@ public class Product {
     @Column(name = "TITLE", nullable = false)
     private String title;
 
+    @Column(name = "NAME")
+    private String name;
+
     @Column(name = "PRICE", nullable = false)
     private BigDecimal price;
 

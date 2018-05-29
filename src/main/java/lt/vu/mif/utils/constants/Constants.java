@@ -10,4 +10,13 @@ public class Constants {
     public static final String ROOT_CATEGORY_NAME = "";
 
     public static final String SHOW_DIALOG_SESSION_PARAMETER = "showRatingDialog";
+
+    public static final String IMAGE_PREFIX = "image_";
+    public static final String IMAGES_FOLDER = "images/";
+    public static final String ZIP_NAME = "products-export.zip";
+    public static final String EXCEL_EXPORT_FILE_NAME = "products.xlsx";
+    public static final String EXCEL_FILE_PATH = "src/main/resources/excel/exported-products.xlsx";
+    public static final String IMAGE_TYPE = ".jpg";
+    public static final String SHEET_NAME = "Produktai";
+    public static final String ZIP_TYPE = "application/zip";
 }

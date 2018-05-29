@@ -2,31 +2,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <title>Turime problemą!</title>
+    <title>Importuoti prekes</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <h:outputStylesheet name="/css/vendor/foundation.css" />
     <h:outputStylesheet name="/css/vendor/foundation-icons.css" />
     <h:outputStylesheet name="/css/styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </h:head>
+
+<ui:define name="metadata">
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
+        <f:event type="preRenderView" listener="#{productExportController.onPageLoad}"/>
+    </f:metadata>
+</ui:define>
+
 <h:body>
 
     <div class="body-wrapper">
-        <!-- NAVIGATION BAR -->
         <ui:include src="./templates/navbars/_container.xhtml" />
-
-        <!-- 403 ACCESS DENIED -->
-        <ui:include src="templates/errors/403-access-denied.xhtml" />
+        <ui:include src="./templates/admin/export-products.xhtml"/>
     </div>
 
-    <!-- FOOTER -->
     <ui:include src="./templates/footers/footer.xhtml" />
-
 
     <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
     <h:outputScript name="js/vendor/foundation.js"/>

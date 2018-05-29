@@ -14,7 +14,7 @@ public interface IProductRepository {
 
     List<Product> findAll();
 
-    public List<Product> getAllByCategory(Category category);
+    List<Product> getAllByCategory(Category category);
 
     Page<Product> getProductsPage(ProductSearch productSearch, int activePage, int pageSize);
 

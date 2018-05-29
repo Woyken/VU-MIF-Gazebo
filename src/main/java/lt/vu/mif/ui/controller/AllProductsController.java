@@ -19,7 +19,7 @@ public class AllProductsController {
     @Setter
     private boolean multipleDeleteEnabled = false;
 
-    @Setter
+    @Getter @Setter
     private List<Long> productsToDeleteIds = new ArrayList<>();
 
 
