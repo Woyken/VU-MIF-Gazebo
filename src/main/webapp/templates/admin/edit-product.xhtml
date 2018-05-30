@@ -29,7 +29,7 @@
                     </div>
                     <div class="columns medium-9 small-12">
                         <h:inputText value="#{productEditController.productView.sku}"
-                                     binding="#{sku}"/>
+                                     binding="#{sku}" />
                     </div>
                 </div>
 
@@ -239,6 +239,11 @@
                     <f:attribute name="noneRequired" value="#{!productEditController.discount}"/>
                 </h:inputHidden>
 
+                <h:inputHidden id="validationInputSku" value="true">
+                    <f:validator binding="#{productEditController}"/>
+                    <f:attribute name="sku" value="#{sku}"/>
+                </h:inputHidden>
+
                 <h:panelGroup rendered="#{productEditController.conflictingProductView ne null}">
                     <div class="row column text-center section">
                         <h5 class="red">Redaguojamo produkto versija nesutampa su naujausia produkto versija. Naujausios produkto versijos duomenys: </h5>
@@ -419,6 +424,7 @@
                         <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
                             <div class="text-center">
                                 <h:message class="alert-text-large" for="validationInput"/>
+                                <h:message class="alert-text-large" for="validationInputSku"/>
                             </div>
                         </div>
                     </div>

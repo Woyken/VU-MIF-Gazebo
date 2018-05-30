@@ -18,9 +18,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EditProductValidation extends DiscountValidation implements Validator {
 
-    @Autowired
-    private IProductRepository productRepository;
-
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o)
         throws ValidatorException {
@@ -61,11 +58,6 @@ public class EditProductValidation extends DiscountValidation implements Validat
 
         if (price.signum() == -1) {
             throw new ValidatorException(new FacesMessage("Kaina negali būti neigiama"));
-        }
-
-        if (productRepository.checkIfProductExists(sku)) {
-            throw new ValidatorException(
-                    new FacesMessage("Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
         }
     }
 }

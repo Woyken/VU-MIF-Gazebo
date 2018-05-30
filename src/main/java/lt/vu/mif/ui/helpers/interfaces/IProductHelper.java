@@ -51,4 +51,6 @@ public interface IProductHelper {
     void update(ProductView view);
 
     Integer getProductVersion(Long productId);
+
+    boolean checkIfProductExists(String skuCode);
 }
