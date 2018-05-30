@@ -55,7 +55,7 @@ public class MockDataGenerator implements IDataGenerator {
         categoryInserter.insertRootCategory();
     }
 
-    private void insertUsers() {
+    public void insertUsers() {
         List<User> users = new ArrayList<>();
 
         for (int i = 1; i <= 20; i++) {
@@ -94,7 +94,7 @@ public class MockDataGenerator implements IDataGenerator {
         return users;
     }
 
-    private void insertProducts() {
+    public void insertProducts() {
         List<Product> products = new ArrayList<>();
         List<Category> categories = new ArrayList<>();
         categories.addAll(createSportCategory());
