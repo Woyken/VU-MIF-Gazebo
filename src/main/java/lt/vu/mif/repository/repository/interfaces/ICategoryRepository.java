@@ -20,4 +20,6 @@ public interface ICategoryRepository {
     void updateAll(List<Category> products);
 
     void delete(Category entity);
+
+    void flush();
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.transaction.Transactional;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.CategoryAttribute;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
@@ -52,12 +53,10 @@ public class CategoryRepositoryTest {
         }
     }
 
-    private Category createDefaultCategory() {
+    @Test
+    public Category createDefaultCategory() {
         Category parentCategory = new Category();
         parentCategory.setName("furniture");
-
-        parentCategory.getAttributes().add("color");
-        parentCategory.getAttributes().add("size");
 
         Category subcategory = new Category();
         subcategory.setName("kitchen");

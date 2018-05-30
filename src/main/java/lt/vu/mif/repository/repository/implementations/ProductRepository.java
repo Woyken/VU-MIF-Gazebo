@@ -78,6 +78,7 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     public void updateAll(List<Product> products) {
         for (Product product : products) {
             entityManager.merge(product);
+            entityManager.flush();
         }
     }
 

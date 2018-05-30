@@ -14,6 +14,8 @@ import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IImageHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.view.AttributeValue;
+import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.DiscountView;
 import lt.vu.mif.ui.view.ImageInMemoryStreamer;
@@ -104,10 +106,12 @@ public class ProductEditController {
         }
 
         try {
+//            productView.getCategory().getAttributes().get(0).setSelectedValue(categories.get(0).getAttributes().get(0).getSelectedValue());
             productHelper.update(productView);
             productView.setVersion(productHelper.getProductVersion(productView.getId()));
             showSuccessMessage = true;
             clearData();
+            categories = categoryHelper.findAll();
         } catch (OptimisticLockingFailureException ex) {
             ex.printStackTrace();
             conflictingProductView = productHelper.getProduct(productView.getId());
@@ -138,6 +142,10 @@ public class ProductEditController {
         productView.setVersion(conflictingProductView.getVersion());
         saveChanges();
         conflictingProductView = null;
+    }
+
+    public void attributeChange(AttributeView attributeView, AttributeValue value) {
+        System.out.println(value);
     }
 
     public void check(boolean selected) {

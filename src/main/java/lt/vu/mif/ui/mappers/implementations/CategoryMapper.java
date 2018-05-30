@@ -1,12 +1,17 @@
 package lt.vu.mif.ui.mappers.implementations;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lt.vu.mif.model.product.CategoryAttributeValue;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.CategoryAttribute;
 import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.ui.mappers.interfaces.IMapper;
+import lt.vu.mif.ui.view.AttributeValue;
+import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.DiscountView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +39,32 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
             entity.setParentCategory(toEntity(view.getParentCategory()));
         }
         entity.setName(view.getName());
-        entity.setAttributes(view.getAttributes());
         entity.setDiscount(discountMapper.toEntity(view.getDiscount()));
+
+        List<AttributeView> attributes = view.getAttributes();
+
+        if (attributes != null) {
+            List<CategoryAttribute> categoryAttributes = new ArrayList<>();
+
+            for (AttributeView attributeView : attributes) {
+                CategoryAttribute categoryAttribute = new CategoryAttribute();
+                categoryAttribute.setName(attributeView.getName());
+                categoryAttribute.setCategory(entity);
+
+                for (AttributeValue value : attributeView.getValues()) {
+                    CategoryAttributeValue attributeValue = new CategoryAttributeValue();
+                    attributeValue.setValue(value.getValue());
+                    attributeValue.setId(value.getId());
+                    attributeValue.setCategoryAttribute(categoryAttribute);
+
+                    categoryAttribute.getValues().add(attributeValue);
+                }
+
+                categoryAttributes.add(categoryAttribute);
+            }
+
+            entity.setAttributes(categoryAttributes);
+        }
 
         return entity;
     }
@@ -60,7 +89,7 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
         view.setId(entity.getId());
         view.setName(entity.getName());
         view.setParentCategory(toView(entity.getParentCategory()));
-        view.setAttributes(entity.getAttributes());
+//        view.setAttributes(entity.getAttributes());
         view.setDiscount(discountMapper.toView(entity.getDiscount()));
 
         //Only root category will not have a parent
@@ -73,6 +102,27 @@ public class CategoryMapper implements IMapper<Category, CategoryView> {
             view.setNameWithParents("/");
         }
 
+        List<CategoryAttribute> attributeViews = entity.getAttributes();
+        List<AttributeView> views = new ArrayList<>();
+
+
+        for (CategoryAttribute categoryAttribute : attributeViews) {
+            AttributeView attributeView = new AttributeView();
+            attributeView.setName(categoryAttribute.getName());
+            attributeView.setId(categoryAttribute.getId());
+
+            for (CategoryAttributeValue value : categoryAttribute.getValues()) {
+                AttributeValue attributeValue = new AttributeValue();
+                attributeValue.setId(value.getId());
+                attributeValue.setValue(value.getValue());
+
+                attributeView.getValues().add(attributeValue);
+            }
+
+            views.add(attributeView);
+        }
+
+        view.setAttributes(views);
 
         return view;
     }

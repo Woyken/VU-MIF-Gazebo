@@ -153,7 +153,20 @@
                         <h:selectOneMenu value="#{productEditController.productView.category}"
                                          converter="omnifaces.SelectItemsConverter" >
                             <f:selectItems value="#{productEditController.categories}"/>
+                            <f:ajax render="@form"/>
                         </h:selectOneMenu>
+
+                        <p:outputLabel>Atributas: </p:outputLabel>
+                        <ui:repeat value="#{productEditController.productView.category.attributes}" var="attribute">
+                            <h:inputText value="#{attribute.name}" disabled="true"/>
+                            <p:outputLabel value="Reikšmė"/>
+
+                            <h:selectOneMenu value="#{attribute.selectedValue}"
+                                             converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems value="#{attribute.values}">
+                                </f:selectItems>
+                            </h:selectOneMenu>
+                        </ui:repeat>
                     </div>
                 </div> <!-- End of Category -->
 

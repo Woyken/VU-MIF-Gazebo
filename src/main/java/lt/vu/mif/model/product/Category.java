@@ -38,10 +38,8 @@ public class Category {
     @JoinColumn(name = "PARENT_CATEGORY_ID")
     private Category parentCategory;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @JoinTable(name = "CATEGORY_ATTRIBUTE", joinColumns = @JoinColumn(name = "CATEGORY_ID"))
-    @Column(name = "ATTRIBUTE")
-    private List<String> attributes = new ArrayList<>();
+    @OneToMany(cascade = ALL, fetch = LAZY, mappedBy = "category")
+    private List<CategoryAttribute> attributes = new ArrayList<>();
 
     @OneToMany(cascade = MERGE, fetch = LAZY, mappedBy = "category")
     private List<Product> products = new ArrayList<>();

@@ -63,9 +63,10 @@ public class EditProductValidation extends DiscountValidation implements Validat
             throw new ValidatorException(new FacesMessage("Kaina negali būti neigiama"));
         }
 
-        if (productRepository.checkIfProductExists(sku)) {
-            throw new ValidatorException(
-                    new FacesMessage("Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
-        }
+
+//        if (productRepository.checkIfProductExists(sku)) {
+//            throw new ValidatorException(
+//                    new FacesMessage("\Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
+//        }
     }
 }

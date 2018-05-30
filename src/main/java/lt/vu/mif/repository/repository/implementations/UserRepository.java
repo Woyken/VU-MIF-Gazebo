@@ -44,7 +44,6 @@ public class UserRepository extends SimpleJpaRepository<User, Long> implements I
         entityManager.merge(user);
     }
 
-    @Transactional
     public void updateEmail(String currentEmail, String newEmail) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaUpdate<User> criteria = builder.createCriteriaUpdate(User.class);
