@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lt.vu.mif.model.product.Category;
-import lt.vu.mif.model.product.CategoryAttribute;
 import lt.vu.mif.model.product.CategoryAttributeValue;
 import lt.vu.mif.model.product.Product;
 import lt.vu.mif.model.product.ProductAttributeValue;
@@ -60,9 +59,10 @@ public class ProductMapper implements IMapper<Product, ProductView> {
             List<ProductAttributeValue> attributeValues = new ArrayList<>();
 
             for(AttributeView attribute : view.getCategory().getAttributes()) {
-//                CategoryAttributeValue attributeValue = attributeValueRepository.getOne(attribute.getSelectedValue().getId());
+                CategoryAttributeValue attributeValue = attributeValueRepository
+                    .getOne(attribute.getSelectedValue().getId());
 
-                CategoryAttributeValue attributeValue = attributeValueRepository.getOne(attribute.getValues().get(0).getId());
+//                CategoryAttributeValue attributeValue = attributeValueRepository.getOne(attribute.getValues().get(0).getId());
 
 
                 ProductAttributeValue productAttributeValue = new ProductAttributeValue();
