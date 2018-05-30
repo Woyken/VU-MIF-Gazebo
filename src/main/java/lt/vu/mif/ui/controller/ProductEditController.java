@@ -4,16 +4,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.Validator;
+import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
+import lt.vu.mif.repository.repository.implementations.ProductRepository;
+import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IImageHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.validation.EditProductValidation;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.DiscountView;
 import lt.vu.mif.ui.view.ImageInMemoryStreamer;
@@ -27,7 +35,7 @@ import org.springframework.dao.OptimisticLockingFailureException;
 @Getter
 @ViewScoped
 @Named
-public class ProductEditController {
+public class ProductEditController implements Validator {
 
     @Autowired
     private IProductHelper productHelper;
@@ -37,6 +45,10 @@ public class ProductEditController {
     private IImageHelper imageHelper;
     @Autowired
     private ImageInMemoryStreamer imageInMemoryStreamer;
+    @Autowired
+    private EditProductValidation editProductValidation;
+    @Autowired
+    private IProductRepository productRepository;
 
     private ProductView productView;
     private DiscountView discountView;
@@ -140,7 +152,28 @@ public class ProductEditController {
         conflictingProductView = null;
     }
 
+    public void validateSku(String sku){
+
+    }
+
     public void check(boolean selected) {
         this.discount = !selected;
+    }
+
+    @Override
+    public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
+        String sku = (String) ((UIInput) uiComponent.getAttributes().get("sku"))
+                .getValue();
+        System.out.println(sku);
+        if(productHelper.getProduct(productView.getId()).getSku().equals(sku)){
+            System.out.println("Same. Shouldn't call validation");
+        }
+        else {
+            System.out.println("Different. Should call validation");
+            if (productRepository.checkIfProductExists(sku)) {
+                throw new ValidatorException(
+                        new FacesMessage("Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
+            }
+        }
     }
 }
