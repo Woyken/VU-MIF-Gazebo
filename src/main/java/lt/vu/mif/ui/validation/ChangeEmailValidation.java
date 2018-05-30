@@ -33,6 +33,10 @@ public class ChangeEmailValidation implements Validator {
             throw new ValidatorException(new FacesMessage("Užpildyti ne visi privalomi laukai"));
         }
 
+        if (newEmail.length()>=255) {
+            throw new ValidatorException(new FacesMessage("Elektroninis paštas negali būti ilgesnis nei 255 simboliai"));
+        }
+
         if (!ValidationUtils.isEmailValid(newEmail)) {
             throw new ValidatorException(new FacesMessage("Įvestas neteisingas el. pašto adresas"));
         }

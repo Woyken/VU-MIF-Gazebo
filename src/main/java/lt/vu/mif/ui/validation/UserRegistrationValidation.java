@@ -37,6 +37,14 @@ public class UserRegistrationValidation implements Validator {
             throw new ValidatorException(new FacesMessage("Įvestas neteisingas el. pašto adresas"));
         }
 
+        if (email.length()>=255) {
+            throw new ValidatorException(new FacesMessage("Elektroninis paštas negali būti ilgesnis nei 255 simboliai"));
+        }
+
+        if (password.length()>=255) {
+            throw new ValidatorException(new FacesMessage("Slaptažodis negali būti ilgesnis nei 255 simboliai"));
+        }
+
         if (!ValidationUtils.isPasswordValid(password)) {
             throw new ValidatorException(new FacesMessage("Slaptažodis neatitinka reikalavimų"));
         }

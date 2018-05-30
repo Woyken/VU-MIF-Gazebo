@@ -42,6 +42,14 @@ public class EditProductValidation extends DiscountValidation implements Validat
             throw new ValidatorException(new FacesMessage("Užpildyti ne visi privalomi laukai"));
         }
 
+        if (sku.length()>=255) {
+            throw new ValidatorException(new FacesMessage("SKU kodas negali būti ilgesnis nei 255 simboliai"));
+        }
+
+        if (title.length()>=255) {
+            throw new ValidatorException(new FacesMessage("Prekės pavadinimas negali būti ilgesnis nei 255 simboliai"));
+        }
+
         if (price == null) {
             throw new ValidatorException(new FacesMessage("Tokia kaina yra negalima"));
         }

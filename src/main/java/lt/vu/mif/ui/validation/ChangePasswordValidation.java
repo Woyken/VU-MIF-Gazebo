@@ -44,6 +44,10 @@ public class ChangePasswordValidation implements Validator {
             throw new ValidatorException(new FacesMessage("Užpildyti ne visi privalomi laukai"));
         }
 
+        if (newPassword.length()>=255) {
+            throw new ValidatorException(new FacesMessage("Slaptažodis negali būti ilgesnis nei 255 simboliai"));
+        }
+
         if (!newPassword.equals(newPasswordRepeat)) {
             throw new ValidatorException(new FacesMessage("Įvesti slaptažodžiai nesutampa"));
         }

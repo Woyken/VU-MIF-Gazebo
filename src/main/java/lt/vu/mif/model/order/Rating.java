@@ -25,7 +25,7 @@ public class Rating {
     @Column(name = "DATE", nullable = false)
     private LocalDateTime date;
 
-    @Column(name = "COMMENT")
+    @Column(name = "COMMENT", length = 2000)
     private String comment;
 
     @Column(name = "VALUE", nullable = false)
