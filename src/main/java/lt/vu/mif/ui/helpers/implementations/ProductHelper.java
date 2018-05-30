@@ -212,6 +212,11 @@ public class ProductHelper implements IProductHelper {
     }
 
     @Override
+    public boolean checkIfProductExists(String skuCode) {
+        return productRepository.checkIfProductExists(skuCode);
+    }
+
+    @Override
     public ProductView getProductViewFromNavigationQuery() {
         String productId = FacesContext
             .getCurrentInstance()

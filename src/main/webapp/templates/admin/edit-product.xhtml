@@ -406,7 +406,6 @@
                                     class="button success expanded"
                                     value="#{productEditController.productFound ? 'Išsaugoti pakeitimus' : 'Pridėti'}"
                                     action="#{productEditController.saveChanges}">
-                                <f:actionListener binding="#{productEditController.validateSku(sku.value)}" />
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
                         </div>

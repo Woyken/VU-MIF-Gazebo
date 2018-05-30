@@ -47,8 +47,6 @@ public class ProductEditController implements Validator {
     private ImageInMemoryStreamer imageInMemoryStreamer;
     @Autowired
     private EditProductValidation editProductValidation;
-    @Autowired
-    private IProductRepository productRepository;
 
     private ProductView productView;
     private DiscountView discountView;
@@ -152,25 +150,24 @@ public class ProductEditController implements Validator {
         conflictingProductView = null;
     }
 
-    public void validateSku(String sku){
-
-    }
-
     public void check(boolean selected) {
         this.discount = !selected;
     }
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
-        String sku = (String) ((UIInput) uiComponent.getAttributes().get("sku"))
-                .getValue();
-        System.out.println(sku);
-        if(productHelper.getProduct(productView.getId()).getSku().equals(sku)){
-            System.out.println("Same. Shouldn't call validation");
+        String sku = (String) ((UIInput) uiComponent.getAttributes().get("sku")).getValue();
+
+        if(isProductFound) {
+            if (!productHelper.getProduct(productView.getId()).getSku().equals(sku)) {
+                if (productHelper.checkIfProductExists(sku)) {
+                    throw new ValidatorException(
+                            new FacesMessage("Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
+                }
+            }
         }
         else {
-            System.out.println("Different. Should call validation");
-            if (productRepository.checkIfProductExists(sku)) {
+            if (productHelper.checkIfProductExists(sku)) {
                 throw new ValidatorException(
                         new FacesMessage("Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
             }
