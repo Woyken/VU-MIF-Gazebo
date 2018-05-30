@@ -1,6 +1,6 @@
 package lt.vu.mif;
 
-import lt.vu.mif.generator.MockDataGenerator;
+import lt.vu.mif.generator.interfaces.IDataGenerator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class UserProfileTestsIT {
     int localServerPort;
 
     @Autowired
-    MockDataGenerator mockDataGenerator;
+    IDataGenerator mockDataGenerator;
 
     private WebDriver driver;
 
@@ -36,7 +36,7 @@ public class UserProfileTestsIT {
         driver = new FirefoxDriver();
         driver.get("http://localhost:" + localServerPort + "/");
         if (!TestPreparation.getSetuped("dataGenerator.insertUsers")) {
-            mockDataGenerator.insertUsers();
+            mockDataGenerator.generateData();
             TestPreparation.setSetuped("dataGenerator.insertUsers");
         }
     }
