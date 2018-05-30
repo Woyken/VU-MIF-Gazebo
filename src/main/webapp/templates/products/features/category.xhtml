@@ -57,34 +57,42 @@
                         <p:outputLabel value="Požymio galimos reikšmės:"/>
                         <div style="width: 50%">
                             <ui:repeat value="#{attribute.values}" var="attributeValue">
-                                <h:inputText value="#{attributeValue}"/>
-                                <h:commandButton
-                                        class="button green"
-                                        value="✓"
-                                        action="#{productCategoryController.addNewAttributeValue(attribute, attributeValue)}">
-                                    <f:ajax render="@form"/>
-                                </h:commandButton>
-                                <h:commandButton
-                                        class="button red"
-                                        value="✘"
-                                        action="#{productCategoryController.removeNewAttributeValue(attribute, attributeValue)}">
-                                    <f:ajax render="@form"/>
-                                </h:commandButton>
+                                <div class="row">
+                                    <div class="columns small-12 medium-9">
+                                        <h:inputText value="#{attributeValue}"/>
+                                    </div>
+                                    <div class="columns small-12 medium-3">
+                                        <h:commandButton
+                                                class="button green"
+                                                value="✓"
+                                                action="#{productCategoryController.addNewAttributeValue(attribute, attributeValue)}">
+                                            <f:ajax render="@form"/>
+                                        </h:commandButton>
+                                        <h:commandButton
+                                                class="button red"
+                                                value="✘"
+                                                action="#{productCategoryController.removeNewAttributeValue(attribute, attributeValue)}">
+                                            <f:ajax render="@form"/>
+                                        </h:commandButton>
+                                    </div>
+                                </div>
                             </ui:repeat>
                         </div>
                     </div>
-                    <h:commandButton
-                            class="button green"
-                            value="✓"
-                            action="#{productCategoryController.addNewAttribute}">
-                        <f:ajax render="@form"/>
-                    </h:commandButton>
-                    <h:commandButton
-                            class="button red"
-                            value="✘"
-                            action="#{productCategoryController.removeNewAttribute(attribute)}">
-                        <f:ajax render="@form"/>
-                    </h:commandButton>
+                    <div class="columns small-2 medium-1">
+                        <h:commandButton
+                                class="button green"
+                                value="✓"
+                                action="#{productCategoryController.addNewAttribute}">
+                            <f:ajax render="@form"/>
+                        </h:commandButton>
+                        <h:commandButton
+                                class="button red"
+                                value="✘"
+                                action="#{productCategoryController.removeNewAttribute(attribute)}">
+                            <f:ajax render="@form"/>
+                        </h:commandButton>
+                    </div>
                 </ui:repeat>
             </div>
 
