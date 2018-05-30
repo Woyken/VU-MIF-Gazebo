@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import lt.vu.mif.generator.interfaces.IDataGenerator;
 import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.model.order.Rating;
@@ -28,7 +27,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MockDataGenerator implements IDataGenerator {
+public class MockDataGenerator extends DataGenerator {
 
     @Autowired
     private IProductRepository productRepository;
@@ -45,14 +44,11 @@ public class MockDataGenerator implements IDataGenerator {
 
     @Override
     public void generateData() {
+        super.generateData();
+
         insertUsers();
         insertProducts();
         insertOrders();
-        insertCategory();
-    }
-
-    private void insertCategory() {
-        categoryInserter.insertRootCategory();
     }
 
     private void insertUsers() {
