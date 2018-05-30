@@ -8,7 +8,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,7 @@ public class EditProductValidation extends DiscountValidation implements Validat
             throw ex;
         }
 
+        Long id = (Long) uiComponent.getAttributes().get("productId");
         String sku = (String) ((UIInput) uiComponent.getAttributes().get("sku"))
             .getValue();
         String title = (String) ((UIInput) uiComponent.getAttributes()
@@ -63,9 +63,12 @@ public class EditProductValidation extends DiscountValidation implements Validat
             throw new ValidatorException(new FacesMessage("Kaina negali būti neigiama"));
         }
 
-        if (productRepository.checkIfProductExists(sku)) {
+        Long existingId = productRepository.getIdBySku(sku);
+
+        if (existingId != null && !existingId.equals(id)) {
             throw new ValidatorException(
-                    new FacesMessage("Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
+                new FacesMessage(
+                    "Nurodytas SKU kodas jau egzistuoja sistemoje. Pateikite unikalų SKU kodą"));
         }
     }
 }

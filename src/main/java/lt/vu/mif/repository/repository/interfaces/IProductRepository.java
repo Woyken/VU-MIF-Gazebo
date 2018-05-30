@@ -30,7 +30,7 @@ public interface IProductRepository {
 
     void updateAll(List<Product> products);
 
-    boolean checkIfProductExists(String skuCode);
+    public Long getIdBySku(String skuCode);
 
     Integer getProductVersion(Long productId);
 }

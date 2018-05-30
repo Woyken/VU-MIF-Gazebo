@@ -229,6 +229,7 @@
                 <!-- For validation -->
                 <h:inputHidden id="validationInput" value="true">
                     <f:validator binding="#{editProductValidation}"/>
+                    <f:attribute name="productId" value="#{productEditController.productView.id}"/>
                     <f:attribute name="sku" value="#{sku}"/>
                     <f:attribute name="title" value="#{title}"/>
                     <f:attribute name="price" value="#{price}"/>
