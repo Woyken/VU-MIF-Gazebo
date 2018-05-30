@@ -25,7 +25,10 @@
                 <!-- SKU code -->
                 <div class="row align-middle">
                     <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">SKU</h5>
+                        <h5 class="font-bold">
+                            <span class="alert-star">*</span>
+                            SKU
+                        </h5>
                     </div>
                     <div class="columns medium-9 small-12">
                         <h:inputText value="#{productEditController.productView.sku}"
@@ -36,7 +39,10 @@
                 <!-- Title -->
                 <div class="row align-middle">
                     <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">Pavadinimas</h5>
+                        <h5 class="font-bold">
+                            <span class="alert-star">*</span>
+                            Pavadinimas
+                        </h5>
                     </div>
                     <div class="columns medium-9 small-12">
                         <h:inputText value="#{productEditController.productView.title}"
@@ -47,7 +53,10 @@
                 <!-- Price -->
                 <div class="row align-middle">
                     <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">Kaina</h5>
+                        <h5 class="font-bold">
+                            <span class="alert-star">*</span>
+                            Kaina
+                        </h5>
                     </div>
                     <div class="columns medium-9 small-12">
                         <h:inputText pt:type="number" pt:min="0"
@@ -213,7 +222,7 @@
                                 </div>
                             </ui:repeat>
 
-                            <div class="columns medium-3 small-12">
+                            <div class="columns medium-3 small-9">
                                 Pridėti prekės nuotrauką
                                 <h:inputFile value="#{productEditController.uploadedFile}"
                                              mode="simple" skinSimple="true"
@@ -222,6 +231,10 @@
                                             render="@form"/>
                                 </h:inputFile>
                             </div>
+                        </div>
+                        <div class="mar-bot-5">
+                            <span class="alert-star">*</span>
+                            <span class="alert-text"> privalomi laukai</span>
                         </div>
                     </div>
                 </div> <!-- End of images -->
