@@ -14,7 +14,6 @@
     <bean id="dataGenerator" class="lt.vu.mif.generator.realizations.MockDataGenerator"/>
     <bean id="errorLogger" class="lt.vu.mif.error.ConsoleErrorLogger"/>
 
-
     <!--Decorator configuration example-->
     <bean id="defaultEmailGenerator" class="lt.vu.mif.email.implementations.DefaultEmailContentGenerator"/>
 
