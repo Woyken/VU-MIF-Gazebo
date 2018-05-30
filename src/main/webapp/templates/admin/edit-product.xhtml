@@ -184,9 +184,10 @@
                                                         class="thumbnail">
                                             <f:param name="id" value="#{image.id}"/>
                                         </p:graphicImage>
-                                        <h:commandLink class="button red">
-                                            <f:ajax execute="@form" render="@form"
-                                                    listener="#{productEditController.removeImage(image)}"/>
+                                        <h:commandLink class="button red" immediate="true">
+                                            <f:ajax render="@form"
+                                                    listener="#{productEditController.removeImage(image)}"
+                                                    immediate="true"/>
                                             <i class="fi-x"/>
                                         </h:commandLink>
                                     </div>
@@ -202,9 +203,10 @@
                                                 class="thumbnail">
                                             <f:param name="id" value="#{image.id}"/>
                                         </p:graphicImage>
-                                        <h:commandLink class="button red">
-                                            <f:ajax execute="@form" render="@form"
-                                                    listener="#{productEditController.removeImage(image)}"/>
+                                        <h:commandLink class="button red" immediate="true">
+                                            <f:ajax render="@form"
+                                                    listener="#{productEditController.removeImage(image)}"
+                                                    immediate="true"/>
                                             <i class="fi-x"/>
                                         </h:commandLink>
                                     </div>
@@ -217,7 +219,7 @@
                                              mode="simple" skinSimple="true"
                                              styleClass="button hollow">
                                     <f:ajax listener="#{productEditController.handleUploadedFile}"
-                                            execute="@form" render="@form"/>
+                                            render="@form"/>
                                 </h:inputFile>
                             </div>
                         </div>
