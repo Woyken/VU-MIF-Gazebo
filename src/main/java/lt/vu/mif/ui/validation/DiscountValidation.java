@@ -102,9 +102,9 @@ public class DiscountValidation implements Validator {
             throw new ValidatorException(new FacesMessage("Neteisinga pabaigos data"));
         }
 
-        if (startDateParsed.isBefore(LocalDateTime.now())) {
-            throw new ValidatorException(new FacesMessage("Nuolaida negali prasidėti praeityje"));
-        }
+//        if (startDateParsed.isBefore(LocalDateTime.now())) {
+//            throw new ValidatorException(new FacesMessage("Nuolaida negali prasidėti praeityje"));
+//        }
 
         if (endDateParsed.isBefore(startDateParsed)) {
             throw new ValidatorException(
