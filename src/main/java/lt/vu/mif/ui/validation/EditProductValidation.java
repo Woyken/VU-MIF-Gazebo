@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Named
 @Component
-public class EditProductValidation implements Validator {
+public class EditProductValidation extends DiscountValidation implements Validator {
 
     @Autowired
     private IProductRepository productRepository;
@@ -24,6 +24,12 @@ public class EditProductValidation implements Validator {
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o)
         throws ValidatorException {
+
+        try {
+            super.validate(facesContext, uiComponent, o);
+        } catch (Exception ex) {
+            throw ex;
+        }
 
         String sku = (String) ((UIInput) uiComponent.getAttributes().get("sku"))
             .getValue();

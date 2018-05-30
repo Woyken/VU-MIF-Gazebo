@@ -12,6 +12,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import lt.vu.mif.utils.validation.ValidationUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.stereotype.Component;
 
 
@@ -22,6 +23,11 @@ public class DiscountValidation implements Validator {
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o)
         throws ValidatorException {
+
+        if (BooleanUtils.isTrue((Boolean) uiComponent.getAttributes().get("noneRequired"))) {
+            return;
+        }
+
         BigDecimal discountPrice = (BigDecimal) ((UIInput) uiComponent.getAttributes()
             .get("discountPrice"))
             .getValue();
@@ -41,7 +47,7 @@ public class DiscountValidation implements Validator {
 
         if (discountPrice == null && discountPercentage == null || startDate.isEmpty() || endDate
             .isEmpty() || startTime.isEmpty() || endTime.isEmpty()) {
-            throw new ValidatorException(new FacesMessage("Užpildyti ne visi privalomi laukai"));
+            throw new ValidatorException(new FacesMessage("Užpildyti ne visi privalomi nuolaidos laukai"));
         }
 
         if (discountPrice != null && discountPercentage != null) {

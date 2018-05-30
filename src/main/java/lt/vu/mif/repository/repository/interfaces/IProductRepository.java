@@ -31,4 +31,6 @@ public interface IProductRepository {
     void updateAll(List<Product> products);
 
     boolean checkIfProductExists(String skuCode);
+
+    Integer getProductVersion(Long productId);
 }

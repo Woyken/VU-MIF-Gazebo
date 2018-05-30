@@ -58,58 +58,89 @@
 
                 <!-- Discount -->
                 <div class="row align-middle">
-
                     <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">Nuolaida</h5>
+                        <h5 class="font-bold">Pritaikyti nuolaidą</h5>
                     </div>
 
-                    <div class="columns medium-7 small-12">
-                        <!-- Discount was found -->
-                        <h:panelGroup
-                                rendered="#{productEditController.productView.discount != null}">
-                            <!-- Discount as percentage -->
-                            <h:outputText
-                                    class="font-bold font-italic success-text-large"
-                                    value="Pritaikyta #{productEditController.productView.discount.percentageDiscount}% nuolaida"
-                                    rendered="#{productEditController.productView.discount.percentageDiscount != null}"/>
-
-                            <!-- Discount as absolute price -->
-                            <h:outputText
-                                    class="font-bold font-italic success-text-large"
-                                    value="Naujoji kaina su nuolaida: #{productEditController.productView.discount.absoluteDiscount}€"
-                                    rendered="#{productEditController.productView.discount.absoluteDiscount != null}"/>
-                        </h:panelGroup>
-
-                        <!-- Discount was not found -->
-                        <h:panelGroup
-                                rendered="#{productEditController.productView.discount == null}">
-                            <h:outputText
-                                    styleClass="font-bold font-italic alert-text-large"
-                                    value="NEPRITAIKYTA"/>
-                        </h:panelGroup>
+                    <div class="columns medium-9 small-12">
+                        <h:selectBooleanCheckbox value="#{productEditController.discount}">
+                            <f:ajax
+                                    listener="#{productEditController.check(!productEditController.discount)}"
+                                    render="@form"/>
+                        </h:selectBooleanCheckbox>
                     </div>
+                </div>
 
-                    <!-- [Button] Edit discount -->
-                    <div class="columns small-3 medium-1">
-                        <a
-                                class="button expanded primary"
-                                href="../../admin-product-discount.xhtml?productId=#{productEditController.productView.id}">
-                            <i class="fi-pencil"/>
-                        </a>
-                    </div>
-
-                    <!-- [Button] Remove discount if one exists -->
-                    <h:panelGroup rendered="#{productEditController.productView.discount != null}">
-                        <div class="columns small-3 small-offset-6 medium-1 medium-offset-0">
-                            <h:commandLink
-                                    class="button expanded red"
-                                    action="#{productEditController.removeDiscount}">
-                                <i class="fi-x"/>
-                                <f:ajax render="@form"/>
-                            </h:commandLink>
+                <h:panelGroup id="discounts" rendered="#{productEditController.discount}">
+                    <div class="row align-middle">
+                        <div class="columns medium-3 small-12">
+                            <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
                         </div>
-                    </h:panelGroup>
-                </div> <!-- End of Discount -->
+
+                        <div class="columns medium-9 small-12">
+                            <h:inputText
+                                    pt:type="number"
+                                    pt:min="0"
+                                    pt:placeholder="49.99"
+                                    value="#{productEditController.discountView.absoluteDiscount}"
+                                    binding="#{discountPrice}"/>
+                        </div>
+                    </div>
+
+                    <div class="row align-middle">
+                        <div class="columns medium-3 small-12">
+                            <h5 class="font-bold">Nuolaida (procentais)</h5>
+                        </div>
+
+                        <div class="columns medium-9 small-12">
+                            <h:inputText
+                                    id="percentInput"
+                                    pt:placeholder="50"
+                                    pt:type="number"
+                                    value="#{productEditController.discountView.percentageDiscount}"
+                                    binding="#{discountPercentage}">
+                                <f:convertNumber integerOnly="true" type="number"/>
+                                <f:validateLongRange minimum="0" maximum="100"/>
+                                <p:ajax event="change" update="percentInput"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+
+                    <!-- Sale date -->
+                    <div class="row align-middle">
+
+                        <!-- The sale starts on -->
+                        <div class="columns medium-3 medium-offset-2 small-12">
+                            <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
+                            <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
+                        </div>
+
+                        <div class="columns medium-2 small-12">
+                            <h:inputText pt:type="date"
+                                         value="#{productEditController.discountView.startDate}"
+                                         binding="#{startDate}"/>
+                            <h:inputText value="#{productEditController.discountView.startTime}"
+                                         binding="#{startTime}"
+                                         pt:placeholder="08:00"/>
+                        </div>
+
+                        <!-- The sale ends on -->
+                        <div class="columns medium-2 medium-offset-1 small-12">
+                            <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
+                            <h5 class="font-bold hide-for-medium">Galioja iki</h5>
+                        </div>
+
+                        <div class="columns medium-2 small-12">
+                            <h:inputText pt:type="date"
+                                         value="#{productEditController.discountView.endDate}"
+                                         binding="#{endDate}"/>
+                            <h:inputText value="#{productEditController.discountView.endTime}"
+                                         binding="#{endTime}"
+                                         pt:placeholder="12:30"/>
+                        </div>
+
+                    </div> <!-- End of Sale date -->
+                </h:panelGroup>
 
                 <!-- Category -->
                 <div class="row align-middle">
@@ -120,7 +151,7 @@
 
                     <div class="columns medium-9 small-12">
                         <h:selectOneMenu value="#{productEditController.productView.category}"
-                                         converter="omnifaces.SelectItemsConverter">
+                                         converter="omnifaces.SelectItemsConverter" >
                             <f:selectItems value="#{productEditController.categories}"/>
                         </h:selectOneMenu>
                     </div>
@@ -199,16 +230,14 @@
                     <f:attribute name="sku" value="#{sku}"/>
                     <f:attribute name="title" value="#{title}"/>
                     <f:attribute name="price" value="#{price}"/>
+                    <f:attribute name="discountPrice" value="#{discountPrice}"/>
+                    <f:attribute name="discountPercentage" value="#{discountPercentage}"/>
+                    <f:attribute name="startDate" value="#{startDate}"/>
+                    <f:attribute name="startTime" value="#{startTime}"/>
+                    <f:attribute name="endDate" value="#{endDate}"/>
+                    <f:attribute name="endTime" value="#{endTime}"/>
+                    <f:attribute name="noneRequired" value="#{!productEditController.discount}"/>
                 </h:inputHidden>
-
-                <!-- Error Message -->
-                <div class="row">
-                    <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
-                        <div class="text-center">
-                            <h:message class="alert-text-large" for="validationInput"/>
-                        </div>
-                    </div>
-                </div>
 
                 <h:panelGroup rendered="#{productEditController.conflictingProductView ne null}">
                     <div class="row column text-center section">
@@ -248,6 +277,57 @@
                                         styleClass="red"/>
                             </div>
                         </div>
+                        <div class="row align-middle red">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
+                            </div>
+
+                            <div class="columns medium-9 small-12">
+                                <h:inputText styleClass="red" disabled="true" value="#{productEditController.conflictingProductView.discount.absoluteDiscount}"/>
+                            </div>
+                        </div>
+
+                        <div class="row align-middle red">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Nuolaida (procentais)</h5>
+                            </div>
+
+                            <div class="columns medium-9 small-12">
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.percentageDiscount}">
+                                    <f:convertNumber integerOnly="true" type="number"/>
+                                    <f:validateLongRange minimum="0" maximum="100"/>
+                                    <p:ajax event="change" update="percentInput"/>
+                                </h:inputText>
+                            </div>
+                        </div>
+
+                        <!-- Sale date -->
+                        <div class="row align-middle">
+
+                            <!-- The sale starts on -->
+                            <div class="columns medium-3 medium-offset-2 small-12 red" >
+                                <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
+                                <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
+                            </div>
+
+                            <div class="columns medium-2 small-12">
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.startDate}" />
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.startTime}" />
+                            </div>
+
+                            <!-- The sale ends on -->
+                            <div class="columns medium-2 medium-offset-1 small-12">
+                                <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
+                                <h5 class="font-bold hide-for-medium">Galioja iki</h5>
+                            </div>
+
+                            <div class="columns medium-2 small-12">
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.endDate}" />
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.endTime}" />
+                            </div>
+
+                        </div> <!-- End of Sale date -->
+
                         <div class="row align-middle">
                             <div class="columns medium-3 small-12">
                                 <h5 class="font-bold">Kategorija</h5>
@@ -341,6 +421,16 @@
                                 class="success-text-large"
                                 value="#{productEditController.productFound ? 'Produkto duomenys sėkmingai atnaujinti' : 'Prekė sėkmingai pridėta'}"/>
                     </div>
+
+                    <!-- Error Message -->
+                    <div class="row">
+                        <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
+                            <div class="text-center">
+                                <h:message class="alert-text-large" for="validationInput"/>
+                            </div>
+                        </div>
+                    </div>
+
                 </h:panelGroup>
             </div>
         </h:form>
