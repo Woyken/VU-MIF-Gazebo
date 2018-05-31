@@ -41,4 +41,12 @@ public class ProductDetailsController {
             throw new IllegalStateException("Product" + "with ID=" + productId + "not found");
         }
     }
+
+    public void onBeforeValidatorAddToCart() {
+        showSuccessMessage = false;
+    }
+
+    public void onAddToCart() {
+        showSuccessMessage = true;
+    }
 }
