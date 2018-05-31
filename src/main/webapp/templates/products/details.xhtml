@@ -73,15 +73,18 @@
                 </div>
 
                 <!-- Quantity -->
-                <div class="row">
-                    <div class="small-3 columns">
-                        <label for="product-quantity" class="font-bold middle">Kiekis:</label>
+                <!-- We do not show this to admin -->
+                <h:panelGroup rendered="#{!userService.adminLoggedIn}">
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <label for="product-quantity" class="font-bold middle">Kiekis:</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <h:inputText pt:type="number" id="product-quantity" value="1" min="1"
+                                         max="99" binding="#{amount}"/>
+                        </div>
                     </div>
-                    <div class="small-9 columns">
-                        <h:inputText pt:type="number" id="product-quantity" value="1" min="1"
-                                     max="99" binding="#{amount}"/>
-                    </div>
-                </div>
+                </h:panelGroup>
 
 
                 <!-- IF PRODUCT IS ON SALE - SHOW THIS -->

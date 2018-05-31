@@ -42,6 +42,14 @@ public class UserService {
         return null;
     }
 
+    public boolean isAdminLoggedIn() {
+        User user = getLoggedUser();
+        if (user == null) {
+            return false;
+        }
+        return user.getRole().toString() == "ADMIN";
+    }
+
     public String getLoggedUserEmail() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
