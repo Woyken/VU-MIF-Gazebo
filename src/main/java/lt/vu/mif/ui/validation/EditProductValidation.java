@@ -11,6 +11,7 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.ui.view.AttributeView;
+import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -70,14 +71,17 @@ public class EditProductValidation extends DiscountValidation implements Validat
 //                    new FacesMessage("\Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
 //        }
 
-        List<AttributeView> attributes = (List<AttributeView>) uiComponent.getAttributes()
-            .get("productAttributes");
+        List<CategoryView> categories = (List<CategoryView>) uiComponent.getAttributes()
+            .get("attributeCategories");
 
-        for (AttributeView a : attributes) {
-            if (a.getSelectedValue() == null) {
-                throw new ValidatorException(
-                    new FacesMessage("Požymiui \"" + a.getName() + "\" nepasirinkta reikšmė"));
+        for (CategoryView c : categories) {
+            for (AttributeView a : c.getAttributes()) {
+                if (a.getSelectedValue() == null) {
+                    throw new ValidatorException(
+                        new FacesMessage("Požymiui \"" + a.getName() + "\" nepasirinkta reikšmė"));
+                }
             }
         }
+
     }
 }

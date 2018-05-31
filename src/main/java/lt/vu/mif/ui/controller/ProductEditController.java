@@ -52,6 +52,8 @@ public class ProductEditController {
     private boolean isProductFound;
 
     private List<CategoryView> categories;
+    //Categories whose attributes apply to product (selected + all parents)
+    private List<CategoryView> attributeCategories;
 
     private List<ImageView> newImages = new ArrayList<>();
     private ProductView conflictingProductView;
@@ -75,8 +77,9 @@ public class ProductEditController {
 
         showSuccessMessage = false;
         categories = categoryHelper.findAll();
-        discount = productView.getDiscount() != null;
         Collections.sort(categories);
+        discount = productView.getDiscount() != null;
+        updateAttributeCategories();
     }
 
     public void handleUploadedFile() throws Exception {
@@ -146,6 +149,16 @@ public class ProductEditController {
 
     public void attributeChange(AttributeView attributeView, AttributeValue value) {
         System.out.println(value);
+    }
+
+    public void updateAttributeCategories() {
+        attributeCategories = new ArrayList<>();
+        CategoryView category = productView.getCategory();
+
+        while (category != null) {
+            attributeCategories.add(category);
+            category = category.getParentCategory();
+        }
     }
 
     public void check(boolean selected) {

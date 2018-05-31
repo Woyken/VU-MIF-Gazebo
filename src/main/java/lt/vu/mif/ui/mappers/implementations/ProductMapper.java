@@ -58,18 +58,21 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         if (product.getCategory() != null) {
             List<ProductAttributeValue> attributeValues = new ArrayList<>();
 
-            for(AttributeView attribute : view.getCategory().getAttributes()) {
-                CategoryAttributeValue attributeValue = attributeValueRepository
-                    .getOne(attribute.getSelectedValue().getId());
+            //Climbs up category hierarchy to the top to save attributes
+            CategoryView category = view.getCategory();
+            while (category != null) {
+                for (AttributeView attribute : category.getAttributes()) {
+                    CategoryAttributeValue attributeValue = attributeValueRepository
+                        .getOne(attribute.getSelectedValue().getId());
 
-//                CategoryAttributeValue attributeValue = attributeValueRepository.getOne(attribute.getValues().get(0).getId());
+                    ProductAttributeValue productAttributeValue = new ProductAttributeValue();
+                    productAttributeValue.setCategoryAttributeValue(attributeValue);
+                    productAttributeValue.setProduct(product);
 
+                    attributeValues.add(productAttributeValue);
+                }
 
-                ProductAttributeValue productAttributeValue = new ProductAttributeValue();
-                productAttributeValue.setCategoryAttributeValue(attributeValue);
-                productAttributeValue.setProduct(product);
-
-                attributeValues.add(productAttributeValue);
+                category = category.getParentCategory();
             }
 
             product.setAttributeValues(attributeValues);
@@ -96,11 +99,23 @@ public class ProductMapper implements IMapper<Product, ProductView> {
         view.setNewPrice(priceResolver.resolvePriceWithDiscount(entity));
         view.setVersion(entity.getVersion());
 
-        for (AttributeView attributeView : view.getCategory().getAttributes()) {
-            for (ProductAttributeValue value : entity.getAttributeValues()) {
-                AttributeValue selected = searchValue(attributeView.getValues(), value.getCategoryAttributeValue().getId());
-                attributeView.setSelectedValue(selected);
+        //Climbs up category hierarchy to the top to set attributes
+        CategoryView category = view.getCategory();
+        while (category != null) {
+            for (AttributeView attributeView : category.getAttributes()) {
+                for (ProductAttributeValue value : entity.getAttributeValues()) {
+                    AttributeValue selected = searchValue(attributeView.getValues(),
+                        value.getCategoryAttributeValue().getId());
+
+                    // I don't know how this code exactly works, but this seems to fix it!!!
+                    if (selected != null) {
+                        attributeView.setSelectedValue(selected);
+                        break;
+                    }
+                }
             }
+
+            category = category.getParentCategory();
         }
 
         return view;
