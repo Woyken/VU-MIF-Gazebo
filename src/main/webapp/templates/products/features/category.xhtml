@@ -7,18 +7,60 @@
 
 
     <div class="section">
+        <!-- New category -->
         <h:form id="addCategoryForm">
+            <div class="row align-middle">
+
+                <div class="columns small-12 medium-3">
+                    <h5 class="font-bold">Pridėti naują kategoriją į pasirinktąją žemiau</h5>
+                </div>
+
+                <div class="columns small-10 medium-8">
+                    <h:inputText value="#{productCategoryController.newCategory}"
+                                 disabled="#{empty productCategoryController.selectedCategory}"/>
+                </div>
+
+                <!-- [Button] Submit new category -->
+                <div class="columns small-2 medium-1">
+                    <h:commandButton
+                            class="button success"
+                            value="✓"
+                            action="#{productCategoryController.createNewCategory}"
+                            disabled="#{empty productCategoryController.selectedCategory}">
+                        <f:ajax execute="@form" render="@form categoryAttributesForm"/>
+                    </h:commandButton>
+                </div>
+            </div>
+
+            <!-- Creation Error/Success Message -->
+            <div class="row-align-middle text-center">
+                <div class="columns">
+                    <div class="mar-bot-5">
+                        <h:outputText class="alert-text-large"
+                                      value="#{productCategoryController.creationErrorMessage}"/>
+                        <h:outputText rendered="#{productCategoryController.isCreationSuccess}"
+                                      class="success-text-large"
+                                      value="Kategorija sėkmingai pridėta"/>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+        <h:form id="categoryAttributesForm">
             <div class="row align-middle margin-top-3">
                 <div class="columns small-12 medium-3">
-                    <h5 class="font-bold">Tėvinė kategorija</h5>
+                    <h5 class="font-bold">Kategorija</h5>
                 </div>
 
                 <div class="columns small-10 medium-8">
                     <h:selectOneMenu value="#{productCategoryController.selectedCategory}"
                                      converter="omnifaces.SelectItemsConverter"
                                      hideNoSelectionOption="true">
+                        <f:selectItem value="#{null}" itemLabel="Pasirinkite kategoriją:"
+                                      noSelectionOption="true"/>
                         <f:selectItems value="#{productCategoryController.categories}"/>
-                        <f:ajax render="@form"/>
+                        <f:ajax render="@form addCategoryForm"/>
                     </h:selectOneMenu>
                 </div>
 
@@ -31,17 +73,6 @@
                             disabled="#{empty productCategoryController.selectedCategory.name}">
                         <f:ajax render="@form"/>
                     </h:commandButton>
-                </div>
-            </div>
-
-            <div class="row align-middle">
-                <div class="columns small-12 medium-3">
-                    <h5 class="font-bold">Nauja kategorija</h5>
-                </div>
-
-                <div class="columns small-10 medium-8">
-                    <h:inputText value="#{productCategoryController.newCategory.name}"
-                                 disabled="#{empty productCategoryController.selectedCategory}"/>
                 </div>
             </div>
 

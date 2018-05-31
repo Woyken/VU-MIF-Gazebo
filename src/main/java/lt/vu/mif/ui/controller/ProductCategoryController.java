@@ -1,6 +1,5 @@
 package lt.vu.mif.ui.controller;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.faces.context.FacesContext;
@@ -10,12 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
-import lt.vu.mif.ui.view.AttributeValue;
-import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.ui.view.CategoryView;
-import lt.vu.mif.utils.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 
 @Logged
 @Getter
@@ -27,7 +22,7 @@ public class ProductCategoryController {
     @Autowired
     private ICategoryHelper categoryHelper;
 
-    private CategoryView newCategory = new CategoryView();
+    private String newCategory;
     private List<CategoryView> categories;
     private CategoryView selectedCategory;
 
@@ -45,13 +40,12 @@ public class ProductCategoryController {
         }
 
         updateCategories();
-        findRootCategory();
 
-        newCategory.setAttributes(new ArrayList<>());
-        newCategory.getAttributes().add(new AttributeView());
-
-        newCategory.getAttributes().get(0).setValues(new ArrayList<>());
-        newCategory.getAttributes().get(0).getValues().add(new AttributeValue());
+//        newCategory.setAttributes(new ArrayList<>());
+//        newCategory.getAttributes().add(new AttributeView());
+//
+//        newCategory.getAttributes().get(0).setValues(new ArrayList<>());
+//        newCategory.getAttributes().get(0).getValues().add(new AttributeValue());
     }
 
     private void updateCategories() {
@@ -59,13 +53,30 @@ public class ProductCategoryController {
         Collections.sort(categories);
     }
 
-    private void findRootCategory() {
-        for (CategoryView categoryView : categories) {
-            if (categoryView.getName().equals(Constants.ROOT_CATEGORY_NAME)) {
-                selectedCategory = categoryView;
-                break;
+    public void createNewCategory() {
+        eraseAllMessages();
+
+        if (newCategory.isEmpty()) {
+            creationErrorMessage = "Įveskite kategorijos pavadinimą";
+            return;
+        }
+
+        for (CategoryView c : categories) {
+            if (selectedCategory.equals(c.getParentCategory()) && newCategory.equals(c.getName())) {
+                creationErrorMessage = "Tokia kategorija jau egzistuoja";
+                return;
             }
         }
+
+        CategoryView category = new CategoryView();
+        category.setName(newCategory);
+        category.setParentCategory(selectedCategory);
+        categoryHelper.save(category);
+
+        updateCategories();
+
+        newCategory = "";
+        isCreationSuccess = true;
     }
 
     public void deleteCategory() {
@@ -101,31 +112,31 @@ public class ProductCategoryController {
         savingErrorMessage = "";
     }
 
-    public void addNewAttribute() {
-        AttributeView view = new AttributeView();
-        view.setValues(new ArrayList<>());
-        view.getValues().add(new AttributeValue());
-        newCategory.getAttributes().add(view);
-    }
-
-    public void removeNewAttribute(AttributeView view) {
-        if (newCategory.getAttributes().size() != 1) {
-            newCategory.getAttributes().remove(view);
-        }
-    }
-
-    public void addNewAttributeValue(AttributeView view, AttributeValue value) {
-        view.getValues().add(value);
-    }
-
-    public void removeNewAttributeValue(AttributeView view, AttributeValue value) {
-        if (view.getValues().size() != 1) {
-            view.getValues().remove(value);
-        }
-    }
-
-    public void saveNewCategory() {
-        categoryHelper.save(newCategory);
-    }
+//    public void addNewAttribute() {
+//        AttributeView view = new AttributeView();
+//        view.setValues(new ArrayList<>());
+//        view.getValues().add(new AttributeValue());
+//        newCategory.getAttributes().add(view);
+//    }
+//
+//    public void removeNewAttribute(AttributeView view) {
+//        if (newCategory.getAttributes().size() != 1) {
+//            newCategory.getAttributes().remove(view);
+//        }
+//    }
+//
+//    public void addNewAttributeValue(AttributeView view, AttributeValue value) {
+//        view.getValues().add(value);
+//    }
+//
+//    public void removeNewAttributeValue(AttributeView view, AttributeValue value) {
+//        if (view.getValues().size() != 1) {
+//            view.getValues().remove(value);
+//        }
+//    }
+//
+//    public void saveNewCategory() {
+//        categoryHelper.save(newCategory);
+//    }
 
 }
