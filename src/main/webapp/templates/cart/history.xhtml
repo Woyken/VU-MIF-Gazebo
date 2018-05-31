@@ -118,15 +118,13 @@
                 </div>
             </div>
 
-            <div class="row align-right">
-                <h:form rendered="#{userService.getLoggedUser().getRole() != 'ADMIN'}">
-                    <h:commandButton class="button expanded primary"
-                                     value="Pridėti visas prekes prie krepšelio"
-                                     pt:data-open="inform-user-about-adding-to-cart-modal"
-                                     actionListener="#{cartController.addProductsToCart(orderDetailsController.orderView.products)}">
-                        <f:ajax execute="@form" render="@none"/>
-                    </h:commandButton>
-                </h:form>
+            <div class="row">
+                <h:commandButton class="button expanded primary"
+                                 value="Pridėti visas prekes prie krepšelio"
+                                 pt:data-open="inform-user-about-adding-to-cart-modal"
+                                 actionListener="#{cartController.addProductsToCart(orderDetailsController.orderView.products)}">
+                    <f:ajax execute="@form" render="@none"/>
+                </h:commandButton>
             </div>
         </h:panelGroup>
 
