@@ -62,8 +62,10 @@
                         <label for="product-category" class="font-bold">Kategorija:</label>
                     </div>
                     <div class="small-9 columns">
+                        <i><b>
                         <h:outputText id="product-category"
-                                      value="#{productDetailsController.productView.category.name}"/>
+                                      value="#{productDetailsController.productView.category.nameWithParents}"/>
+                        </b></i>
                     </div>
                     <br/>
                     <br/>
