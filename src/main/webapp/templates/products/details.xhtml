@@ -127,6 +127,9 @@
                     <f:attribute name="amount" value="#{amount}"/>
                 </h:inputHidden>
 
+                <f:event type="preValidate"
+                         listener="#{productDetailsController.onBeforeValidatorAddToCart()}"/>
+
                 <!-- Error Message -->
                 <div class="row">
                     <div class="columns">
@@ -138,14 +141,21 @@
 
                 <!-- Add to cart -->
                 <h:commandButton
-                        class="button large hollow expanded primary-inverted js-add-to-cart-details"
+                        class="button large hollow expanded primary-inverted"
                         value="PRIDĖTI Į KREPŠELĮ"
-                        rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}">
+                        rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}"
+                        action="#{productDetailsController.onAddToCart}">
                     <f:actionListener
                             binding="#{cartController.addProductToCart(productDetailsController.productView.id, amount.value)}"/>
                     <f:ajax execute="@form" render="@form"/>
                 </h:commandButton>
 
+                <!--Success message-->
+                <ui:fragment rendered="#{productDetailsController.showSuccessMessage}">
+                    <div class="text-center">
+                        <label class="success-text-large">Pridėta!</label>
+                    </div>
+                </ui:fragment>
             </h:form>
 
             <!-- [Button][Admin] Edit product -->
