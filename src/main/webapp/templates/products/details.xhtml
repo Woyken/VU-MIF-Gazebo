@@ -44,7 +44,7 @@
             <!-- SKU code for ADMIN -->
             <h:form rendered="#{userService.getLoggedUser().getRole() == 'ADMIN'}">
                 <h5 class="font-bold text-center">
-                    SKU -- #{productDetailsController.productView.sku}
+                    #{productDetailsController.productView.sku}
                 </h5>
                 <br/>
             </h:form>
