@@ -36,6 +36,9 @@ public class ProductController implements Serializable {
 
     private String minPrice;
     private String maxPrice;
+
+    private List<CategoryView> attributeCategories = new ArrayList<>();
+
     private ProductSearchView productSearch = new ProductSearchView();
     private Page<ProductView> productsPage;
     private Paging paging = new Paging();
@@ -63,12 +66,24 @@ public class ProductController implements Serializable {
     }
 
     public void searchCategory(TreeNode categoryNode) {
+        makeAttributeCategoryList((CategoryView) categoryNode.getData());
+
         List<CategoryView> categoriesToSearch = new ArrayList<CategoryView>();
         makeCategoryList(categoriesToSearch, categoryNode);
 
         productSearch.setCategories(categoriesToSearch);
 
         searchProducts();
+    }
+
+    private void makeAttributeCategoryList(CategoryView category) {
+        attributeCategories = new ArrayList<>();
+
+        while (category != null) {
+            attributeCategories.add(category);
+
+            category = category.getParentCategory();
+        }
     }
 
     private void makeCategoryList(List<CategoryView> categories, TreeNode current) {

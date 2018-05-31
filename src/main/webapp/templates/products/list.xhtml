@@ -256,47 +256,43 @@
                             </ul>
                         </li> <!-- End of filter by price -->
 
+                        <h:panelGroup id="attributes">
+                            <h:panelGroup
+                                    rendered="#{not empty productController.attributeCategories}">
+                                <li>
+                                    <h4 class="text-center font-bold margin-top-2"> Požymiai </h4>
+                                </li>
 
-                        <!--&lt;!&ndash; Filter by attributes &ndash;&gt;-->
-                        <!--<li class="margin-top-3">-->
-                            <!--<h5 class="text-center font-bold "> Požymiai </h5>-->
-                            <!--<ul class="menu vertical nested is-active">-->
-                                <!--<li>-->
-                                    <!--<input id="attribute-checkbox1" type="checkbox"/>-->
-                                    <!--<label for="attribute-checkbox1">-->
-                                        <!--Atributas 1-->
-                                    <!--</label>-->
-                                <!--</li>-->
+                                <!--Filter by attributes-->
+                                <li class="margin-top-3">
+                                    <ui:repeat value="#{productController.attributeCategories}"
+                                               var="category">
+                                        <ui:repeat value="#{category.attributes}" var="attribute">
+                                            <h5 class="text-center font-bold margin-top-2"> #{attribute.name} </h5>
+                                            <ul class="menu vertical nested is-active">
+                                                <ui:repeat value="#{attribute.values}"
+                                                           var="attributeValue">
+                                                    <li>
+                                                        <h:selectBooleanCheckbox id="attributeValue"
+                                                                                 value="#{attributeValue.isSelected}"/>
+                                                        <h:outputLabel for="attributeValue">
+                                                            #{attributeValue.value}
+                                                        </h:outputLabel>
+                                                    </li>
+                                                </ui:repeat>
+                                            </ul>
+                                        </ui:repeat>
+                                    </ui:repeat>
+                                </li>
 
-                                <!--<li>-->
-                                    <!--<input id="attribute-checkbox2" type="checkbox"/>-->
-                                    <!--<label for="attribute-checkbox2">-->
-                                        <!--Atributas 2-->
-                                    <!--</label>-->
-                                <!--</li>-->
-
-                                <!--<li>-->
-                                    <!--<input id="attribute-checkbox3" type="checkbox"/>-->
-                                    <!--<label for="attribute-checkbox3">-->
-                                        <!--Atributas 3-->
-                                    <!--</label>-->
-                                <!--</li>-->
-
-                                <!--<li>-->
-                                    <!--<input id="attribute-checkbox4" type="checkbox"/>-->
-                                    <!--<label for="attribute-checkbox4">-->
-                                        <!--Atributas 4-->
-                                    <!--</label>-->
-                                <!--</li>-->
-
-                                <!--&lt;!&ndash; [Button] Filter by attributes &ndash;&gt;-->
-                                <!--<li>-->
-                                    <!--<button type="button" class="button expanded margin-top-1">-->
-                                        <!--Filtruoti-->
-                                    <!--</button>-->
-                                <!--</li>-->
-                            <!--</ul>-->
-                        <!--</li> &lt;!&ndash; End of filter by attributes &ndash;&gt;-->
+                                <!-- [Button] Filter by attributes -->
+                                <li>
+                                    <button type="button" class="button expanded margin-top-1">
+                                        Filtruoti
+                                    </button>
+                                </li>
+                            </h:panelGroup>
+                        </h:panelGroup>
 
                     </ul>
                 </div>
