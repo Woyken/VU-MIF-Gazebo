@@ -56,6 +56,7 @@ public class ProductCategoryController {
         Collections.sort(categories);
     }
 
+    //I know it is not really good to instantly save to database, but can't do it differently now
     public void createNewCategory() {
         eraseAllMessages();
 
@@ -74,7 +75,10 @@ public class ProductCategoryController {
         CategoryView category = new CategoryView();
         category.setName(newCategory);
         category.setParentCategory(selectedCategory);
-        categoryHelper.save(category);
+        CategoryView saved = categoryHelper.save(category);
+        categories.add(saved);
+        Collections.sort(categories);
+        selectedCategory = saved;
 
         updateCategories();
 
@@ -134,7 +138,13 @@ public class ProductCategoryController {
     }
 
     public void updateCategory() {
-        categoryHelper.update(selectedCategory);
+        eraseAllMessages();
+
+        for (CategoryView c : categories) {
+            categoryHelper.update(c);
+        }
+
+        isSavingSuccess = true;
     }
 
 }

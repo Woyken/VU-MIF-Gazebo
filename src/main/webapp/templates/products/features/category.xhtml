@@ -172,7 +172,6 @@
 
             </ui:repeat>
 
-
             <!-- [Button] Update category -->
             <div class="row align-middle section">
                 <h:commandButton
@@ -181,6 +180,19 @@
                         action="#{productCategoryController.updateCategory}">
                     <f:ajax render="@form" execute="@form"/>
                 </h:commandButton>
+            </div>
+
+            <!-- Saving Error/Success Message -->
+            <div class="row-align-middle text-center">
+                <div class="columns">
+                    <div class="mar-bot-5">
+                        <h:outputText class="alert-text-large"
+                                      value="#{productCategoryController.savingErrorMessage}"/>
+                        <h:outputText rendered="#{productCategoryController.isSavingSuccess}"
+                                      class="success-text-large"
+                                      value="Kategorijos sėkmingai išsaugotos"/>
+                    </div>
+                </div>
             </div>
 
         </h:form>

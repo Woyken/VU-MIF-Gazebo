@@ -7,14 +7,11 @@ import static javax.persistence.FetchType.LAZY;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,7 +35,7 @@ public class Category {
     @JoinColumn(name = "PARENT_CATEGORY_ID")
     private Category parentCategory;
 
-    @OneToMany(cascade = ALL, fetch = LAZY, mappedBy = "category")
+    @OneToMany(cascade = ALL, fetch = LAZY, mappedBy = "category", orphanRemoval = true)
     private List<CategoryAttribute> attributes = new ArrayList<>();
 
     @OneToMany(cascade = MERGE, fetch = LAZY, mappedBy = "category")

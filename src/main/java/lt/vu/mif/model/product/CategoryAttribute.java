@@ -1,6 +1,7 @@
 package lt.vu.mif.model.product;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.MERGE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class CategoryAttribute {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @ManyToOne(cascade = ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
