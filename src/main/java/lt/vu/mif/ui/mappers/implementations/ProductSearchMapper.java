@@ -35,7 +35,6 @@ public class ProductSearchMapper implements IMapper<ProductSearch, ProductSearch
         entity.setCategories(categoryMapper.toEntities(view.getCategories()));
 
         //Should be in a mapper, but gotta go fast =]]]]
-        entity.setAttributeValues(new ArrayList<>());
         if (view.getAttributeValues() != null) {
             for (AttributeValue v : view.getAttributeValues()) {
                 CategoryAttributeValue attributeValue = attributeValueRepository
@@ -44,7 +43,7 @@ public class ProductSearchMapper implements IMapper<ProductSearch, ProductSearch
                 ProductAttributeValue productAttributeValue = new ProductAttributeValue();
                 productAttributeValue.setCategoryAttributeValue(attributeValue);
 
-                entity.getAttributeValues().add(productAttributeValue);
+                entity.getSelectedAttributeValues().add(v.getId());
             }
         }
 
