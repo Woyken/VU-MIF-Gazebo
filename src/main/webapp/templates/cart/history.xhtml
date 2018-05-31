@@ -4,7 +4,7 @@
         xmlns:p="http://primefaces.org/ui"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
-        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <div id="cart-history-window">
 
@@ -116,6 +116,15 @@
                     <p:outputLabel styleClass="text-right larger-text"
                                    value="Krepšelio vertė: #{orderDetailsController.orderView.totalSum} €"/>
                 </div>
+            </div>
+
+            <div class="row">
+                <h:commandButton class="button expanded primary"
+                                 value="Pridėti visas prekes prie krepšelio"
+                                 pt:data-open="inform-user-about-adding-to-cart-modal"
+                                 actionListener="#{cartController.addProductsToCart(orderDetailsController.orderView.products)}">
+                    <f:ajax execute="@form" render="@none"/>
+                </h:commandButton>
             </div>
         </h:panelGroup>
 
