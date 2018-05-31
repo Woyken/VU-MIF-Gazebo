@@ -67,5 +67,5 @@ public class Product {
     private Integer version;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = ALL, mappedBy = "product", orphanRemoval = true)
-    private List<ProductAttributeValue> attributeValues;
+    private List<ProductAttributeValue> attributeValues = new ArrayList<>();
 }
