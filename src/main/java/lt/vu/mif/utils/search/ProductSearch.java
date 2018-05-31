@@ -1,11 +1,11 @@
 package lt.vu.mif.utils.search;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.model.product.Category;
-import lt.vu.mif.model.product.ProductAttributeValue;
 
 @Getter
 @Setter
@@ -14,7 +14,7 @@ public class ProductSearch {
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
     private List<Category> categories;
-    private List<ProductAttributeValue> attributeValues;
+    private List<Long> selectedAttributeValues = new ArrayList<>();
     private boolean includeDeleted = false;
     private ProductSortEnum sortBy = ProductSortEnum.CREATE_DATE;
 
@@ -23,7 +23,7 @@ public class ProductSearch {
         minPrice = null;
         maxPrice = null;
         categories = null;
-        attributeValues = null;
+        selectedAttributeValues = new ArrayList<>();
         includeDeleted = false;
         sortBy = ProductSortEnum.CREATE_DATE;
     }
