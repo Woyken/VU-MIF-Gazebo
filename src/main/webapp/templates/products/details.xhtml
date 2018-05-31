@@ -143,7 +143,7 @@
                         rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}">
                     <f:actionListener
                             binding="#{cartController.addProductToCart(productDetailsController.productView.id, amount.value)}"/>
-                    <f:ajax execute="@form" render="@form"/>
+                    <f:ajax execute="@form" render="@form" resetValues="true"/>
                 </h:commandButton>
 
             </h:form>
