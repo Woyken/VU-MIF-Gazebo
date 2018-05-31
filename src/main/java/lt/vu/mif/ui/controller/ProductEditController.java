@@ -109,8 +109,7 @@ public class ProductEditController {
         }
 
         try {
-//            productView.getCategory().getAttributes().get(0).setSelectedValue(categories.get(0).getAttributes().get(0).getSelectedValue());
-            productHelper.update(productView);
+            productView = productHelper.update(productView);
             productView.setVersion(productHelper.getProductVersion(productView.getId()));
             showSuccessMessage = true;
             clearData();

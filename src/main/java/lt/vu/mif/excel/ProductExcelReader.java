@@ -242,7 +242,7 @@ public class ProductExcelReader extends ProductExcelComponent {
             return result;
         }
 
-        if (productRepository.checkIfProductExists(skuCode)) {
+        if (productRepository.getIdBySku(skuCode) != null) {
             result.setMessage("Produktas su SKU kodu: " + skuCode  + " jau egzistuoja sistemoje. Eilutė " + rowNo);
             return result;
         }

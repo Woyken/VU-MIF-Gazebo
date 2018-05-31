@@ -33,6 +33,7 @@ public class EditProductValidation extends DiscountValidation implements Validat
             throw ex;
         }
 
+        Long id = (Long) uiComponent.getAttributes().get("productId");
         String sku = (String) ((UIInput) uiComponent.getAttributes().get("sku"))
             .getValue();
         String title = (String) ((UIInput) uiComponent.getAttributes()
@@ -66,10 +67,13 @@ public class EditProductValidation extends DiscountValidation implements Validat
         }
 
 
-//        if (productRepository.checkIfProductExists(sku)) {
-//            throw new ValidatorException(
-//                    new FacesMessage("\Nurodytas SKU kodas jau egzistuoja sisemoje. Pateikite unikalų SKU kodą"));
-//        }
+        Long existingId = productRepository.getIdBySku(sku);
+
+        if (existingId != null && !existingId.equals(id)) {
+            throw new ValidatorException(
+                new FacesMessage(
+                    "Nurodytas SKU kodas jau egzistuoja sistemoje. Pateikite unikalų SKU kodą"));
+        }
 
         List<CategoryView> categories = (List<CategoryView>) uiComponent.getAttributes()
             .get("attributeCategories");
@@ -82,6 +86,5 @@ public class EditProductValidation extends DiscountValidation implements Validat
                 }
             }
         }
-
     }
 }

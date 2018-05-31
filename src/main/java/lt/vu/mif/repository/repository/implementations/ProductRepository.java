@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -53,15 +54,19 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     }
 
     @Override
-    public boolean checkIfProductExists(String skuCode) {
+    public Long getIdBySku(String skuCode) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<Product> root = criteria.from(Product.class);
 
         criteria.where(builder.equal(root.get(Product_.sku), skuCode));
-        criteria.select(builder.count(root.get(Product_.id)));
+        criteria.select(root.get(Product_.id));
 
-        return entityManager.createQuery(criteria).getSingleResult() > 0;
+        try {
+            return entityManager.createQuery(criteria).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Autowired
@@ -71,8 +76,8 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     }
 
     @Override
-    public void update(Product entity) {
-        entityManager.merge(entity);
+    public Product update(Product entity) {
+        return entityManager.merge(entity);
     }
 
     public void updateAll(List<Product> products) {
