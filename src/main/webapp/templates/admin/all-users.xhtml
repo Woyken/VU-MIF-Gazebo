@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- USER INFO TITLE -->
+    <div class="row column text-center section">
+        <h1 class="section-title">Visi naudotojai</h1>
+    </div> <!-- END OF USER INFO TITLE -->
+
+    <div id="all-users-window">
+        <div class="row section">
+            <h:panelGroup id="allUsersPanel" style="display:contents">
+                <ui:repeat value="#{usersController.users}" var="user">
+                    <div class="columns medium-3 small-6 admin-user-box">
+                        <a href="../../admin-details-user.xhtml?userId=#{user.id}">
+                            <p class="user-email-box">
+                                <b>
+                                    #{user.email}
+                                </b>
+                            </p>
+                            <p>
+                                Užsakymai: #{user.ordersCount}
+                                <br/>
+                                Vidutinė suma #{user.averagePrice} €
+                                <br/>
+                                Bendra suma:  #{user.ordersSum} €
+                            </p>
+                        </a>
+                        <h:form id="my-form">
+                            <div class="small-8 small-offset-2 medium-12 medium-offset-0">
+                                <h:commandButton value="#{user.blocked ? 'Atblokuoti' : 'Blokuoti'}" styleClass="button expanded #{user.blocked ? 'green' : 'orange'}" disabled="#{user.role == 'ADMIN' ? 'true' : 'false'}">
+                                    <f:ajax execute="@form" listener="#{usersController.blockUser(user)}" render="allUsersPanel"/>
+                                </h:commandButton>
+                            </div>
+                        </h:form>
+                    </div>
+                </ui:repeat>
+            </h:panelGroup>
+        </div>
+    </div>
+
+</ui:composition>
+</html>

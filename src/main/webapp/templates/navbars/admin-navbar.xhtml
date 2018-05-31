@@ -33,6 +33,16 @@
                         data-responsive-menu="accordion medium-dropdown"
                         role="menubar">
 
+                        <!-- Order list-->
+                        <li role="menuitem">
+                            <h:outputLink value="../../admin-all-orders.xhtml">Užsakymai</h:outputLink>
+                        </li>
+
+                        <!-- User list-->
+                        <li role="menuitem">
+                            <h:outputLink value="../../admin-all-users.xhtml">Pirkėjai</h:outputLink>
+                        </li>
+
                         <!-- Product settings dropdown -->
                         <li class="has-submenu is-dropdown-submenu-parent is-right-arrow opens-right" role="menuitem">
                             <a>Prekės</a>
@@ -40,23 +50,45 @@
 
                                 <!-- Add product -->
                                 <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
-                                    <a href="../../admin-add-product.xhtml">
+                                    <a href="../../admin-edit-product.xhtml">
                                         <i class="fi-lock" />
                                         Pridėti prekę</a>
                                 </li>
 
                                 <!-- Import products -->
                                 <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
-                                    <a href="#">
-                                        <i class="fi-mail" />
+                                    <a href="../../admin-import.xhtml">
+                                        <i class="fi-download" />
                                         Importuoti prekes</a>
                                 </li>
 
-                                <!-- Edit product -->
                                 <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
-                                    <a href="../../admin-edit-product.xhtml">
-                                        <i class="fi-wrench" />
-                                        Redaguoti prekę</a>
+                                    <a href="../../admin-export.xhtml">
+                                        <i class="fi-upload" />
+                                        Eksportuoti prekes</a>
+                                </li>
+
+                                <!-- All products -->
+                                <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
+                                    <a href="../../admin-all-products.xhtml">
+                                        <i class="fi-list" />
+                                        Visos prekės</a>
+                                </li>
+
+                                <!-- Add discount -->
+                                <li role="menuitem"
+                                    class="is-submenu-item is-dropdown-submenu-item">
+                                    <a href="../../admin-product-discount.xhtml">
+                                        <i class="fi-megaphone"/>
+                                        Pridėti nuolaidą</a>
+                                </li>
+
+                                <!-- Add category -->
+                                <li role="menuitem"
+                                    class="is-submenu-item is-dropdown-submenu-item">
+                                    <a href="../../admin-product-category.xhtml">
+                                        <i class="fi-pricetag-multiple"/>
+                                        Pridėti kategoriją</a>
                                 </li>
                             </ul>
                         </li>

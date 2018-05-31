@@ -1,0 +1,126 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <div id="details-user-window">
+
+        <!-- USER INFO TITLE -->
+        <div class="row column text-center section">
+            <h1 class="section-title">Pirkėjo Informacija</h1>
+        </div> <!-- END OF USER INFO TITLE -->
+
+        <div class="row section" id="info">
+            <div class="columns small-6">
+                <p class="user-email-box">
+                    <b>
+                        #{userDetailsController.user.email}
+                    </b>
+                </p>
+                <!--    Total number of orders
+                        Average price or cart
+                        Total price of all carts     -->
+                <p>
+                    Užsakymai: #{userDetailsController.user.ordersCount}
+                    <br/>
+                    Vidutinė suma #{userDetailsController.user.averagePrice} €
+                    <br/>
+                    Bendra suma:  #{userDetailsController.user.ordersSum} €
+                </p>
+                <h:form id="my-form">
+                    <div class="small-8 medium-5 large-4">
+                        <h:commandButton class="button expanded"
+                                         value="#{userDetailsController.user.blocked ? 'Atblokuoti' : 'Blokuoti'}"
+                                         styleClass="button expanded #{userDetailsController.user.blocked ? 'green' : 'orange'}"
+                                         disabled="#{userDetailsController.user.role == 'ADMIN' ? 'true' : 'false'}"
+                                         action="#{userDetailsController.blockUser}">
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+
+        <h:panelGroup rendered="#{!empty ordersController.userOrders}">
+
+            <!-- USER ORDERS LIST TITLE -->
+            <div class="row column text-center section">
+                <h3 class="section-title">Pirkėjo užsakymai</h3>
+            </div> <!-- END OF USER ORDERS LIST TITLE -->
+
+            <!-- ORDERS HISTORY -->
+            <div id="shopping-list-header" class="row section hide-for-small-only">
+                <div class="columns small-2"><h5>Užsakymo Nr.</h5></div>
+                <div class="columns small-3"><h5>Data</h5></div>
+                <div class="columns small-3"><h5>Užsakymo būsena</h5></div>
+                <div class="columns small-2"><h5>Krepšelio kaina</h5></div>
+            </div>
+
+            <div id="shopping-list-body" class="row align-middle">
+                <ui:repeat value="#{ordersController.userOrders}" var="order">
+                    <!-- Order number -->
+                    <div class="small-12 medium-2 columns">
+                        <div class="row align-middle align-top">
+                            <p:outputLabel styleClass="large-text" value="#{order.id}"/>
+                        </div>
+                    </div>
+
+                    <!-- Date bought. -->
+                    <div class="medium-3 columns hide-for-small-only">
+                        <div class="row column">
+                            <p:outputLabel styleClass="large-text" value="#{order.creationDate}"/>
+                        </div>
+                    </div>
+                    <!-- [Mobile] Date bought -->
+                    <div class="small-12 columns hide-for-medium">
+                        <div class="row column">
+                            <p:outputLabel styleClass="large-text" value="#{order.creationDate}"/>
+                        </div>
+                    </div>
+
+                    <!-- Product quantity. -->
+                    <div class="small-12 medium-3 columns">
+                        <p:outputLabel styleClass="large-text" value="#{order.status.name}"/>
+                    </div>
+
+                    <!-- Price of the product. -->
+                    <div class="small-12 medium-2 columns">
+                        <p:outputLabel styleClass="shopping-cart-price large-text"
+                                       value="#{order.totalSum} €"/>
+                    </div>
+
+                    <!-- [Button] Add to current cart -->
+                    <div class="small-2 columns hide-for-small-only">
+                        <a href="../../admin-details-order.xhtml?orderId=#{order.id}"
+                           class="button expanded primary">
+                            Peržiūrėti
+                        </a>
+                    </div>
+                    <!-- [Mobile][Button] Add to current cart -->
+                    <div class="small-12 columns hide-for-medium">
+                        <a href="../../cart-history.xhtml?orderId=#{order.id}"
+                           class="button expanded primary">
+                            Peržiūrėti
+                        </a>
+                    </div>
+                </ui:repeat>
+            </div> <!-- END OF SHOPPING HISTORY -->
+
+            <br/><br/>
+
+        </h:panelGroup>
+
+        <h:panelGroup
+                rendered="#{empty ordersController.userOrders and userDetailsController.user.role != 'ADMIN'}">
+            <p:outputLabel styleClass="text-center" value="Šis pirkėjas dar nei karto neapsipirko"/>
+        </h:panelGroup>
+
+    </div> <!-- END OF WINDOW -->
+
+</ui:composition>
+</html>

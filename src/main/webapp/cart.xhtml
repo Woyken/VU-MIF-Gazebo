@@ -9,7 +9,7 @@
 </f:metadata>
 
 <h:head>
-    <title>Cart</title>
+    <title>Prekių krepšelis</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -19,11 +19,13 @@
 </h:head>
 <h:body>
 
-    <!-- NAVIGATION BAR -->
-    <ui:include src="./templates/navbars/_container.xhtml" />
+    <div class="body-wrapper">
+        <!-- NAVIGATION BAR -->
+        <ui:include src="./templates/navbars/_container.xhtml" />
 
-    <!-- CART -->
-    <ui:include src="./templates/cart/_container.xhtml" />
+        <!-- CART -->
+        <ui:include src="./templates/cart/cart.xhtml"/>
+    </div>
 
     <!-- FOOTER -->
     <ui:include src="./templates/footers/footer.xhtml" />

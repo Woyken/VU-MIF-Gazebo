@@ -6,14 +6,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:o="http://omnifaces.org/ui">
+>
 
 <f:metadata>
     <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
 </f:metadata>
 
 <h:head>
-    <title>Home page</title>
+    <title>Internetinė parduotuvė Gazebo.lt</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -41,7 +41,7 @@
                         data-closing-time="200">
                         <li role="menuitem">
                             <a id="cart-button" href="cart.xhtml">
-                                <i class="fi-shopping-cart"></i>
+                                <i class="fi-shopping-cart"/>
                                 Mano krepšelis
                             </a>
                         </li>
@@ -49,12 +49,12 @@
                             <a id="account-settings" class="primary" href="#">Paskyra</a>
                             <ul class="menu">
                                 <li>
-                                    <i class="fi-lock"></i>
+                                    <i class="fi-lock"/>
                                     <a href="#" data-open="change-password-modal">Keisti slaptažodį</a>
                                 </li>
 
                                 <li>
-                                    <i class="fi-mail"></i>
+                                    <i class="fi-mail"/>
                                     <a href="#" data-open="change-email-modal">Keisti el. paštą</a>
                                 </li>
                             </ul>
@@ -130,7 +130,7 @@
                         <label class="input-label">
                             <span class="alert-star">*</span>
                             Pakartokite naująjį slaptažodį
-                            <span><i class="fi-lock"></i></span>
+                            <span><i class="fi-lock"/></span>
                             <input type="password"/>
                         </label>
                     </div>
@@ -142,7 +142,7 @@
                         <label class="input-label">
                             <span class="alert-star">*</span>
                             Dabartinis slaptažodis
-                            <i class="fi-unlock"></i>
+                            <i class="fi-unlock"/>
                             <input class="no-mar" type="password"/>
                         </label>
                         <!-- Required fields. -->
@@ -185,7 +185,7 @@
                     <div class="columns">
                         <label class="input-label">
                             Dabartinis adresas
-                            <i class="fi-torso"></i>
+                            <i class="fi-torso"/>
                             <input type="text" placeholder="gazebo@gmail.com"
                                    value="gazebo@gmail.com" disabled=""/>
                         </label>
@@ -198,7 +198,7 @@
                         <label class="input-label">
                             <span class="alert-star">*</span>
                             Naujasis adresas
-                            <span><i class="fi-mail"></i></span>
+                            <span><i class="fi-mail"/></span>
                             <input type="text"/>
                         </label>
                     </div>
@@ -210,7 +210,7 @@
                         <label class="input-label">
                             <span class="alert-star">*</span>
                             Pakartokite naująjį adresą
-                            <span><i class="fi-mail"></i></span>
+                            <span><i class="fi-mail"/></span>
                             <input type="text"/>
                         </label>
                     </div>
@@ -222,7 +222,7 @@
                         <label class="input-label">
                             <span class="alert-star">*</span>
                             Dabartinis slaptažodis
-                            <span><i class="fi-lock"></i></span>
+                            <span><i class="fi-lock"/></span>
                             <input class="no-mar" type="text"/>
                         </label>
                         <!-- Required fields. -->

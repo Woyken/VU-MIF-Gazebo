@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns:p="http://java.sun.com/jsf/html">
+<html>
 
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
@@ -9,7 +9,7 @@
         xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <f:metadata>
-        <f:event type="preRenderView" listener="#{emailChangeController.onPageLoad}"/>
+        <f:event type="preRenderView" listener="#{userBlockedController.onPageLoad}"/>
     </f:metadata>
 
     <!-- NAVIGATION BAR -->
@@ -55,10 +55,16 @@
                             <a>Paskyra</a>
                             <ul class="menu vertical" role="menu" data-submenu="" >
 
+                                <!-- View account information -->
+                                <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
+                                    <a href="../../user-information.xhtml" >
+                                        <i class="fi-info"/>
+                                        Mano informacija</a>
+                                </li>
+
                                 <!-- Change password -->
                                 <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
-                                    <a href="#"
-                                       data-open="change-password-modal">
+                                    <a href="#" data-open="change-password-modal">
                                         <i class="fi-lock"/>
                                         Keisti slaptažodį</a>
                                 </li>
@@ -69,6 +75,7 @@
                                         <i class="fi-mail"/>
                                         Keisti el. paštą</a>
                                 </li>
+
                             </ul>
                         </li>
 
@@ -94,6 +101,20 @@
                     <h4 class="form-title text-center">
                         Slaptažodžio keitimas
                     </h4>
+                    <br/>
+
+                    <!-- Current password. -->
+                    <div class="row">
+                        <div class="columns">
+                            <label class="input-label">
+                                <span class="alert-star">*</span>
+                                Dabartinis slaptažodis
+                                <i class="fi-unlock"/>
+                                <h:inputSecret class="no-mar" binding="#{oldPassword}"/>
+                            </label>
+                        </div>
+                    </div>
+
                     <br/>
 
                     <!-- New password. -->
@@ -129,18 +150,6 @@
                                 <span><i class="fi-lock"/></span>
                                 <h:inputSecret binding="#{newPasswordRepeat}"/>
                             </label>
-                        </div>
-                    </div>
-
-                    <!-- Current password. -->
-                    <div class="row">
-                        <div class="columns">
-                            <label class="input-label">
-                                <span class="alert-star">*</span>
-                                Dabartinis slaptažodis
-                                <i class="fi-unlock"/>
-                                <h:inputSecret class="no-mar" binding="#{oldPassword}"/>
-                            </label>
                             <!-- Required fields. -->
                             <div class="mar-bot-5">
                                 <span class="alert-star">*</span>
@@ -173,7 +182,9 @@
                             <h:commandButton class="button success expanded" value="Keisti slaptažodį" action="#{passwordChangeController.changePassword}" update="passwordSuccessMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="passwordSuccessMessage"/>
+                            <h:outputLabel value="#{passwordChangeController.successMessage}"
+                                           class="success-text"
+                                           id="passwordSuccessMessage"/>
                         </div>
                     </div>
                 </div>
@@ -204,7 +215,8 @@
                             <label class="input-label">
                                 Dabartinis adresas
                                 <i class="fi-torso"/>
-                                <h:inputText value="#{emailChangeController.loggedUserEmail}" disabled="true"/>
+                                <h:inputText value="#{userService.getLoggedUserEmail()}"
+                                             disabled="true"/>
                             </label>
                         </div>
                     </div>
@@ -270,10 +282,11 @@
                     <!-- Submit. -->
                     <div class="row">
                         <div class="columns">
-                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.updateUser}" update="emailSuccessMessage">
+                            <h:commandButton class="button success expanded" value="Keisti el. pašto adresą" action="#{emailChangeController.changeEmail}" update="emailSuccessMessage emailErrorMessage">
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>
-                            <h:outputLabel value="#{passwordChangeController.successMessage}" id="emailSuccessMessage"/>
+                            <h:outputLabel class="success-text" value="#{emailChangeController.successMessage}" id="emailSuccessMessage" rendered="#{not empty emailChangeController.successMessage}"/>
+                            <h:outputLabel class="alert-text" value="#{emailChangeController.errorMessage}" id="emailErrorMessage" rendered="#{not empty emailChangeController.errorMessage}"/>
                         </div>
                     </div>
                 </h:form>

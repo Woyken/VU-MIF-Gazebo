@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://java.sun.com/jsf/html">
+>
 
 <h:head>
-    <title>Home</title>
+    <title>Registruotis</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -16,88 +15,13 @@
 </h:head>
 <h:body>
 
-    <!-- REGISTRATION FORM -->
-    <div id="registration-window">
+    <div class="body-wrapper">
+        <ui:include src="./templates/navbars/_container.xhtml"/>
+        <ui:include src="./templates/auth/register.xhtml"/>
+    </div>
 
-        <div class="row section">
-            <div class="columns small-10 small-offset-1 medium-6 medium-offset-3 large-4 large-offset-4">
-                <h4 class="form-title text-center">
-                    Naujos paskyros kūrimas
-                </h4>
-                <br />
-                <h:form>
+    <ui:include src="./templates/footers/footer.xhtml"/>
 
-                    <!--email-->
-                    <div class="row">
-                        <div class="columns">
-                            <label class="input-label">El. paštas
-                                <i class="fi-torso" />
-                                <p:inputText binding="#{email}" value="#{userRegistrationController.email}"/>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!--password-->
-                    <div class="row align-middle">
-                        <div class="columns">
-                            <label class="input-label">Slaptažodis
-                                <span><i class="fi-lock" /></span>
-                                <p:inputSecret binding="#{password}" value="#{userRegistrationController.password}"/>
-                            </label>
-                        </div>
-                        <div class="columns shrink">
-                        <span
-                                data-tooltip=""
-                                data-allow-html="true"
-                                class="has-tip right"
-                                title="- Bent 8 simbolių ilgio. &lt;/br/&gt;
-                                   - Bent viena didžioji raidė. &lt;/br/&gt;
-                                   - Bent viena mažoji raidė. &lt;/br/&gt;
-                                   - Bent vienas simbolis, kuris nebūtų raidė.">
-                                <i class="fi-info" />
-                        </span>
-                        </div>
-                    </div>
-
-                    <!--repeat password-->
-                    <div class="row">
-                        <div class="columns">
-                            <label class="input-label">Pakartokite slaptažodį
-                                <span><i class="fi-lock" /></span>
-                                <p:inputSecret binding="#{passwordRepeat}" value="#{userRegistrationController.passwordRepeat}"/>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- For validation -->
-                    <h:inputHidden id="validationInput" value="true">
-                        <f:validator binding="#{userRegistrationValidation}"/>
-                        <f:attribute name="email" value="#{email}"/>
-                        <f:attribute name="password" value="#{password}"/>
-                        <f:attribute name="passwordRepeat" value="#{passwordRepeat}"/>
-                    </h:inputHidden>
-
-                    <!-- Error Message -->
-                    <div class="row">
-                        <div class="columns">
-                            <div class="mar-bot-5">
-                                <h:message class="alert-text" for="validationInput"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--button-->
-                    <div class="row">
-                        <div class="columns">
-                            <p:commandButton class="button success expanded" action="#{userRegistrationController.saveUser}" value="REGISTRUOTIS" update="message"/>
-                            <p:outputLabel value="#{userRegistrationController.message}" id="message"/>
-                        </div>
-                    </div>
-                </h:form>
-            </div>
-        </div>
-
-    </div> <!-- END OF REGISTRATION FORM -->
 
     <h:outputScript name="js/vendor/jquery-3.3.1.min.js"/>
     <h:outputScript name="js/vendor/foundation.js"/>

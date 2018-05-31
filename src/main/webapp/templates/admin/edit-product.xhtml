@@ -1,18 +1,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
 >
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 >
 
     <div id="add-product-window">
-        <h:form>
+        <h:form id="productEditForm" enctype="multipart/form-data">
+
             <!-- PAGE TITLE -->
             <div class="row column text-center section">
-                <h1 class="section-title">Redaguoti prekę</h1>
+                <h1 class="section-title">#{productEditController.productFound ? 'Redaguoti prekę' : 'Pridėti prekę'}</h1>
             </div> <!-- END OF PAGE TITLE -->
 
 
@@ -22,36 +25,152 @@
                 <!-- SKU code -->
                 <div class="row align-middle">
                     <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">SKU</h5>
+                        <h5 class="font-bold">
+                            <span class="alert-star">*</span>
+                            SKU
+                        </h5>
                     </div>
                     <div class="columns medium-9 small-12">
-                        <h:inputText value="#{productEditController.productView.sku}"/>
+                        <h:inputText value="#{productEditController.productView.sku}"
+                                     binding="#{sku}"/>
                     </div>
                 </div>
 
-                <!-- Name -->
+                <!-- Title -->
                 <div class="row align-middle">
                     <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">Pavadinimas</h5>
+                        <h5 class="font-bold">
+                            <span class="alert-star">*</span>
+                            Pavadinimas
+                        </h5>
                     </div>
                     <div class="columns medium-9 small-12">
-                        <h:inputText value="#{productEditController.productView.title}"/>
+                        <h:inputText value="#{productEditController.productView.title}"
+                                     binding="#{title}"/>
                     </div>
                 </div>
 
                 <!-- Price -->
                 <div class="row align-middle">
                     <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">Kaina</h5>
+                        <h5 class="font-bold">
+                            <span class="alert-star">*</span>
+                            Kaina
+                        </h5>
                     </div>
                     <div class="columns medium-9 small-12">
-                        <h:inputText type="number"
-                                     value="#{productEditController.productView.price}"/>
+                        <h:inputText pt:type="number" pt:min="0"
+                                     value="#{productEditController.productView.price}"
+                                     binding="#{price}"/>
                     </div>
                 </div>
 
-                <!-- Description -->
+                <!-- [Checkbox] Discount -->
                 <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Pritaikyti nuolaidą</h5>
+                    </div>
+
+                    <div class="columns medium-9 small-12">
+                        <h:selectBooleanCheckbox value="#{productEditController.discount}">
+                            <f:ajax
+                                    listener="#{productEditController.check(!productEditController.discount)}"
+                                    render="discountsWrapper"/>
+                        </h:selectBooleanCheckbox>
+                    </div>
+                </div>
+
+                <h:panelGroup id="discountsWrapper">
+                    <h:panelGroup id="discounts" rendered="#{productEditController.discount}">
+
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
+                            </div>
+
+                            <div class="columns medium-9 small-12">
+                                <h:inputText
+                                        pt:type="number"
+                                        pt:min="0"
+                                        pt:placeholder="49.99"
+                                        value="#{productEditController.discountView.absoluteDiscount}"
+                                        binding="#{discountPrice}"/>
+                            </div>
+                        </div>
+
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Nuolaida (procentais)</h5>
+                            </div>
+
+                            <div class="columns medium-9 small-12">
+                                <h:inputText
+                                        id="percentInput"
+                                        pt:placeholder="50"
+                                        pt:type="number"
+                                        value="#{productEditController.discountView.percentageDiscount}"
+                                        binding="#{discountPercentage}">
+                                    <f:convertNumber integerOnly="true" type="number"/>
+                                    <f:validateLongRange minimum="0" maximum="100"/>
+                                    <p:ajax event="change" update="percentInput"/>
+                                </h:inputText>
+                            </div>
+                        </div>
+
+                        <!-- Sale date -->
+                        <div class="row align-middle">
+
+                            <!-- The sale starts on -->
+                            <div class="columns medium-3 medium-offset-2 small-12">
+                                <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
+                                <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
+                            </div>
+
+                            <div class="columns medium-2 small-12">
+                                <h:inputText pt:type="date"
+                                             value="#{productEditController.discountView.startDate}"
+                                             binding="#{startDate}"/>
+                                <h:inputText value="#{productEditController.discountView.startTime}"
+                                             binding="#{startTime}"
+                                             pt:placeholder="08:00"/>
+                            </div>
+
+                            <!-- The sale ends on -->
+                            <div class="columns medium-2 medium-offset-1 small-12">
+                                <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
+                                <h5 class="font-bold hide-for-medium">Galioja iki</h5>
+                            </div>
+
+                            <div class="columns medium-2 small-12">
+                                <h:inputText pt:type="date"
+                                             value="#{productEditController.discountView.endDate}"
+                                             binding="#{endDate}"/>
+                                <h:inputText value="#{productEditController.discountView.endTime}"
+                                             binding="#{endTime}"
+                                             pt:placeholder="12:30"/>
+                            </div>
+
+                        </div> <!-- End of Sale date -->
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!-- Category -->
+                <div class="row align-middle">
+
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Kategorija</h5>
+                    </div>
+
+                    <div class="columns medium-9 small-12">
+                        <h:selectOneMenu value="#{productEditController.productView.category}"
+                                         converter="omnifaces.SelectItemsConverter" >
+                            <f:selectItems value="#{productEditController.categories}"/>
+                        </h:selectOneMenu>
+                    </div>
+                </div> <!-- End of Category -->
+
+                <!-- Description -->
+                <div class="row ">
                     <div class="columns medium-3 small-12">
                         <h5 class="font-bold">Aprašymas</h5>
                     </div>
@@ -62,24 +181,283 @@
                 </div>
 
                 <!-- Images -->
-                <!--<div class="row align-middle">-->
-                <!--<div class="columns medium-3 small-12">-->
-                <!--<h5 class="font-bold">Nuotrauka</h5>-->
-                <!--</div>-->
-                <!--<div class="columns medium-9 small-12">-->
-                <!--<input type="file" accept="image/*"/>-->
-                <!--</div>-->
-                <!--</div>-->
+                <h:panelGroup id="images">
+                    <div class="row">
+                        <div class="columns medium-3 small-12">
+                            <h5 class="font-bold">Nuotrauka(-os)</h5>
+                        </div>
 
-                <div class="row section">
-                    <div class="columns">
-                        <p:commandLink
-                                class="button orange expanded"
-                                value="Išsaugoti pakeitimus"
-                                action="#{productEditController.saveChanges}"
-                        />
+                        <!-- Old images (from DB) -->
+                        <div class="columns small-12 medium-9">
+                            <div class="row">
+                                <ui:repeat value="#{productEditController.productView.images}"
+                                           var="image">
+                                    <div class="columns small-12 medium-3">
+                                        <div class="box-for-buttons-on-image">
+
+                                            <!-- Display the image itself -->
+                                            <p:graphicImage value="#{imageStreamer.image}"
+                                                            class="thumbnail">
+                                                <f:param name="id" value="#{image.id}"/>
+                                            </p:graphicImage>
+
+                                            <!-- [Button] Remove old image -->
+                                            <h:commandLink class="button red" immediate="true">
+                                                <f:ajax render="productEditForm:images"
+                                                        listener="#{productEditController.removeImage(image)}"
+                                                        immediate="true"/>
+                                                <i class="fi-x"/>
+                                            </h:commandLink>
+
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+
+                                <!-- New images (from stream) -->
+                                <ui:repeat value="#{productEditController.newImages}" var="image">
+                                    <div class="columns small-12 medium-3">
+                                        <div class="box-for-buttons-on-image">
+
+                                            <!-- Display the image itself -->
+                                            <p:graphicImage
+                                                    value="#{imageInMemoryStreamer.image}"
+                                                    class="thumbnail">
+                                                <f:param name="id" value="#{image.id}"/>
+                                            </p:graphicImage>
+
+                                            <!-- [Button] Remove new image -->
+                                            <h:commandLink class="button red" immediate="true">
+                                                <f:ajax render="productEditForm:images"
+                                                        listener="#{productEditController.removeImage(image)}"
+                                                        immediate="true"/>
+                                                <i class="fi-x"/>
+                                            </h:commandLink>
+
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+
+                                <!-- Add new image -->
+                                <div class="columns medium-3 small-9">
+                                    Pridėti prekės nuotrauką
+                                    <h:inputFile value="#{productEditController.uploadedFile}"
+                                                 mode="simple" skinSimple="true"
+                                                 styleClass="button hollow">
+                                        <f:ajax listener="#{productEditController.handleUploadedFile}"
+                                                render="productEditForm:images"/>
+                                    </h:inputFile>
+                                </div>
+                            </div>
+                            <div class="mar-bot-5">
+                                <span class="alert-star">*</span>
+                                <span class="alert-text"> privalomi laukai</span>
+                            </div>
+                        </div>
+                    </div> <!-- End of images -->
+                </h:panelGroup>
+
+
+                <!-- For validation -->
+                <h:inputHidden id="validationInput" value="true">
+                    <f:validator binding="#{editProductValidation}"/>
+                    <f:attribute name="productId" value="#{productEditController.productView.id}"/>
+                    <f:attribute name="sku" value="#{sku}"/>
+                    <f:attribute name="title" value="#{title}"/>
+                    <f:attribute name="price" value="#{price}"/>
+                    <f:attribute name="discountPrice" value="#{discountPrice}"/>
+                    <f:attribute name="discountPercentage" value="#{discountPercentage}"/>
+                    <f:attribute name="startDate" value="#{startDate}"/>
+                    <f:attribute name="startTime" value="#{startTime}"/>
+                    <f:attribute name="endDate" value="#{endDate}"/>
+                    <f:attribute name="endTime" value="#{endTime}"/>
+                    <f:attribute name="noneRequired" value="#{!productEditController.discount}"/>
+                </h:inputHidden>
+
+                <h:panelGroup rendered="#{productEditController.conflictingProductView ne null}">
+                    <div class="row column text-center section">
+                        <h5 class="red">Redaguojamo produkto versija nesutampa su naujausia produkto versija. Naujausios produkto versijos duomenys: </h5>
                     </div>
-                </div>
+                    <section class="red">
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">SKU</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputText
+                                        value="#{productEditController.conflictingProductView.sku}"
+                                        disabled="true"
+                                        styleClass="red"/>
+                            </div>
+                        </div>
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Pavadinimas</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputText
+                                        value="#{productEditController.conflictingProductView.title}"
+                                        disabled="true"
+                                        styleClass="red"/>
+                            </div>
+                        </div>
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Kaina</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputText
+                                        value="#{productEditController.conflictingProductView.price}"
+                                        disabled="true"
+                                        styleClass="red"/>
+                            </div>
+                        </div>
+                        <div class="row align-middle red">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
+                            </div>
+
+                            <div class="columns medium-9 small-12">
+                                <h:inputText styleClass="red" disabled="true" value="#{productEditController.conflictingProductView.discount.absoluteDiscount}"/>
+                            </div>
+                        </div>
+
+                        <div class="row align-middle red">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Nuolaida (procentais)</h5>
+                            </div>
+
+                            <div class="columns medium-9 small-12">
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.percentageDiscount}">
+                                    <f:convertNumber integerOnly="true" type="number"/>
+                                    <f:validateLongRange minimum="0" maximum="100"/>
+                                    <p:ajax event="change" update="percentInput"/>
+                                </h:inputText>
+                            </div>
+                        </div>
+
+                        <!-- Sale date -->
+                        <div class="row align-middle">
+
+                            <!-- The sale starts on -->
+                            <div class="columns medium-3 medium-offset-2 small-12 red" >
+                                <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
+                                <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
+                            </div>
+
+                            <div class="columns medium-2 small-12">
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.startDate}" />
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.startTime}" />
+                            </div>
+
+                            <!-- The sale ends on -->
+                            <div class="columns medium-2 medium-offset-1 small-12">
+                                <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
+                                <h5 class="font-bold hide-for-medium">Galioja iki</h5>
+                            </div>
+
+                            <div class="columns medium-2 small-12">
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.endDate}" />
+                                <h:inputText disabled="true" styleClass="red" value="#{productEditController.conflictingProductView.discount.endTime}" />
+                            </div>
+
+                        </div> <!-- End of Sale date -->
+
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Kategorija</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputText
+                                        value="#{productEditController.conflictingProductView.category.name}"
+                                        disabled="true"
+                                        styleClass="red"/>
+                            </div>
+                        </div>
+                        <div class="row align-middle">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Aprašymas</h5>
+                            </div>
+                            <div class="columns medium-9 small-12">
+                                <h:inputTextarea
+                                        value="#{productEditController.conflictingProductView.description}"
+                                        rows="4" disabled="true" styleClass="red"/>
+                            </div>
+                        </div>
+                        <!-- Images -->
+                        <div class="row">
+                            <div class="columns medium-3 small-12">
+                                <h5 class="font-bold">Nuotrauka(-os)</h5>
+                            </div>
+                            <div class="columns small-12 medium-9">
+                                <div class="row">
+                                    <ui:repeat
+                                            value="#{productEditController.conflictingProductView.images}"
+                                            var="image">
+                                        <div class="columns small-12 medium-3">
+                                            <div class="box-for-buttons-on-image">
+                                                <p:graphicImage value="#{imageStreamer.image}"
+                                                                class="thumbnail">
+                                                    <f:param name="id" value="#{image.id}"/>
+                                                </p:graphicImage>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                        </div> <!-- End of images -->
+                        <div class="row align-middle">
+                            <div class="columns small-8 medium-6">
+                                <h:commandButton
+                                        class="button success expanded"
+                                        value="Atnaujinti duomenis"
+                                        action="#{productEditController.updateProductView}">
+                                    <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>
+                        </div>
+                            <div class="columns small-6 medium-6">
+                                <h:commandButton
+                                        class="button success expanded"
+                                        value="Išsaugoti (pakeitimai bus užrašyti ant viršaus)"
+                                        action="#{productEditController.overrideProductView}">
+                                    <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{productEditController.conflictingProductView eq null}">
+                    <div class="row align-middle section">
+
+                        <!-- [Button] Save changes -->
+                        <div class="columns small-offset-3 small-6 ">
+                            <h:commandButton
+                                    class="button success expanded"
+                                    value="#{productEditController.productFound ? 'Išsaugoti pakeitimus' : 'Pridėti'}"
+                                    action="#{productEditController.saveChanges}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
+                        </div>
+
+                    </div>
+                    <!--Success message-->
+                    <div class="text-center">
+                        <p:outputLabel
+                                rendered="#{productEditController.showSuccessMessage}"
+                                class="success-text-large"
+                                value="#{productEditController.productFound ? 'Produkto duomenys sėkmingai atnaujinti' : 'Prekė sėkmingai pridėta'}"/>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div class="row">
+                        <div class="columns small-10 small-offset-1 medium-8 medium-offset-2">
+                            <div class="text-center">
+                                <h:message class="alert-text-large" for="validationInput"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </h:panelGroup>
             </div>
         </h:form>
         <!-- END OF EDIT PRODUCT -->

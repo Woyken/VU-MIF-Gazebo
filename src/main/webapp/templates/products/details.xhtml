@@ -1,10 +1,11 @@
 <ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <!-- PAGE TITLE. -->
     <div class="row column text-center section">
@@ -41,42 +42,145 @@
         <!-- Text Section -->
         <div class="small-12 medium-6 large-5 columns">
 
+            <!-- SKU code for ADMIN -->
+            <h:form rendered="#{userService.getLoggedUser().getRole() == 'ADMIN'}">
+                <h5 class="font-bold text-center">
+                    SKU -- #{productDetailsController.productView.sku}
+                </h5>
+                <br/>
+            </h:form>
+
             <!-- Name -->
             <h3 class="text-center font-italic">#{productDetailsController.productView.title}</h3>
 
             <!-- Description -->
             <p class="text-justify">#{productDetailsController.productView.description}</p>
 
-            <!-- Quantity -->
-            <div class="row">
-                <div class="small-3 columns">
-                    <label for="product-quantity" class="font-bold middle">Kiekis:</label>
-                </div>
-                <div class="small-9 columns">
-                    <!-- TODO: Max skaičius priklauso nuo prekių kiekio sandelyje! -->
-                    <input type="number" id="product-quantity" value="1" min="1" max="99"/>
-                </div>
-            </div>
-
-            <!-- Price -->
-            <div class="row">
-                <div class="small-3 columns">
-                    <label for="product-quantity" class="font-bold">Kaina:</label>
-                </div>
-                <div class="small-9 columns">
-                    <!-- TODO: Galutinė kaina priklausys nuo prekių kiekio! -->
-                    <p> #{productDetailsController.productView.price} €</p>
-                </div>
-            </div>
-
-            <!-- Add to cart -->
             <h:form>
-                <h:commandButton class="button large hollow expanded primary-inverted" value="PRIDĖTI Į KREPŠELĮ" pt:data-open="inform-user-about-adding-to-cart-modal" actionListener="#{cartController.addProductToCart(productDetailsController.productView.id)}">
-                    <f:ajax execute="@form" render="@none" />
+                <!-- Category -->
+                <div class="row middle">
+                    <div class="small-3 columns">
+                        <label for="product-category" class="font-bold">Kategorija:</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <i><b>
+                        <h:outputText id="product-category"
+                                      value="#{productDetailsController.productView.category.nameWithParents}"/>
+                        </b></i>
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+
+                <!-- Quantity -->
+                <!-- We do not show this to admin -->
+                <h:panelGroup rendered="#{!userService.adminLoggedIn}">
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <label for="product-quantity" class="font-bold middle">Kiekis:</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <h:inputText pt:type="number" id="product-quantity" value="1" min="1"
+                                         max="99" binding="#{amount}"/>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+
+                <!-- IF PRODUCT IS ON SALE - SHOW THIS -->
+                <!-- Price -->
+                <h:panelGroup rendered="#{empty productDetailsController.productView.newPrice}">
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <label for="product-quantity" class="font-bold">Kaina:</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <p> #{productDetailsController.productView.price} €</p>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+
+                <!-- IF PRODUCT IS NOT ON SALE - SHOW THIS -->
+                <!-- Price -->
+                <h:panelGroup rendered="#{not empty productDetailsController.productView.newPrice}">
+                    <div class="row mar-bot-5">
+                        <div class="small-3 columns">
+                            <label for="product-quantity" class="font-bold">Kaina:</label>
+                        </div>
+                        <div class="small-9 columns">
+                            <div class="row">
+                                <div class="columns small-4">
+                                    <p class="product-details-price-old strike"
+                                       style="display: inline;">
+                                        #{productDetailsController.productView.price} €
+                                    </p>
+                                </div>
+                                <div class="columns small-8">
+                                    <p class="product-details-price-new">
+                                        #{productDetailsController.productView.newPrice} €
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <!-- For validation -->
+                <h:inputHidden id="validationInput" value="true">
+                    <f:validator binding="#{buyProductValidation}"/>
+                    <f:attribute name="amount" value="#{amount}"/>
+                </h:inputHidden>
+
+                <f:event type="preValidate"
+                         listener="#{productDetailsController.onBeforeValidatorAddToCart()}"/>
+
+                <!-- Error Message -->
+                <div class="row">
+                    <div class="columns">
+                        <div class="mar-bot-5">
+                            <h:message class="alert-text-large" for="validationInput"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add to cart -->
+                <h:commandButton
+                        class="button large hollow expanded primary-inverted"
+                        value="PRIDĖTI Į KREPŠELĮ"
+                        rendered="#{not userService.isLoggedIn() or (userService.isLoggedIn() and userService.getLoggedUser().getRole() == 'USER')}"
+                        action="#{productDetailsController.onAddToCart}">
+                    <f:actionListener
+                            binding="#{cartController.addProductToCart(productDetailsController.productView.id, amount.value)}"/>
+                    <f:ajax execute="@form" render="@form"/>
                 </h:commandButton>
+
+                <!--Success message-->
+                <ui:fragment rendered="#{productDetailsController.showSuccessMessage}">
+                    <div class="text-center">
+                        <label class="success-text-large">Pridėta!</label>
+                    </div>
+                </ui:fragment>
             </h:form>
+
+            <!-- [Button][Admin] Edit product -->
+            <c:choose>
+                <c:when test="#{userService.isLoggedIn()}">
+                    <c:choose>
+
+                        <!-- Admin logged in -->
+                        <c:when test="#{userService.getLoggedUser().getRole() == 'ADMIN'}">
+                            <a href="../../admin-edit-product.xhtml?productId=#{productDetailsController.productView.id}"
+                               class="button large expanded">
+                                Redaguoti prekę
+                            </a>
+                        </c:when>
+
+                    </c:choose>
+                </c:when>
+            </c:choose>
         </div>
-    </div> <!-- END OF PRODUCT DETAILS -->
+    </div> <!-- END OF PRODUCT INFO -->
 
 
     <!-- INFORM USER ABOUT ADDING TO CART MODAL -->

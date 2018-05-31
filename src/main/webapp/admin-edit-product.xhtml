@@ -12,7 +12,7 @@
 </ui:define>
 
 <h:head>
-    <title>Home</title>
+    <title>Redaguoti prekę</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -22,11 +22,13 @@
 </h:head>
 <h:body>
 
-    <!-- NAVIGATION BAR -->
-    <ui:include src="./templates/navbars/_container.xhtml" />
+    <div class="body-wrapper">
+        <!-- NAVIGATION BAR -->
+        <ui:include src="./templates/navbars/_container.xhtml" />
 
-    <!-- ADD PRODUCT -->
-    <ui:include src="./templates/admin/edit-product.xhtml" />
+        <!-- ADD PRODUCT -->
+        <ui:include src="./templates/admin/edit-product.xhtml" />
+    </div>
 
     <!-- FOOTER -->
     <ui:include src="./templates/footers/footer.xhtml" />

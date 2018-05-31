@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- USER INFO TITLE -->
+    <div class="row column text-center section">
+        <h1 class="section-title">Visi užsakymai</h1>
+    </div> <!-- END OF USER INFO TITLE -->
+
+    <div id="all-orders-window">
+        <div class="row section">
+            <h:panelGroup id="allOrdersPanel" style="display:contents">
+                <ui:repeat value="#{ordersController.orders}" var="order">
+                    <div class="columns medium-3 small-6 admin-order-box">
+                        <p>
+                            Pirkėjo paštas: <b>#{order.userEmail}</b>
+                        </p>
+                        <p>
+                            Užsakymo būsena: <b>#{order.status.name}</b>
+                        </p>
+                        <p>
+                            Užsakymo kaina: <b>#{order.totalSum}</b>
+                        </p>
+
+                        <div class="small-8 small-offset-2 medium-12 medium-offset-0">
+                            <a href="../../admin-details-order.xhtml?orderId=#{order.id}"
+                               class="button expanded">
+                                Išsamiau
+                            </a>
+                        </div>
+
+                    </div>
+                </ui:repeat>
+            </h:panelGroup>
+        </div>
+    </div>
+
+</ui:composition>
+</html>

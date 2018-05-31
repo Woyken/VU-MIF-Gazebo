@@ -1,8 +1,68 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"/>
+</head>
 <body>
 
-<h1>Atsiprašome, įvyko nenumatyta klaida.</h1>
+<!-- ERROR -->
+<div id="error-page">
+
+    <!-- Error code and meaning -->
+    <div class="row section">
+        <div class="columns small-12">
+
+            <!-- [Mobile] -->
+            <h3 class="text-center hide-for-medium">
+                <b> 500 </b>
+                - vidinė klaida
+            </h3>
+
+            <!-- [Desktop] -->
+            <h1 class="text-center hide-for-small-only">
+                <b> 500 </b>
+                - vidinė klaida
+            </h1>
+        </div>
+    </div>
+
+    <!-- What to do now -->
+    <div class="row section">
+        <div class="columns small-12 medium-10 medium-offset-1">
+
+            <!-- [Mobile] -->
+            <div class="hide-for-medium">
+                <h5> Įvyko klaida mūsų gale. </h5>
+                <h5> Jeigu ši problema išliks prašome susisiekti su mumis per
+                    <em> pagalba@gazebo.com. </em>
+                </h5>
+            </div>
+
+            <!-- [Desktop] -->
+            <div class="hide-for-small-only">
+                <h4> Įvyko klaida mūsų gale. </h4>
+                <h4> Jeigu ši problema išliks prašome susisiekti su mumis per
+                    <em> pagalba@gazebo.com. </em>
+                </h4>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Have some fun -->
+    <div class="row section align-center">
+        <!-- [Desktop] -->
+        <div class="columns medium-8 medium-offset-2 hide-for-small-only">
+            <img src="../../resources/images/errors/error.jpg" />
+        </div>
+
+        <!-- [Mobile] -->
+        <div class="columns small-12 hide-for-medium ">
+            <img src="../../resources/images/errors/error.jpg" />
+        </div>
+    </div>
+
+</div> <!-- END OF ERROR -->
 
 </body>
 </html>

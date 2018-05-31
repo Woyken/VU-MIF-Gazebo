@@ -7,23 +7,32 @@
 <f:metadata>
     <f:event type="preRenderView" listener="#{productController.onPageLoad}"/>
 </f:metadata>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{ratingController.onPageLoad}"/>
+</f:metadata>
 
 <h:head>
-    <title>Home</title>
+    <title>Internetinė parduotuvė Gazebo.lt</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <h:outputStylesheet name="/css/vendor/foundation.css" />
     <h:outputStylesheet name="/css/vendor/foundation-icons.css" />
     <h:outputStylesheet name="/css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </h:head>
 <h:body>
 
-    <!-- NAVIGATION BAR -->
-    <ui:include src="./templates/navbars/_container.xhtml" />
+    <div class="body-wrapper">
+        <!-- NAVIGATION BAR -->
+        <ui:include src="./templates/navbars/_container.xhtml" />
 
-    <!-- PRODUCT LIST -->
-    <ui:include src="./templates/products/list.xhtml" />
+        <!-- RATE SHOPPING EXPERIENCE -->
+        <ui:include src="templates/modals/rate-shopping-experience.xhtml" />
+
+        <!-- PRODUCT LIST -->
+        <ui:include src="./templates/products/list.xhtml" />
+    </div>
 
     <!-- FOOTER -->
     <ui:include src="./templates/footers/footer.xhtml" />
@@ -33,6 +42,10 @@
     <h:outputScript name="js/vendor/foundation.js"/>
     <h:outputScript name="js/foundation-app.js"/>
     <h:outputScript name="js/vendor/what-input.js"/>
+    <h:outputScript name="js/vendor/notify.min.js"/>
+    <h:outputScript name="js/add-to-cart-notification.js"/>
+    <h:outputScript name="js/rate-shopping-experience.js" />
+    <!--<h:outputScript name="js/aside-filter.js" />-->
 
 </h:body>
 </html>

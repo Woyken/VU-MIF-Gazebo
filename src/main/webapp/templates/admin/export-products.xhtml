@@ -1,0 +1,147 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <div class="row column text-center section">
+        <h1 class="section-title">Produktų eksportavimas</h1>
+    </div>
+
+    <h:form id="exportForm">
+        <div class="columns row align-middle text-center section">
+            <h:outputLabel id="exportMsg"
+                           class=" #{productExportController.message == 'Eksportavimas sėkmingai atliktas.' ? 'success-text' : 'alert-text'}"
+                           value="#{productExportController.message}"/>
+        </div>
+        <div class="row section">
+            <div class="hide-for-small-only columns medium-4">
+                <h:commandButton
+                        class="button expanded green"
+                        value="Eksportuoti visas prekes"
+                        onclick="document.getElementById('exportForm:exportMsg').innerText = 'Eksportavimas vykdomas..'"
+                        action="#{productExportController.exportAll}">
+                    <f:ajax execute="@form" render="@form"/>
+                </h:commandButton>
+            </div>
+            <div class="hide-for-small-only columns medium-4">
+                <c:choose>
+                    <c:when test="#{allProductsController.multipleDeleteEnabled}">
+                        <h:commandButton
+                                class="button expanded orange"
+                                value="Eksportuoti pasirinktas prekes"
+                                onclick="document.getElementById('exportForm:exportMsg').innerText = 'Eksportavimas vykdomas..'"
+                                action="#{productExportController.exportSelected(allProductsController.productsToDeleteIds)}">
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
+                    </c:when>
+                    <c:otherwise>
+                        <button
+                                type="button"
+                                class="button expanded red"
+                                data-open="remove-product-modal"
+                                disabled="">
+                            Eksportuoti pasirinktas prekes
+                        </button>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <div class="hide-for-small-only columns medium-4">
+                <p:commandButton value="Atsisiųsti failą" ajax="false" rendered="#{productExportController.message ne null and productExportController.success}"
+                                 onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s" styleClass="button expanded blue">
+                    <p:fileDownload value="#{productExportController.file}" />
+                </p:commandButton>
+            </div>
+        </div>
+    </h:form>
+
+    <!-- PRODUCT LIST -->
+    <div id="admin-all-products">
+        <div class="row section">
+            <h:panelGroup id="productList" style="display:contents">
+                <ui:repeat value="#{productController.productsPage.content}" var="product">
+
+                    <div class="columns medium-3 small-6 admin-product-box">
+                        <div class="row align-middle">
+                            <div class="columns medium-9 small-8">
+                                <p>
+                                    <b>
+                                        #{product.sku}
+                                    </b>
+                                    <br/>
+                                    #{product.title}
+                                </p>
+                            </div>
+                            <div class="columns small-2">
+                                <h:form>
+                                    <h:selectBooleanCheckbox>
+                                        <f:ajax
+                                                listener="#{allProductsController.addProductToDelete(product.id)}"
+                                                render="exportForm"/>
+                                    </h:selectBooleanCheckbox>
+                                </h:form>
+                            </div>
+
+                            <div class="columns small-2 expanded">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="columns medium-12">
+                                <a href="../../product-details.xhtml?productId=#{product.id}"
+                                   class="button expanded">
+                                    Peržiūrėti prekę
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </ui:repeat>
+            </h:panelGroup>
+        </div>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="row section">
+        <div class="columns small-12">
+            <h:form id="paging-form">
+                <nav aria-label="Pagination">
+                    <ul class="pagination text-center">
+                        <li class="pagination-previous">
+                            <h:commandLink value="Atgal"
+                                           disabled="#{productController.paging.activePage eq 0}">
+                                <f:ajax execute="@form" listener="#{productController.previous}"
+                                        render="productList paging-form"/>
+                            </h:commandLink>
+                        </li>
+                        <ui:repeat value="#{productController.paging.totalPages}" var="page"
+                                   varStatus="status">
+                            <li>
+                                <h:commandLink
+                                        rendered="#{productController.paging.isPageNumberShown(status.index)}"
+                                        value="#{status.index + 1}"
+                                        styleClass="#{status.index eq productController.paging.activePage ? 'current' : ''}">
+                                    <f:ajax execute="@form"
+                                            listener="#{productController.searchProducts(status.index)}"
+                                            render="productList paging-form"/>
+                                </h:commandLink>
+                            </li>
+                        </ui:repeat>
+                        <li class="pagination-next">
+                            <h:commandLink value="Pirmyn"
+                                           disabled="#{productController.paging.activePage + 1 eq productController.productsPage.totalPages}">
+                                <f:ajax execute="@form" listener="#{productController.next}"
+                                        render="productList paging-form"/>
+                            </h:commandLink>
+                        </li>
+                    </ul>
+                </nav>
+            </h:form>
+        </div>
+    </div>
+</ui:composition>
+</html>

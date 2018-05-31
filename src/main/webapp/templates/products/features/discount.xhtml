@@ -1,0 +1,188 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!-- PAGE TITLE. -->
+    <div class="row column text-center section">
+        <h1 class="section-title">
+            <p:outputLabel styleClass="large-text" value="Pridėti prekės nuolaidą"
+                           rendered="#{productDiscountController.isProductFound}"/>
+            <p:outputLabel styleClass="large-text" value="Pridėti kategorijos nuolaidą"
+                           rendered="#{not productDiscountController.isProductFound}"/>
+
+        </h1>
+    </div> <!-- END OF PAGE TITLE. -->
+
+
+    <!-- Sale price -->
+    <div class="row section align-middle margin-bottom-1">
+        <div class="columns small-12">
+            <h:form id="discountForm" style="display: contents;">
+
+                <!-- Choose category -->
+                <h:panelGroup rendered="#{not productDiscountController.isProductFound}">
+                    <div class="row align-middle">
+                        <div class="columns medium-3 small-12">
+                            <h5 class="font-bold"> Kategorija </h5>
+                        </div>
+
+                        <div class="columns medium-9 small-12">
+                            <h:selectOneMenu value="#{productDiscountController.selectedCategory}"
+                                             converter="omnifaces.SelectItemsConverter"
+                                             hideNoSelectionOption="true">
+                                <f:selectItem value="#{null}" itemLabel="Pasirinkite kategoriją:"
+                                              noSelectionOption="true"/>
+                                <f:selectItems value="#{productDiscountController.categories}"/>
+                                <f:ajax render="@form"
+                                        listener="#{productDiscountController.categoryChange}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <!-- Sale as concrete price -->
+                <h:panelGroup rendered="#{productDiscountController.isProductFound}">
+                    <div class="row align-middle">
+                        <div class="columns medium-3 small-12">
+                            <h5 class="font-bold">Nuolaida (nauja kaina)</h5>
+                        </div>
+
+                        <div class="columns medium-9 small-12">
+                            <h:inputText
+                                    pt:type="number"
+                                    pt:min="0"
+                                    pt:placeholder="49.99"
+                                    value="#{productDiscountController.discountView.absoluteDiscount}"
+                                    binding="#{discountPrice}"/>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <!-- Sale as % -->
+                <div class="row align-middle">
+                    <div class="columns medium-3 small-12">
+                        <h5 class="font-bold">Nuolaida (procentais)</h5>
+                    </div>
+
+                    <div class="columns medium-9 small-12">
+                        <h:inputText
+                                id="percentInput"
+                                pt:placeholder="50"
+                                pt:type="number"
+                                value="#{productDiscountController.discountView.percentageDiscount}"
+                                binding="#{discountPercentage}"
+                                disabled="#{not productDiscountController.isProductFound and
+                                            empty productDiscountController.selectedCategory}">
+                            <f:convertNumber integerOnly="true" type="number"/>
+                            <f:validateLongRange minimum="0" maximum="100"/>
+                            <p:ajax event="change" update="percentInput"/>
+                        </h:inputText>
+                    </div>
+                </div>
+
+                <!-- Sale date -->
+                <div class="row align-middle">
+
+                    <!-- The sale starts on -->
+                    <div class="columns medium-2 medium-offset-3 small-12">
+                        <h5 class="font-bold text-right hide-for-small-only">Galioja nuo</h5>
+                        <h5 class="font-bold hide-for-medium">Galioja nuo</h5>
+                    </div>
+
+                    <div class="columns medium-2 small-12">
+                        <h:inputText pt:type="date"
+                                     value="#{productDiscountController.discountView.startDate}"
+                                     binding="#{startDate}"
+                                     disabled="#{not productDiscountController.isProductFound and
+                                            empty productDiscountController.selectedCategory}"/>
+                        <h:inputText value="#{productDiscountController.discountView.startTime}"
+                                     binding="#{startTime}"
+                                     pt:placeholder="08:00"
+                                     disabled="#{not productDiscountController.isProductFound and
+                                            empty productDiscountController.selectedCategory}"/>
+                    </div>
+
+                    <!-- The sale ends on -->
+                    <div class="columns medium-2 medium-offset-1 small-12">
+                        <h5 class="font-bold text-right hide-for-small-only">Galioja iki</h5>
+                        <h5 class="font-bold hide-for-medium">Galioja iki</h5>
+                    </div>
+
+                    <div class="columns medium-2 small-12">
+                        <h:inputText pt:type="date"
+                                     value="#{productDiscountController.discountView.endDate}"
+                                     binding="#{endDate}"
+                                     disabled="#{not productDiscountController.isProductFound and
+                                            empty productDiscountController.selectedCategory}"/>
+                        <h:inputText value="#{productDiscountController.discountView.endTime}"
+                                     binding="#{endTime}"
+                                     pt:placeholder="12:30"
+                                     disabled="#{not productDiscountController.isProductFound and
+                                            empty productDiscountController.selectedCategory}"/>
+                    </div>
+
+                </div> <!-- End of Sale date -->
+
+                <!-- For validation -->
+                <h:inputHidden id="discountValidationInput" value="true">
+                    <f:validator binding="#{discountValidation}"/>
+                    <f:attribute name="discountPrice" value="#{discountPrice}"/>
+                    <f:attribute name="discountPercentage" value="#{discountPercentage}"/>
+                    <f:attribute name="startDate" value="#{startDate}"/>
+                    <f:attribute name="startTime" value="#{startTime}"/>
+                    <f:attribute name="endDate" value="#{endDate}"/>
+                    <f:attribute name="endTime" value="#{endTime}"/>
+                </h:inputHidden>
+
+                <!-- Validation Error Message -->
+                <div class="row-align-middle text-center">
+                    <div class="columns">
+                        <div class="mar-bot-5">
+                            <h:message class="alert-text-large" for="discountValidationInput"/>
+                            <h:outputText class="alert-text-large"
+                                          value="#{productDiscountController.errorMessage}"/>
+                            <f:event type="preValidate"
+                                     listener="#{productDiscountController.setErrorMessage('')}"/>
+                            <h:outputText rendered="#{productDiscountController.isSuccess}"
+                                          class="success-text-large"
+                                          value="Nuolaida sėkmingai išsaugota"/>
+                            <f:event type="preValidate"
+                                     listener="#{productDiscountController.setIsSuccess(false)}"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row align-middle section">
+                    <!-- [Button] Add discount -->
+                    <div class="columns small-6 medium-4">
+                        <h:commandButton
+                                class="button expanded success"
+                                value="Išsaugoti"
+                                action="#{productDiscountController.addDiscount}">
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
+                    </div>
+
+                    <!-- [Button] Remove discount -->
+                    <div class="columns small-6 medium-4 medium-offset-4">
+                        <h:commandButton
+                                class="button expanded red"
+                                value="Panaikinti nuolaidą"
+                                action="#{productDiscountController.removeDiscount}">
+                            <f:ajax render="@form"/>
+                        </h:commandButton>
+                    </div>
+
+                </div>
+            </h:form>
+
+        </div>
+    </div> <!-- End of Sale price -->
+
+
+</ui:composition>

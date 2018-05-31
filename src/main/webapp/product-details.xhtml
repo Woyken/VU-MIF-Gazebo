@@ -11,7 +11,7 @@
 </ui:define>
 
 <h:head>
-    <title>Home page</title>
+    <title>Prekės informacija</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -21,11 +21,13 @@
 </h:head>
 <h:body>
 
-    <!-- NAVIGATION BAR -->
-    <ui:include src="./templates/navbars/_container.xhtml" />
+    <div class="body-wrapper">
+        <!-- NAVIGATION BAR -->
+        <ui:include src="./templates/navbars/_container.xhtml" />
 
-    <!-- PRODUCT DETAILS -->
-    <ui:include src="./templates/products/details.xhtml" />
+        <!-- PRODUCT DETAILS -->
+        <ui:include src="./templates/products/details.xhtml" />
+    </div>
 
     <!-- FOOTER -->
     <ui:include src="./templates/footers/footer.xhtml" />
@@ -34,6 +36,8 @@
     <h:outputScript name="js/vendor/foundation.js"/>
     <h:outputScript name="js/foundation-app.js"/>
     <h:outputScript name="js/vendor/what-input.js"/>
+    <h:outputScript name="js/vendor/notify.min.js"/>
+    <h:outputScript name="js/add-to-cart-notification.js"/>
 
 </h:body>
 </html>

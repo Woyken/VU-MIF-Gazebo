@@ -1,0 +1,184 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- PAGE TITLE -->
+    <div class="row column text-center section">
+        <h1 class="section-title">Visos prekės</h1>
+    </div> <!-- END OF PAGE TITLE -->
+
+        <!-- PRODUCT LIST -->
+        <div id="admin-all-products">
+
+            <div class="row section">
+                <div class="columns small-12 medium-3 medium-offset-9">
+
+                    <!-- [Button] Delete multiple products -->
+                    <!-- The only way I thought of without using any h:something commands -->
+                    <!-- Because pt:data-close fucks up and closes the modal after a second -->
+                    <h:form id="deleteButton">
+                        <c:choose>
+                            <c:when test="#{allProductsController.multipleDeleteEnabled}">
+                                <button
+                                        type="button"
+                                        class="button expanded red"
+                                        data-open="remove-product-modal">
+                                    Ištrinti pažymėtas prekes
+                                </button>
+                            </c:when>
+
+                            <c:otherwise>
+                                <!-- This one is disabled -->
+                                <button
+                                        type="button"
+                                        class="button expanded red"
+                                        data-open="remove-product-modal"
+                                        disabled="">
+                                    Ištrinti pažymėtas prekes
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+                    </h:form>
+
+                </div>
+            </div>
+
+            <div class="row section">
+                <h:panelGroup id="productList" style="display:contents">
+                    <ui:repeat value="#{productController.productsPage.content}" var="product">
+
+                        <div class="columns medium-3 small-6 admin-product-box">
+                            <div class="row align-middle">
+                                <div class="columns medium-9 small-8">
+                                    <!-- SKU code and name -->
+                                    <p>
+                                        <b>
+                                            #{product.sku}
+                                        </b>
+                                        <br/>
+                                        #{product.title}
+                                    </p>
+                                </div>
+
+                                <!-- [Checkbox] Select product to delete -->
+                                <div class="columns small-2">
+                                    <h:form>
+                                        <h:selectBooleanCheckbox>
+                                            <f:ajax
+                                                    listener="#{allProductsController.addProductToDelete(product.id)}"
+                                                    render="deleteButton"/>
+                                        </h:selectBooleanCheckbox>
+                                    </h:form>
+                                </div>
+
+                                <div class="columns small-2 expanded">
+                                </div>
+                            </div>
+
+                            <!-- [Button] Edit product -->
+                            <div class="row">
+                                <div class="columns medium-12">
+                                    <a href="../../admin-edit-product.xhtml?productId=#{product.id}"
+                                       class="button expanded">
+                                        <i class="fi-pencil"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ui:repeat>
+                </h:panelGroup>
+            </div>
+        </div>
+
+    <!-- PAGINATION -->
+    <div class="row section">
+        <div class="columns small-12">
+            <h:form id="paging-form">
+                <nav aria-label="Pagination">
+                    <ul class="pagination text-center">
+                        <li class="pagination-previous">
+                            <h:commandLink value="Atgal"
+                                           disabled="#{productController.paging.activePage eq 0}">
+                                <f:ajax execute="@form" listener="#{productController.previous}"
+                                        render="productList paging-form"/>
+                            </h:commandLink>
+                        </li>
+                        <ui:repeat value="#{productController.paging.totalPages}" var="page"
+                                   varStatus="status">
+                            <li>
+                                <h:commandLink
+                                        rendered="#{productController.paging.isPageNumberShown(status.index)}"
+                                        value="#{status.index + 1}"
+                                        styleClass="#{status.index eq productController.paging.activePage ? 'current' : ''}">
+                                    <f:ajax execute="@form"
+                                            listener="#{productController.searchProducts(status.index)}"
+                                            render="productList paging-form"/>
+                                </h:commandLink>
+                            </li>
+                        </ui:repeat>
+                        <li class="pagination-next">
+                            <h:commandLink value="Pirmyn"
+                                           disabled="#{productController.paging.activePage + 1 eq productController.productsPage.totalPages}">
+                                <f:ajax execute="@form" listener="#{productController.next}"
+                                        render="productList paging-form"/>
+                            </h:commandLink>
+                        </li>
+                    </ul>
+                </nav>
+            </h:form>
+        </div>
+    </div> <!-- END OF PAGINATION -->
+
+    <!-- REMOVE PRODUCT MODAL. -->
+    <div id="remove-product-modal"
+         class="reveal"
+         data-reveal=""
+         data-animation-in="fade-in fast">
+        <div class="row">
+            <div class="columns small-8 small-offset-2">
+                <h4 class="form-title text-center">
+                    Ar tikrai norite ištrinti prekę?
+                </h4>
+
+                <br/>
+
+                <div class="row">
+                    <!-- [Button] Delete product -->
+                    <div class="columns small-5 large-3 large-offset-2">
+                        <h:form>
+                            <h:commandLink
+                                    class="button red expanded"
+                                    value="Taip"
+                                    pt:data-close=""
+                                    action="#{allProductsController.deleteMultipleProducts}">
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+
+                    <!-- [Button] Cancel -->
+                    <div class="columns small-5 small-offset-2 large-3 large-offset-2">
+                        <button class="button primary expanded" data-close=""
+                                type="button">
+                            Ne
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <button class="close-button" data-close="" type="button">
+            <i class="fi-x"></i>
+        </button>
+    </div> <!-- END OF REMOVE PRODUCT MODAL. -->
+
+</ui:composition>
+</html>
