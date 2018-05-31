@@ -64,9 +64,9 @@ public class ProductHelper implements IProductHelper {
     private UserMapper userMapper;
 
     @Override
-    public void update(ProductView view) {
+    public ProductView update(ProductView view) {
         Product entity = productMapper.toEntity(view);
-        productRepository.update(entity);
+        return productMapper.toView(productRepository.update(entity));
     }
 
     public Integer getProductVersion(Long productId) {

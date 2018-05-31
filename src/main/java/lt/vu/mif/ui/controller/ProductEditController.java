@@ -104,7 +104,7 @@ public class ProductEditController {
         }
 
         try {
-            productHelper.update(productView);
+            productView = productHelper.update(productView);
             productView.setVersion(productHelper.getProductVersion(productView.getId()));
             showSuccessMessage = true;
             clearData();
