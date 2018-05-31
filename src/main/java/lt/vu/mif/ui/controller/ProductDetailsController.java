@@ -1,5 +1,7 @@
 package lt.vu.mif.ui.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -7,6 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.view.AttributeView;
+import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.ProductView;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,7 @@ public class ProductDetailsController {
     private IProductHelper productHelper;
 
     private ProductView productView;
+    private List<AttributeView> attributes;
     boolean showSuccessMessage = false;
 
     public void onPageLoad() {
@@ -39,6 +44,17 @@ public class ProductDetailsController {
 
         if (productView == null) {
             throw new IllegalStateException("Product" + "with ID=" + productId + "not found");
+        }
+
+        attributes = new ArrayList<>();
+        CategoryView category = productView.getCategory();
+
+        while (category != null) {
+            for (AttributeView a : category.getAttributes()) {
+                attributes.add(a);
+            }
+
+            category = category.getParentCategory();
         }
     }
 }

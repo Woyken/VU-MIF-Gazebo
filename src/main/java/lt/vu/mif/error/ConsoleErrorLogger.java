@@ -10,6 +10,6 @@ public class ConsoleErrorLogger implements IErrorLogger {
 
     @Override
     public void logError(String error) {
-        System.out.println(ANSI_RED + "ERROR OCCURRED: " + error + ANSI_RESET);
+//        System.out.println(ANSI_RED + "ERROR OCCURRED: " + error + ANSI_RESET);
     }
 }

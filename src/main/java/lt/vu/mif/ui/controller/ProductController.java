@@ -13,6 +13,7 @@ import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.paging.Paging;
+import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.ProductSearchView;
 import lt.vu.mif.ui.view.ProductView;
@@ -37,7 +38,7 @@ public class ProductController implements Serializable {
     private String minPrice;
     private String maxPrice;
 
-    private List<CategoryView> attributeCategories = new ArrayList<>();
+    private List<AttributeView> attributes = new ArrayList<>();
 
     private ProductSearchView productSearch = new ProductSearchView();
     private Page<ProductView> productsPage;
@@ -77,10 +78,12 @@ public class ProductController implements Serializable {
     }
 
     private void makeAttributeCategoryList(CategoryView category) {
-        attributeCategories = new ArrayList<>();
+        attributes = new ArrayList<>();
 
         while (category != null) {
-            attributeCategories.add(category);
+            for (AttributeView a : category.getAttributes()) {
+                attributes.add(a);
+            }
 
             category = category.getParentCategory();
         }

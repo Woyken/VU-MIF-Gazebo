@@ -256,43 +256,43 @@
                             </ul>
                         </li> <!-- End of filter by price -->
 
-                        <h:panelGroup id="attributes">
-                            <h:panelGroup
-                                    rendered="#{not empty productController.attributeCategories}">
+                        <h:form id="attributes">
+                            <h:panelGroup rendered="#{not empty productController.attributes}">
                                 <li>
                                     <h4 class="text-center font-bold margin-top-2"> Požymiai </h4>
                                 </li>
 
                                 <!--Filter by attributes-->
                                 <li class="margin-top-3">
-                                    <ui:repeat value="#{productController.attributeCategories}"
-                                               var="category">
-                                        <ui:repeat value="#{category.attributes}" var="attribute">
-                                            <h5 class="text-center font-bold margin-top-2"> #{attribute.name} </h5>
-                                            <ul class="menu vertical nested is-active">
-                                                <ui:repeat value="#{attribute.values}"
-                                                           var="attributeValue">
-                                                    <li>
-                                                        <h:selectBooleanCheckbox id="attributeValue"
-                                                                                 value="#{attributeValue.isSelected}"/>
-                                                        <h:outputLabel for="attributeValue">
-                                                            #{attributeValue.value}
-                                                        </h:outputLabel>
-                                                    </li>
-                                                </ui:repeat>
-                                            </ul>
-                                        </ui:repeat>
+                                    <ui:repeat value="#{productController.attributes}"
+                                               var="attribute">
+                                        <h5 class="text-center font-bold margin-top-2"> #{attribute.name} </h5>
+                                        <ul class="menu vertical nested is-active">
+                                            <ui:repeat value="#{attribute.values}"
+                                                       var="attributeValue">
+                                                <li>
+                                                    <h:selectBooleanCheckbox id="attributeValue"
+                                                                             value="#{attributeValue.isSelected}"/>
+                                                    <h:outputLabel for="attributeValue">
+                                                        #{attributeValue.value}
+                                                    </h:outputLabel>
+                                                </li>
+                                            </ui:repeat>
+                                        </ul>
                                     </ui:repeat>
                                 </li>
 
                                 <!-- [Button] Filter by attributes -->
-                                <li>
-                                    <button type="button" class="button expanded margin-top-1">
-                                        Filtruoti
-                                    </button>
+                                <li class="margin-top-2">
+                                    <h:commandButton class="button expanded" value="Filtruoti">
+                                        <f:ajax execute="@form"
+                                                listener="#{productController.searchAttributes}"
+                                                render="productList paging-form"/>
+                                    </h:commandButton>
                                 </li>
+
                             </h:panelGroup>
-                        </h:panelGroup>
+                        </h:form>
 
                     </ul>
                 </div>
