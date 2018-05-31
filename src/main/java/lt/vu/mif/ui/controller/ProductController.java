@@ -13,6 +13,7 @@ import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.paging.Paging;
+import lt.vu.mif.ui.view.AttributeValue;
 import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.ProductSearchView;
@@ -95,6 +96,22 @@ public class ProductController implements Serializable {
         for (TreeNode t : current.getChildren()) {
             makeCategoryList(categories, t);
         }
+    }
+
+    public void searchAttributes() {
+        List<AttributeValue> attributeValues = new ArrayList<>();
+
+        for (AttributeView a : attributes) {
+            for (AttributeValue v : a.getValues()) {
+                if (v.getIsSelected()) {
+                    attributeValues.add(v);
+                }
+            }
+        }
+
+        productSearch.setAttributeValues(attributeValues);
+
+        searchProducts();
     }
 
     public void search() {

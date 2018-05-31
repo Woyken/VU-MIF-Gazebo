@@ -14,6 +14,7 @@ public class ProductSearchView {
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
     private List<CategoryView> categories;
+    private List<AttributeValue> attributeValues;
     private boolean includeDeleted = false;
     private ProductSortEnum sortBy;
 
@@ -22,6 +23,7 @@ public class ProductSearchView {
         minPrice = null;
         maxPrice = null;
         categories = null;
+        attributeValues = null;
         includeDeleted = false;
         sortBy = ProductSortEnum.CREATE_DATE;
     }
