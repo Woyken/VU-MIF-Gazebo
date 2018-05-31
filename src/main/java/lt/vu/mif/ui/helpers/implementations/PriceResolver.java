@@ -59,8 +59,7 @@ public class PriceResolver implements IPriceResolver {
 
         Discount categoryDiscount = getBiggestCategoryDiscount(productCategory);
 
-        productCategory.getDiscount();
-        if (categoryDiscount == null || !categoryDiscount.isDiscountValid()) {
+        if (categoryDiscount == null) {
             return null;
         }
 
@@ -80,7 +79,7 @@ public class PriceResolver implements IPriceResolver {
         Discount parentDiscount = null;
 
         if (parentCategory != null) {
-            parentDiscount = parentCategory.getDiscount();
+            parentDiscount = getBiggestCategoryDiscount(parentCategory);
         }
 
         if (discount == null || !discount.isDiscountValid()) {
