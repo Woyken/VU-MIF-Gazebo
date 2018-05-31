@@ -67,6 +67,7 @@ public class ProductEditController {
             conflictingProductView = null;
             isProductFound = true;
         } catch (IllegalArgumentException x) {
+            discountView = new DiscountView();
             productView = new ProductView();
             isProductFound = false;
         }
