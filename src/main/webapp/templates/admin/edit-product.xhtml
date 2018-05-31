@@ -167,22 +167,19 @@
                             <f:ajax render="@form"
                                     listener="#{productEditController.updateAttributeCategories}"/>
                         </h:selectOneMenu>
-                        <ui:repeat value="#{productEditController.attributeCategories}"
-                                   var="category">
-                            <ui:repeat value="#{category.attributes}" var="attribute">
-                                <p:outputLabel>Atributas: </p:outputLabel>
-                                <h:inputText value="#{attribute.name}" disabled="true"/>
+                        <ui:repeat value="#{productEditController.allCategoriesAttributes}" var="attribute">
+                            <p:outputLabel>Atributas: </p:outputLabel>
+                            <h:inputText value="#{attribute.name}" disabled="true"/>
 
-                                <p:outputLabel value="Reikšmė"/>
-                                <h:selectOneMenu value="#{attribute.selectedValue}"
-                                                 converter="omnifaces.SelectItemsConverter"
-                                                 hideNoSelectionOption="true">
-                                    <f:selectItem value="#{null}" itemLabel="Pasirinkite reikšmę:"
-                                                  noSelectionOption="true"/>
-                                    <f:selectItems value="#{attribute.values}"/>
-                                    <f:ajax render="@form"/>
-                                </h:selectOneMenu>
-                            </ui:repeat>
+                            <p:outputLabel value="Reikšmė"/>
+                            <h:selectOneMenu value="#{attribute.selectedValue}"
+                                             converter="omnifaces.SelectItemsConverter"
+                                             hideNoSelectionOption="true">
+                                <f:selectItem value="#{null}" itemLabel="Pasirinkite reikšmę:"
+                                              noSelectionOption="true"/>
+                                <f:selectItems value="#{attribute.values}"/>
+                                <f:ajax render="@form"/>
+                            </h:selectOneMenu>
                         </ui:repeat>
                     </div>
                 </div> <!-- End of Category -->
@@ -278,8 +275,8 @@
                         <f:attribute name="endTime" value="#{endTime}"/>
                         <f:attribute name="noneRequired"
                                      value="#{!productEditController.discount}"/>
-                        <f:attribute name="attributeCategories"
-                                     value="#{productEditController.attributeCategories}"/>
+                        <f:attribute name="allCategoriesAttributes"
+                                     value="#{productEditController.allCategoriesAttributes}"/>
                     </h:inputHidden>
                 </h:panelGroup>
 
