@@ -1,5 +1,6 @@
 package lt.vu.mif.ui.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.faces.context.FacesContext;
@@ -9,6 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
+import lt.vu.mif.ui.view.AttributeValue;
+import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.ui.view.CategoryView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -112,31 +115,26 @@ public class ProductCategoryController {
         savingErrorMessage = "";
     }
 
-//    public void addNewAttribute() {
-//        AttributeView view = new AttributeView();
-//        view.setValues(new ArrayList<>());
-//        view.getValues().add(new AttributeValue());
-//        newCategory.getAttributes().add(view);
-//    }
-//
-//    public void removeNewAttribute(AttributeView view) {
-//        if (newCategory.getAttributes().size() != 1) {
-//            newCategory.getAttributes().remove(view);
-//        }
-//    }
-//
-//    public void addNewAttributeValue(AttributeView view, AttributeValue value) {
-//        view.getValues().add(value);
-//    }
-//
-//    public void removeNewAttributeValue(AttributeView view, AttributeValue value) {
-//        if (view.getValues().size() != 1) {
-//            view.getValues().remove(value);
-//        }
-//    }
-//
-//    public void saveNewCategory() {
-//        categoryHelper.save(newCategory);
-//    }
+    public void addNewAttribute() {
+        AttributeView view = new AttributeView();
+        view.setValues(new ArrayList<>());
+        selectedCategory.getAttributes().add(view);
+    }
+
+    public void removeNewAttribute(AttributeView view) {
+        selectedCategory.getAttributes().remove(view);
+    }
+
+    public void addNewAttributeValue(AttributeView view) {
+        view.getValues().add(new AttributeValue());
+    }
+
+    public void removeNewAttributeValue(AttributeView view, AttributeValue value) {
+        view.getValues().remove(value);
+    }
+
+    public void updateCategory() {
+        categoryHelper.update(selectedCategory);
+    }
 
 }
