@@ -87,113 +87,128 @@
                 </div>
             </div>
 
-            <!-- [Button] Add attribute-->
-            <div class="row align-middle">
-                <div class="columns small-offset-3 medium-offset-3 small-6 medium-6">
-                    <h:commandButton
-                            class="button expanded"
-                            value="Pridėti naują požymį"
-                            disabled="#{empty productCategoryController.selectedCategory}"
-                            action="#{productCategoryController.addNewAttribute}">
-                        <f:ajax render="@form"/>
-                    </h:commandButton>
-                </div>
-            </div>
-
-            <!-- ATTRIBUTES -->
-            <ui:repeat value="#{productCategoryController.selectedCategory.attributes}"
-                       var="attribute">
-
-                <div class="row align-middle margin-top-3">
-
-                    <!--[Label]-->
-                    <div class="columns small-3 medium-3">
-                        <h5 class="font-bold">Požymio pavadinimas</h5>
-                    </div>
-
-                    <!--[Field] Attribute name-->
-                    <div class="columns small-8 medium-8">
-                        <h:inputText value="#{attribute.name}"
-                                     disabled="#{empty productCategoryController.selectedCategory}"/>
-                    </div>
-
-                    <!--[Button] Remove attribute-->
-                    <div class="columns small-1 medium-1">
+            <h:panelGroup id="fieldsToExecute">
+                <!-- [Button] Add attribute-->
+                <div class="row align-middle">
+                    <div class="columns small-offset-3 medium-offset-3 small-6 medium-6">
                         <h:commandButton
-                                class="button red"
-                                value="✘"
-                                action="#{productCategoryController.removeNewAttribute(attribute)}">
+                                class="button expanded"
+                                value="Pridėti naują požymį"
+                                disabled="#{empty productCategoryController.selectedCategory}"
+                                action="#{productCategoryController.addNewAttribute}">
                             <f:ajax render="@form"/>
                         </h:commandButton>
                     </div>
-
                 </div>
 
-                <div class="row align-middle">
+                <!-- ATTRIBUTES -->
+                <ui:repeat value="#{productCategoryController.selectedCategory.attributes}"
+                           var="attribute">
 
-                    <!-- [Label] -->
-                    <div class="columns small-offset-3 medium-offset-3 small-3 medium-3">
-                        <h6 class="font-bold">Požymio galimos reikšmės:</h6>
-                    </div>
+                    <div class="row align-middle margin-top-3">
 
-                    <!-- [Button] Add new attribute value -->
-                    <div class="columns small-1 medium-1">
-                        <h:commandButton
-                                class="button success"
-                                value="+"
-                                action="#{productCategoryController.addNewAttributeValue(attribute)}">
-                            <f:ajax execute="@form" render="@form categoryAttributesForm"/>
-                        </h:commandButton>
-                    </div>
-
-                </div>
-
-                <!-- ATTRIBUTE VALUES -->
-                <ui:repeat value="#{attribute.values}" var="attributeValue">
-                    <div class="row">
-
-                        <!-- [Field] Attribute value -->
-                        <div class="columns small-offset-3 medium-offset-3 small-3 medium-3">
-                            <h:inputText value="#{attributeValue.value}"/>
+                        <!--[Label]-->
+                        <div class="columns small-3 medium-3">
+                            <h5 class="font-bold">Požymio pavadinimas</h5>
                         </div>
 
-                        <!-- [Button] Remove attribute value -->
+                        <!--[Field] Attribute name-->
+                        <div class="columns small-8 medium-8">
+                            <h:inputText value="#{attribute.name}"
+                                         disabled="#{empty productCategoryController.selectedCategory}">
+                                <!--ajax needed to preserve values when adding more attributes-->
+                                <f:ajax/>
+                            </h:inputText>
+                        </div>
+
+                        <!--[Button] Remove attribute-->
                         <div class="columns small-1 medium-1">
                             <h:commandButton
                                     class="button red"
                                     value="✘"
-                                    action="#{productCategoryController.removeNewAttributeValue(attribute, attributeValue)}">
+                                    action="#{productCategoryController.removeNewAttribute(attribute)}">
                                 <f:ajax render="@form"/>
                             </h:commandButton>
                         </div>
 
                     </div>
+
+                    <div class="row align-middle">
+
+                        <!-- [Label] -->
+                        <div class="columns small-offset-3 medium-offset-3 small-3 medium-3">
+                            <h6 class="font-bold">Požymio galimos reikšmės:</h6>
+                        </div>
+
+                        <!-- [Button] Add new attribute value -->
+                        <div class="columns small-1 medium-1">
+                            <h:commandButton
+                                    class="button success"
+                                    value="+"
+                                    action="#{productCategoryController.addNewAttributeValue(attribute)}">
+                                <f:ajax render="@form categoryAttributesForm"/>
+                            </h:commandButton>
+                        </div>
+
+                    </div>
+
+                    <!-- ATTRIBUTE VALUES -->
+                    <ui:repeat value="#{attribute.values}" var="attributeValue">
+                        <div class="row">
+
+                            <!-- [Field] Attribute value -->
+                            <div class="columns small-offset-3 medium-offset-3 small-3 medium-3">
+                                <h:inputText value="#{attributeValue.value}">
+                                    <!--ajax needed to preserve values when adding more attributes-->
+                                    <f:ajax/>
+                                </h:inputText>
+                            </div>
+
+                            <!-- [Button] Remove attribute value -->
+                            <div class="columns small-1 medium-1">
+                                <h:commandButton
+                                        class="button red"
+                                        value="✘"
+                                        action="#{productCategoryController.removeNewAttributeValue(attribute, attributeValue)}">
+                                    <f:ajax render="@form"/>
+                                </h:commandButton>
+                            </div>
+
+                        </div>
+                    </ui:repeat>
+
                 </ui:repeat>
 
-            </ui:repeat>
+                <!-- [Button] Update category -->
+                <div class="row align-middle section">
+                    <h:commandButton
+                            class="button expanded success"
+                            value="Išsaugoti"
+                            action="#{productCategoryController.updateCategory}">
+                        <f:ajax render="@form" execute="fieldsToExecute"/>
+                    </h:commandButton>
+                </div>
 
-            <!-- [Button] Update category -->
-            <div class="row align-middle section">
-                <h:commandButton
-                        class="button expanded success"
-                        value="Išsaugoti"
-                        action="#{productCategoryController.updateCategory}">
-                    <f:ajax render="@form" execute="@form"/>
-                </h:commandButton>
-            </div>
+                <!-- For validation -->
+                <h:inputHidden id="categoryValidationInput" value="true">
+                    <f:validator binding="#{categoryValidation}"/>
+                    <f:attribute name="categories" value="#{productCategoryController.categories}"/>
+                </h:inputHidden>
 
-            <!-- Saving Error/Success Message -->
-            <div class="row-align-middle text-center">
-                <div class="columns">
-                    <div class="mar-bot-5">
-                        <h:outputText class="alert-text-large"
-                                      value="#{productCategoryController.savingErrorMessage}"/>
-                        <h:outputText rendered="#{productCategoryController.isSavingSuccess}"
-                                      class="success-text-large"
-                                      value="Kategorijos sėkmingai išsaugotos"/>
+                <!-- Saving Error/Success Message -->
+                <div class="row-align-middle text-center">
+                    <div class="columns">
+                        <div class="mar-bot-5">
+                            <h:message class="alert-text-large" for="categoryValidationInput"/>
+                            <h:outputText class="alert-text-large"
+                                          value="#{productCategoryController.savingErrorMessage}"/>
+                            <h:outputText rendered="#{productCategoryController.isSavingSuccess}"
+                                          class="success-text-large"
+                                          value="Kategorijos sėkmingai išsaugotos"/>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </h:panelGroup>
 
         </h:form>
 

@@ -86,6 +86,7 @@ public class ProductCategoryController {
         isCreationSuccess = true;
     }
 
+    //Not good to save directly to database
     public void deleteCategory() {
         eraseAllMessages();
 
