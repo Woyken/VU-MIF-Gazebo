@@ -66,7 +66,6 @@ public class EditProductValidation extends DiscountValidation implements Validat
             throw new ValidatorException(new FacesMessage("Kaina negali būti neigiama"));
         }
 
-
         Long existingId = productRepository.getIdBySku(sku);
 
         if (existingId != null && !existingId.equals(id)) {
