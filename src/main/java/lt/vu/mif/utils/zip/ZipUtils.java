@@ -39,7 +39,7 @@ public class ZipUtils {
         throws IOException {
         for (Image image : images) {
             ZipEntry entry = new ZipEntry(
-                Constants.IMAGES_FOLDER + Constants.IMAGE_PREFIX + image.getId()
+                "/" + Constants.IMAGES_FOLDER + Constants.IMAGE_PREFIX + image.getId()
                     + Constants.IMAGE_TYPE);
             zos.putNextEntry(entry);
             zos.write(image.getContent());
