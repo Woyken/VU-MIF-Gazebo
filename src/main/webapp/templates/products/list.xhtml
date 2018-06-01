@@ -167,7 +167,7 @@
     <!-- SORTING -->
     <div class="row align-middle margin-bottom-0">
 
-        <div class="columns small-12 medium-3 medium-offset-4 shrink">
+        <div class="columns small-12 medium-3 medium-offset-2 shrink">
             <span class="font-bold"> Rikiuoti pagal </span>
         </div>
 
@@ -179,6 +179,22 @@
                     <f:selectItem itemLabel="Pigiausi aukščiau" itemValue="PRICE_ASCENDING"/>
 
                     <f:ajax listener="#{productController.search()}" render="productList"/>
+                </h:selectOneMenu>
+            </h:form>
+        </div>
+
+        <div class="columns small-12 medium-3 shrink">
+            <span class="font-bold"> Prekių puslapyje </span>
+        </div>
+
+        <div class="columns small-12 medium-1 padding-top-1">
+            <h:form>
+                <h:selectOneMenu value="#{productController.pageSize}">
+                    <f:selectItem itemValue="12"/>
+                    <f:selectItem itemValue="20"/>
+                    <f:selectItem itemValue="48"/>
+                    <f:selectItem itemValue="100"/>
+                    <f:ajax render="productList paging-form" listener="#{productController.searchProducts(0)}"/>
                 </h:selectOneMenu>
             </h:form>
         </div>
