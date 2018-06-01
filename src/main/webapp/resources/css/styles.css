@@ -604,7 +604,15 @@ legend {
 .display-contents {
     display: contents;
 }
-
+.limit-text-length {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    line-height: 33.6px;        /* fallback */
+    max-height: 33.6px;       /* fallback */
+}
 .red {
     color: red;
 }
