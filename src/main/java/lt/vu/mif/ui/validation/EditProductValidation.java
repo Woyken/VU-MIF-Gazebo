@@ -1,6 +1,7 @@
 package lt.vu.mif.ui.validation;
 
 import java.math.BigDecimal;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -9,6 +10,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
+import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -69,6 +71,16 @@ public class EditProductValidation extends DiscountValidation implements Validat
             throw new ValidatorException(
                 new FacesMessage(
                     "Nurodytas SKU kodas jau egzistuoja sistemoje. Pateikite unikalų SKU kodą"));
+        }
+
+        List<AttributeView> allAttributes = (List<AttributeView>) uiComponent.getAttributes()
+            .get("allCategoriesAttributes");
+
+        for (AttributeView a : allAttributes) {
+            if (a.getSelectedValue() == null) {
+                throw new ValidatorException(
+                    new FacesMessage("Požymiui \"" + a.getName() + "\" nepasirinkta reikšmė"));
+            }
         }
     }
 }

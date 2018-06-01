@@ -2,6 +2,7 @@ package lt.vu.mif.ui.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ public class CategoryView implements Comparable<CategoryView> {
     private String nameWithParents;
     private CategoryView parentCategory;
     private DiscountView discount;
-    private List<String> attributes;
+    private List<AttributeView> attributes = new ArrayList<>();
 
     public CategoryView() {
     }
@@ -22,7 +23,7 @@ public class CategoryView implements Comparable<CategoryView> {
     public CategoryView(CategoryView other) {
         this.id = other.id;
         this.name = other.name;
-        this.attributes = new ArrayList<String>(other.attributes);
+        this.attributes = other.attributes.stream().map(AttributeView::new).collect(Collectors.toList());
         this.parentCategory = other.getParentCategory() == null ? null :
             new CategoryView(other.parentCategory);
         this.discount = other.getDiscount() == null ? null :

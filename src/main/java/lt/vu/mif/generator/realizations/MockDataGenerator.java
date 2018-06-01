@@ -12,6 +12,8 @@ import lt.vu.mif.model.order.Order;
 import lt.vu.mif.model.order.OrderStatus;
 import lt.vu.mif.model.order.Rating;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.CategoryAttribute;
+import lt.vu.mif.model.product.CategoryAttributeValue;
 import lt.vu.mif.model.product.Discount;
 import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
@@ -21,6 +23,7 @@ import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IOrderRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.repository.interfaces.IUserRepository;
+import lt.vu.mif.ui.view.AttributeValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,8 +42,6 @@ public class MockDataGenerator extends DataGenerator {
     private ICategoryRepository categoryRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private CategoryInserter categoryInserter;
 
     @Override
     public void generateData() {
@@ -153,6 +154,23 @@ public class MockDataGenerator extends DataGenerator {
 
         Category basketball = new Category();
         basketball.setName("Krepšinis");
+
+        CategoryAttribute basketBallAttribute = new CategoryAttribute();
+        basketBallAttribute.setCategory(basketball);
+        basketBallAttribute.setName("Kamuolio spalva");
+
+        CategoryAttributeValue white = new CategoryAttributeValue();
+        white.setCategoryAttribute(basketBallAttribute);
+        white.setValue("BALTA");
+
+        CategoryAttributeValue black = new CategoryAttributeValue();
+        black.setCategoryAttribute(basketBallAttribute);
+        black.setValue("JUODA");
+
+        basketBallAttribute.getValues().add(white);
+        basketBallAttribute.getValues().add(black);
+
+        basketball.getAttributes().add(basketBallAttribute);
 
         Category tennis = new Category();
         tennis.setName("Tenisas");

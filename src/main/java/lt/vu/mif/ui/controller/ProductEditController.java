@@ -14,6 +14,8 @@ import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IImageHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.view.AttributeValue;
+import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.DiscountView;
 import lt.vu.mif.ui.view.ImageInMemoryStreamer;
@@ -50,6 +52,8 @@ public class ProductEditController {
     private boolean isProductFound;
 
     private List<CategoryView> categories;
+    //Categories whose attributes apply to product (selected + all parents)
+    private List<AttributeView> allCategoriesAttributes;
 
     private List<ImageView> newImages = new ArrayList<>();
     private ProductView conflictingProductView;
@@ -74,8 +78,9 @@ public class ProductEditController {
 
         showSuccessMessage = false;
         categories = categoryHelper.findAll();
-        discount = productView.getDiscount() != null;
         Collections.sort(categories);
+        discount = productView.getDiscount() != null;
+        updateAttributeCategories();
     }
 
     public void handleUploadedFile() throws Exception {
@@ -109,6 +114,7 @@ public class ProductEditController {
             productView.setVersion(productHelper.getProductVersion(productView.getId()));
             showSuccessMessage = true;
             clearData();
+            categories = categoryHelper.findAll();
         } catch (OptimisticLockingFailureException ex) {
             ex.printStackTrace();
             conflictingProductView = productHelper.getProduct(productView.getId());
@@ -139,6 +145,20 @@ public class ProductEditController {
         productView.setVersion(conflictingProductView.getVersion());
         saveChanges();
         conflictingProductView = null;
+    }
+
+    public void attributeChange(AttributeView attributeView, AttributeValue value) {
+        System.out.println(value);
+    }
+
+    public void updateAttributeCategories() {
+        allCategoriesAttributes = new ArrayList<>();
+        CategoryView category = productView.getCategory();
+
+        while (category != null) {
+            allCategoriesAttributes.addAll(category.getAttributes());
+            category = category.getParentCategory();
+        }
     }
 
     public void check(boolean selected) {

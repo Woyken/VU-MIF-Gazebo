@@ -1,5 +1,6 @@
 package lt.vu.mif.model.product;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
 
 import java.math.BigDecimal;
@@ -64,4 +65,7 @@ public class Product {
 
     @Version
     private Integer version;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = ALL, mappedBy = "product", orphanRemoval = true)
+    private List<ProductAttributeValue> attributeValues;
 }

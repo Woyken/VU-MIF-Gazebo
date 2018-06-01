@@ -93,8 +93,6 @@ public class ProductDiscountController {
         productHelper.update(productView);
 
         isSuccess = true;
-
-        return;
     }
 
     private void addDiscountToCategory() {
@@ -102,8 +100,6 @@ public class ProductDiscountController {
         categoryHelper.update(selectedCategory);
 
         isSuccess = true;
-
-        return;
     }
 
     private void removeDiscountFromProduct() {

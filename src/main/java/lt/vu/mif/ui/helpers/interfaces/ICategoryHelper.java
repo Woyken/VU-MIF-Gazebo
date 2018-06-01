@@ -11,7 +11,7 @@ public interface ICategoryHelper {
 
     CategoryView getCategoryByName(String name);
 
-    void save(CategoryView view);
+    CategoryView save(CategoryView view);
 
     void update(CategoryView view);
 

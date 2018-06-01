@@ -72,6 +72,22 @@
                     <br/>
                 </div>
 
+                <!-- Attribute -->
+                <div class="row middle">
+                    <h:panelGroup rendered="#{not empty productDetailsController.attributes}">
+                        <div class="small-9 columns">
+                            <span class="font-bold">Požymiai:</span>
+                        </div>
+                        <ui:repeat value="#{productDetailsController.attributes}" var="attribute">
+                            <div class="small-9 columns">
+                                <h:outputText value="#{attribute.name}: #{attribute.selectedValue.value}"/>
+                            </div>
+                        </ui:repeat>
+                    </h:panelGroup>
+                    <br/>
+                    <br/>
+                </div>
+
                 <!-- Quantity -->
                 <!-- We do not show this to admin -->
                 <h:panelGroup rendered="#{!userService.adminLoggedIn}">

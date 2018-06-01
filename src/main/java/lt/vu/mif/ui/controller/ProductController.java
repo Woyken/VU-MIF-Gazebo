@@ -13,6 +13,8 @@ import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.ICategoryHelper;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
 import lt.vu.mif.ui.paging.Paging;
+import lt.vu.mif.ui.view.AttributeValue;
+import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.ProductSearchView;
 import lt.vu.mif.ui.view.ProductView;
@@ -36,6 +38,9 @@ public class ProductController implements Serializable {
 
     private String minPrice;
     private String maxPrice;
+
+    private List<AttributeView> attributes = new ArrayList<>();
+
     private ProductSearchView productSearch = new ProductSearchView();
     private Page<ProductView> productsPage;
     private Paging paging = new Paging();
@@ -63,6 +68,8 @@ public class ProductController implements Serializable {
     }
 
     public void searchCategory(TreeNode categoryNode) {
+        makeAttributeCategoryList((CategoryView) categoryNode.getData());
+
         List<CategoryView> categoriesToSearch = new ArrayList<CategoryView>();
         makeCategoryList(categoriesToSearch, categoryNode);
 
@@ -71,12 +78,40 @@ public class ProductController implements Serializable {
         searchProducts();
     }
 
+    private void makeAttributeCategoryList(CategoryView category) {
+        attributes = new ArrayList<>();
+
+        while (category != null) {
+            for (AttributeView a : category.getAttributes()) {
+                attributes.add(a);
+            }
+
+            category = category.getParentCategory();
+        }
+    }
+
     private void makeCategoryList(List<CategoryView> categories, TreeNode current) {
         categories.add((CategoryView) current.getData());
 
         for (TreeNode t : current.getChildren()) {
             makeCategoryList(categories, t);
         }
+    }
+
+    public void searchAttributes() {
+        List<AttributeValue> attributeValues = new ArrayList<>();
+
+        for (AttributeView a : attributes) {
+            for (AttributeValue v : a.getValues()) {
+                if (v.getIsSelected()) {
+                    attributeValues.add(v);
+                }
+            }
+        }
+
+        productSearch.setAttributeValues(attributeValues);
+
+        searchProducts();
     }
 
     public void search() {

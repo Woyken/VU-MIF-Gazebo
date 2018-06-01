@@ -11,11 +11,15 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.CategoryAttributeValue_;
 import lt.vu.mif.model.product.Product;
+import lt.vu.mif.model.product.ProductAttributeValue;
+import lt.vu.mif.model.product.ProductAttributeValue_;
 import lt.vu.mif.model.product.Product_;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.repository.utils.PersistenceUtils;
@@ -83,6 +87,7 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
     public void updateAll(List<Product> products) {
         for (Product product : products) {
             entityManager.merge(product);
+            entityManager.flush();
         }
     }
 
@@ -167,6 +172,12 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
         if (!search.isIncludeDeleted()) {
             predicates
                 .add(builder.isFalse(root.get(Product_.deleted)));
+        }
+
+        if (!CollectionUtils.isEmpty(search.getSelectedAttributeValues())) {
+            Join<Product, ProductAttributeValue> valueJoin = root.join(Product_.attributeValues);
+            predicates.add(valueJoin.get(ProductAttributeValue_.categoryAttributeValue).get(
+                CategoryAttributeValue_.id).in(search.getSelectedAttributeValues()));
         }
 
         return predicates;
