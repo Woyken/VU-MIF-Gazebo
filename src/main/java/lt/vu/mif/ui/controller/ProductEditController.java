@@ -54,6 +54,8 @@ public class ProductEditController {
     private List<CategoryView> categories;
     //Categories whose attributes apply to product (selected + all parents)
     private List<AttributeView> allCategoriesAttributes;
+    private List<AttributeView> allConflictingCategoriesAttributes;
+
 
     private List<ImageView> newImages = new ArrayList<>();
     private ProductView conflictingProductView;
@@ -118,6 +120,7 @@ public class ProductEditController {
         } catch (OptimisticLockingFailureException ex) {
             ex.printStackTrace();
             conflictingProductView = productHelper.getProduct(productView.getId());
+            updateConflictingAttributeCategories();
         }
     }
 
@@ -157,6 +160,16 @@ public class ProductEditController {
 
         while (category != null) {
             allCategoriesAttributes.addAll(category.getAttributes());
+            category = category.getParentCategory();
+        }
+    }
+
+    private void updateConflictingAttributeCategories() {
+        allConflictingCategoriesAttributes = new ArrayList<>();
+        CategoryView category = conflictingProductView.getCategory();
+
+        while (category != null) {
+            allConflictingCategoriesAttributes.addAll(category.getAttributes());
             category = category.getParentCategory();
         }
     }

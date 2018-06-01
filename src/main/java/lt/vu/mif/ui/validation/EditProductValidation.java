@@ -11,6 +11,7 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.ui.view.AttributeView;
+import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.utils.validation.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -81,6 +82,14 @@ public class EditProductValidation extends DiscountValidation implements Validat
                 throw new ValidatorException(
                     new FacesMessage("Požymiui \"" + a.getName() + "\" nepasirinkta reikšmė"));
             }
+        }
+
+        CategoryView category = (CategoryView) uiComponent.getAttributes()
+            .get("category");
+
+        if (category == null) {
+            throw new ValidatorException(
+                new FacesMessage("Pasirinkite kategoriją"));
         }
     }
 }
