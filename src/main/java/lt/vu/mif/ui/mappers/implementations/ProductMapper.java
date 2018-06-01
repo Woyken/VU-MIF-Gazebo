@@ -62,14 +62,16 @@ public class ProductMapper implements IMapper<Product, ProductView> {
             CategoryView category = view.getCategory();
             while (category != null) {
                 for (AttributeView attribute : category.getAttributes()) {
-                    CategoryAttributeValue attributeValue = attributeValueRepository
-                        .getOne(attribute.getSelectedValue().getId());
+                    if (attribute.getSelectedValue() != null) {
+                        CategoryAttributeValue attributeValue = attributeValueRepository
+                            .getOne(attribute.getSelectedValue().getId());
 
-                    ProductAttributeValue productAttributeValue = new ProductAttributeValue();
-                    productAttributeValue.setCategoryAttributeValue(attributeValue);
-                    productAttributeValue.setProduct(product);
+                        ProductAttributeValue productAttributeValue = new ProductAttributeValue();
+                        productAttributeValue.setCategoryAttributeValue(attributeValue);
+                        productAttributeValue.setProduct(product);
 
-                    attributeValues.add(productAttributeValue);
+                        attributeValues.add(productAttributeValue);
+                    }
                 }
 
                 category = category.getParentCategory();
