@@ -18,6 +18,7 @@ import lt.vu.mif.ui.view.AttributeView;
 import lt.vu.mif.ui.view.CategoryView;
 import lt.vu.mif.ui.view.ProductSearchView;
 import lt.vu.mif.ui.view.ProductView;
+import lt.vu.mif.utils.constants.Constants;
 import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,6 +44,7 @@ public class ProductController implements Serializable {
 
     private ProductSearchView productSearch = new ProductSearchView();
     private Page<ProductView> productsPage;
+    private Integer pageSize = Constants.PAGE_SIZE;
     private Paging paging = new Paging();
 
     public void onPageLoad() {
@@ -116,7 +118,7 @@ public class ProductController implements Serializable {
 
     public void search() {
         productsPage = productHelper
-            .getProductsPage(paging.getActivePage(), paging.getPageSize(), productSearch);
+            .getProductsPage(paging.getActivePage(), pageSize != null ? pageSize : paging.getPageSize(), productSearch);
         paging.setTotalPages(productsPage.getTotalPages());
     }
 
@@ -138,7 +140,7 @@ public class ProductController implements Serializable {
     public void searchProducts(int activePage) {
         paging.setActivePage(activePage);
         productsPage = productHelper
-            .getProductsPage(paging.getActivePage(), paging.getPageSize(), productSearch)
+            .getProductsPage(paging.getActivePage(), pageSize != null ? pageSize : paging.getPageSize(), productSearch)
             .map(ProductView::new);
     }
 
