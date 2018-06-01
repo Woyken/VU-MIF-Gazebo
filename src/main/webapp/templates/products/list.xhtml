@@ -328,11 +328,24 @@
                         </a>
 
                         <!-- Product name -->
-                        <h5 class="product-name bor-bot">#{productItem.title}</h5>
+                        <h5 class="product-name bor-bot limit-text-length">#{productItem.title}</h5>
 
                         <!-- Product categories -->
-                        <i></i>
-                        <h6 class="product-category text-center"><i> Kategorija: #{productItem.category.name} </i> </h6>
+                        <h6 class="product-category text-center hide-for-small-only">
+                            <i>
+                                <b> Kategorija: </b>
+                            </i>
+                            <span> #{productItem.category.name} </span>
+                        </h6>
+
+                        <!-- [Mobile] Product categories -->
+                        <h6 class="product-category text-center hide-for-medium">
+                            <i>
+                                <b> Kategorija: </b>
+                            </i>
+                            <br/>
+                            <span> #{productItem.category.name} </span>
+                        </h6>
 
                         <!-- IF THE PRODUCT IS NOT ON SALE - SHOW THIS -->
                         <!--Product price -->
