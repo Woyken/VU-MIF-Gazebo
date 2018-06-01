@@ -57,12 +57,14 @@ public class ProductParser implements IProductParser {
                     }
                 }
 
-                if (value != null) {
-                    ProductAttributeValue productAttributeValue = new ProductAttributeValue();
-                    productAttributeValue.setCategoryAttributeValue(value);
-                    productAttributeValue.setProduct(entity);
-                    entity.getAttributeValues().add(productAttributeValue);
+                if (value == null) {
+                    throw new IllegalArgumentException("Neteisingas kategorijos požymis: " + categoryAttribute.getName() + ", reikšmė: " + valueForAttribute);
                 }
+
+                ProductAttributeValue productAttributeValue = new ProductAttributeValue();
+                productAttributeValue.setCategoryAttributeValue(value);
+                productAttributeValue.setProduct(entity);
+                entity.getAttributeValues().add(productAttributeValue);
             }
 
             category = category.getParentCategory();
