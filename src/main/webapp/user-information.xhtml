@@ -31,10 +31,11 @@
 
             <!-- USER INFORMATION -->
             <div class="row">
-                <div class="columns">
-                    <h:outputLabel for="email" class="larger-text" value="Jūsų el. paštas:"/>
-                    <h:outputText class="larger-text" value="#{userService.getLoggedUserEmail()}"
-                                  id="email"/>
+                <div class="columns small-12">
+                    <h3 class="font-bold"> Jūsų el. paštas: </h3>
+                </div>
+                <div class="columns small-12">
+                    <h3> #{userService.getLoggedUserEmail()} </h3>
                 </div>
             </div>
             <!-- END OF USER INFORMATION -->

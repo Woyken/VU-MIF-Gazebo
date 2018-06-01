@@ -75,7 +75,7 @@
                     <!-- [Button] Add to current cart -->
                     <div class="small-1 columns hide-for-small-only">
                         <h:form rendered="#{userService.getLoggedUser().getRole() != 'ADMIN'}">
-                            <h:commandButton class="button expanded primary"
+                            <h:commandButton class="button expanded green"
                                              value="+"
                                              pt:data-open="inform-user-about-adding-to-cart-modal"
                                              actionListener="#{cartController.addProductToCart(product.id)}">
@@ -85,7 +85,7 @@
                     </div>
                     <!-- [Mobile][Button] Add to current cart -->
                     <div class="small-12 columns hide-for-medium">
-                        <a class="button primary expanded" data-open="add-item-to-cart-modal">
+                        <a class="button green expanded" data-open="add-item-to-cart-modal">
                             Pridėti prekę į krepšelį
                         </a>
                     </div>
@@ -111,20 +111,24 @@
                 </button>
             </div> <!-- END OF ADD ITEM TO CART -->
 
-            <div id="shopping-list-total" class="row align-right">
+            <div id="shopping-list-total" class="row align-right section margin-top-1">
                 <div class="columns">
-                    <p:outputLabel styleClass="text-right larger-text"
-                                   value="Krepšelio vertė: #{orderDetailsController.orderView.totalSum} €"/>
+                    <h4 class="text-right">
+                        <span style="font-weight: normal; color:black;"> Krepšelio vertė: </span>
+                        <b> #{orderDetailsController.orderView.totalSum} € </b>
+                    </h4>
                 </div>
             </div>
 
             <div class="row">
-                <h:commandButton class="button expanded primary"
-                                 value="Pridėti visas prekes prie krepšelio"
-                                 pt:data-open="inform-user-about-adding-to-cart-modal"
-                                 actionListener="#{cartController.addProductsToCart(orderDetailsController.orderView.products)}">
-                    <f:ajax execute="@form" render="@none"/>
-                </h:commandButton>
+                <div class="columns small-12">
+                    <h:commandButton class="button expanded green"
+                                     value="Pridėti visas prekes prie krepšelio"
+                                     pt:data-open="inform-user-about-adding-to-cart-modal"
+                                     actionListener="#{cartController.addProductsToCart(orderDetailsController.orderView.products)}">
+                        <f:ajax execute="@form" render="@none"/>
+                    </h:commandButton>
+                </div>
             </div>
         </h:panelGroup>
 

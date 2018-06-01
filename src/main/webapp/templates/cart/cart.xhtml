@@ -187,16 +187,16 @@
                 </div>
 
 
-                <!-- [Button][Mobile] Buy cart items  -->
+                <!-- [Button][Mobile] Buy cart items -->
                 <div class="hide-for-medium columns small-12 ">
                     <!--When user is logged in-->
-                    <p:commandLink class="button orange expanded"
+                    <p:commandLink class="button green expanded"
                                    value="Pirkti prekes"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and userService.isLoggedIn()}"
                                    action="#{cartController.buyProducts}"
                     />
-                    <!--When user is not logged in-->
-                    <p:commandLink class="button orange expanded"
+                    <!-- When user is not logged in -->
+                    <p:commandLink class="button green expanded"
                                    value="Pirkti prekes"
                                    action="#{cartController.buyWithoutLogin}"
                                    p:rendered="#{cartController.productsInCart.size()!=0 and !userService.isLoggedIn()}"/>
