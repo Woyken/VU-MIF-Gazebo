@@ -111,6 +111,9 @@
                     <ul class="categories-menu menu vertical nested is-active filter-price-menu">
                         <h:form id="attributesMobile">
                             <h:panelGroup rendered="#{not empty productController.attributes}">
+                                <li>
+                                    <h4 class="text-center font-bold"> Požymiai </h4>
+                                </li>
                                 <!--Filter by attributes-->
                                 <li class="margin-top-0">
                                     <ui:repeat value="#{productController.attributes}"
