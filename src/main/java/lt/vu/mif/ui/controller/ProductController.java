@@ -144,6 +144,11 @@ public class ProductController implements Serializable {
             .map(ProductView::new);
     }
 
+    public void onPageSizeChange() {
+        searchProducts(0);
+        paging.setTotalPages(productsPage.getTotalPages());
+    }
+
     public int getPagingIndex() {
         return paging.getIndex();
     }

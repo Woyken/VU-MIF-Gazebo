@@ -195,7 +195,7 @@
                     <f:selectItem itemValue="20"/>
                     <f:selectItem itemValue="48"/>
                     <f:selectItem itemValue="100"/>
-                    <f:ajax render="productList paging-form" listener="#{productController.searchProducts(0)}"/>
+                    <f:ajax render="productList paging-form" listener="#{productController.onPageSizeChange}"/>
                 </h:selectOneMenu>
             </h:form>
         </div>
