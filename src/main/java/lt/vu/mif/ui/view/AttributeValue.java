@@ -10,7 +10,7 @@ public class AttributeValue {
     private Long id;
     private String value;
     //Used in filtering
-    private Boolean isSelected = true;
+    private Boolean isSelected = false;
 
     public AttributeValue() {
     }
