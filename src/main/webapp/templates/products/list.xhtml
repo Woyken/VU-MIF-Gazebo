@@ -114,7 +114,6 @@
                                 <li>
                                     <h4 class="text-center font-bold"> Požymiai </h4>
                                 </li>
-
                                 <!--Filter by attributes-->
                                 <li class="margin-top-0">
                                     <ui:repeat value="#{productController.attributes}"
@@ -211,14 +210,15 @@
             <div data-sticky-container="">
                 <div class="sticky" data-sticky="" data-top-anchor="search" data-margin-top="5">
                     <br/>
-                    <h5 class="text-center font-bold">
-                        Visos kategorijos
-                    </h5>
-
                     <ul id="filter-aside" class="vertical menu" data-accordion-menu=""
                         data-submenu-toggle="true">
 
                         <!-- FILTER BY CATEGORIES -->
+                        <li>
+                            <h5 class="text-center font-bold">
+                                Visos kategorijos
+                            </h5>
+                        </li>
                         <ui:include src="categoryMenu.xhtml">
                             <ui:param name="parent" value="#{categoryTreeView.root}"/>
                         </ui:include>
