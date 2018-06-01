@@ -57,4 +57,12 @@ public class ProductDetailsController {
             category = category.getParentCategory();
         }
     }
+
+    public void onBeforeValidatorAddToCart() {
+        showSuccessMessage = false;
+    }
+
+    public void onAddToCart() {
+        showSuccessMessage = true;
+    }
 }

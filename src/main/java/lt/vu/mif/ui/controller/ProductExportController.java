@@ -30,12 +30,14 @@ public class ProductExportController {
     private ProductRepository productRepository;
 
     private String message;
+    private boolean isSuccess;
 
     public void onPageLoad() {
         if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) {
             return;
         }
         message = null;
+        isSuccess = false;
     }
 
     public void exportAll() throws InterruptedException, ExecutionException {
@@ -55,6 +57,7 @@ public class ProductExportController {
         if (result.getMessage() != null) {
             message = result.getMessage();
         } else {
+            isSuccess = true;
             message = "Eksportavimas sėkmingai atliktas.";
         }
     }

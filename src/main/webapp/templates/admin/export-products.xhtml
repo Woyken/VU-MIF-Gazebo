@@ -52,7 +52,7 @@
                 </c:choose>
             </div>
             <div class="hide-for-small-only columns medium-4">
-                <p:commandButton value="Atsisiųsti failą" ajax="false" rendered="#{productExportController.message ne null}"
+                <p:commandButton value="Atsisiųsti failą" ajax="false" rendered="#{productExportController.message ne null and productExportController.success}"
                                  onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s" styleClass="button expanded blue">
                     <p:fileDownload value="#{productExportController.file}" />
                 </p:commandButton>
