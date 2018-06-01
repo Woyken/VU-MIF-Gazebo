@@ -157,35 +157,41 @@
                 </h:panelGroup>
 
                 <!-- Category -->
-                <div class="row align-middle">
+                <h:panelGroup id="category">
+                    <div class="row align-middle">
 
-                    <div class="columns medium-3 small-12">
-                        <h5 class="font-bold">Kategorija</h5>
-                    </div>
+                        <div class="columns medium-3 small-12">
+                            <h5 class="font-bold">Kategorija</h5>
+                        </div>
 
-                    <div class="columns medium-9 small-12">
-                        <h:selectOneMenu value="#{productEditController.productView.category}"
-                                         converter="omnifaces.SelectItemsConverter">
-                            <f:selectItems value="#{productEditController.categories}"/>
-                            <f:ajax render="@form"
-                                    listener="#{productEditController.updateAttributeCategories}"/>
-                        </h:selectOneMenu>
-                        <ui:repeat value="#{productEditController.allCategoriesAttributes}" var="attribute">
-                            <p:outputLabel>Atributas: </p:outputLabel>
-                            <h:inputText value="#{attribute.name}" disabled="true"/>
-
-                            <p:outputLabel value="Reikšmė"/>
-                            <h:selectOneMenu value="#{attribute.selectedValue}"
+                        <div class="columns medium-9 small-12">
+                            <h:selectOneMenu value="#{productEditController.productView.category}"
                                              converter="omnifaces.SelectItemsConverter"
                                              hideNoSelectionOption="true">
-                                <f:selectItem value="#{null}" itemLabel="Pasirinkite reikšmę:"
+                                <f:selectItem value="#{null}" itemLabel="Pasirinkite kategoriją:"
                                               noSelectionOption="true"/>
-                                <f:selectItems value="#{attribute.values}"/>
-                                <f:ajax render="@form"/>
+                                <f:selectItems value="#{productEditController.categories}"/>
+                                <f:ajax render="category"
+                                        listener="#{productEditController.updateAttributeCategories}"/>
                             </h:selectOneMenu>
-                        </ui:repeat>
-                    </div>
-                </div> <!-- End of Category -->
+                            <ui:repeat value="#{productEditController.allCategoriesAttributes}"
+                                       var="attribute">
+                                <p:outputLabel>Atributas: </p:outputLabel>
+                                <h:inputText value="#{attribute.name}" disabled="true"/>
+
+                                <p:outputLabel value="Reikšmė"/>
+                                <h:selectOneMenu value="#{attribute.selectedValue}"
+                                                 converter="omnifaces.SelectItemsConverter"
+                                                 hideNoSelectionOption="true">
+                                    <f:selectItem value="#{null}" itemLabel="Pasirinkite reikšmę:"
+                                                  noSelectionOption="true"/>
+                                    <f:selectItems value="#{attribute.values}"/>
+                                    <f:ajax/>
+                                </h:selectOneMenu>
+                            </ui:repeat>
+                        </div>
+                    </div> <!-- End of Category -->
+                </h:panelGroup>
 
                 <h:panelGroup id="lowerPart">
                     <!-- Description -->
@@ -295,6 +301,8 @@
                                      value="#{!productEditController.discount}"/>
                         <f:attribute name="allCategoriesAttributes"
                                      value="#{productEditController.allCategoriesAttributes}"/>
+                        <f:attribute name="category"
+                                     value="#{productEditController.productView.category}"/>
                     </h:inputHidden>
                 </h:panelGroup>
 
@@ -393,17 +401,42 @@
 
                         </div> <!-- End of Sale date -->
 
+                        <!-- Category -->
                         <div class="row align-middle">
+
                             <div class="columns medium-3 small-12">
                                 <h5 class="font-bold">Kategorija</h5>
                             </div>
+
                             <div class="columns medium-9 small-12">
-                                <h:inputText
-                                        value="#{productEditController.conflictingProductView.category.name}"
-                                        disabled="true"
-                                        styleClass="red"/>
+                                <h:selectOneMenu
+                                        value="#{productEditController.conflictingProductView.category}"
+                                        converter="omnifaces.SelectItemsConverter"
+                                        disabled="true" styleClass="red">
+                                    <f:selectItems value="#{productEditController.categories}"/>
+                                    <f:ajax render="category"
+                                            listener="#{productEditController.updateAttributeCategories}"/>
+                                </h:selectOneMenu>
+                                <ui:repeat value="#{productEditController.allCategoriesAttributes}"
+                                           var="attribute">
+                                    <p:outputLabel>Atributas: </p:outputLabel>
+                                    <h:inputText value="#{attribute.name}" disabled="true"/>
+
+                                    <p:outputLabel value="Reikšmė"/>
+                                    <h:selectOneMenu value="#{attribute.selectedValue}"
+                                                     converter="omnifaces.SelectItemsConverter"
+                                                     hideNoSelectionOption="true"
+                                                     disabled="true" styleClass="red">
+                                        <f:selectItem value="#{null}"
+                                                      itemLabel="Pasirinkite reikšmę:"
+                                                      noSelectionOption="true"/>
+                                        <f:selectItems value="#{attribute.values}"/>
+                                        <f:ajax/>
+                                    </h:selectOneMenu>
+                                </ui:repeat>
                             </div>
-                        </div>
+                        </div> <!-- End of Category -->
+
                         <div class="row align-middle">
                             <div class="columns medium-3 small-12">
                                 <h5 class="font-bold">Aprašymas</h5>
