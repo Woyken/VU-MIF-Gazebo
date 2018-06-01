@@ -107,53 +107,47 @@
                 </div> <!-- END OF [Mobile] PRICE FILTER -->
 
 
-                <!-- [Mobile] ATTRIBUTE FILTER -->
                 <div class="columns small-12 margin-top-2">
-                    <h5 class="text-center font-bold"> Požymiai </h5>
+                    <ul class="categories-menu menu vertical nested is-active filter-price-menu">
+                        <h:form id="attributesMobile">
+                            <h:panelGroup rendered="#{not empty productController.attributes}">
+                                <li>
+                                    <h4 class="text-center font-bold"> Požymiai </h4>
+                                </li>
 
-                    <ul class="categories-menu menu vertical nested is-active">
+                                <!--Filter by attributes-->
+                                <li class="margin-top-0">
+                                    <ui:repeat value="#{productController.attributes}"
+                                               var="attribute">
+                                        <h5 class="text-center font-bold margin-top-2"> #{attribute.name} </h5>
+                                        <ul class="menu vertical nested is-active">
+                                            <ui:repeat value="#{attribute.values}"
+                                                       var="attributeValue">
+                                                <li>
+                                                    <h:selectBooleanCheckbox id="attributeValue"
+                                                                             value="#{attributeValue.isSelected}"/>
+                                                    <h:outputLabel for="attributeValue">
+                                                        #{attributeValue.value}
+                                                    </h:outputLabel>
+                                                </li>
+                                            </ui:repeat>
+                                        </ul>
+                                    </ui:repeat>
+                                </li>
 
-                        <li>
-                            <input id="attribute-checkbox-mobile1" type="checkbox"/>
-                            <label for="attribute-checkbox-mobile1">
-                                Attribute 1
-                            </label>
-                        </li>
+                                <!-- [Button] Filter by attributes -->
+                                <li class="margin-top-2">
+                                    <h:commandButton class="button expanded" value="Filtruoti">
+                                        <f:ajax execute="@form"
+                                                listener="#{productController.searchAttributes}"
+                                                render="productList paging-form"/>
+                                    </h:commandButton>
+                                </li>
 
-                        <li>
-                            <input id="attribute-checkbox-mobile2" type="checkbox"/>
-                            <label for="attribute-checkbox-mobile2">
-                                Attribute 2
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="attribute-checkbox-mobile3" type="checkbox"/>
-                            <label for="attribute-checkbox-mobile3">
-                                Attribute 3
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="attribute-checkbox-mobile4" type="checkbox"/>
-                            <label for="attribute-checkbox-mobile4">
-                                Attribute 4
-                            </label>
-                        </li>
-
-                        <li>
-                            <input id="attribute-checkbox-mobile5" type="checkbox"/>
-                            <label for="attribute-checkbox-mobile5">
-                                Attribute 5
-                            </label>
-                        </li>
-
+                            </h:panelGroup>
+                        </h:form>
                     </ul>
-
-                    <!-- [Button][Mobile] Filter by attribute -->
-                    <button type="button" class="button expanded margin-top-1" data-close="">
-                        Filtruoti
-                    </button>
+                </div>
 
                 </div> <!-- END OF [Mobile] ATTRIBUTE FILTER -->
 
@@ -167,7 +161,7 @@
             </button>
         </div>
 
-    </div><!-- END OF [MOBILE] OFF-CANVAS PRODUCT FILTER -->
+    <!-- END OF [MOBILE] OFF-CANVAS PRODUCT FILTER -->
 
 
     <!-- SORTING -->
