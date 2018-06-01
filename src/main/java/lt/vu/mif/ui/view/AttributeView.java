@@ -22,7 +22,8 @@ public class AttributeView {
         id = other.id;
         name = other.name;
         values = other.values.stream().map(AttributeValue::new).collect(Collectors.toList());
-        selectedValue = new AttributeValue(other.selectedValue);
+        selectedValue =
+            other.selectedValue == null ? null : new AttributeValue(other.selectedValue);
     }
 
     @Override
