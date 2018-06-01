@@ -40,41 +40,43 @@ public class PresentationDataGenerator implements IDataGenerator {
         //ILGIS
         CategoryAttribute lenght = createCategoryAttribute(skateboad, "Ilgis");
         List<CategoryAttributeValue> lenghtValues = new ArrayList<>();
-        lenghtValues.add(createAttributeValue(lenght, "30"));
-        lenghtValues.add(createAttributeValue(lenght, "31"));
-        lenghtValues.add(createAttributeValue(lenght, "32"));
-        lenghtValues.add(createAttributeValue(lenght, "39"));
-        lenghtValues.add(createAttributeValue(lenght, "40"));
-        lenghtValues.add(createAttributeValue(lenght, "40,5"));
-        lenghtValues.add(createAttributeValue(lenght, "46"));
-        lenghtValues.add(createAttributeValue(lenght, "38"));
+        lenghtValues.add(createAttributeValue(lenght, "30''"));
+        lenghtValues.add(createAttributeValue(lenght, "31''"));
+        lenghtValues.add(createAttributeValue(lenght, "32''"));
+        lenghtValues.add(createAttributeValue(lenght, "39''"));
+        lenghtValues.add(createAttributeValue(lenght, "40''"));
+        lenghtValues.add(createAttributeValue(lenght, "40,5''"));
+        lenghtValues.add(createAttributeValue(lenght, "46''"));
+        lenghtValues.add(createAttributeValue(lenght, "38''"));
         lenght.getValues().addAll(lenghtValues);
 
 
         //PLOTIS
         CategoryAttribute width = createCategoryAttribute(skateboad, "Plotis");
         List<CategoryAttributeValue> widthValues = new ArrayList<>();
-        widthValues.add(createAttributeValue(width, "7.5"));
-        widthValues.add(createAttributeValue(width, "8"));
-        widthValues.add(createAttributeValue(width, "10"));
-        widthValues.add(createAttributeValue(width, "29.75"));
-        widthValues.add(createAttributeValue(width, "9.75"));
-        widthValues.add(createAttributeValue(width, "9"));
-        widthValues.add(createAttributeValue(width, "46"));
+        widthValues.add(createAttributeValue(width, "7,5''"));
+        widthValues.add(createAttributeValue(width, "8''"));
+        widthValues.add(createAttributeValue(width, "10''"));
+        widthValues.add(createAttributeValue(width, "29,75''"));
+        widthValues.add(createAttributeValue(width, "9,75''"));
+        widthValues.add(createAttributeValue(width, "9,6''"));
+        widthValues.add(createAttributeValue(width, "9''"));
         width.getValues().addAll(widthValues);
 
         //RATAI
         CategoryAttribute wheels = createCategoryAttribute(skateboad, "Ratai");
         List<CategoryAttributeValue> wheelsValues = new ArrayList<>();
-        wheelsValues.add(createAttributeValue(wheels, "52x30mm,100A"));
-        wheelsValues.add(createAttributeValue(wheels, "52x33mm,100A"));
-        wheelsValues.add(createAttributeValue(wheels, "32x30mm,100A"));
-        wheelsValues.add(createAttributeValue(wheels, "75x52mm,78A"));
-        wheelsValues.add(createAttributeValue(wheels, "71x51mm,82A"));
-        wheelsValues.add(createAttributeValue(wheels, "70x51mm,78A"));
-        wheelsValues.add(createAttributeValue(wheels, "80 mm 84A"));
-        wheelsValues.add(createAttributeValue(wheels, "110 mm 88A"));
-        wheelsValues.add(createAttributeValue(wheels, "110 mm 85A"));
+        wheelsValues.add(createAttributeValue(wheels, "52x30 mm, 100A"));
+        wheelsValues.add(createAttributeValue(wheels, "52x33 mm, 100A"));
+        wheelsValues.add(createAttributeValue(wheels, "32x30 mm, 100A"));
+        wheelsValues.add(createAttributeValue(wheels, "75x52 mm, 78A"));
+        wheelsValues.add(createAttributeValue(wheels, "71x51 mm, 82A"));
+        wheelsValues.add(createAttributeValue(wheels, "70x51 mm, 78A"));
+        wheelsValues.add(createAttributeValue(wheels, "70x51 mm, 80A"));
+        wheelsValues.add(createAttributeValue(wheels, "80 mm, 84A"));
+        wheelsValues.add(createAttributeValue(wheels, "80 mm, 85A"));
+        wheelsValues.add(createAttributeValue(wheels, "110 mm, 88A"));
+        wheelsValues.add(createAttributeValue(wheels, "110 mm, 85A"));
         wheels.getValues().addAll(wheelsValues);
 
 
@@ -85,7 +87,9 @@ public class PresentationDataGenerator implements IDataGenerator {
         bearingsValues.add(createAttributeValue(bearings, "Wicked ABEC 7"));
         bearingsValues.add(createAttributeValue(bearings, "High Precision Mindless"));
         bearingsValues.add(createAttributeValue(bearings, "ABEC 9"));
+        bearingsValues.add(createAttributeValue(bearings, "ABEC 7"));
         bearingsValues.add(createAttributeValue(bearings, "Twincam"));
+        bearingsValues.add(createAttributeValue(bearings, "Twincam Titalium feeride"));
         bearingsValues.add(createAttributeValue(bearings, "Wicked freespin ABEC 9"));
         bearings.getValues().addAll(bearingsValues);
 
@@ -93,7 +97,7 @@ public class PresentationDataGenerator implements IDataGenerator {
         longboards.setName("Longboards");
         longboards.setParentCategory(skateboad);
 
-        CategoryAttribute maxHeight = createCategoryAttribute(longboards, "Maksimalus svoris");
+        CategoryAttribute maxHeight = createCategoryAttribute(longboards, "Maksimalus Svoris");
         List<CategoryAttributeValue> maxHeightValues = new ArrayList<>();
         maxHeightValues.add(createAttributeValue(maxHeight, "130kg"));
         maxHeightValues.add(createAttributeValue(maxHeight, "120kg"));
@@ -113,8 +117,10 @@ public class PresentationDataGenerator implements IDataGenerator {
 
         CategoryAttribute axis = createCategoryAttribute(skateboards, "Ašys");
         List<CategoryAttributeValue> axisValues = new ArrayList<>();
-        axisValues.add(createAttributeValue(axis, "Ašis 1"));
-        axisValues.add(createAttributeValue(axis, "Ašis 2"));
+        axisValues.add(createAttributeValue(axis, "5'' Temple Pro"));
+        axisValues.add(createAttributeValue(axis, "5'' gravity casted AL"));
+        axisValues.add(createAttributeValue(axis, "8 mm"));
+
         axis.getValues().addAll(axisValues);
 
         Category skates = new Category();
@@ -130,31 +136,36 @@ public class PresentationDataGenerator implements IDataGenerator {
         skatesBearingsValues.add(createAttributeValue(skatesBearings, "ABEC 9"));
         skatesBearingsValues.add(createAttributeValue(skatesBearings, "Twincam"));
         skatesBearingsValues.add(createAttributeValue(skatesBearings, "Wicked freespin ABEC 9"));
+        skatesBearingsValues.add(createAttributeValue(skatesBearings, "Twincam Titalium freeride"));
         skatesBearings.getValues().addAll(skatesBearingsValues);
 
         CategoryAttribute skatesaxis = createCategoryAttribute(skates, "Ašys");
         List<CategoryAttributeValue> skatesaxisValues = new ArrayList<>();
-        skatesaxisValues.add(createAttributeValue(skatesaxis, "Ašis 1"));
-        skatesaxisValues.add(createAttributeValue(skatesaxis, "Ašis 2"));
+        skatesaxisValues.add(createAttributeValue(skatesaxis, "8 mm"));
+        skatesaxisValues.add(createAttributeValue(skatesaxis, "5'' Temple Pro"));
+        skatesaxisValues.add(createAttributeValue(skatesaxis, "5'' gravity casted AL"));
         skatesaxis.getValues().addAll(skatesaxisValues);
 
 
         CategoryAttribute skatesWheel = createCategoryAttribute(skates, "Ratai");
         List<CategoryAttributeValue> skatesWheelValues = new ArrayList<>();
-        skatesWheelValues.add(createAttributeValue(skatesWheel, "52x30mm,100A"));
-        skatesWheelValues.add(createAttributeValue(skatesWheel, "52x33mm,100A"));
-        skatesWheelValues.add(createAttributeValue(skatesWheel, "32x30mm,100A"));
-        skatesWheelValues.add(createAttributeValue(skatesWheel, "75x52mm,78A"));
-        skatesWheelValues.add(createAttributeValue(skatesWheel, "71x51mm,82A"));
-        skatesWheelValues.add(createAttributeValue(skatesWheel, "70x51mm,78A"));
-        skatesWheelValues.add(createAttributeValue(skatesWheel, "80 mm 84A"));
-        skatesWheelValues.add(createAttributeValue(skatesWheel, "110 mm 88A"));
-        skatesWheelValues.add(createAttributeValue(skatesWheel, "110 mm 85A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "52x30 mm, 100A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "52x33 mm, 100A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "32x30 mm, 100A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "75x52 mm, 78A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "71x51 mm, 82A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "70x51 mm, 78A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "70x51 mm, 80A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "80 mm, 84A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "80 mm, 85A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "110 mm, 88A"));
+        skatesWheelValues.add(createAttributeValue(skatesWheel, "110 mm, 85A"));
         skatesWheel.getValues().addAll(skatesWheelValues);
 
         CategoryAttribute purpose = createCategoryAttribute(skates, "Paskirtis");
         List<CategoryAttributeValue> purposeValues = new ArrayList<>();
-        purposeValues.add(createAttributeValue(purpose, "Paskirtis"));
+        purposeValues.add(createAttributeValue(purpose, "Freeride"));
+        purposeValues.add(createAttributeValue(purpose, "Fitness"));
         purpose.getValues().addAll(purposeValues);
 
         Category protection = new Category();
@@ -174,6 +185,10 @@ public class PresentationDataGenerator implements IDataGenerator {
         sizeValues.add(createAttributeValue(size, "S"));
         sizeValues.add(createAttributeValue(size, "M"));
         sizeValues.add(createAttributeValue(size, "L"));
+        sizeValues.add(createAttributeValue(size, "52 mm"));
+        sizeValues.add(createAttributeValue(size, "80 mm"));
+        sizeValues.add(createAttributeValue(size, "62 mm"));
+
         size.getValues().addAll(sizeValues);
 
         Category spareParts = new Category();
@@ -189,11 +204,15 @@ public class PresentationDataGenerator implements IDataGenerator {
         wheelSizeValues.add(createAttributeValue(wheelSize, "S"));
         wheelSizeValues.add(createAttributeValue(wheelSize, "M"));
         wheelSizeValues.add(createAttributeValue(wheelSize, "L"));
+        wheelSizeValues.add(createAttributeValue(wheelSize, "52 mm"));
+        wheelSizeValues.add(createAttributeValue(wheelSize, "80 mm"));
+        wheelSizeValues.add(createAttributeValue(wheelSize, "62 mm"));
+
         wheelSize.getValues().addAll(wheelSizeValues);
 
         CategoryAttribute thickness = createCategoryAttribute(partwheels, "Storis");
         List<CategoryAttributeValue> thicknessValues = new ArrayList<>();
-        thicknessValues.add(createAttributeValue(thickness, "30mm"));
+        thicknessValues.add(createAttributeValue(thickness, "30 mm"));
         thickness.getValues().addAll(thicknessValues);
 
         CategoryAttribute hardness = createCategoryAttribute(partwheels, "Kietumas");
