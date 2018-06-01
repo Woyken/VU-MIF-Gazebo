@@ -9,6 +9,7 @@ import java.util.concurrent.CompletionStage;
 import lt.vu.mif.model.product.Category;
 import lt.vu.mif.model.product.Image;
 import lt.vu.mif.model.product.Product;
+import lt.vu.mif.model.product.ProductAttributeValue;
 import lt.vu.mif.utils.constants.Constants;
 import lt.vu.mif.utils.zip.ZipUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -71,33 +72,45 @@ public class ProductExcelWriter extends ProductExcelComponent {
 
     private void writeProducts(List<Product> products, Sheet sheet) {
         int rowNo = 1;
-        int mergeFrom = 0;
 
         for (Product product : products) {
             Row row = sheet.createRow(rowNo++);
 
-            row.createCell(0).setCellValue(product.getName());
+            row.createCell(0).setCellValue(product.getTitle());
             row.createCell(1).setCellValue(product.getTitle());
             row.createCell(2).setCellValue(product.getPrice().toString());
             row.createCell(3).setCellValue(getImagesText(product.getImages()));
             row.createCell(4).setCellValue(product.getSku());
             row.createCell(5).setCellValue(product.getDescription());
             row.createCell(6).setCellValue(getCategoryText(product.getCategory()));
-            row.createCell(7).setCellValue("add attributes here");
 
-            //Merging rows
-            if (!product.getCategory().getAttributes().isEmpty()) {
-                int mergeTo = mergeFrom + product.getCategory().getAttributes().size();
-                for (int i = 0; i < 7; i++) {
-                    sheet.addMergedRegion(new CellRangeAddress(mergeFrom, mergeTo, i, i));
+            ProductAttributeValue firstVal = product.getAttributeValues().isEmpty() ? null : product.getAttributeValues().get(0);
+            if (firstVal == null) {
+                row.createCell(7).setCellValue("");
+                row.createCell(8).setCellValue("");
+            } else {
+                writeAttribute(row, firstVal);
+                product.getAttributeValues().remove(firstVal);
+            }
 
+            if (product.getAttributeValues().size() > 0) {
+                for (ProductAttributeValue value : product.getAttributeValues()) {
+                    Row newRow = sheet.createRow(rowNo++);
+                    writeAttribute(newRow, value);
                 }
-                mergeFrom = mergeTo + 1;
+                for (int i = 0; i < 7; i++) {
+                    sheet.addMergedRegion(new CellRangeAddress(rowNo - product.getAttributeValues().size() - 1, rowNo - 1, i, i));
+                }
             }
         }
 
         //Merge header column
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 7, 8));
+    }
+
+    private void writeAttribute(Row row, ProductAttributeValue firstVal) {
+        row.createCell(7).setCellValue(firstVal.getCategoryAttributeValue().getCategoryAttribute().getName());
+        row.createCell(8).setCellValue(firstVal.getCategoryAttributeValue().getValue());
     }
 
 
