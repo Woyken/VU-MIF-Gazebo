@@ -3,6 +3,7 @@ package lt.vu.mif.ui.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,16 @@ public class AttributeView {
     private String name;
     private List<AttributeValue> values = new ArrayList<>();
     private AttributeValue selectedValue;
+
+    public AttributeView() {
+    }
+
+    public AttributeView(AttributeView other) {
+        id = other.id;
+        name = other.name;
+        values = other.values.stream().map(AttributeValue::new).collect(Collectors.toList());
+        selectedValue = new AttributeValue(other.selectedValue);
+    }
 
     @Override
     public boolean equals(Object o) {

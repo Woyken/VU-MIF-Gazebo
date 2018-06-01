@@ -9,6 +9,17 @@ import lombok.Setter;
 public class AttributeValue {
     private Long id;
     private String value;
+    //Used in filtering
+    private Boolean isSelected = true;
+
+    public AttributeValue() {
+    }
+
+    AttributeValue(AttributeValue other) {
+        id = other.id;
+        value = other.value;
+        isSelected = other.isSelected;
+    }
 
     @Override
     public String toString() {

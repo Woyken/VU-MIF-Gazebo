@@ -53,7 +53,7 @@ public class ProductEditController {
 
     private List<CategoryView> categories;
     //Categories whose attributes apply to product (selected + all parents)
-    private List<CategoryView> attributeCategories;
+    private List<AttributeView> allCategoriesAttributes;
 
     private List<ImageView> newImages = new ArrayList<>();
     private ProductView conflictingProductView;
@@ -71,6 +71,7 @@ public class ProductEditController {
             conflictingProductView = null;
             isProductFound = true;
         } catch (IllegalArgumentException x) {
+            discountView = new DiscountView();
             productView = new ProductView();
             isProductFound = false;
         }
@@ -151,11 +152,11 @@ public class ProductEditController {
     }
 
     public void updateAttributeCategories() {
-        attributeCategories = new ArrayList<>();
+        allCategoriesAttributes = new ArrayList<>();
         CategoryView category = productView.getCategory();
 
         while (category != null) {
-            attributeCategories.add(category);
+            allCategoriesAttributes.addAll(category.getAttributes());
             category = category.getParentCategory();
         }
     }

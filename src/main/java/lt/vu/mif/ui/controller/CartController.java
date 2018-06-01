@@ -9,8 +9,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.Logging.Logged;
 import lt.vu.mif.ui.helpers.interfaces.IProductHelper;
+import lt.vu.mif.ui.view.BoughtProductView;
 import lt.vu.mif.ui.view.CartItemView;
 import lt.vu.mif.ui.view.CartView;
+import lt.vu.mif.ui.view.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -46,6 +48,13 @@ public class CartController implements Serializable {
     public void addProductToCart(Long id, Long amount) {
         addOrIncrementProduct(id, amount);
         onItemAmountChange();
+    }
+
+    public void addProductsToCart(List<BoughtProductView> products){
+        for (BoughtProductView item: products)
+        {
+            addProductToCart(item.getId(), 1L);
+        }
     }
 
     public BigDecimal getSum() {
