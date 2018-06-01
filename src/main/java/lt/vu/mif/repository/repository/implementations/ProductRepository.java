@@ -195,6 +195,9 @@ public class ProductRepository extends SimpleJpaRepository<Product, Long> implem
             } else if (productSearch.getSortBy() == ProductSortEnum.PRICE_ASCENDING) {
                 criteriaQuery.orderBy(criteriaBuilder.asc(root.get(Product_.price)));
             }
+
+            criteriaQuery.distinct(true);
+
             return criteriaBuilder.and(PersistenceUtils
                 .toArray(buildSearchPredicates(productSearch, root, criteriaBuilder)));
         };
