@@ -103,9 +103,10 @@
                 </h:panelGroup>
 
 
-                <!-- IF PRODUCT IS ON SALE - SHOW THIS -->
+                <!-- IF PRODUCT IS NOT ON SALE - SHOW THIS -->
                 <!-- Price -->
-                <h:panelGroup rendered="#{empty productDetailsController.productView.newPrice}">
+                <h:panelGroup rendered="#{(productDetailsController.productView.price eq
+                 productDetailsController.productView.newPrice)}">
                     <div class="row">
                         <div class="small-3 columns">
                             <label for="product-quantity" class="font-bold">Kaina:</label>
@@ -117,9 +118,10 @@
                 </h:panelGroup>
 
 
-                <!-- IF PRODUCT IS NOT ON SALE - SHOW THIS -->
+                <!-- IF PRODUCT IS ON SALE - SHOW THIS -->
                 <!-- Price -->
-                <h:panelGroup rendered="#{not empty productDetailsController.productView.newPrice}">
+                <h:panelGroup rendered="#{not (productDetailsController.productView.price eq
+                 productDetailsController.productView.newPrice)}">
                     <div class="row mar-bot-5">
                         <div class="small-3 columns">
                             <label for="product-quantity" class="font-bold">Kaina:</label>
