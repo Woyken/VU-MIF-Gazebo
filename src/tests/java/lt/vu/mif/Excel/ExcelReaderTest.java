@@ -2,10 +2,13 @@ package lt.vu.mif.Excel;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 import lt.vu.mif.excel.ImportResult;
 import lt.vu.mif.excel.ProductExcelReader;
-import lt.vu.mif.model.product.Category;
+import lt.vu.mif.generator.interfaces.IDataGenerator;
+import lt.vu.mif.model.product.Product;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
+import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.utils.implementations.ProductParser;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +22,7 @@ import org.springframework.util.ResourceUtils;
 @RunWith(SpringRunner.class)
 public class ExcelReaderTest {
 
-    private static final String FILE_NAME = "/tests_products.xlsx";
+    private static final String FILE_NAME = "/products.xlsx";
 
     @Autowired
     private ProductExcelReader productExcelReader;
@@ -27,50 +30,14 @@ public class ExcelReaderTest {
     private ProductParser productParser;
     @Autowired
     private ICategoryRepository categoryRepository;
+    @Autowired
+    private IProductRepository productRepository;
+    @Autowired
+    private IDataGenerator dataGenerator;
 
     @Before
     public void init() {
-        Category electronics = new Category();
-        electronics.setName("electronics");
-
-        Category phones = new Category();
-        phones.setName("phones");
-
-        Category smartPhones = new Category();
-        smartPhones.setName("smart-phones");
-
-        smartPhones.setParentCategory(phones);
-        phones.setParentCategory(electronics);
-
-        Category other = new Category();
-        other.setName("other");
-
-        Category smartWatches = new Category();
-        smartWatches.setName("smart-watches");
-
-        smartWatches.setParentCategory(other);
-        other.setParentCategory(electronics);
-
-        Category houseAppliances = new Category();
-        houseAppliances.setName("house-appliances");
-
-        Category other2 = new Category();
-        other2.setName("other2");
-
-        other2.setParentCategory(houseAppliances);
-        houseAppliances.setParentCategory(electronics);
-
-        Category test = new Category();
-        test.setName("TEST");
-
-        categoryRepository.save(electronics);
-        categoryRepository.save(phones);
-        categoryRepository.save(smartPhones);
-        categoryRepository.save(other);
-        categoryRepository.save(smartWatches);
-        categoryRepository.save(houseAppliances);
-        categoryRepository.save(other2);
-        categoryRepository.save(test);
+        dataGenerator.generateData();
     }
 
     @Test
@@ -83,7 +50,8 @@ public class ExcelReaderTest {
             throw new IllegalStateException(productList.getMessage());
         }
 
-        productParser.parseProducts(productList);
+        List<Product> products = productParser.parseProducts(productList);
+        productRepository.saveAll(products);
 
         if (productList.getMessage() != null) {
             throw new IllegalStateException(productList.getMessage());

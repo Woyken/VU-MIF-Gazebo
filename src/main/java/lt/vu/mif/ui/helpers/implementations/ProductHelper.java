@@ -190,8 +190,10 @@ public class ProductHelper implements IProductHelper {
             .readFile(inputStream);
 
         productPromise.thenAccept(importResult -> {
-            List<Product> productsToSave = productParser.parseProducts(importResult);
-            saveAll(productsToSave);
+            if (importResult.getMessage() == null) {
+                List<Product> productsToSave = productParser.parseProducts(importResult);
+                saveAll(productsToSave);
+            }
         });
 
         return productPromise.toCompletableFuture();

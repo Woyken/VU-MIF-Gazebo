@@ -5,11 +5,14 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import lt.vu.mif.model.product.Category;
+import lt.vu.mif.model.product.CategoryAttribute;
 import lt.vu.mif.repository.repository.interfaces.ICategoryRepository;
 import lt.vu.mif.repository.repository.interfaces.IProductRepository;
 import lt.vu.mif.utils.interfaces.IImageReader;
@@ -43,6 +46,7 @@ public class ProductExcelReader extends ProductExcelComponent {
     public ImportResult readFileSync(InputStream inputStream) {
         ImportResult importResult = new ImportResult();
         List<Object> rowValues = new ArrayList<>();
+        Map<String, String> properties = new HashMap<>();
 
         String errorMessage;
 
@@ -58,7 +62,7 @@ public class ProductExcelReader extends ProductExcelComponent {
 
             List<CellRangeAddress> productsAddresses = getProductAddresses(sheet);
             CellRangeAddress newProductAddress = getAndRemove(productsAddresses, sheet);
-            ParsedProductResult product;
+            ParsedProductResult product = new ParsedProductResult();
 
             for (Row currentRow : sheet) {
                 if (currentRow.getRowNum() == 0) {
@@ -95,14 +99,17 @@ public class ProductExcelReader extends ProductExcelComponent {
                 });
 
                 if (newProduct && !rowValues.isEmpty()) {
-                    product = parseProduct(rowValues, currentRow);
+                    properties = new HashMap<>();
+                    parseAttribute(rowValues, properties);
+                    product = parseProduct(rowValues, currentRow, properties);
                     if (product.getMessage() != null) {
                         importResult.setMessage(product.getMessage());
                         return importResult;
                     }
                     importResult.getProducts().add(product.getExcelProduct());
                 } else {
-                    // Parse and set properties here
+                    parseAttribute(rowValues, properties);
+                    product.getExcelProduct().getAttributes().putAll(properties);
                 }
                 rowValues.clear();
             }
@@ -112,11 +119,14 @@ public class ProductExcelReader extends ProductExcelComponent {
         return importResult;
     }
 
-    private Property parseProperty(Row row, List<Object> rowValues) {
-        String key = (String) rowValues.get(7);
-        String value = (String) rowValues.get(8);
+    private void parseAttribute(List<Object> rowValues, Map<String, String> properties) {
+        if (rowValues.isEmpty()) {
+            return;
+        }
 
-        return new Property(key, value);
+        String attributeName = String.valueOf(rowValues.get(7));
+        String value = String.valueOf(rowValues.get(8));
+        properties.put(attributeName, value);
     }
 
     private List<CellRangeAddress> getProductAddresses(Sheet sheet) {
@@ -176,7 +186,7 @@ public class ProductExcelReader extends ProductExcelComponent {
         return false;
     }
 
-    private ParsedProductResult parseProduct(List<Object> rowValues, Row row) {
+    private ParsedProductResult parseProduct(List<Object> rowValues, Row row, Map<String, String> attributes) {
         ParsedProductResult result = new ParsedProductResult();
         ExcelProduct product = new ExcelProduct();
 
@@ -262,6 +272,7 @@ public class ProductExcelReader extends ProductExcelComponent {
         String[] categories = category.split("\\/");
         Category latestCategory = categoryRepository
             .getCategoryByName(categories[categories.length - 1]);
+
         if (latestCategory == null) {
             result.setMessage("Nurodyta neegzistuojanti kategorija. Eilutė: " + rowNo);
             return result;
@@ -283,6 +294,7 @@ public class ProductExcelReader extends ProductExcelComponent {
         product.setSkuCode(skuCode);
         product.setDescription(description);
         product.setCategory(latestCategory);
+        product.setAttributes(attributes);
 
         result.setExcelProduct(product);
         return result;

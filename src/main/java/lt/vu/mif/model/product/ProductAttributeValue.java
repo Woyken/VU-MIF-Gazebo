@@ -23,8 +23,8 @@ public class ProductAttributeValue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "VALUE")
-    private String value;
+//    @Column(name = "VALUE")
+//    private String value;
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "CATEGORY_ATTRIBUTE_VALUE")
